@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeScreen">
+   <children>
+      <Label layoutX="101.0" layoutY="39.0" text="Client Appointment Viewer - Home">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="323.0" layoutY="102.0" text="No Upcoming Appointments" />
+      <ButtonBar layoutX="170.0" layoutY="247.0" prefHeight="40.0" prefWidth="401.0">
+        <buttons>
+            <Button mnemonicParsing="false" text="View All Appointments" />
+          <Button mnemonicParsing="false" text="Add/Update Customer" />
+        </buttons>
+      </ButtonBar>
+      <Label fx:id="CurrentTimeLabel" layoutX="670.0" layoutY="560.0" text="Current Time" />
+   </children>
+</AnchorPane>
