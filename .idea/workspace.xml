@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ClientAppointments.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/AppointmentScreen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/CustomerScreen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/HomeScreen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/LoginScreen.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/CustomerScreen.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/HomeScreen.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/LoginScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
