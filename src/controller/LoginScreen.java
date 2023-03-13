@@ -26,6 +26,6 @@ public class LoginScreen implements Initializable {
     }
 
     public void onLoginButtonAction(ActionEvent actionEvent) {
-        System.out.println("User not found!");
+        System.out.println("Login Clicked");
     }
 }
