@@ -1,6 +1,5 @@
 package main;
 
-import helper.AppointmentQuery;
 import helper.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +28,7 @@ public class Main extends Application {
         else {
             System.out.println("Insert failed");
         }*/
-        AppointmentQuery.check_login();
+
         launch(args);
 
         JDBC.closeConnection();

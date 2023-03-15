@@ -1,6 +1,6 @@
-package model;
+package helper;
 
-public class AlertHandler {
+public abstract class AlertHandler {
 
     public static boolean checkLoginCredentials()
     {
