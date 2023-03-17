@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class LoginScreen implements Initializable {
+public class LoginScreenController implements Initializable {
 
 
     Stage stage;
@@ -45,9 +45,9 @@ public class LoginScreen implements Initializable {
 
     public void onLoginButtonAction(ActionEvent actionEvent) throws SQLException, IOException {
         if (LoginHelper.check_login(UserNameTextField.getText(), PasswordTextField.getText())) {
-            // Switch to HomeScreen.fxml
+            // Switch to HomeScreenController.fxml
             stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml")); // needs exception handler clause
+            scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
             stage.setScene(new Scene(scene));
             stage.show();
             System.out.println("Login Successful!");

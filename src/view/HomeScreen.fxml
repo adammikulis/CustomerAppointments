@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeScreen">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeScreenController">
    <children>
       <Label layoutX="101.0" layoutY="39.0" text="Client Appointment Viewer - Home">
          <font>
@@ -14,7 +14,7 @@
       <Label layoutX="323.0" layoutY="102.0" text="No Upcoming Appointments" />
       <ButtonBar layoutX="170.0" layoutY="247.0" prefHeight="40.0" prefWidth="401.0">
         <buttons>
-            <Button mnemonicParsing="false" text="View All Appointments" />
+            <Button mnemonicParsing="false" onAction="#onViewAllAppointmentsButtonAction" text="View All Appointments" />
           <Button mnemonicParsing="false" text="Add/Update Customer" />
         </buttons>
       </ButtonBar>

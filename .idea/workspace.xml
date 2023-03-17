@@ -4,13 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="added SQL database connection and select statement for login">
-      <change afterPath="$PROJECT_DIR$/src/helper/LoginHelper.java" afterDir="false" />
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="login field checks against SQL database and brings user to home screen">
+      <change afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controller/HomeScreenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/LoginScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/AlertHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AlertHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/CustomerScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/HomeScreen.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/LoginScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CustomerScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CustomerScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/HomeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomeScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678676789444</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="login field checks against SQL database and brings user to home screen">
+      <created>1678847624740</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1678847624740</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -111,6 +123,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added various model classes" />
     <MESSAGE value="added SQL database connection and select statement for login" />
-    <option name="LAST_COMMIT_MESSAGE" value="added SQL database connection and select statement for login" />
+    <MESSAGE value="login field checks against SQL database and brings user to home screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="login field checks against SQL database and brings user to home screen" />
   </component>
 </project>
