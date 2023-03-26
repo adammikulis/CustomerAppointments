@@ -1,6 +1,6 @@
 package main;
 
-import helper.JDBC;
+import helper.JDBCHelper;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,7 +20,7 @@ public class Main extends Application {
 
     public static void main(String[] args) throws SQLException {
 
-        JDBC.openConnection();
+        JDBCHelper.openConnection();
         /*int rowsAffected = AppointmentQuery.insert_user("adam", "adam");
         if (rowsAffected > 0) {
             System.out.println(rowsAffected);
@@ -31,6 +31,6 @@ public class Main extends Application {
 
         launch(args);
 
-        JDBC.closeConnection();
+        JDBCHelper.closeConnection();
     }
 }

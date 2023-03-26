@@ -36,7 +36,6 @@ public class LoginScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("client db gui initialized");
         Locale currentLocale = Locale.getDefault();
         ZoneIdLabel.setText("Current locale: " + currentLocale);
         ErrorMessageLabel.setText("");

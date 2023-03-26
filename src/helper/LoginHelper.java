@@ -8,7 +8,7 @@ public class LoginHelper {
 
     public static boolean check_login(String inputUserName, String inputPassword) throws SQLException {
         String sql = "SELECT Password FROM users WHERE User_Name = ?";
-        PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+        PreparedStatement ps = JDBCHelper.getConnection().prepareStatement(sql);
         ps.setString(1, inputUserName);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {

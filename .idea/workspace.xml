@@ -4,18 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="login field checks against SQL database and brings user to home screen">
-      <change afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/controller/HomeScreenController.java" afterDir="false" />
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/CustomerScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/HomeScreen.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/LoginScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CustomerScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CustomerScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/HomeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomeScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/LoginScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/JDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/JDBCHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/LoginHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/LoginHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Appointment.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,18 +43,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/adamm/Downloads/my-sql-connector/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/adamm/Downloads/my-sql-connector/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="ClientAppointments" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
@@ -106,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678847624740</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added functionality to HomeScreenController, can link to Appointment view">
+      <created>1679081332649</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1679081332649</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -124,6 +127,7 @@
     <MESSAGE value="added various model classes" />
     <MESSAGE value="added SQL database connection and select statement for login" />
     <MESSAGE value="login field checks against SQL database and brings user to home screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="login field checks against SQL database and brings user to home screen" />
+    <MESSAGE value="Added functionality to HomeScreenController, can link to Appointment view" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added functionality to HomeScreenController, can link to Appointment view" />
   </component>
 </project>
