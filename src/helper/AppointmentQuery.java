@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AppointmentQuery {
+public class AppointmentQuery {
 
 
     public List<Appointment> getAppointments() {
@@ -19,25 +19,26 @@ public abstract class AppointmentQuery {
         try (PreparedStatement preparedStatement = JDBCHelper.getConnection().prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
-                int appointment_ID = resultSet.getInt("Appointment_ID");
-                int contact_ID = resultSet.getInt("Contact_ID");
-                int customer_ID = resultSet.getInt("Customer_ID");
-                int user_ID = resultSet.getInt("User_ID");
+                int appointmentId = resultSet.getInt("Appointment_ID");
+                int contactId = resultSet.getInt("Contact_ID");
+                int customerId = resultSet.getInt("Customer_ID");
+                int userId = resultSet.getInt("User_ID");
                 String title = resultSet.getString("Title");
                 String description = resultSet.getString("Description");
                 String location = resultSet.getString("Location");
                 String type = resultSet.getString("Type");
-                String created_By = resultSet.getString("Created_By");
-                String last_Updated_By = resultSet.getString("Last_Updated_By");
+                String createdBy = resultSet.getString("Created_By");
+                String lastUpdatedBy = resultSet.getString("Last_Updated_By");
                 LocalDateTime start = resultSet.getTimestamp("Start").toLocalDateTime();
                 LocalDateTime end = resultSet.getTimestamp("End").toLocalDateTime();
-                LocalDateTime create_Date = resultSet.getTimestamp("Create_Date").toLocalDateTime();
-                LocalDateTime last_Update = resultSet.getTimestamp("Last_Update").toLocalDateTime();
+                LocalDateTime createDate = resultSet.getTimestamp("Create_Date").toLocalDateTime();
+                LocalDateTime lastUpdate = resultSet.getTimestamp("Last_Update").toLocalDateTime();
 
-                appointments.add(new Appointment(appointment_ID, contact_ID, customer_ID, user_ID, title, description, location, type, created_By, last_Updated_By, start, end, create_Date, last_Update));
+                appointments.add(new Appointment(appointmentId, contactId, customerId, userId, title, description, location, type, createdBy, lastUpdatedBy, start, end, createDate, lastUpdate));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("ERORR");
+            e.printStackTrace(System.out);
         }
         return appointments;
     }
