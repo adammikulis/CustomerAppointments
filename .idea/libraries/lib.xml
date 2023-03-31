@@ -2,7 +2,7 @@
   <library name="lib">
     <CLASSES>
       <root url="file://$PATH_TO_FX$" />
-      <root url="jar://$USER_HOME$/Downloads/my-sql-connector/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../Windows/Java/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

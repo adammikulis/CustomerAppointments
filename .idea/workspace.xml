@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="filled out Appointment and AppointmentQuery class">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Appointment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/AppointmentList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/AppointmentList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +49,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/adamm/Downloads/my-sql-connector/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar",
+    "last_opened_file_path": "C:/Windows/Java/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
