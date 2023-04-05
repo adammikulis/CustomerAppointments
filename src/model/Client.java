@@ -75,4 +75,53 @@ public class Client {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
+
+    /**
+     * Return first name
+     *
+     * @return firstName
+     */
+    public String getFirstName() { return firstName;}
+
+    /**
+     * Set last name
+     *
+     * @param lastName
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    /**
+     * Return last name
+     *
+     * @return lastName
+     */
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setStreetAddress (String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public String getStreetAddress () {
+        return streetAddress;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCountry() {
+        return country;
+    }
 }

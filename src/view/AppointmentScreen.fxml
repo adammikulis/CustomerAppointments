@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentScreenController">
    <children>
-      <TableView fx:id="appointmentTableView" layoutX="23.0" layoutY="94.0" prefHeight="479.0" prefWidth="759.0">
+      <TableView fx:id="appointmentTableView" layoutX="23.0" layoutY="94.0" prefHeight="426.0" prefWidth="759.0">
         <columns>
           <TableColumn fx:id="appointmentIdColumn" prefWidth="98.33334350585938" text="Appointment_ID" />
           <TableColumn fx:id="titleColumn" prefWidth="45.0" text="Title" />
@@ -30,5 +30,6 @@
             <Font name="System Bold" size="26.0" />
          </font>
       </Label>
+      <Button fx:id="backbutton" layoutX="730.0" layoutY="536.0" mnemonicParsing="false" onAction="#onBackButtonPress" text="Back" />
    </children>
 </AnchorPane>

@@ -23,9 +23,16 @@ public class HomeScreenController implements Initializable {
     }
     public void onViewAllAppointmentsButtonAction(ActionEvent actionEvent) throws IOException {
 
-        // Switch to HomeScreenController.fxml
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/AppointmentScreen.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+    }
+
+    public void onAddUpdateClientButtonPressed(ActionEvent actionEvent) throws IOException {
+
+        stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/ClientScreen.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }

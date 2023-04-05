@@ -1,17 +1,28 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import model.Appointment;
 import model.AppointmentList;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class AppointmentScreenController implements Initializable {
+
+    Stage stage;
+    Parent scene;
 
     @FXML
     private TableView<Appointment> appointmentTableView;
@@ -52,5 +63,12 @@ public class AppointmentScreenController implements Initializable {
         endDateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
         customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
+    }
+
+    public void onBackButtonPress(ActionEvent actionEvent) throws IOException {
+        stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
     }
 }
