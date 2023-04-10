@@ -37,7 +37,7 @@ public class AppointmentQuery {
                 appointments.add(new Appointment(appointmentId, contactId, customerId, userId, title, description, location, type, createdBy, lastUpdatedBy, start, end, createDate, lastUpdate));
             }
         } catch (SQLException e) {
-            System.out.println("ERORR");
+            System.out.println("SQL Error");
             e.printStackTrace(System.out);
         }
         return appointments;

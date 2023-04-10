@@ -19,7 +19,7 @@ public class HomeScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Home Screen initialized");
+
     }
     public void onViewAllAppointmentsButtonAction(ActionEvent actionEvent) throws IOException {
 

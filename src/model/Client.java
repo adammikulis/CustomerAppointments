@@ -1,53 +1,45 @@
 package model;
 
+import java.time.LocalDateTime;
+
 public class Client {
 
     private int clientId;
-    private String firstName;
-    private String lastName;
+    private String clientName;
     private String streetAddress;
-    private String city;
-    private String country;
+    private String postalCode;
+    private String phone;
+    private LocalDateTime createDate;
+    private String createdBy;
+    private LocalDateTime lastUpdate;
+    private String lastUpdatedBy;
+    private int divisionId;
+
 
     /**
      * Constructor for Client
      *
      * @param clientId      client id
-     * @param firstName     client name
-     * @param lastName      client name
+     * @param clientName    client name
      * @param streetAddress client street address
-     * @param city          client city
-     * @param country       client country
+     * @param postalCode    client postalCode
+
+     * @param phone         client phone
      */
-    public Client(int clientId, String firstName, String lastName, String streetAddress, String city, String country) {
+    public Client(int clientId, String clientName, String streetAddress, String postalCode, String phone, LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy, int divisionId) {
         this.clientId = clientId;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.clientName = clientName;
         this.streetAddress = streetAddress;
-        this.city = city;
-        this.country = country;
+        this.postalCode = postalCode;
+        this.phone = phone;
+        this.createDate = createDate;
+        this.createdBy = createdBy;
+        this.lastUpdate = lastUpdate;
+        this.lastUpdatedBy = lastUpdatedBy;
+        this.divisionId = divisionId;
+
     }
 
-    /**
-     * Returns next auto-generated product id
-     *
-     * @return increments and returns next product id based on last product on list
-     */
-    public static int getNextClientId() {
-        int newClientId = 0;
-        // Check if there are any products present and return id greater than current
-        try {
-            for (Client client : ClientList.getAllClients()) {
-                if (client.getClientId() > newClientId)
-                    newClientId = client.getClientId() + 1;
-            }
-            return newClientId;
-        }
-        // Returns id as 1 if part list is empty
-        catch (Exception e) {
-            return 1;
-        }
-    }
 
     /**
      * /** Set client id
@@ -67,29 +59,14 @@ public class Client {
         return clientId;
     }
 
-    /**
-     * Set client first name
-     *
-     * @param firstName first name
-     */
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
     /**
-     * Return first name
+     * Set client name
      *
-     * @return firstName
+     * @param clientName
      */
-    public String getFirstName() { return firstName;}
-
-    /**
-     * Set last name
-     *
-     * @param lastName
-     */
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
     /**
@@ -97,8 +74,8 @@ public class Client {
      *
      * @return lastName
      */
-    public String getLastName() {
-        return lastName;
+    public String getClientName() {
+        return clientName;
     }
 
     public void setStreetAddress (String streetAddress) {
@@ -109,19 +86,20 @@ public class Client {
         return streetAddress;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
-    public String getCity() {
-        return city;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getCountry() {
-        return country;
+    public String getPhone() {
+        return phone;
     }
 }
