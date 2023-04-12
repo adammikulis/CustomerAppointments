@@ -1,19 +1,25 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Client;
 import model.ClientList;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ClientScreenController implements Initializable {
+
+
+
 
     Stage stage;
     Parent scene;
@@ -32,6 +38,17 @@ public class ClientScreenController implements Initializable {
     @FXML
     private TableColumn<Client, Integer> phoneColumn;
 
+    @FXML
+    private TextField clientScreenNameTextField;
+    @FXML
+    private TextField clientScreenAddressTextField;
+    @FXML
+    private TextField clientScreenPostalCodeTextField;
+    @FXML
+    private TextField clientScreenPhoneTextField;
+
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -43,4 +60,15 @@ public class ClientScreenController implements Initializable {
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
     }
 
+    public void onClientScreenDeleteClientButtonPressed(ActionEvent actionEvent) throws IOException {
+        System.out.println("Deleted client");
+    }
+
+    public void onClientScreenSaveCopyClientButton(ActionEvent actionEvent) throws IOException {
+        System.out.println("Copied client");
+    }
+
+    public void onClientScreenSaveNewClientButton(ActionEvent actionEvent) throws IOException {
+        System.out.println("Saved new client");
+    }
 }
