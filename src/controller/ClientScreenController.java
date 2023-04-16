@@ -14,12 +14,10 @@ import model.ClientList;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class ClientScreenController implements Initializable {
-
-
-
 
     Stage stage;
     Parent scene;
@@ -58,17 +56,74 @@ public class ClientScreenController implements Initializable {
         streetAddressColumn.setCellValueFactory(new PropertyValueFactory<>("streetAddress"));
         postalCodeColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+
+        clientTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                System.out.println("Selected row: " + newValue);
+            }
+        });
     }
 
     public void onClientScreenDeleteClientButtonPressed(ActionEvent actionEvent) throws IOException {
-        System.out.println("Deleted client");
+        // Get the selected client
+        Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
+
+        if (selectedClient != null) {
+            // Remove the selected client from the list of all clients
+            ClientList.getAllClients().remove(selectedClient);
+            System.out.println("Deleted client with ID " + selectedClient.getClientId());
+        } else {
+            System.out.println("No client selected for deletion.");
+        }
     }
+
 
     public void onClientScreenSaveCopyClientButton(ActionEvent actionEvent) throws IOException {
-        System.out.println("Copied client");
+        Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
+        if (selectedClient != null) {
+            int newClientId = selectedClient.getClientId();
+            String clientName = selectedClient.getClientName();
+            String streetAddress = selectedClient.getStreetAddress();
+            String postalCode = selectedClient.getPostalCode();
+            String phone = selectedClient.getPhone();
+            LocalDateTime createDate = selectedClient.getCreateDate();
+            String createdBy = selectedClient.getCreatedBy();
+            LocalDateTime lastUpdate = LocalDateTime.now();
+            String lastUpdatedBy = selectedClient.getLastUpdatedBy();
+            int divisionId = selectedClient.getDivisionId();
+
+            Client copiedClient = new Client(newClientId, clientName, streetAddress, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdatedBy, divisionId);
+            ClientList.addClient(copiedClient);
+
+            System.out.println("Copied client: " + copiedClient);
+        } else {
+            System.out.println("No client selected");
+        }
     }
 
+
     public void onClientScreenSaveNewClientButton(ActionEvent actionEvent) throws IOException {
-        System.out.println("Saved new client");
+        // Get the data from the input fields
+        String name = clientScreenNameTextField.getText();
+        String streetAddress = clientScreenAddressTextField.getText();
+        String postalCode = clientScreenPostalCodeTextField.getText();
+        String phone = clientScreenPhoneTextField.getText();
+
+        // Create a new Client object with the input data and the next available client ID
+        int newClientId = ClientList.getNextClientId();
+        Client newClient = new Client(newClientId, name, streetAddress, postalCode, phone, null, null, null, null, 0);
+
+        // Add the new client to the list of all clients
+        ClientList.addClient(newClient);
+
+        // Clear the input fields
+        clientScreenNameTextField.clear();
+        clientScreenAddressTextField.clear();
+        clientScreenPostalCodeTextField.clear();
+        clientScreenPhoneTextField.clear();
+
+        System.out.println("Saved new client with ID " + newClientId);
     }
+
+
 }

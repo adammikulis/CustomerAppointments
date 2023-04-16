@@ -102,4 +102,95 @@ public class Client {
     public String getPhone() {
         return phone;
     }
+
+    /**
+     * Get the client's creation date.
+     *
+     * @return createDate as LocalDateTime
+     */
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    /**
+     * Set the client's creation date.
+     *
+     * @param createDate LocalDateTime to set the creation date
+     */
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
+    }
+
+    /**
+     * Get the client's creator.
+     *
+     * @return createdBy as String
+     */
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    /**
+     * Set the client's creator.
+     *
+     * @param createdBy String to set the creator
+     */
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    /**
+     * Get the client's last update date.
+     *
+     * @return lastUpdate as LocalDateTime
+     */
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
+
+    /**
+     * Set the client's last update date.
+     *
+     * @param lastUpdate LocalDateTime to set the last update date
+     */
+    public void setLastUpdate(LocalDateTime lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
+    /**
+     * Get the client's last updater.
+     *
+     * @return lastUpdatedBy as String
+     */
+    public String getLastUpdatedBy() {
+        return lastUpdatedBy;
+    }
+
+    /**
+     * Set the client's last updater.
+     *
+     * @param lastUpdatedBy String to set the last updater
+     */
+    public void setLastUpdatedBy(String lastUpdatedBy) {
+        this.lastUpdatedBy = lastUpdatedBy;
+    }
+
+    /**
+     * Get the client's division ID.
+     *
+     * @return divisionId as int
+     */
+    public int getDivisionId() {
+        return divisionId;
+    }
+
+    /**
+     * Set the client's division ID.
+     *
+     * @param divisionId int to set the division ID
+     */
+    public void setDivisionId(int divisionId) {
+        this.divisionId = divisionId;
+    }
+
 }

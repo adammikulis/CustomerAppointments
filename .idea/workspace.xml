@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="client screen displays all clients">
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="added text fields and buttons to client screen">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/ClientScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClientScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ClientScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ClientScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ClientList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ClientList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681148850596</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="added text fields and buttons to client screen">
+      <created>1681323400148</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1681323400148</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -157,7 +164,8 @@
     <MESSAGE value="nearly finished client class and some name refactors" />
     <MESSAGE value="updated client screen and related SQL query" />
     <MESSAGE value="client screen displays all clients" />
-    <option name="LAST_COMMIT_MESSAGE" value="client screen displays all clients" />
+    <MESSAGE value="added text fields and buttons to client screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="added text fields and buttons to client screen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
