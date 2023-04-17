@@ -14,10 +14,11 @@
       <Label layoutX="323.0" layoutY="102.0" text="No Upcoming Appointments" />
       <ButtonBar layoutX="170.0" layoutY="247.0" prefHeight="40.0" prefWidth="401.0">
         <buttons>
-            <Button mnemonicParsing="false" onAction="#onViewAllAppointmentsButtonAction" text="View All Appointments" />
+            <Button mnemonicParsing="false" onAction="#onViewAllAppointmentsButtonPressed" text="View All Appointments" />
           <Button fx:id="addUpdateClientButton" mnemonicParsing="false" onAction="#onAddUpdateClientButtonPressed" text="Add/Update Client" />
         </buttons>
       </ButtonBar>
       <Label fx:id="CurrentTimeLabel" layoutX="670.0" layoutY="560.0" text="Current Time" />
+      <Button layoutX="389.0" layoutY="399.0" mnemonicParsing="false" onAction="#onHomeScreenExitButtonPressed" text="Exit" />
    </children>
 </AnchorPane>

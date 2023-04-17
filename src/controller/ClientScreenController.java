@@ -2,19 +2,21 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.AppointmentList;
 import model.Client;
 import model.ClientList;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ClientScreenController implements Initializable {
@@ -69,16 +71,29 @@ public class ClientScreenController implements Initializable {
         Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
 
         if (selectedClient != null) {
-            // Remove the selected client from the list of all clients
-            ClientList.getAllClients().remove(selectedClient);
-            System.out.println("Deleted client with ID " + selectedClient.getClientId());
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Deletion");
+            alert.setHeaderText("Are you sure you want to delete this client?");
+            alert.setContentText("Deleting a client will also delete all appointments associated with this client.");
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                // Delete all associated appointments
+                AppointmentList.getAllAppointments().removeIf(appointment -> appointment.getCustomerId() == selectedClient.getClientId());
+                System.out.println("Deleted all appointments associated with client with ID " + selectedClient.getClientId());
+
+                // Remove the selected client from the list of all clients
+                ClientList.getAllClients().remove(selectedClient);
+                System.out.println("Deleted client with ID " + selectedClient.getClientId());
+            }
         } else {
             System.out.println("No client selected for deletion.");
         }
     }
 
 
-    public void onClientScreenSaveCopyClientButton(ActionEvent actionEvent) throws IOException {
+
+    public void onClientScreenSaveCopyClientButtonPressed(ActionEvent actionEvent) throws IOException {
         Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
         if (selectedClient != null) {
             int newClientId = selectedClient.getClientId();
@@ -102,7 +117,7 @@ public class ClientScreenController implements Initializable {
     }
 
 
-    public void onClientScreenSaveNewClientButton(ActionEvent actionEvent) throws IOException {
+    public void onClientScreenSaveNewClientButtonPressed(ActionEvent actionEvent) throws IOException {
         // Get the data from the input fields
         String name = clientScreenNameTextField.getText();
         String streetAddress = clientScreenAddressTextField.getText();
@@ -126,4 +141,10 @@ public class ClientScreenController implements Initializable {
     }
 
 
+    public void onClientScreenBackButtonPressed(ActionEvent actionEvent) throws IOException {
+        stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
+    }
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import helper.JDBCHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,7 +22,7 @@ public class HomeScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
-    public void onViewAllAppointmentsButtonAction(ActionEvent actionEvent) throws IOException {
+    public void onViewAllAppointmentsButtonPressed(ActionEvent actionEvent) throws IOException {
 
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/AppointmentScreen.fxml"));
@@ -35,5 +36,10 @@ public class HomeScreenController implements Initializable {
         scene = FXMLLoader.load(getClass().getResource("/view/ClientScreen.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+    }
+
+    public void onHomeScreenExitButtonPressed(ActionEvent actionEvent) throws IOException {
+        JDBCHelper.closeConnection(); // close the database connection
+        System.exit(0); // exit the JavaFX application
     }
 }
