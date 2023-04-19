@@ -39,7 +39,6 @@ public class HomeScreenController implements Initializable {
     }
 
     public void onHomeScreenExitButtonPressed(ActionEvent actionEvent) throws IOException {
-        JDBCHelper.closeConnection(); // Close the database connection
         System.exit(0); // Exit the JavaFX application
     }
 }

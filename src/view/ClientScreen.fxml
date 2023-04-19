@@ -11,13 +11,13 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TableView fx:id="clientTableView" layoutX="14.0" layoutY="118.0" prefHeight="329.0" prefWidth="402.0">
+      <TableView fx:id="clientTableView" layoutX="14.0" layoutY="117.0" prefHeight="330.0" prefWidth="420.0">
         <columns>
-            <TableColumn fx:id="clientIdColumn" prefWidth="75.0" text="ID" />
-          <TableColumn fx:id="clientNameColumn" prefWidth="75.0" text="Name" />
-          <TableColumn fx:id="streetAddressColumn" prefWidth="93.33331298828125" text="Street Address" />
-            <TableColumn fx:id="postalCodeColumn" prefWidth="76.0" text="Postal Code" />
-            <TableColumn fx:id="phoneColumn" prefWidth="56.666656494140625" text="Phone" />
+            <TableColumn fx:id="clientIdColumn" prefWidth="41.333343505859375" text="ID" />
+          <TableColumn fx:id="clientNameColumn" prefWidth="121.33332824707031" text="Name" />
+          <TableColumn fx:id="streetAddressColumn" prefWidth="97.0" text="Street Address" />
+            <TableColumn fx:id="postalCodeColumn" prefWidth="79.0" text="Postal Code" />
+            <TableColumn fx:id="phoneColumn" text="Phone" />
         </columns>
       </TableView>
       <GridPane layoutX="451.0" layoutY="144.0" minWidth="-Infinity" prefHeight="148.0" prefWidth="290.0">
@@ -46,13 +46,10 @@
          </children>
       </GridPane>
       <Label layoutX="451.0" layoutY="118.0" text="Client Information" />
-      <ButtonBar layoutX="116.0" layoutY="494.0" prefHeight="40.0" prefWidth="503.0">
-        <buttons>
-            <Button mnemonicParsing="false" onAction="#onClientScreenSaveCopyClientButtonPressed" text="Save As Copy" />
-            <Button fx:id="clientScreenDeleteClientButton" mnemonicParsing="false" onAction="#onClientScreenSaveNewClientButtonPressed" text="Save New Client" />
-            <Button mnemonicParsing="false" onAction="#onClientScreenDeleteClientButtonPressed" text="Delete Client" />
-            <Button mnemonicParsing="false" onAction="#onClientScreenBackButtonPressed" text="Back" />
-        </buttons>
-      </ButtonBar>
+      <ButtonBar layoutX="116.0" layoutY="494.0" prefHeight="40.0" prefWidth="503.0" />
+      <Button layoutX="451.0" layoutY="320.0" mnemonicParsing="false" onAction="#onUpdateCurrentClientButtonPressed" text="Update Current Client" />
+      <Button fx:id="clientScreenDeleteClientButton" layoutX="639.0" layoutY="320.0" mnemonicParsing="false" onAction="#onClientScreenSaveNewClientButtonPressed" text="Save New Client" />
+      <Button layoutX="451.0" layoutY="363.0" mnemonicParsing="false" onAction="#onClientScreenDeleteClientButtonPressed" text="Delete Client" />
+      <Button layoutX="664.0" layoutY="525.0" mnemonicParsing="false" onAction="#onClientScreenBackButtonPressed" text="Back" />
    </children>
 </AnchorPane>

@@ -33,7 +33,7 @@
       <ButtonBar layoutX="155.0" layoutY="539.0" prefHeight="40.0" prefWidth="615.0">
         <buttons>
             <Button mnemonicParsing="false" onAction="#onSaveNewAppointmentButtonPressed" prefHeight="25.0" text="Save New Appointment" />
-          <Button mnemonicParsing="false" onAction="#onCopyAppointmentButtonPressed" text="Copy Appointment" />
+          <Button mnemonicParsing="false" onAction="#onUpdateAppointmentButtonPressed" text="Update Appointment" />
             <Button mnemonicParsing="false" onAction="#onDeleteAppointmentButtonPressed" text="Delete Appointment" />
             <Button fx:id="backbutton" minWidth="39.0" mnemonicParsing="false" onAction="#onAppointmentBackButtonPressed" prefHeight="25.0" text="Back" />
         </buttons>
@@ -71,7 +71,7 @@
             <TextField fx:id="appointmentTitleTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentDescriptionTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentLocationTextField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <TextField fx:id="appointmentcontactTextField" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <TextField fx:id="appointmentContactTextField" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentStartDateTimeTextField" GridPane.columnIndex="6" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentEndDateTimeTextField" GridPane.columnIndex="7" GridPane.rowIndex="1" />
             <TextField fx:id="customerIdTextField" GridPane.columnIndex="8" GridPane.rowIndex="1" />

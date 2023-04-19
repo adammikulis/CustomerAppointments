@@ -1,5 +1,6 @@
 package controller;
 
+import helper.JDBCHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,10 @@ import model.ClientList;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -47,11 +52,10 @@ public class ClientScreenController implements Initializable {
     @FXML
     private TextField clientScreenPhoneTextField;
 
-
+    private Client currentClient;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         clientTableView.setItems(ClientList.getAllClients());
         clientIdColumn.setCellValueFactory(new PropertyValueFactory<>("clientId"));
         clientNameColumn.setCellValueFactory(new PropertyValueFactory<>("clientName"));
@@ -62,6 +66,13 @@ public class ClientScreenController implements Initializable {
         clientTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 System.out.println("Selected row: " + newValue);
+                currentClient = newValue; // Set the current client
+
+                // Populate the textfields with the selected client's data
+                clientScreenNameTextField.setText(currentClient.getClientName());
+                clientScreenAddressTextField.setText(currentClient.getStreetAddress());
+                clientScreenPostalCodeTextField.setText(currentClient.getPostalCode());
+                clientScreenPhoneTextField.setText(currentClient.getPhone());
             }
         });
     }
@@ -78,13 +89,24 @@ public class ClientScreenController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
 
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                // Delete all associated appointments
-                AppointmentList.getAllAppointments().removeIf(appointment -> appointment.getCustomerId() == selectedClient.getClientId());
-                System.out.println("Deleted all appointments associated with client with ID " + selectedClient.getClientId());
+                try (Connection conn = JDBCHelper.getConnection()) {
+                    // Delete all associated appointments
+                    PreparedStatement deleteAppointmentsStatement = conn.prepareStatement("DELETE FROM appointments WHERE Customer_Id = ?");
+                    deleteAppointmentsStatement.setInt(1, selectedClient.getClientId());
+                    deleteAppointmentsStatement.executeUpdate();
+                    System.out.println("Deleted all appointments associated with client with ID " + selectedClient.getClientId());
 
-                // Remove the selected client from the list of all clients
-                ClientList.getAllClients().remove(selectedClient);
-                System.out.println("Deleted client with ID " + selectedClient.getClientId());
+                    // Delete the selected client from the database
+                    PreparedStatement deleteClientStatement = conn.prepareStatement("DELETE FROM customers WHERE Customer_Id = ?");
+                    deleteClientStatement.setInt(1, selectedClient.getClientId());
+                    deleteClientStatement.executeUpdate();
+                    System.out.println("Deleted client with ID " + selectedClient.getClientId());
+
+                    // Remove the selected client from the list of all clients
+                    ClientList.getAllClients().remove(selectedClient);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         } else {
             System.out.println("No client selected for deletion.");
@@ -93,29 +115,52 @@ public class ClientScreenController implements Initializable {
 
 
 
-    public void onClientScreenSaveCopyClientButtonPressed(ActionEvent actionEvent) throws IOException {
+
+    public void onUpdateCurrentClientButtonPressed(ActionEvent actionEvent) throws IOException {
+        // Get the selected client
         Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
+
         if (selectedClient != null) {
-            int newClientId = selectedClient.getClientId();
-            String clientName = selectedClient.getClientName();
-            String streetAddress = selectedClient.getStreetAddress();
-            String postalCode = selectedClient.getPostalCode();
-            String phone = selectedClient.getPhone();
-            LocalDateTime createDate = selectedClient.getCreateDate();
-            String createdBy = selectedClient.getCreatedBy();
-            LocalDateTime lastUpdate = LocalDateTime.now();
-            String lastUpdatedBy = selectedClient.getLastUpdatedBy();
-            int divisionId = selectedClient.getDivisionId();
+            // Get the data from the input fields
+            String name = clientScreenNameTextField.getText();
+            String streetAddress = clientScreenAddressTextField.getText();
+            String postalCode = clientScreenPostalCodeTextField.getText();
+            String phone = clientScreenPhoneTextField.getText();
 
-            Client copiedClient = new Client(newClientId, clientName, streetAddress, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdatedBy, divisionId);
-            ClientList.addClient(copiedClient);
+            // Update the selected client with the new data
+            selectedClient.setClientName(name);
+            selectedClient.setStreetAddress(streetAddress);
+            selectedClient.setPostalCode(postalCode);
+            selectedClient.setPhone(phone);
+            selectedClient.setLastUpdate(LocalDateTime.now());
+            selectedClient.setLastUpdatedBy("admin");
 
-            System.out.println("Copied client: " + copiedClient);
+            // Update the client in the database
+            String updateStatement = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ? WHERE Customer_Id = ?";
+            try {
+                PreparedStatement preparedStatement = JDBCHelper.getConnection().prepareStatement(updateStatement);
+                preparedStatement.setString(1, selectedClient.getClientName());
+                preparedStatement.setString(2, selectedClient.getStreetAddress());
+                preparedStatement.setString(3, selectedClient.getPostalCode());
+                preparedStatement.setString(4, selectedClient.getPhone());
+                preparedStatement.setObject(5, selectedClient.getLastUpdate());
+                preparedStatement.setString(6, selectedClient.getLastUpdatedBy());
+                preparedStatement.setInt(7, selectedClient.getClientId());
+
+                int rowsAffected = preparedStatement.executeUpdate();
+                System.out.println("Updated client with ID " + selectedClient.getClientId());
+
+                preparedStatement.close();
+            } catch (SQLException e) {
+                System.out.println("Error updating client in database: " + e.getMessage());
+            }
+
+            // Refresh the table view
+            clientTableView.refresh();
         } else {
-            System.out.println("No client selected");
+            System.out.println("No client selected for update.");
         }
     }
-
 
     public void onClientScreenSaveNewClientButtonPressed(ActionEvent actionEvent) throws IOException {
         // Get the data from the input fields
@@ -132,13 +177,35 @@ public class ClientScreenController implements Initializable {
         ClientList.addClient(newClient);
 
         // Clear the input fields
-        clientScreenNameTextField.clear();
-        clientScreenAddressTextField.clear();
-        clientScreenPostalCodeTextField.clear();
-        clientScreenPhoneTextField.clear();
+        String empty = "";
+        clientScreenNameTextField.setText(empty);
+        clientScreenAddressTextField.setText(empty);
+        clientScreenPostalCodeTextField.setText(empty);
+        clientScreenPhoneTextField.setText(empty);
 
-        System.out.println("Saved new client with ID " + newClientId);
+        // Save the new client to the database
+        try {
+            Connection conn = JDBCHelper.getConnection();
+            String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, name);
+            stmt.setString(2, streetAddress);
+            stmt.setString(3, postalCode);
+            stmt.setString(4, phone);
+            stmt.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
+            stmt.setString(6, "admin");
+            stmt.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
+            stmt.setString(8, "admin");
+            stmt.setInt(9, 1); // Replace with the correct division ID
+
+            stmt.executeUpdate();
+            System.out.println("Saved new client to database with ID " + newClientId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
 
 
     public void onClientScreenBackButtonPressed(ActionEvent actionEvent) throws IOException {
