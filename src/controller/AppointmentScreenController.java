@@ -1,5 +1,6 @@
 package controller;
 
+import helper.AppointmentQuery;
 import helper.JDBCHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -165,6 +166,15 @@ public class AppointmentScreenController implements Initializable {
         AppointmentList.addAppointment(newAppointment);
         appointmentTableView.refresh();
 
+        // Insert the new appointment into the database
+        try {
+            AppointmentQuery appointmentQuery = new AppointmentQuery();
+            appointmentQuery.insertAppointment(newAppointment);
+            System.out.println("Created new appointment with id " + newAppointment.getAppointmentId() + " in the database.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         // Clear the text fields
         appointmentContactTextField.clear();
         customerIdTextField.clear();
@@ -174,37 +184,8 @@ public class AppointmentScreenController implements Initializable {
         appointmentLocationTextField.clear();
         appointmentStartDateTimeTextField.clear();
         appointmentEndDateTimeTextField.clear();
-
-        // Insert the new appointment into the database
-        try {
-            Connection connection = JDBCHelper.getConnection();
-
-            String sql = "INSERT INTO appointments(Appointment_ID, Contact_ID, Customer_ID, User_ID, Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, newAppointment.getAppointmentId());
-            ps.setInt(2, newAppointment.getContactId());
-            ps.setInt(3, newAppointment.getCustomerId());
-            ps.setInt(4, newAppointment.getUserId());
-            ps.setString(5, newAppointment.getTitle());
-            ps.setString(6, newAppointment.getDescription());
-            ps.setString(7, newAppointment.getLocation());
-            ps.setString(8, newAppointment.getType());
-            ps.setString(9, newAppointment.getStartDateTime().toString());
-            ps.setString(10, newAppointment.getEndDateTime().toString());
-            ps.setString(11, newAppointment.getCreateDate().toString());
-            ps.setString(12, newAppointment.getCreatedBy());
-            ps.setTimestamp(13, Timestamp.valueOf(newAppointment.getLastUpdate()));
-            ps.setString(14, newAppointment.getLastUpdatedBy());
-
-
-
-            ps.executeUpdate();
-            System.out.println("Created new appointment with id " + newAppointment.getAppointmentId() + " in the database.");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
+
 
 
 

@@ -3,6 +3,8 @@ package helper;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import java.sql.*;
+
 public abstract class JDBCHelper {
     private static final String protocol = "jdbc";
     private static final String vendor = ":mysql:";
@@ -14,15 +16,12 @@ public abstract class JDBCHelper {
     private static String password = "Passw0rd!"; // Password
     private static Connection connection;  // Connection Interface
 
-    public static void openConnection()
-    {
+    public static void openConnection() {
         try {
             Class.forName(driver); // Locate Driver
             connection = DriverManager.getConnection(jdbcUrl, userName, password); // Reference Connection object
             System.out.println("Connection successful!");
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Error:" + e.getMessage());
         }
     }
@@ -31,9 +30,7 @@ public abstract class JDBCHelper {
         try {
             connection.close();
             System.out.println("Connection closed!");
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Error:" + e.getMessage());
         }
     }
@@ -42,4 +39,25 @@ public abstract class JDBCHelper {
         return connection;
     }
 
+    public static void closeResultSet(ResultSet rs) {
+        if (rs != null) {
+            try {
+                rs.close();
+                System.out.println("ResultSet closed!");
+            } catch (SQLException e) {
+                System.out.println("Error:" + e.getMessage());
+            }
+        }
+    }
+
+    public static void closeStatement(Statement statement) {
+        if (statement != null) {
+            try {
+                statement.close();
+                System.out.println("Statement closed!");
+            } catch (SQLException e) {
+                System.out.println("Error:" + e.getMessage());
+            }
+        }
+    }
 }
