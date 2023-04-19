@@ -63,6 +63,7 @@ public class AppointmentScreenController implements Initializable {
         customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
+        // Listener for selecting what row
         appointmentTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 System.out.println("Selected: " + newSelection.getAppointmentId());
@@ -82,13 +83,13 @@ public class AppointmentScreenController implements Initializable {
 
     public void onCopyAppointmentButtonPressed(ActionEvent actionEvent) throws IOException {
         Appointment selectedAppointment = appointmentTableView.getSelectionModel().getSelectedItem();
-        /*if (selectedAppointment == null) {
+        if (selectedAppointment == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setHeaderText("No Appointment Selected");
             alert.setContentText("Please select an appointment to copy.");
             alert.showAndWait();
             return;
-        }*/
+        }
 
         int appointmentId = AppointmentList.getNextAppointmentId();
         int contactId = selectedAppointment.getContactId();
