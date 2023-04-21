@@ -26,12 +26,11 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ClientScreenController implements Initializable {
-
-
     Stage stage;
     Parent scene;
 
     private Client currentClient;
+    private ClientQuery clientQuery = new ClientQuery();
 
     @FXML
     private TableView<Client> clientTableView;
@@ -61,8 +60,6 @@ public class ClientScreenController implements Initializable {
     @FXML
     private ComboBox<String> clientDivisionComboBox;
 
-    private ClientQuery clientQuery = new ClientQuery();
-
     @FXML
     private void onCountryComboBoxChanged(ActionEvent event) {
         String country = clientCountryComboBox.getValue() != null ? clientCountryComboBox.getValue().toString() : null;
@@ -72,7 +69,6 @@ public class ClientScreenController implements Initializable {
             clearDivisionComboBox();
         }
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -108,8 +104,6 @@ public class ClientScreenController implements Initializable {
         });
     }
 
-
-
     public void onClientScreenDeleteClientButtonPressed(ActionEvent actionEvent) throws IOException, SQLException {
         // Get the selected client
         Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
@@ -136,6 +130,7 @@ public class ClientScreenController implements Initializable {
         } else {
             System.out.println("No client selected for deletion.");
         }
+        clearFieldsAndRefresh();
     }
 
     public void onUpdateCurrentClientButtonPressed(ActionEvent actionEvent) throws IOException {
@@ -172,20 +167,11 @@ public class ClientScreenController implements Initializable {
                 e.printStackTrace();
             }
 
-            // Clear the input fields
-            String empty = "";
-            clientScreenNameTextField.setText(empty);
-            clientScreenAddressTextField.setText(empty);
-            clientScreenPostalCodeTextField.setText(empty);
-            clientScreenPhoneTextField.setText(empty);
-            clearCountryComboBox();
-            clearDivisionComboBox();
 
-            // Refresh the table view
-            clientTableView.refresh();
         } else {
             System.out.println("No client selected for update.");
         }
+        clearFieldsAndRefresh();
     }
 
 
@@ -227,14 +213,6 @@ public class ClientScreenController implements Initializable {
         }
 
 
-        // Clear the input fields
-        String empty = "";
-        clientScreenNameTextField.setText(empty);
-        clientScreenAddressTextField.setText(empty);
-        clientScreenPostalCodeTextField.setText(empty);
-        clientScreenPhoneTextField.setText(empty);
-        clearCountryComboBox();
-        clearDivisionComboBox();
 
         // Save the new client to the database using the insertClient method from ClientQuery
         try {
@@ -244,8 +222,24 @@ public class ClientScreenController implements Initializable {
             e.printStackTrace();
         }
 
+        clearFieldsAndRefresh();
+    }
+
+    private void clearFieldsAndRefresh() {
+        // Clear the input fields
+        String empty = "";
+        clientScreenNameTextField.setText(empty);
+        clientScreenAddressTextField.setText(empty);
+        clientScreenPostalCodeTextField.setText(empty);
+        clientScreenPhoneTextField.setText(empty);
+        clearCountryComboBox();
+        clearDivisionComboBox();
+
         // Refresh the table view
         clientTableView.refresh();
+
+        // Clear the selection
+        clientTableView.getSelectionModel().clearSelection();
     }
 
     private void populateDivisionComboBox(String country) {
@@ -258,16 +252,15 @@ public class ClientScreenController implements Initializable {
         clientDivisionComboBox.setItems(divisions);
     }
 
-
-
     private void clearCountryComboBox() {
-        clientCountryComboBox.getSelectionModel().clearSelection();
         clientCountryComboBox.getItems().clear();
+        clientCountryComboBox.setValue(null);
     }
 
+
     private void clearDivisionComboBox() {
-        clientDivisionComboBox.getSelectionModel().clearSelection();
         clientDivisionComboBox.getItems().clear();
+        clientCountryComboBox.setValue(null);
     }
 
 
@@ -276,5 +269,10 @@ public class ClientScreenController implements Initializable {
         scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+    }
+
+    @FXML
+    private void onClientScreenClearSelectionButtonPressed(ActionEvent actionEvent) {
+        clearFieldsAndRefresh();
     }
 }
