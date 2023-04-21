@@ -2,9 +2,7 @@ package helper;
 
 import model.Client;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,4 +35,54 @@ public class ClientQuery {
         }
         return clients;
     }
+
+    public void onSaveNewClient(String name, String streetAddress, String postalCode, String phone) {
+        try {
+            String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement ps = JDBCHelper.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, name);
+            ps.setString(2, streetAddress);
+            ps.setString(3, postalCode);
+            ps.setString(4, phone);
+            ps.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(6, "admin");
+            ps.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(8, "admin");
+            ps.setInt(9, 1); // Replace with the correct division ID
+
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                int newClientId = rs.getInt(1);
+                System.out.println("Saved new client to database with ID " + newClientId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static List<String> getClientDivisionsByCountry(String country) {
+        List<String> divisions = new ArrayList<>();
+
+        try (Connection conn = JDBCHelper.getConnection();
+             PreparedStatement ps = conn.prepareStatement("SELECT Division FROM first_level_divisions WHERE Country_ID = (SELECT Country_ID FROM countries WHERE Country = ?)");
+        ) {
+            ps.setString(1, country);
+
+            try (ResultSet resultSet = ps.executeQuery()) {
+                while (resultSet.next()) {
+                    String division = resultSet.getString("Division");
+                    divisions.add(division);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Error");
+            e.printStackTrace(System.out);
+        }
+
+        return divisions;
+    }
+
+
 }

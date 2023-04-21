@@ -1,6 +1,9 @@
 package controller;
 
+import helper.ClientQuery;
 import helper.JDBCHelper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,10 +24,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ClientScreenController implements Initializable {
+
 
     Stage stage;
     Parent scene;
@@ -52,6 +57,20 @@ public class ClientScreenController implements Initializable {
     @FXML
     private TextField clientScreenPhoneTextField;
 
+    @FXML
+    private ComboBox clientCountryComboBox;
+    @FXML
+    private ComboBox clientDivisionComboBox;
+
+    @FXML
+    public void onCountryComboBoxChanged(ActionEvent actionEvent) {
+        String country = clientCountryComboBox.getValue().toString();
+        List<String> divisions = ClientQuery.getClientDivisionsByCountry(country);
+        clientDivisionComboBox.getItems().clear();
+        clientDivisionComboBox.getItems().addAll(divisions);
+    }
+
+
     private Client currentClient;
 
     @Override
@@ -62,6 +81,18 @@ public class ClientScreenController implements Initializable {
         streetAddressColumn.setCellValueFactory(new PropertyValueFactory<>("streetAddress"));
         postalCodeColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+
+        clientCountryComboBox.getItems().addAll("U.S", "UK", "Canada");
+
+        // Set the onAction event for the clientCountryComboBox
+        clientCountryComboBox.setOnAction(event -> {
+            String selectedCountry = (String) clientCountryComboBox.getValue();
+            List<String> divisions = ClientQuery.getClientDivisionsByCountry(selectedCountry);
+            ObservableList<String> divisionOptions = FXCollections.observableArrayList(divisions);
+            clientDivisionComboBox.setItems(divisionOptions);
+        });
+
+
 
         clientTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -188,18 +219,18 @@ public class ClientScreenController implements Initializable {
             Connection conn = JDBCHelper.getConnection();
             String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, name);
-            stmt.setString(2, streetAddress);
-            stmt.setString(3, postalCode);
-            stmt.setString(4, phone);
-            stmt.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
-            stmt.setString(6, "admin");
-            stmt.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
-            stmt.setString(8, "admin");
-            stmt.setInt(9, 1); // Replace with the correct division ID
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, name);
+            ps.setString(2, streetAddress);
+            ps.setString(3, postalCode);
+            ps.setString(4, phone);
+            ps.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(6, "admin");
+            ps.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(8, "admin");
+            ps.setInt(9, 1); // Replace with the correct division ID
 
-            stmt.executeUpdate();
+            ps.executeUpdate();
             System.out.println("Saved new client to database with ID " + newClientId);
         } catch (SQLException e) {
             e.printStackTrace();
