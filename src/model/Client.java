@@ -1,5 +1,7 @@
 package model;
 
+import helper.ClientQuery;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class Client {
@@ -192,5 +194,14 @@ public class Client {
     public void setDivisionId(int divisionId) {
         this.divisionId = divisionId;
     }
+
+    public String getCountry() {
+        return ClientQuery.getCountryByDivisionId(getDivisionId());
+    }
+
+    public String getDivision() {
+        return ClientQuery.getDivisionByDivisionId(getDivisionId());
+    }
+
 
 }

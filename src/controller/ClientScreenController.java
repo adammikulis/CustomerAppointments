@@ -1,7 +1,8 @@
 package controller;
 
 import helper.ClientQuery;
-import helper.ConnectionHelper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -17,8 +18,6 @@ import model.ClientList;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -31,6 +30,8 @@ public class ClientScreenController implements Initializable {
 
     Stage stage;
     Parent scene;
+
+    private Client currentClient;
 
     @FXML
     private TableView<Client> clientTableView;
@@ -56,21 +57,22 @@ public class ClientScreenController implements Initializable {
     private TextField clientScreenPhoneTextField;
 
     @FXML
-    private ComboBox clientCountryComboBox;
+    private ComboBox<String> clientCountryComboBox;
     @FXML
-    private ComboBox clientDivisionComboBox;
+    private ComboBox<String> clientDivisionComboBox;
+
+    private ClientQuery clientQuery = new ClientQuery();
 
     @FXML
-    public void onCountryComboBoxChanged(Event event) {
-        String country = clientCountryComboBox.getValue().toString();
-        List<String> divisions = ClientQuery.getClientDivisionsByCountry(country);
-        clientDivisionComboBox.getItems().clear();
-        clientDivisionComboBox.getItems().addAll(divisions);
+    private void onCountryComboBoxChanged(ActionEvent event) {
+        String country = clientCountryComboBox.getValue() != null ? clientCountryComboBox.getValue().toString() : null;
+        if (country != null) {
+            populateDivisionComboBox(country);
+        } else {
+            clearDivisionComboBox();
+        }
     }
 
-
-
-    private Client currentClient;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -84,7 +86,6 @@ public class ClientScreenController implements Initializable {
         clientCountryComboBox.getItems().addAll("U.S", "UK", "Canada");
         clientCountryComboBox.setOnAction(event -> onCountryComboBoxChanged(event));
 
-
         clientTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 System.out.println("Selected row: " + newValue);
@@ -95,12 +96,21 @@ public class ClientScreenController implements Initializable {
                 clientScreenAddressTextField.setText(currentClient.getStreetAddress());
                 clientScreenPostalCodeTextField.setText(currentClient.getPostalCode());
                 clientScreenPhoneTextField.setText(currentClient.getPhone());
+
+                // Populate the combo boxes with the selected client's country and division
+                clientCountryComboBox.getSelectionModel().select(currentClient.getCountry());
+                List<String> divisions = ClientQuery.getClientDivisionsByCountry(currentClient.getCountry());
+                clientDivisionComboBox.getItems().clear();
+                clientDivisionComboBox.getItems().addAll(divisions);
+                clientDivisionComboBox.getSelectionModel().select(currentClient.getDivision());
+
             }
         });
     }
 
 
-    public void onClientScreenDeleteClientButtonPressed(ActionEvent actionEvent) throws IOException {
+
+    public void onClientScreenDeleteClientButtonPressed(ActionEvent actionEvent) throws IOException, SQLException {
         // Get the selected client
         Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
 
@@ -112,20 +122,21 @@ public class ClientScreenController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
 
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                boolean isDeleted = ClientQuery.deleteClient(selectedClient);
+                try {
+                    boolean isDeleted = clientQuery.deleteClient(selectedClient);
 
-                if (!isDeleted) {
+                    if (!isDeleted) {
+                        System.out.println("Error deleting client.");
+                    }
+                } catch (SQLException e) {
                     System.out.println("Error deleting client.");
+                    e.printStackTrace();
                 }
             }
         } else {
             System.out.println("No client selected for deletion.");
         }
     }
-
-
-
-
 
     public void onUpdateCurrentClientButtonPressed(ActionEvent actionEvent) throws IOException {
         // Get the selected client
@@ -137,6 +148,12 @@ public class ClientScreenController implements Initializable {
             String streetAddress = clientScreenAddressTextField.getText();
             String postalCode = clientScreenPostalCodeTextField.getText();
             String phone = clientScreenPhoneTextField.getText();
+            String country = clientCountryComboBox.getValue().toString();
+            String division = clientDivisionComboBox.getValue().toString();
+
+            // Get the Division_ID using the ClientQuery method
+            ClientQuery clientQuery = new ClientQuery();
+            int divisionId = clientQuery.getDivisionIdByCountryAndDivision(country, division);
 
             // Update the selected client with the new data
             selectedClient.setClientName(name);
@@ -145,26 +162,24 @@ public class ClientScreenController implements Initializable {
             selectedClient.setPhone(phone);
             selectedClient.setLastUpdate(LocalDateTime.now());
             selectedClient.setLastUpdatedBy("admin");
+            selectedClient.setDivisionId(divisionId);
 
-            // Update the client in the database
-            String updateStatement = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ? WHERE Customer_Id = ?";
+            // Update the client in the database using the updateClient method from ClientQuery
             try {
-                PreparedStatement preparedStatement = ConnectionHelper.getConnection().prepareStatement(updateStatement);
-                preparedStatement.setString(1, selectedClient.getClientName());
-                preparedStatement.setString(2, selectedClient.getStreetAddress());
-                preparedStatement.setString(3, selectedClient.getPostalCode());
-                preparedStatement.setString(4, selectedClient.getPhone());
-                preparedStatement.setObject(5, selectedClient.getLastUpdate());
-                preparedStatement.setString(6, selectedClient.getLastUpdatedBy());
-                preparedStatement.setInt(7, selectedClient.getClientId());
-
-                int rowsAffected = preparedStatement.executeUpdate();
-                System.out.println("Updated client with ID " + selectedClient.getClientId());
-
-                preparedStatement.close();
+                clientQuery.updateClient(selectedClient);
             } catch (SQLException e) {
-                System.out.println("Error updating client in database: " + e.getMessage());
+                System.out.println("Error updating client.");
+                e.printStackTrace();
             }
+
+            // Clear the input fields
+            String empty = "";
+            clientScreenNameTextField.setText(empty);
+            clientScreenAddressTextField.setText(empty);
+            clientScreenPostalCodeTextField.setText(empty);
+            clientScreenPhoneTextField.setText(empty);
+            clearCountryComboBox();
+            clearDivisionComboBox();
 
             // Refresh the table view
             clientTableView.refresh();
@@ -173,19 +188,44 @@ public class ClientScreenController implements Initializable {
         }
     }
 
+
     public void onClientScreenSaveNewClientButtonPressed(ActionEvent actionEvent) throws IOException {
         // Get the data from the input fields
         String name = clientScreenNameTextField.getText();
         String streetAddress = clientScreenAddressTextField.getText();
         String postalCode = clientScreenPostalCodeTextField.getText();
         String phone = clientScreenPhoneTextField.getText();
+        String country = clientCountryComboBox.getValue().toString();
+        String division = clientDivisionComboBox.getValue().toString();
 
-        // Create a new Client object with the input data and the next available client ID
-        int newClientId = ClientList.getNextClientId();
-        Client newClient = new Client(newClientId, name, streetAddress, postalCode, phone, null, null, null, null, 0);
+        // Get the Division_ID using the ClientQuery method
+        ClientQuery clientQuery = new ClientQuery();
+        int divisionId = clientQuery.getDivisionIdByCountryAndDivision(country, division);
 
-        // Add the new client to the list of all clients
-        ClientList.addClient(newClient);
+        // Set the create and last update times to the current time
+        LocalDateTime now = LocalDateTime.now();
+
+        // Create a new Client object with the input data and current time and user for create and last update info
+        Client newClient = new Client(
+                0,
+                name,
+                streetAddress,
+                postalCode,
+                phone,
+                now,
+                "admin",
+                now,
+                "admin",
+                divisionId
+        );
+
+        try {
+            ClientList.addClient(newClient);
+        } catch (SQLException e) {
+            System.out.println("Error adding new client to list.");
+            e.printStackTrace();
+        }
+
 
         // Clear the input fields
         String empty = "";
@@ -193,13 +233,42 @@ public class ClientScreenController implements Initializable {
         clientScreenAddressTextField.setText(empty);
         clientScreenPostalCodeTextField.setText(empty);
         clientScreenPhoneTextField.setText(empty);
+        clearCountryComboBox();
+        clearDivisionComboBox();
 
-        // Save the new client to the database using the saveNewClient method from ClientQuery
-        ClientQuery clientQuery = new ClientQuery();
-        clientQuery.saveNewClient(name, streetAddress, postalCode, phone);
+        // Save the new client to the database using the insertClient method from ClientQuery
+        try {
+            clientQuery.insertClient(newClient);
+        } catch (SQLException e) {
+            System.out.println("Error inserting new client into database.");
+            e.printStackTrace();
+        }
+
+        // Refresh the table view
+        clientTableView.refresh();
+    }
+
+    private void populateDivisionComboBox(String country) {
+        ObservableList<String> divisions = FXCollections.observableArrayList();
+
+        // Assume you have a method that returns a list of divisions for a given country name
+        List<String> divisionsList = clientQuery.getClientDivisionsByCountry(country);
+
+        divisions.addAll(divisionsList);
+        clientDivisionComboBox.setItems(divisions);
     }
 
 
+
+    private void clearCountryComboBox() {
+        clientCountryComboBox.getSelectionModel().clearSelection();
+        clientCountryComboBox.getItems().clear();
+    }
+
+    private void clearDivisionComboBox() {
+        clientDivisionComboBox.getSelectionModel().clearSelection();
+        clientDivisionComboBox.getItems().clear();
+    }
 
 
     public void onClientScreenBackButtonPressed(ActionEvent actionEvent) throws IOException {
