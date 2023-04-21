@@ -1,6 +1,6 @@
 package main;
 
-import helper.JDBCHelper;
+import helper.ConnectionHelper;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,9 +19,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws SQLException {
-
-        JDBCHelper.openConnection();
+        ConnectionHelper.openConnection();
         launch(args);
-        JDBCHelper.closeConnection();
+        ConnectionHelper.closeConnection();
     }
 }

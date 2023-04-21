@@ -6,10 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="refactored appointment INSERT into AppointmentQuery">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/ClientScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClientScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/HomeScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helper/ClientQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/ClientQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/JDBCHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/ConnectionHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/LoginHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/LoginHelper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ClientScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ClientScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +30,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

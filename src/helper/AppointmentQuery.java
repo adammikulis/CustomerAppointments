@@ -14,7 +14,7 @@ public class AppointmentQuery {
         List<Appointment> appointments = new ArrayList<>();
 
         String query = "SELECT * FROM appointments";
-        try (PreparedStatement preparedStatement = JDBCHelper.getConnection().prepareStatement(query);
+        try (PreparedStatement preparedStatement = ConnectionHelper.getConnection().prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 int appointmentId = resultSet.getInt("Appointment_ID");
@@ -46,7 +46,7 @@ public class AppointmentQuery {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            connection = JDBCHelper.getConnection();
+            connection = ConnectionHelper.getConnection();
             String sql = "INSERT INTO appointments(Appointment_ID, Contact_ID, Customer_ID, User_ID, Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             ps = ((Connection) connection).prepareStatement(sql);
             ps.setInt(1, appointment.getAppointmentId());
@@ -66,8 +66,8 @@ public class AppointmentQuery {
             ps.executeUpdate();
             System.out.println("Created new appointment with id " + appointment.getAppointmentId() + " in the database.");
         } finally {
-            JDBCHelper.closeResultSet(rs);
-            JDBCHelper.closeStatement(ps);
+            ConnectionHelper.closeResultSet(rs);
+            ConnectionHelper.closeStatement(ps);
         }
     }
 }

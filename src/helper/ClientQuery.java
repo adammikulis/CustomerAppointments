@@ -1,6 +1,7 @@
 package helper;
 
 import model.Client;
+import model.ClientList;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -13,7 +14,7 @@ public class ClientQuery {
         List<Client> clients = new ArrayList<>();
 
         String query = "SELECT * FROM customers";
-        try (PreparedStatement preparedStatement = JDBCHelper.getConnection().prepareStatement(query);
+        try (PreparedStatement preparedStatement = ConnectionHelper.getConnection().prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 int clientId = resultSet.getInt("Customer_ID");
@@ -36,11 +37,11 @@ public class ClientQuery {
         return clients;
     }
 
-    public void onSaveNewClient(String name, String streetAddress, String postalCode, String phone) {
+    public void saveNewClient(String name, String streetAddress, String postalCode, String phone) {
         try {
             String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement ps = JDBCHelper.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = ConnectionHelper.getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, name);
             ps.setString(2, streetAddress);
             ps.setString(3, postalCode);
@@ -65,8 +66,7 @@ public class ClientQuery {
     public static List<String> getClientDivisionsByCountry(String country) {
         List<String> divisions = new ArrayList<>();
 
-        try (Connection conn = JDBCHelper.getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT Division FROM first_level_divisions WHERE Country_ID = (SELECT Country_ID FROM countries WHERE Country = ?)");
+        try (PreparedStatement ps = ConnectionHelper.getConnection().prepareStatement("SELECT Division FROM first_level_divisions WHERE Country_ID = (SELECT Country_ID FROM countries WHERE Country = ?)");
         ) {
             ps.setString(1, country);
 
@@ -83,6 +83,31 @@ public class ClientQuery {
 
         return divisions;
     }
+
+    public static boolean deleteClient(Client clientToDelete) {
+        try {
+            // Delete all associated appointments
+            PreparedStatement deleteAppointmentsStatement = ConnectionHelper.getConnection().prepareStatement("DELETE FROM appointments WHERE Customer_Id = ?");
+            deleteAppointmentsStatement.setInt(1, clientToDelete.getClientId());
+            deleteAppointmentsStatement.executeUpdate();
+            System.out.println("Deleted all appointments associated with client with ID " + clientToDelete.getClientId());
+
+            // Delete the selected client from the database
+            PreparedStatement deleteClientStatement = ConnectionHelper.getConnection().prepareStatement("DELETE FROM customers WHERE Customer_Id = ?");
+            deleteClientStatement.setInt(1, clientToDelete.getClientId());
+            deleteClientStatement.executeUpdate();
+            System.out.println("Deleted client with ID " + clientToDelete.getClientId());
+
+            // Remove the selected client from the list of all clients
+            ClientList.getAllClients().remove(clientToDelete);
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
 
 }

@@ -1,6 +1,5 @@
 package controller;
 
-import helper.JDBCHelper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

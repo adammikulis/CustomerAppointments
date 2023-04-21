@@ -1,10 +1,9 @@
 package controller;
 
 import helper.ClientQuery;
-import helper.JDBCHelper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import helper.ConnectionHelper;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.AppointmentList;
 import model.Client;
 import model.ClientList;
 
@@ -63,12 +61,13 @@ public class ClientScreenController implements Initializable {
     private ComboBox clientDivisionComboBox;
 
     @FXML
-    public void onCountryComboBoxChanged(ActionEvent actionEvent) {
+    public void onCountryComboBoxChanged(Event event) {
         String country = clientCountryComboBox.getValue().toString();
         List<String> divisions = ClientQuery.getClientDivisionsByCountry(country);
         clientDivisionComboBox.getItems().clear();
         clientDivisionComboBox.getItems().addAll(divisions);
     }
+
 
 
     private Client currentClient;
@@ -83,15 +82,7 @@ public class ClientScreenController implements Initializable {
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
 
         clientCountryComboBox.getItems().addAll("U.S", "UK", "Canada");
-
-        // Set the onAction event for the clientCountryComboBox
-        clientCountryComboBox.setOnAction(event -> {
-            String selectedCountry = (String) clientCountryComboBox.getValue();
-            List<String> divisions = ClientQuery.getClientDivisionsByCountry(selectedCountry);
-            ObservableList<String> divisionOptions = FXCollections.observableArrayList(divisions);
-            clientDivisionComboBox.setItems(divisionOptions);
-        });
-
+        clientCountryComboBox.setOnAction(event -> onCountryComboBoxChanged(event));
 
 
         clientTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -108,6 +99,7 @@ public class ClientScreenController implements Initializable {
         });
     }
 
+
     public void onClientScreenDeleteClientButtonPressed(ActionEvent actionEvent) throws IOException {
         // Get the selected client
         Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
@@ -120,29 +112,17 @@ public class ClientScreenController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
 
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                try (Connection conn = JDBCHelper.getConnection()) {
-                    // Delete all associated appointments
-                    PreparedStatement deleteAppointmentsStatement = conn.prepareStatement("DELETE FROM appointments WHERE Customer_Id = ?");
-                    deleteAppointmentsStatement.setInt(1, selectedClient.getClientId());
-                    deleteAppointmentsStatement.executeUpdate();
-                    System.out.println("Deleted all appointments associated with client with ID " + selectedClient.getClientId());
+                boolean isDeleted = ClientQuery.deleteClient(selectedClient);
 
-                    // Delete the selected client from the database
-                    PreparedStatement deleteClientStatement = conn.prepareStatement("DELETE FROM customers WHERE Customer_Id = ?");
-                    deleteClientStatement.setInt(1, selectedClient.getClientId());
-                    deleteClientStatement.executeUpdate();
-                    System.out.println("Deleted client with ID " + selectedClient.getClientId());
-
-                    // Remove the selected client from the list of all clients
-                    ClientList.getAllClients().remove(selectedClient);
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                if (!isDeleted) {
+                    System.out.println("Error deleting client.");
                 }
             }
         } else {
             System.out.println("No client selected for deletion.");
         }
     }
+
 
 
 
@@ -169,7 +149,7 @@ public class ClientScreenController implements Initializable {
             // Update the client in the database
             String updateStatement = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ? WHERE Customer_Id = ?";
             try {
-                PreparedStatement preparedStatement = JDBCHelper.getConnection().prepareStatement(updateStatement);
+                PreparedStatement preparedStatement = ConnectionHelper.getConnection().prepareStatement(updateStatement);
                 preparedStatement.setString(1, selectedClient.getClientName());
                 preparedStatement.setString(2, selectedClient.getStreetAddress());
                 preparedStatement.setString(3, selectedClient.getPostalCode());
@@ -214,28 +194,11 @@ public class ClientScreenController implements Initializable {
         clientScreenPostalCodeTextField.setText(empty);
         clientScreenPhoneTextField.setText(empty);
 
-        // Save the new client to the database
-        try {
-            Connection conn = JDBCHelper.getConnection();
-            String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, name);
-            ps.setString(2, streetAddress);
-            ps.setString(3, postalCode);
-            ps.setString(4, phone);
-            ps.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
-            ps.setString(6, "admin");
-            ps.setTimestamp(7, Timestamp.valueOf(LocalDateTime.now()));
-            ps.setString(8, "admin");
-            ps.setInt(9, 1); // Replace with the correct division ID
-
-            ps.executeUpdate();
-            System.out.println("Saved new client to database with ID " + newClientId);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        // Save the new client to the database using the saveNewClient method from ClientQuery
+        ClientQuery clientQuery = new ClientQuery();
+        clientQuery.saveNewClient(name, streetAddress, postalCode, phone);
     }
+
 
 
 
