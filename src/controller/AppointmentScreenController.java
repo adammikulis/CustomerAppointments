@@ -1,8 +1,8 @@
 package controller;
 
 import helper.AppointmentQuery;
+import helper.ContactQuery;
 import javafx.collections.FXCollections;
-import javafx.css.converter.StringConverter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +30,7 @@ public class AppointmentScreenController implements Initializable {
 
     Stage stage;
     Parent scene;
+
 
 
 
@@ -110,6 +111,17 @@ public class AppointmentScreenController implements Initializable {
         customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
+        // Listener for changes in the selected item of the contact combo box
+        appointmentContactComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                // Set the contactId for the appointment
+                Appointment selectedAppointment = appointmentTableView.getSelectionModel().getSelectedItem();
+                if (selectedAppointment != null) {
+                    selectedAppointment.setContactId(newSelection.getContactId());
+                }
+            }
+        });
+
         // Listener for selecting a row
         appointmentTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -121,13 +133,18 @@ public class AppointmentScreenController implements Initializable {
 
                 // Get the contact name for the appointment
                 String contactName = null;
+                List<String> contactNames = null;
+                ContactQuery contactQuery = new ContactQuery();
                 try {
-                    AppointmentQuery appointmentQuery = new AppointmentQuery();
-                    contactName = appointmentQuery.getContactName(newSelection.getContactId());
+                    contactNames = contactQuery.getAllContactNames();
+                    Contact selectedContact = contactQuery.getContact(newSelection.getContactId());
+                    appointmentContactComboBox.getSelectionModel().select(selectedContact);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                appointmentContactComboBox.setValue(ContactList.getContactByName(contactName));
+
+                List<Contact> contacts = ContactList.getContactsByNames(contactNames);
+                appointmentContactComboBox.setItems(FXCollections.observableArrayList(contacts));
 
                 appointmentStartDateTimeTextField.setText(newSelection.getStartDateTime().toString());
                 appointmentEndDateTimeTextField.setText(newSelection.getEndDateTime().toString());
@@ -136,10 +153,20 @@ public class AppointmentScreenController implements Initializable {
             }
         });
 
-        // Populate the contact combo box with Contact objects
-        appointmentContactComboBox.setItems(FXCollections.observableArrayList(ContactList.getAllContacts()));
 
+        // Populate the contact combo box with Contact objects
+        List<String> contactNames = null;
+        try {
+            ContactQuery contactQuery = new ContactQuery();
+            contactNames = contactQuery.getAllContactNames();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<Contact> contacts = ContactList.getContactsByNames(contactNames);
+        appointmentContactComboBox.setItems(FXCollections.observableArrayList(contacts));
     }
+
+
 
 
 
@@ -195,7 +222,7 @@ public class AppointmentScreenController implements Initializable {
             AppointmentQuery appointmentQuery = new AppointmentQuery();
             appointmentQuery.insertAppointment(newAppointment);
             System.out.println("Created new appointment with id " + newAppointment.getAppointmentId() + " in the database.");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

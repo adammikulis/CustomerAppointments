@@ -19,12 +19,18 @@ public class ContactList {
         allContacts.remove(contact);
     }
 
-    public static Contact getContactByName(String contactName) {
-        for (Contact contact : allContacts) {
-            if (contact.getContactName().equals(contactName)) {
-                return contact;
+    public static List<Contact> getContactsByNames(List<String> contactNames) {
+        List<Contact> contacts = new ArrayList<>();
+        for (String contactName : contactNames) {
+            for (Contact contact : allContacts) {
+                if (contact.getContactName().equals(contactName)) {
+                    contacts.add(contact);
+                    break;
+                }
             }
         }
-        return null; // or throw an exception if the contact is not found
+        return contacts;
     }
+
+
 }

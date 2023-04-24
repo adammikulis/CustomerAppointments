@@ -1,8 +1,8 @@
 package model;
 
 import helper.AppointmentQuery;
+import helper.ContactQuery;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class Appointment {
@@ -232,8 +232,8 @@ public class Appointment {
         // Get the contact name for the appointment
         String contactName = null;
         try {
-            AppointmentQuery appointmentQuery = new AppointmentQuery();
-            contactName = appointmentQuery.getContactName(contactId);
+            ContactQuery contactQuery = new ContactQuery();
+            contactName = contactQuery.getContactName(contactId);
         } catch (Exception e) {
             e.printStackTrace();
         }

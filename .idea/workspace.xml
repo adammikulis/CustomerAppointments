@@ -4,19 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="can sucessfully add, delete, and update clients but issue with country combobox">
-      <change afterPath="$PROJECT_DIR$/src/helper/LoginQuery.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/Contact.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/model/ContactList.java" afterDir="false" />
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="appointments show contact name, error when selecting appointment">
+      <change afterPath="$PROJECT_DIR$/src/helper/ContactQuery.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/LoginScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginScreenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/LoginHelper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Appointment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ContactList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ContactList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -205,7 +200,21 @@
       <option name="project" value="LOCAL" />
       <updated>1682120908031</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="login screen fully functions">
+      <created>1682373150981</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1682373150981</updated>
+    </task>
+    <task id="LOCAL-00020" summary="appointments show contact name, error when selecting appointment">
+      <created>1682373171960</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1682373171960</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -238,7 +247,9 @@
     <MESSAGE value="refactored client queries from the controller to ClientQuery" />
     <MESSAGE value="added functionality for client screen comboboxes" />
     <MESSAGE value="can sucessfully add, delete, and update clients but issue with country combobox" />
-    <option name="LAST_COMMIT_MESSAGE" value="can sucessfully add, delete, and update clients but issue with country combobox" />
+    <MESSAGE value="login screen fully functions" />
+    <MESSAGE value="appointments show contact name, error when selecting appointment" />
+    <option name="LAST_COMMIT_MESSAGE" value="appointments show contact name, error when selecting appointment" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
