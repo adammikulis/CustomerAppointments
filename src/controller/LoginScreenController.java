@@ -1,15 +1,19 @@
 package controller;
 
-import helper.LoginHelper;
+import helper.LoginQuery;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,39 +24,80 @@ import java.util.ResourceBundle;
 
 public class LoginScreenController implements Initializable {
 
-
     Stage stage;
     Parent scene;
 
-
     @FXML
-    private TextField UserNameTextField;
+    private PasswordField passwordPasswordField;
     @FXML
-    private TextField PasswordTextField;
+    private TextField userNameTextField;
     @FXML
-    private Label ZoneIdLabel;
-    @FXML
-    private Label ErrorMessageLabel;
+    private Label zoneIdLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Locale currentLocale = Locale.getDefault();
-        ZoneIdLabel.setText("Current locale: " + currentLocale);
-        ErrorMessageLabel.setText("");
-
+        if (currentLocale.equals(Locale.ENGLISH)) {
+            zoneIdLabel.setText("Current Locale: " + currentLocale);
+        } else if (currentLocale.equals(Locale.FRENCH)) {
+            zoneIdLabel.setText("Locale actuelle: " + currentLocale);
+            userNameTextField.setPromptText("Nom d'utilisateur");
+            passwordPasswordField.setPromptText("Mot de passe");
+        }
     }
 
     public void onLoginButtonAction(ActionEvent actionEvent) throws SQLException, IOException {
-        if (LoginHelper.check_login(UserNameTextField.getText(), PasswordTextField.getText())) {
-            // Switch to HomeScreenController.fxml
-            stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+        String userName = userNameTextField.getText();
+        String password = passwordPasswordField.getText();
+
+        if (userName.isEmpty() || password.isEmpty()) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            userNameTextField.clear();
+            passwordPasswordField.clear();
+
+            if (Locale.getDefault().getLanguage().equals("fr")) {
+                alert.setHeaderText("Champs vides");
+                alert.setContentText("Veuillez entrer un nom d'utilisateur et un mot de passe.");
+            } else {
+                alert.setHeaderText("Empty Fields");
+                alert.setContentText("Please enter a username and password.");
+            }
+            alert.showAndWait();
+            return;
+        }
+
+        try {
+            LoginQuery.checkLogin(userName, password);
+            stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
             stage.setScene(new Scene(scene));
             stage.show();
-            System.out.println("Login Successful!");
-        }
-        else {
-            System.out.println("Login Failed");
+        } catch (IllegalArgumentException e) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+
+            if (Locale.getDefault().getLanguage().equals("fr")) {
+                if (e.getMessage().equals("Incorrect password")) {
+                    alert.setHeaderText("Mot de passe incorrect");
+                    alert.setContentText("Le mot de passe que vous avez entré est incorrect. Veuillez réessayer.");
+                } else if (e.getMessage().equals("User not found")) {
+                    alert.setHeaderText("Utilisateur introuvable");
+                    alert.setContentText("L'utilisateur que vous avez entré n'a pas été trouvé. Veuillez réessayer.");
+                }
+            } else {
+                if (e.getMessage().equals("Incorrect password")) {
+                    alert.setHeaderText("Incorrect password");
+                    alert.setContentText("The password you entered is incorrect. Please try again.");
+                } else if (e.getMessage().equals("User not found")) {
+                    alert.setHeaderText("User not found");
+                    alert.setContentText("The user you entered was not found. Please try again.");
+                }
+            }
+
+            alert.showAndWait();
+            userNameTextField.clear();
+            passwordPasswordField.clear();
         }
     }
 }

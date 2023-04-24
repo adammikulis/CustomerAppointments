@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginScreenController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginScreenController">
    <children>
       <Button layoutX="472.0" layoutY="299.0" mnemonicParsing="false" onAction="#onLoginButtonAction" text="Login" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="208.0" layoutY="72.0" prefHeight="104.0" prefWidth="407.0" text="Customer Appointment Database - Employee Login" textAlignment="CENTER" wrapText="true">
@@ -12,11 +12,10 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <TextField fx:id="UserNameTextField" layoutX="369.0" layoutY="199.0" promptText="Username" />
-      <TextField fx:id="PasswordTextField" layoutX="369.0" layoutY="242.0" promptText="Password" />
+      <TextField fx:id="userNameTextField" layoutX="369.0" layoutY="199.0" promptText="Username" />
       <Label layoutX="266.0" layoutY="203.0" text="Username" />
       <Label layoutX="266.0" layoutY="246.0" text="Password" />
-      <Label fx:id="ZoneIdLabel" layoutX="266.0" layoutY="303.0" prefHeight="17.0" prefWidth="184.0" text="Locale" />
-      <Label fx:id="ErrorMessageLabel" layoutX="266.0" layoutY="360.0" text="&lt;error message&gt;" />
+      <Label fx:id="zoneIdLabel" layoutX="266.0" layoutY="303.0" prefHeight="17.0" prefWidth="184.0" text="Locale" />
+      <PasswordField fx:id="passwordPasswordField" layoutX="369.0" layoutY="242.0" promptText="Password" />
    </children>
 </AnchorPane>
