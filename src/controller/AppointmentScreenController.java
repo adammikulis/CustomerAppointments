@@ -1,6 +1,8 @@
 package controller;
 
 import helper.AppointmentQuery;
+import javafx.collections.FXCollections;
+import javafx.css.converter.StringConverter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,21 +14,32 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
 import model.AppointmentList;
+import model.Contact;
+import model.ContactList;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AppointmentScreenController implements Initializable {
 
+
     Stage stage;
     Parent scene;
 
+
+
+
     @FXML
     private TableView<Appointment> appointmentTableView;
+
+    @FXML
+    private TableColumn<Appointment, String> contactColumn;
+
 
     @FXML
     private TableColumn<Appointment, Integer> appointmentIdColumn;
@@ -39,9 +52,6 @@ public class AppointmentScreenController implements Initializable {
 
     @FXML
     private TableColumn<Appointment, String> locationColumn;
-
-    @FXML
-    private TableColumn<Appointment, Integer> contactIdColumn;
 
     @FXML
     private TableColumn<Appointment, String> typeColumn;
@@ -58,8 +68,6 @@ public class AppointmentScreenController implements Initializable {
     @FXML
     private TableColumn<Appointment, Integer> userIdColumn;
 
-    /*@FXML
-    private ComboBox<AppointmentType> appointmentTypeComboBox;*/
 
     @FXML
     private TextField appointmentTitleTextField;
@@ -71,7 +79,10 @@ public class AppointmentScreenController implements Initializable {
     private TextField appointmentLocationTextField;
 
     @FXML
-    private TextField appointmentContactTextField;
+    private ComboBox<Contact> appointmentContactComboBox;
+
+    @FXML
+    private TextField appointmentTypeTextField;
 
     @FXML
     private TextField appointmentStartDateTimeTextField;
@@ -92,7 +103,7 @@ public class AppointmentScreenController implements Initializable {
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
-        contactIdColumn.setCellValueFactory(new PropertyValueFactory<>("contactId"));
+        contactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         startDateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
         endDateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
@@ -103,18 +114,34 @@ public class AppointmentScreenController implements Initializable {
         appointmentTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 // Set the text fields to show the appointment's information
-                /*appointmentTypeComboBox.setValue(newSelection.getType());*/
+                appointmentTypeTextField.setText(newSelection.getType());
                 appointmentTitleTextField.setText(newSelection.getTitle());
                 appointmentDescriptionTextField.setText(newSelection.getDescription());
                 appointmentLocationTextField.setText(newSelection.getLocation());
-                appointmentContactTextField.setText(Integer.toString(newSelection.getContactId()));
+
+                // Get the contact name for the appointment
+                String contactName = null;
+                try {
+                    AppointmentQuery appointmentQuery = new AppointmentQuery();
+                    contactName = appointmentQuery.getContactName(newSelection.getContactId());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                appointmentContactComboBox.setValue(ContactList.getContactByName(contactName));
+
                 appointmentStartDateTimeTextField.setText(newSelection.getStartDateTime().toString());
                 appointmentEndDateTimeTextField.setText(newSelection.getEndDateTime().toString());
                 customerIdTextField.setText(Integer.toString(newSelection.getCustomerId()));
                 userIdTextField.setText(Integer.toString(newSelection.getUserId()));
             }
         });
+
+        // Populate the contact combo box with Contact objects
+        appointmentContactComboBox.setItems(FXCollections.observableArrayList(ContactList.getAllContacts()));
+
     }
+
+
 
 
     public void onAppointmentBackButtonPressed(ActionEvent actionEvent) throws IOException {
@@ -126,8 +153,9 @@ public class AppointmentScreenController implements Initializable {
 
     public void onSaveNewAppointmentButtonPressed(ActionEvent actionEvent) throws IOException {
         // Get the values from the text fields
-        int contactId = Integer.parseInt(appointmentContactTextField.getText());
         int customerId = Integer.parseInt(customerIdTextField.getText());
+        Contact selectedContact = appointmentContactComboBox.getSelectionModel().getSelectedItem();
+        int contactId = selectedContact.getContactId();
         int userId = Integer.parseInt(userIdTextField.getText());
         String title = appointmentTitleTextField.getText();
         String description = appointmentDescriptionTextField.getText();
@@ -172,7 +200,7 @@ public class AppointmentScreenController implements Initializable {
         }
 
         // Clear the text fields
-        appointmentContactTextField.clear();
+        clearAppointmentContactComboBox();
         customerIdTextField.clear();
         userIdTextField.clear();
         appointmentTitleTextField.clear();
@@ -182,10 +210,10 @@ public class AppointmentScreenController implements Initializable {
         appointmentEndDateTimeTextField.clear();
     }
 
-
-
-
-
+    private void clearAppointmentContactComboBox() {
+        appointmentContactComboBox.getItems().clear();
+        appointmentContactComboBox.setValue(null);
+    }
 
 
     public void onDeleteAppointmentButtonPressed(ActionEvent actionEvent) throws IOException {
@@ -208,4 +236,6 @@ public class AppointmentScreenController implements Initializable {
 
     public void onUpdateAppointmentButtonPressed(ActionEvent actionEvent) throws IOException {
     }
+
+
 }

@@ -1,5 +1,8 @@
 package model;
 
+import helper.AppointmentQuery;
+
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class Appointment {
@@ -9,6 +12,7 @@ public class Appointment {
     private int customerId;
     private int userId;
 
+    private String contactName;
     private String title;
     private String description;
     private String location;
@@ -224,5 +228,21 @@ public class Appointment {
         this.lastUpdate = lastUpdate;
     }
 
+    public String getContactName() {
+        // Get the contact name for the appointment
+        String contactName = null;
+        try {
+            AppointmentQuery appointmentQuery = new AppointmentQuery();
+            contactName = appointmentQuery.getContactName(contactId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return contactName;
+    }
+
+
+    public void setContactName(String contactName) {
+        this.contactName = contactName;
+    }
 
 }

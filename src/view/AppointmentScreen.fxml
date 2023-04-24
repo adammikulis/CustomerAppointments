@@ -12,7 +12,7 @@
           <TableColumn fx:id="titleColumn" prefWidth="71.33332061767578" text="Title" />
             <TableColumn fx:id="descriptionColumn" prefWidth="103.3333740234375" text="Description" />
             <TableColumn fx:id="locationColumn" prefWidth="71.0" text="Location" />
-            <TableColumn fx:id="contactIdColumn" prefWidth="61.0" text="Contact_ID" />
+            <TableColumn fx:id="contactColumn" prefWidth="61.0" text="Contact" />
             <TableColumn fx:id="typeColumn" prefWidth="44.3333740234375" text="Type" />
             <TableColumn fx:id="startDateTimeColumn" prefWidth="101.0" text="Start Date/Time" />
             <TableColumn fx:id="endDateTimeColumn" prefWidth="89.33331298828125" text="End Date/Time" />
@@ -66,16 +66,16 @@
             <Label text="End Date/Time" GridPane.columnIndex="7" />
             <Label text="Customer_ID" GridPane.columnIndex="8" />
             <Label text="User_ID" GridPane.columnIndex="9" />
-            <ComboBox fx:id="appointmentTypeComboBox" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
             <TextField editable="false" promptText="Auto-Generated" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentTitleTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentDescriptionTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentLocationTextField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <TextField fx:id="appointmentContactTextField" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentStartDateTimeTextField" GridPane.columnIndex="6" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentEndDateTimeTextField" GridPane.columnIndex="7" GridPane.rowIndex="1" />
             <TextField fx:id="customerIdTextField" GridPane.columnIndex="8" GridPane.rowIndex="1" />
             <TextField fx:id="userIdTextField" editable="false" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+            <TextField fx:id="typeTextField" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <ComboBox fx:id="appointmentContactComboBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>
