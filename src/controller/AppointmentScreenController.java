@@ -95,6 +95,22 @@ public class AppointmentScreenController implements Initializable {
 
     private String loggedInUserName;
 
+    // Get the values from the text fields
+    int customerId;
+    Contact selectedContact;
+    int contactId;
+    int userId;
+    String title;
+    String description;
+    String location;
+    String type;
+    String createdBy;
+    String lastUpdatedBy;
+    LocalDateTime startDateTime;
+    LocalDateTime endDateTime;
+    LocalDateTime createDate;
+    LocalDateTime lastUpdate;
+
 
 
     @Override
@@ -191,24 +207,11 @@ public class AppointmentScreenController implements Initializable {
 
     public void onSaveNewAppointmentButtonPressed(ActionEvent actionEvent) throws IOException {
         // Get the values from the text fields
-        int customerId = Integer.parseInt(customerIdTextField.getText());
-        Contact selectedContact = appointmentContactComboBox.getSelectionModel().getSelectedItem();
-        int contactId = selectedContact.getContactId();
-        int userId = Integer.parseInt(userIdTextField.getText());
-        String title = appointmentTitleTextField.getText();
-        String description = appointmentDescriptionTextField.getText();
-        String location = appointmentLocationTextField.getText();
-        String type = appointmentTypeTextField.getText();
-        String createdBy = loggedInUserName;
-        String lastUpdatedBy = loggedInUserName;
-        LocalDateTime startDateTime = LocalDateTime.parse(appointmentStartDateTimeTextField.getText());
-        LocalDateTime endDateTime = LocalDateTime.parse(appointmentEndDateTimeTextField.getText());
-        LocalDateTime createDate = LocalDateTime.now();
-        LocalDateTime lastUpdate = LocalDateTime.now();
+        getAllFields();
 
-        // Create a new appointment object
+        // Create a new appointment object without an appointment ID
         Appointment newAppointment = new Appointment(
-                AppointmentList.getNextAppointmentId(),
+                -1, // temporary invalid appointment ID
                 contactId,
                 customerId,
                 userId,
@@ -227,17 +230,17 @@ public class AppointmentScreenController implements Initializable {
         // Insert the new appointment into the database
         try {
             AppointmentQuery appointmentQuery = new AppointmentQuery();
-            appointmentQuery.insertAppointment(newAppointment);
-            System.out.println("Created new appointment with id " + newAppointment.getAppointmentId() + " in the database.");
+            int generatedAppointmentId = appointmentQuery.insertAppointment(newAppointment);
+            System.out.println("Created new appointment with id " + generatedAppointmentId + " in the database.");
+            newAppointment.setAppointmentId(generatedAppointmentId); // Set the actual appointment ID
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         // Add the new appointment to the list
         AppointmentList.addAppointment(newAppointment);
-
         clearFieldsAndRefresh();
     }
+
 
 
     public void onDeleteAppointmentButtonPressed(ActionEvent actionEvent) throws IOException {
@@ -262,11 +265,63 @@ public class AppointmentScreenController implements Initializable {
 
 
     public void onUpdateAppointmentButtonPressed(ActionEvent actionEvent) throws IOException {
+        Appointment selectedAppointment = appointmentTableView.getSelectionModel().getSelectedItem();
+        if (selectedAppointment == null) {
+            // No appointment selected, show error message
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please select an appointment to update.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Get the values from the text fields
+        getAllFields();
+
+        // Update the selected appointment object with the new values
+        selectedAppointment.setContactId(contactId);
+        selectedAppointment.setCustomerId(customerId);
+        selectedAppointment.setUserId(userId);
+        selectedAppointment.setTitle(title);
+        selectedAppointment.setDescription(description);
+        selectedAppointment.setLocation(location);
+        selectedAppointment.setType(type);
+        selectedAppointment.setStartDateTime(startDateTime);
+        selectedAppointment.setEndDateTime(endDateTime);
+        selectedAppointment.setLastUpdate(lastUpdate);
+        selectedAppointment.setLastUpdatedBy(lastUpdatedBy);
+
+        // Update the appointment in the database
+        try {
+            AppointmentQuery appointmentQuery = new AppointmentQuery();
+            appointmentQuery.updateAppointment(selectedAppointment);
+            System.out.println("Updated appointment with id " + selectedAppointment.getAppointmentId() + " in the database.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        clearFieldsAndRefresh();
     }
+
 
 
     public void onAppointmentClearAllFieldsButtonPressed(ActionEvent actionEvent) {
         clearFieldsAndRefresh();
+    }
+
+    private void getAllFields() {
+        // Get the values from the text fields
+        customerId = Integer.parseInt(customerIdTextField.getText());
+        selectedContact = appointmentContactComboBox.getSelectionModel().getSelectedItem();
+        contactId = selectedContact.getContactId();
+        userId = Integer.parseInt(userIdTextField.getText());
+        title = appointmentTitleTextField.getText();
+        description = appointmentDescriptionTextField.getText();
+        location = appointmentLocationTextField.getText();
+        type = appointmentTypeTextField.getText();
+        createdBy = loggedInUserName;
+        lastUpdatedBy = loggedInUserName;
+        startDateTime = LocalDateTime.parse(appointmentStartDateTimeTextField.getText());
+        endDateTime = LocalDateTime.parse(appointmentEndDateTimeTextField.getText());
+        createDate = LocalDateTime.now();
+        lastUpdate = LocalDateTime.now();
     }
 
     private void clearFieldsAndRefresh() {

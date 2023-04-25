@@ -194,6 +194,7 @@ public class Appointment {
 
     /**
      *
+     *
      * @return
      */
     public LocalDateTime getEndDateTime() {

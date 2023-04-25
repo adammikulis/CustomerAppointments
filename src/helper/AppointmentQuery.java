@@ -34,7 +34,6 @@ public class AppointmentQuery {
                 LocalDateTime end = resultSet.getTimestamp("End").toLocalDateTime();
                 LocalDateTime createDate = resultSet.getTimestamp("Create_Date").toLocalDateTime();
                 LocalDateTime lastUpdate = resultSet.getTimestamp("Last_Update").toLocalDateTime();
-                String contactName = resultSet.getString("Contact_Name");
 
                 appointments.add(new Appointment(appointmentId, contactId, customerId, userId, title, description, location, type, createdBy, lastUpdatedBy, start, end, createDate, lastUpdate));
             }
@@ -45,37 +44,74 @@ public class AppointmentQuery {
         return appointments;
     }
 
-    public int insertAppointment(Appointment appointment) throws SQLException {
-        String insertSql = "INSERT INTO appointments (customer_id, contact_id, user_id, title, description, location, type, start, end, created_by, last_updated_by, create_date, last_update) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private void setAppointmentFields(PreparedStatement preparedStatement, Appointment appointment) throws SQLException {
+        preparedStatement.setInt(1, appointment.getContactId());
+        preparedStatement.setInt(2, appointment.getCustomerId());
+        preparedStatement.setInt(3, appointment.getUserId());
+        preparedStatement.setString(4, appointment.getTitle());
+        preparedStatement.setString(5, appointment.getDescription());
+        preparedStatement.setString(6, appointment.getLocation());
+        preparedStatement.setString(7, appointment.getType());
+        preparedStatement.setTimestamp(8, Timestamp.valueOf(appointment.getStartDateTime()));
+        preparedStatement.setTimestamp(9, Timestamp.valueOf(appointment.getEndDateTime()));
+        preparedStatement.setTimestamp(10, Timestamp.valueOf(appointment.getLastUpdate()));
+        preparedStatement.setString(11, appointment.getLastUpdatedBy());
+    }
 
+    public void updateAppointment(Appointment updatedAppointment) throws SQLException {
         Connection conn = DriverManager.getConnection();
-        try (PreparedStatement preparedStatement = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS)) {
+        String updateStatement = "UPDATE appointments SET Contact_ID = ?, Customer_ID = ?, User_ID = ?, Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Last_Update = ?, Last_Updated_By = ? "
+                + "WHERE Appointment_ID = ?";
 
-            preparedStatement.setInt(1, appointment.getCustomerId());
-            preparedStatement.setInt(2, appointment.getContactId());
-            preparedStatement.setInt(3, appointment.getUserId());
-            preparedStatement.setString(4, appointment.getTitle());
-            preparedStatement.setString(5, appointment.getDescription());
-            preparedStatement.setString(6, appointment.getLocation());
-            preparedStatement.setString(7, appointment.getType());
-            preparedStatement.setObject(8, appointment.getStartDateTime());
-            preparedStatement.setObject(9, appointment.getEndDateTime());
-            preparedStatement.setString(10, appointment.getCreatedBy());
-            preparedStatement.setString(11, appointment.getLastUpdatedBy());
-            preparedStatement.setObject(12, appointment.getCreateDate());
-            preparedStatement.setObject(13, appointment.getLastUpdate());
+        PreparedStatement preparedStatement = conn.prepareStatement(updateStatement);
+
+        setAppointmentFields(preparedStatement, updatedAppointment);
+        preparedStatement.setInt(12, updatedAppointment.getAppointmentId());
+
+        preparedStatement.executeUpdate();
+    }
+
+    public int insertAppointment(Appointment appointment) throws SQLException {
+        String insertSql = "INSERT INTO appointments (contact_id, customer_id, user_id, title, description, location, type, start, end, last_update, last_updated_by, create_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        Connection conn = DriverManager.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet generatedKeys = null;
+
+        try {
+            preparedStatement = conn.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
+
+            setAppointmentFields(preparedStatement, appointment);
+            preparedStatement.setTimestamp(12, Timestamp.valueOf(appointment.getCreateDate()));
 
             preparedStatement.executeUpdate();
 
-            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    return generatedKeys.getInt(1);
-                } else {
-                    throw new SQLException("Creating appointment failed, no ID obtained.");
+            generatedKeys = preparedStatement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                return generatedKeys.getInt(1);
+            } else {
+                throw new SQLException("Creating appointment failed, no ID obtained.");
+            }
+        } finally {
+            if (generatedKeys != null) {
+                try {
+                    generatedKeys.close();
+                } catch (SQLException e) {
+                    e.printStackTrace(System.out);
+                }
+            }
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace(System.out);
                 }
             }
         }
     }
+
+
+
+
 
     public void deleteAppointment(int appointmentId) {
         String deleteSql = "DELETE FROM appointments WHERE appointment_id = ?";

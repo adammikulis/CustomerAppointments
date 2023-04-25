@@ -33,19 +33,21 @@ public class LoginScreenController implements Initializable {
     @FXML
     private TextField userNameTextField;
     @FXML
-    private Label zoneIdLabel;
+    private Label localeIdLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Locale currentLocale = Locale.getDefault();
-        if (currentLocale.equals(Locale.ENGLISH)) {
-            zoneIdLabel.setText("Current Locale: " + currentLocale);
-        } else if (currentLocale.equals(Locale.FRENCH)) {
-            zoneIdLabel.setText("Locale actuelle: " + currentLocale);
+        String languageCode = Locale.getDefault().getLanguage();
+
+        if (languageCode.equals("en")) {
+            localeIdLabel.setText("Current Locale: " + Locale.getDefault().toString());
+        } else if (languageCode.equals("fr")) {
+            localeIdLabel.setText("Locale actuelle: " + Locale.getDefault().toString());
             userNameTextField.setPromptText("Nom d'utilisateur");
             passwordPasswordField.setPromptText("Mot de passe");
         }
     }
+
 
     public void onLoginButtonAction(ActionEvent actionEvent) throws SQLException, IOException {
         String userName = userNameTextField.getText();
