@@ -1,6 +1,7 @@
 package controller;
 
 import helper.LoginQuery;
+import helper.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,6 +70,10 @@ public class LoginScreenController implements Initializable {
 
         try {
             LoginQuery.checkLogin(userName, password);
+
+            SessionManager.getInstance().setCurrentUserName(userName);
+            System.out.println("Current user: " + SessionManager.getInstance().getCurrentUserName());
+
             stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
             stage.setScene(new Scene(scene));

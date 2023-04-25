@@ -1,12 +1,11 @@
 package helper;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public abstract class ConnectionHelper {
+public abstract class DriverManager {
     private static final String protocol = "jdbc";
     private static final String vendor = ":mysql:";
     private static final String location = "//localhost/";
@@ -21,7 +20,7 @@ public abstract class ConnectionHelper {
         try {
             if (connection == null || connection.isClosed()) {
                 Class.forName(driver); // Locate Driver
-                connection = DriverManager.getConnection(jdbcUrl, userName, password); // Reference Connection object
+                connection = java.sql.DriverManager.getConnection(jdbcUrl, userName, password); // Reference Connection object
                 System.out.println("Connection successful!");
             }
         } catch (Exception e) {

@@ -5,12 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="appointments show contact name, error when selecting appointment">
-      <change afterPath="$PROJECT_DIR$/src/helper/ContactQuery.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/helper/SessionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ClientScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClientScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/LoginScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginScreenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Appointment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ContactList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ContactList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/ClientQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/ClientQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/ConnectionHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/DriverManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/ContactQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/ContactQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/LoginQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/LoginQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +54,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Windows/Java/openjfx-17.0.2/javafx-sdk-17.0.2/lib&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Windows/Java/JavaFX/javafx-sdk-17.0.6/lib&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -258,6 +264,12 @@
           <properties class="java.lang.IllegalStateException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/controller/AppointmentScreenController.java</url>
+          <line>29</line>
+          <properties field="stage" class="controller.AppointmentScreenController" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
