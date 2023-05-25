@@ -13,7 +13,7 @@ public class ContactQuery {
 
     public String getContactName(int contactId) {
         String query = "SELECT Contact_Name FROM contacts WHERE Contact_ID = ?";
-        try (PreparedStatement preparedStatement = ConnectionHelper.getConnection().prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = DriverManager.getConnection().prepareStatement(query)) {
             preparedStatement.setInt(1, contactId);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -30,7 +30,7 @@ public class ContactQuery {
         List<String> contactNames = new ArrayList<>();
 
         String query = "SELECT Contact_Name FROM contacts";
-        try (PreparedStatement preparedStatement = ConnectionHelper.getConnection().prepareStatement(query);
+        try (PreparedStatement preparedStatement = DriverManager.getConnection().prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 String contactName = resultSet.getString("Contact_Name");
@@ -50,7 +50,7 @@ public class ContactQuery {
         ResultSet rs = null;
 
         try {
-            conn = ConnectionHelper.getConnection();
+            conn = DriverManager.getConnection();
 
             String query = "SELECT * FROM contacts WHERE Contact_ID=?";
             stmt = conn.prepareStatement(query);

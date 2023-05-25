@@ -32,6 +32,14 @@ public class ClientScreenController implements Initializable {
     private Client currentClient;
     private ClientQuery clientQuery = new ClientQuery();
 
+    private String name;
+    private String streetAddress;
+    private String postalCode;
+    private String phone;
+    private String country;
+    private String division;
+    private int divisionId;
+
     @FXML
     private TableView<Client> clientTableView;
 
@@ -138,17 +146,11 @@ public class ClientScreenController implements Initializable {
         Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
 
         if (selectedClient != null) {
-            // Get the data from the input fields
-            String name = clientScreenNameTextField.getText();
-            String streetAddress = clientScreenAddressTextField.getText();
-            String postalCode = clientScreenPostalCodeTextField.getText();
-            String phone = clientScreenPhoneTextField.getText();
-            String country = clientCountryComboBox.getValue().toString();
-            String division = clientDivisionComboBox.getValue().toString();
+            getClientDataFromInputFields();
 
             // Get the Division_ID using the ClientQuery method
             ClientQuery clientQuery = new ClientQuery();
-            int divisionId = clientQuery.getDivisionIdByCountryAndDivision(country, division);
+            divisionId = clientQuery.getDivisionIdByCountryAndDivision(country, division);
 
             // Update the selected client with the new data
             selectedClient.setClientName(name);
@@ -174,19 +176,24 @@ public class ClientScreenController implements Initializable {
         clearFieldsAndRefresh();
     }
 
+    private void getClientDataFromInputFields() {
+        // Get the data from the input fields
+        name = clientScreenNameTextField.getText();
+        streetAddress = clientScreenAddressTextField.getText();
+        postalCode = clientScreenPostalCodeTextField.getText();
+        phone = clientScreenPhoneTextField.getText();
+        country = clientCountryComboBox.getValue().toString();
+        division = clientDivisionComboBox.getValue().toString();
+    }
+
 
     public void onClientScreenSaveNewClientButtonPressed(ActionEvent actionEvent) throws IOException {
         // Get the data from the input fields
-        String name = clientScreenNameTextField.getText();
-        String streetAddress = clientScreenAddressTextField.getText();
-        String postalCode = clientScreenPostalCodeTextField.getText();
-        String phone = clientScreenPhoneTextField.getText();
-        String country = clientCountryComboBox.getValue().toString();
-        String division = clientDivisionComboBox.getValue().toString();
+        getClientDataFromInputFields();
 
         // Get the Division_ID using the ClientQuery method
         ClientQuery clientQuery = new ClientQuery();
-        int divisionId = clientQuery.getDivisionIdByCountryAndDivision(country, division);
+        divisionId = clientQuery.getDivisionIdByCountryAndDivision(country, division);
 
         // Set the create and last update times to the current time
         LocalDateTime now = LocalDateTime.now();
@@ -211,7 +218,6 @@ public class ClientScreenController implements Initializable {
             System.out.println("Error adding new client to list.");
             e.printStackTrace();
         }
-
 
 
         // Save the new client to the database using the insertClient method from ClientQuery
@@ -245,7 +251,6 @@ public class ClientScreenController implements Initializable {
     private void populateDivisionComboBox(String country) {
         ObservableList<String> divisions = FXCollections.observableArrayList();
 
-        // Assume you have a method that returns a list of divisions for a given country name
         List<String> divisionsList = clientQuery.getClientDivisionsByCountry(country);
 
         divisions.addAll(divisionsList);
@@ -275,4 +280,17 @@ public class ClientScreenController implements Initializable {
     private void onClientScreenClearSelectionButtonPressed(ActionEvent actionEvent) {
         clearFieldsAndRefresh();
     }
+
+    private boolean validateClientInputs(String name, String streetAddress, String postalCode, String phone) {
+        if (name.trim().isEmpty() || streetAddress.trim().isEmpty() || postalCode.trim().isEmpty() || phone.trim().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText("Please fill in all the required fields.");
+            alert.setContentText("Name, street address, postal code, and phone number must not be empty.");
+            alert.showAndWait();
+            return false;
+        }
+        return true;
+    }
+
 }

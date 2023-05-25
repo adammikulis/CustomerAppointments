@@ -78,5 +78,6 @@
             <ComboBox fx:id="appointmentContactComboBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
          </children>
       </GridPane>
+      <Button layoutX="328.0" layoutY="503.0" mnemonicParsing="false" onAction="#onAppointmentClearAllFieldsButtonPressed" text="Clear All Fields" />
    </children>
 </AnchorPane>

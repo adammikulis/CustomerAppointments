@@ -1,6 +1,7 @@
 package controller;
 
 import helper.LoginQuery;
+import helper.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,19 +33,21 @@ public class LoginScreenController implements Initializable {
     @FXML
     private TextField userNameTextField;
     @FXML
-    private Label zoneIdLabel;
+    private Label localeIdLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Locale currentLocale = Locale.getDefault();
-        if (currentLocale.equals(Locale.ENGLISH)) {
-            zoneIdLabel.setText("Current Locale: " + currentLocale);
-        } else if (currentLocale.equals(Locale.FRENCH)) {
-            zoneIdLabel.setText("Locale actuelle: " + currentLocale);
+        String languageCode = Locale.getDefault().getLanguage();
+
+        if (languageCode.equals("en")) {
+            localeIdLabel.setText("Current Locale: " + Locale.getDefault().toString());
+        } else if (languageCode.equals("fr")) {
+            localeIdLabel.setText("Locale actuelle: " + Locale.getDefault().toString());
             userNameTextField.setPromptText("Nom d'utilisateur");
             passwordPasswordField.setPromptText("Mot de passe");
         }
     }
+
 
     public void onLoginButtonAction(ActionEvent actionEvent) throws SQLException, IOException {
         String userName = userNameTextField.getText();
@@ -69,6 +72,10 @@ public class LoginScreenController implements Initializable {
 
         try {
             LoginQuery.checkLogin(userName, password);
+
+            SessionManager.getInstance().setCurrentUserName(userName);
+            System.out.println("Current user: " + SessionManager.getInstance().getCurrentUserName());
+
             stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
             stage.setScene(new Scene(scene));

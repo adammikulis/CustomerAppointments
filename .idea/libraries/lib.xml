@@ -2,10 +2,10 @@
   <library name="lib">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/../../../../Windows/Java/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar!/" />
-      <root url="file://$PROJECT_DIR$/../../../../Windows/Java/openjfx-17.0.2/javafx-sdk-17.0.2/lib" />
+      <root url="file://$PATH_TO_FX$" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
-    <jarDirectory url="file://$PROJECT_DIR$/../../../../Windows/Java/openjfx-17.0.2/javafx-sdk-17.0.2/lib" recursive="false" />
+    <jarDirectory url="file://$PATH_TO_FX$" recursive="false" />
   </library>
 </component>

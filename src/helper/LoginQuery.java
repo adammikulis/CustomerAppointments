@@ -12,7 +12,7 @@ public class LoginQuery {
         }
 
         String sql = "SELECT Password FROM users WHERE User_Name = ?";
-        PreparedStatement ps = ConnectionHelper.getConnection().prepareStatement(sql);
+        PreparedStatement ps = DriverManager.getConnection().prepareStatement(sql);
         ps.setString(1, inputUserName);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {

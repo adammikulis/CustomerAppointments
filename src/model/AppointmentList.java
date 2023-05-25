@@ -29,13 +29,4 @@ public class AppointmentList {
         allAppointments.remove(appointment);
     }
 
-    public static int getNextAppointmentId() {
-        int maxId = 0;
-        for (Appointment appointment : allAppointments) {
-            if (appointment.getAppointmentId() > maxId) {
-                maxId = appointment.getAppointmentId();
-            }
-        }
-        return maxId + 1;
-    }
 }
