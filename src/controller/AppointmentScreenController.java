@@ -243,4 +243,6 @@ public class AppointmentScreenController implements Initializable {
     }
 
 
+    public void onAppointmentClearAllFieldsButtonPressed(ActionEvent actionEvent) {
+    }
 }

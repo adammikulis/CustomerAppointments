@@ -29,4 +29,8 @@ public class AppointmentList {
         allAppointments.remove(appointment);
     }
 
+    public static int getNextAppointmentId() {
+        return -1;
+    }
+
 }

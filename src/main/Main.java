@@ -1,6 +1,6 @@
 package main;
 
-import helper.ConnectionHelper;
+import helper.DriverManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,8 +20,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws SQLException {
-        ConnectionHelper.openConnection();
+        DriverManager.openConnection();
         launch(args);
-        ConnectionHelper.closeConnection();
+        DriverManager.closeConnection();
     }
 }
