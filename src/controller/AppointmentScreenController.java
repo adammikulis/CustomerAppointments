@@ -27,73 +27,51 @@ import java.util.ResourceBundle;
 
 public class AppointmentScreenController implements Initializable {
 
-
     Stage stage;
     Parent scene;
 
-
-
-
-
     @FXML
     private TableView<Appointment> appointmentTableView;
-
     @FXML
     private TableColumn<Appointment, String> contactColumn;
 
 
     @FXML
     private TableColumn<Appointment, Integer> appointmentIdColumn;
-
     @FXML
     private TableColumn<Appointment, String> titleColumn;
-
     @FXML
     private TableColumn<Appointment, String> descriptionColumn;
-
     @FXML
     private TableColumn<Appointment, String> locationColumn;
-
     @FXML
     private TableColumn<Appointment, String> typeColumn;
-
     @FXML
     private TableColumn<Appointment, LocalDateTime> startDateTimeColumn;
-
     @FXML
     private TableColumn<Appointment, LocalDateTime> endDateTimeColumn;
-
     @FXML
     private TableColumn<Appointment, Integer> customerIdColumn;
-
     @FXML
     private TableColumn<Appointment, Integer> userIdColumn;
 
 
     @FXML
     private TextField appointmentTitleTextField;
-
     @FXML
     private TextField appointmentDescriptionTextField;
-
     @FXML
     private TextField appointmentLocationTextField;
-
     @FXML
     private ComboBox<Contact> appointmentContactComboBox;
-
     @FXML
     private TextField appointmentTypeTextField;
-
     @FXML
     private TextField appointmentStartDateTimeTextField;
-
     @FXML
     private TextField appointmentEndDateTimeTextField;
-
     @FXML
     private TextField customerIdTextField;
-
     @FXML
     private TextField userIdTextField;
 
