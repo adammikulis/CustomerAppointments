@@ -112,8 +112,9 @@ public class AppointmentQuery {
     public void deleteAppointment(int appointmentId) {
         String deleteSql = "DELETE FROM appointments WHERE appointment_id = ?";
 
-        Connection conn = DriverManager.getConnection();
-        try (PreparedStatement preparedStatement = conn.prepareStatement(deleteSql)) {
+        try {
+            Connection conn = DriverManager.getConnection();
+            PreparedStatement preparedStatement = conn.prepareStatement(deleteSql);
             preparedStatement.setInt(1, appointmentId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

@@ -151,10 +151,17 @@ public class AppointmentScreenController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this appointment?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
-            // Delete the appointment from the table and the database
+            // Delete the appointment from the table
             AppointmentList.deleteAppointment(selectedAppointment);
+
+            // Delete the appointment from the database
+            AppointmentQuery appointmentQuery = new AppointmentQuery();
+            appointmentQuery.deleteAppointment(selectedAppointment.getAppointmentId());
+            System.out.println("Deleted appointment with id " + selectedAppointment.getAppointmentId() + " from the database.");
         }
     }
+
+
 
     public void refreshContactComboBox() {
         List<Contact> contacts = null;
