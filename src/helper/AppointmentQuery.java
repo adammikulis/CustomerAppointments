@@ -121,4 +121,6 @@ public class AppointmentQuery {
             e.printStackTrace(System.out);
         }
     }
+
+
 }
