@@ -233,18 +233,15 @@ public class ClientScreenController implements Initializable {
 
     private void clearFieldsAndRefresh() {
         // Clear the input fields
-        String empty = "";
-        clientScreenNameTextField.setText(empty);
-        clientScreenAddressTextField.setText(empty);
-        clientScreenPostalCodeTextField.setText(empty);
-        clientScreenPhoneTextField.setText(empty);
+        clientScreenNameTextField.clear();
+        clientScreenAddressTextField.clear();
+        clientScreenPostalCodeTextField.clear();
+        clientScreenPhoneTextField.clear();
         clearCountryComboBox();
         clearDivisionComboBox();
 
-        // Refresh the table view
+        // Refresh table view and clear selection
         clientTableView.refresh();
-
-        // Clear the selection
         clientTableView.getSelectionModel().clearSelection();
     }
 

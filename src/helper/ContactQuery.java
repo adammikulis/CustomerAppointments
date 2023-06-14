@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactQuery {
-
     public String getContactName(int contactId) {
         String query = "SELECT Contact_Name FROM contacts WHERE Contact_ID = ?";
         try (PreparedStatement preparedStatement = DriverManager.getConnection().prepareStatement(query)) {
@@ -77,10 +76,44 @@ public class ContactQuery {
             }
 
         }
-
         // Return null if no contact found with the given ID
         return null;
     }
 
+    public Contact getContactByName(String contactName) throws SQLException {
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = DriverManager.getConnection();
+
+            String query = "SELECT * FROM contacts WHERE Contact_Name=?";
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, contactName);
+
+            rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                int id = rs.getInt("Contact_ID");
+                String name = rs.getString("Contact_Name");
+                String email = rs.getString("Email");
+
+                return new Contact(id, name, email);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        // Return null if no contact found with the given name
+        return null;
+    }
 
 }

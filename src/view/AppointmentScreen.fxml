@@ -30,10 +30,10 @@
             <Font name="System Bold" size="26.0" />
          </font>
       </Label>
-      <ButtonBar layoutX="155.0" layoutY="539.0" prefHeight="40.0" prefWidth="615.0">
+      <ButtonBar layoutX="69.0" layoutY="539.0" prefHeight="40.0" prefWidth="701.0">
         <buttons>
-            <Button mnemonicParsing="false" onAction="#onSaveNewAppointmentButtonPressed" prefHeight="25.0" text="Save New Appointment" />
-          <Button mnemonicParsing="false" onAction="#onUpdateAppointmentButtonPressed" text="Update Appointment" />
+            <Button mnemonicParsing="false" onAction="#onCreateNewAppointmentButtonPressed" prefHeight="25.0" text="Create New Appointment" />
+          <Button mnemonicParsing="false" onAction="#onSaveAppointmentButtonPressed" text="Save/Update Appointment" />
             <Button mnemonicParsing="false" onAction="#onDeleteAppointmentButtonPressed" text="Delete Appointment" />
             <Button fx:id="backbutton" minWidth="39.0" mnemonicParsing="false" onAction="#onAppointmentBackButtonPressed" prefHeight="25.0" text="Back" />
         </buttons>

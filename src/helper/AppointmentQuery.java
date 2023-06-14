@@ -109,10 +109,6 @@ public class AppointmentQuery {
         }
     }
 
-
-
-
-
     public void deleteAppointment(int appointmentId) {
         String deleteSql = "DELETE FROM appointments WHERE appointment_id = ?";
 
@@ -125,10 +121,4 @@ public class AppointmentQuery {
             e.printStackTrace(System.out);
         }
     }
-
-
-
-
-
-
 }

@@ -2,6 +2,7 @@ package controller;
 
 import helper.AppointmentQuery;
 import helper.ContactQuery;
+import helper.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,7 +35,6 @@ public class AppointmentScreenController implements Initializable {
     private TableView<Appointment> appointmentTableView;
     @FXML
     private TableColumn<Appointment, String> contactColumn;
-
 
     @FXML
     private TableColumn<Appointment, Integer> appointmentIdColumn;
@@ -145,10 +145,6 @@ public class AppointmentScreenController implements Initializable {
     }
 
 
-
-
-
-
     public void onAppointmentBackButtonPressed(ActionEvent actionEvent) throws IOException {
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
@@ -204,21 +200,9 @@ public class AppointmentScreenController implements Initializable {
             e.printStackTrace();
         }
 
-        // Clear the text fields
-        clearAppointmentContactComboBox();
-        customerIdTextField.clear();
-        userIdTextField.clear();
-        appointmentTitleTextField.clear();
-        appointmentDescriptionTextField.clear();
-        appointmentLocationTextField.clear();
-        appointmentStartDateTimeTextField.clear();
-        appointmentEndDateTimeTextField.clear();
+        clearFieldsAndRefresh();
     }
 
-    private void clearAppointmentContactComboBox() {
-        appointmentContactComboBox.getItems().clear();
-        appointmentContactComboBox.setValue(null);
-    }
 
 
     public void onDeleteAppointmentButtonPressed(ActionEvent actionEvent) throws IOException {
@@ -239,10 +223,118 @@ public class AppointmentScreenController implements Initializable {
         }
     }
 
-    public void onUpdateAppointmentButtonPressed(ActionEvent actionEvent) throws IOException {
+    public void onAppointmentClearAllFieldsButtonPressed(ActionEvent actionEvent) {
+        clearFieldsAndRefresh();
     }
 
+    public void onCreateNewAppointmentButtonPressed(ActionEvent actionEvent) {
+        clearFieldsAndRefresh();
 
-    public void onAppointmentClearAllFieldsButtonPressed(ActionEvent actionEvent) {
+        // Create a new appointment object
+        Appointment newAppointment = new Appointment(
+                -1,
+                -1,
+                -1,
+                -1,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+
+        // Add the new appointment to the list and refresh the table view
+        AppointmentList.addAppointment(newAppointment);
+        appointmentTableView.refresh();
+
+        // Insert the new appointment into the database
+        try {
+            AppointmentQuery appointmentQuery = new AppointmentQuery();
+            appointmentQuery.insertAppointment(newAppointment);
+            System.out.println("Created new appointment with id " + newAppointment.getAppointmentId() + " in the database.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        clearFieldsAndRefresh();
+
+    }
+
+    public void onSaveAppointmentButtonPressed(ActionEvent actionEvent) {
+
+        Appointment selectedAppointment = appointmentTableView.getSelectionModel().getSelectedItem();
+
+        if(selectedAppointment == null) {
+            // No appointment selected, show error message
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please select an appointment to save.");
+            alert.showAndWait();
+            return;
+        }
+
+        // Get the values from the text fields
+        int customerId = Integer.parseInt(customerIdTextField.getText());
+        Contact selectedContact = appointmentContactComboBox.getSelectionModel().getSelectedItem();
+        int contactId = selectedContact.getContactId();
+        int userId = Integer.parseInt(userIdTextField.getText());
+        String title = appointmentTitleTextField.getText();
+        String description = appointmentDescriptionTextField.getText();
+        String location = appointmentLocationTextField.getText();
+        String type = appointmentTypeTextField.getText();
+        String createdBy = "test";
+        String lastUpdatedBy = SessionManager.getInstance().getCurrentUserName();
+        LocalDateTime startDateTime = LocalDateTime.parse(appointmentStartDateTimeTextField.getText());
+        LocalDateTime endDateTime = LocalDateTime.parse(appointmentEndDateTimeTextField.getText());
+        LocalDateTime createDate = LocalDateTime.now();
+        LocalDateTime lastUpdate = LocalDateTime.now();
+
+        // Update the selected appointment
+        selectedAppointment.setCustomerId(customerId);
+        selectedAppointment.setContactId(contactId);
+        selectedAppointment.setUserId(userId);
+        selectedAppointment.setTitle(title);
+        selectedAppointment.setDescription(description);
+        selectedAppointment.setLocation(location);
+        selectedAppointment.setType(type);
+        selectedAppointment.setStartDateTime(startDateTime);
+        selectedAppointment.setEndDateTime(endDateTime);
+        selectedAppointment.setLastUpdatedBy(lastUpdatedBy);
+        selectedAppointment.setLastUpdate(LocalDateTime.now());
+
+        // Save the changes to the database
+        try {
+            AppointmentQuery appointmentQuery = new AppointmentQuery();
+            appointmentQuery.updateAppointment(selectedAppointment);
+            System.out.println("Updated appointment with id " + selectedAppointment.getAppointmentId() + " in the database.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        clearFieldsAndRefresh();
+    }
+
+    private void clearAppointmentContactComboBox() {
+        appointmentContactComboBox.getItems().clear();
+        appointmentContactComboBox.setValue(null);
+    }
+    private void clearFieldsAndRefresh() {
+        // Clear the input fields
+        clearAppointmentContactComboBox();
+        customerIdTextField.clear();
+        userIdTextField.clear();
+        appointmentTitleTextField.clear();
+        appointmentDescriptionTextField.clear();
+        appointmentTypeTextField.clear();
+        appointmentLocationTextField.clear();
+        appointmentStartDateTimeTextField.clear();
+        appointmentEndDateTimeTextField.clear();
+
+        // Refresh table view and clear selection
+        appointmentTableView.refresh();
+        appointmentTableView.getSelectionModel().clearSelection();
     }
 }
