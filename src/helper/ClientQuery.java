@@ -42,42 +42,66 @@ public class ClientQuery {
                 + "Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        PreparedStatement preparedStatement = conn.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
-        preparedStatement.setString(1, client.getClientName());
-        preparedStatement.setString(2, client.getStreetAddress());
-        preparedStatement.setString(3, client.getPostalCode());
-        preparedStatement.setString(4, client.getPhone());
-        preparedStatement.setTimestamp(5, Timestamp.valueOf(client.getCreateDate()));
-        preparedStatement.setString(6, client.getCreatedBy());
-        preparedStatement.setTimestamp(7, Timestamp.valueOf(client.getLastUpdate()));
-        preparedStatement.setString(8, client.getLastUpdatedBy());
-        preparedStatement.setInt(9, client.getDivisionId());
+        PreparedStatement ps = conn.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
+        ps.setString(1, client.getClientName());
+        ps.setString(2, client.getStreetAddress());
+        ps.setString(3, client.getPostalCode());
+        ps.setString(4, client.getPhone());
+        ps.setTimestamp(5, Timestamp.valueOf(client.getCreateDate()));
+        ps.setString(6, client.getCreatedBy());
+        ps.setTimestamp(7, Timestamp.valueOf(client.getLastUpdate()));
+        ps.setString(8, client.getLastUpdatedBy());
+        ps.setInt(9, client.getDivisionId());
 
-        int affectedRows = preparedStatement.executeUpdate();
+        int affectedRows = ps.executeUpdate();
         if (affectedRows == 0) {
             throw new SQLException("Creating client failed, no rows affected.");
         }
 
-        int clientId;
-        try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+        int clientId=0;
+        try  {
+            ResultSet generatedKeys = ps.getGeneratedKeys();
             if (generatedKeys.next()) {
                 clientId = generatedKeys.getInt(1);
             } else {
                 throw new SQLException("Creating client failed, no ID obtained.");
             }
         }
+        catch (SQLException e) {
+            System.out.println("SQL Error");
+            e.printStackTrace(System.out);
+        }
 
-        preparedStatement.close();
-
+        ps.close();
         return clientId;
     }
 
+    public static List<String> getClientCountries() {
+        List<String> countries = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = DriverManager.getConnection().prepareStatement("SELECT Country FROM countries");
+            try (ResultSet resultSet = ps.executeQuery()) {
+                while (resultSet.next()) {
+                    String country = resultSet.getString("Country");
+                    countries.add(country);
+                }
+            }
+        }
+        catch (SQLException e) {
+            System.out.println("SQL Error");
+            e.printStackTrace(System.out);
+        }
+
+        return countries;
+
+    }
 
     public static List<String> getClientDivisionsByCountry(String country) {
         List<String> divisions = new ArrayList<>();
 
-        try (PreparedStatement ps = DriverManager.getConnection().prepareStatement("SELECT Division FROM first_level_divisions WHERE Country_ID = (SELECT Country_ID FROM countries WHERE Country = ?)");
-        ) {
+        try {
+            PreparedStatement ps = DriverManager.getConnection().prepareStatement("SELECT Division FROM first_level_divisions WHERE Country_ID = (SELECT Country_ID FROM countries WHERE Country = ?)");
             ps.setString(1, country);
 
             try (ResultSet resultSet = ps.executeQuery()) {
@@ -86,7 +110,8 @@ public class ClientQuery {
                     divisions.add(division);
                 }
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println("SQL Error");
             e.printStackTrace(System.out);
         }
@@ -123,11 +148,11 @@ public class ClientQuery {
     public void updateClient(Client client) throws SQLException {
         String updateStatement = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ? WHERE Customer_Id = ?";
         PreparedStatement statement = null;
-        Connection connection = null;
+        Connection conn = null;
 
         try {
-            connection = DriverManager.getConnection();
-            statement = connection.prepareStatement(updateStatement);
+            conn = DriverManager.getConnection();
+            statement = conn.prepareStatement(updateStatement);
             statement.setString(1, client.getClientName());
             statement.setString(2, client.getStreetAddress());
             statement.setString(3, client.getPostalCode());
@@ -138,7 +163,8 @@ public class ClientQuery {
 
             int rowsAffected = statement.executeUpdate();
             System.out.println("Updated " + rowsAffected + " row(s) in customers table.");
-        } finally {
+        }
+        finally {
             if (statement != null) {
                 statement.close();
             }
@@ -150,15 +176,16 @@ public class ClientQuery {
         try {
             Connection conn = DriverManager.getConnection();
             Statement stmt = conn.createStatement();
-            ResultSet resultSet = stmt.executeQuery("SELECT MAX(Customer_ID) + 1 AS next_id FROM client_schedule.customers");
+            ResultSet rs = stmt.executeQuery("SELECT MAX(Customer_ID) + 1 AS next_id FROM client_schedule.customers");
 
-            if (resultSet.next()) {
-                nextId = resultSet.getInt("next_id");
+            if (rs.next()) {
+                nextId = rs.getInt("next_id");
             }
 
-            resultSet.close();
+            rs.close();
             stmt.close();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             System.out.println("SQL Error");
             e.printStackTrace(System.out);
         }
@@ -168,18 +195,23 @@ public class ClientQuery {
     public static int getDivisionIdByCountryAndDivision(String country, String division) {
         int divisionId = -1;
 
-        try (PreparedStatement ps = DriverManager.getConnection().prepareStatement(
-                "SELECT Division_ID FROM first_level_divisions WHERE Division = ? AND Country_ID = (SELECT Country_ID FROM countries WHERE Country = ?)"
-        )) {
+        try {
+            PreparedStatement ps = DriverManager.getConnection().prepareStatement("SELECT Division_ID FROM first_level_divisions WHERE Division = ? AND Country_ID = (SELECT Country_ID FROM countries WHERE Country = ?)");
             ps.setString(1, division);
             ps.setString(2, country);
 
-            try (ResultSet resultSet = ps.executeQuery()) {
+            try {
+                ResultSet resultSet = ps.executeQuery();
                 if (resultSet.next()) {
                     divisionId = resultSet.getInt("Division_ID");
                 }
             }
-        } catch (SQLException e) {
+            catch (SQLException e) {
+                System.out.println("SQL Error");
+                e.printStackTrace(System.out);
+            }
+        }
+        catch (SQLException e) {
             System.out.println("SQL Error");
             e.printStackTrace(System.out);
         }
@@ -190,14 +222,19 @@ public class ClientQuery {
     public static String getCountryByDivisionId(int divisionId) {
         String country = null;
 
-        try (PreparedStatement ps = DriverManager.getConnection().prepareStatement("SELECT Country FROM first_level_divisions INNER JOIN countries ON first_level_divisions.Country_ID = countries.Country_ID WHERE Division_ID = ?");
-        ) {
+        try  {
+            PreparedStatement ps = DriverManager.getConnection().prepareStatement("SELECT Country FROM first_level_divisions INNER JOIN countries ON first_level_divisions.Country_ID = countries.Country_ID WHERE Division_ID = ?");
             ps.setInt(1, divisionId);
 
-            try (ResultSet resultSet = ps.executeQuery()) {
-                if (resultSet.next()) {
-                    country = resultSet.getString("Country");
+            try {
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    country = rs.getString("Country");
                 }
+            }
+            catch (SQLException e) {
+                System.out.println("SQL Error");
+                e.printStackTrace(System.out);
             }
         } catch (SQLException e) {
             System.out.println("SQL Error");
@@ -210,23 +247,25 @@ public class ClientQuery {
     public static String getDivisionByDivisionId(int divisionId) {
         String division = null;
 
-        try (PreparedStatement ps = DriverManager.getConnection().prepareStatement("SELECT Division FROM first_level_divisions WHERE Division_ID = ?");
-        ) {
+        try {
+            PreparedStatement ps = DriverManager.getConnection().prepareStatement("SELECT Division FROM first_level_divisions WHERE Division_ID = ?");
             ps.setInt(1, divisionId);
 
-            try (ResultSet resultSet = ps.executeQuery()) {
+            try {
+                ResultSet resultSet = ps.executeQuery();
                 if (resultSet.next()) {
                     division = resultSet.getString("Division");
                 }
             }
+            catch (SQLException e) {
+                System.out.println("SQL Error");
+                e.printStackTrace(System.out);
+            }
+
         } catch (SQLException e) {
             System.out.println("SQL Error");
             e.printStackTrace(System.out);
         }
-
         return division;
     }
-
-
-
 }

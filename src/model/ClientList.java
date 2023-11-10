@@ -33,8 +33,6 @@ public class ClientList {
         allClients.add(client);
     }
 
-
-
     /**
      * Generates the next client ID.
      *

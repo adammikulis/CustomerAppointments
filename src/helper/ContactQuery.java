@@ -55,9 +55,11 @@ public class ContactQuery {
 
     public String getContactName(int contactId) {
         String query = "SELECT Contact_Name FROM contacts WHERE Contact_ID = ?";
-        try (PreparedStatement preparedStatement = DriverManager.getConnection().prepareStatement(query)) {
-            preparedStatement.setInt(1, contactId);
-            ResultSet resultSet = preparedStatement.executeQuery();
+        try {
+            Connection conn = DriverManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, contactId);
+            ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()) {
                 return resultSet.getString("Contact_Name");
             }
@@ -88,17 +90,17 @@ public class ContactQuery {
 
     public Contact getContact(int contactId) throws SQLException {
         Connection conn = null;
-        PreparedStatement stmt = null;
+        PreparedStatement ps = null;
         ResultSet rs = null;
 
         try {
             conn = DriverManager.getConnection();
 
             String query = "SELECT * FROM contacts WHERE Contact_ID=?";
-            stmt = conn.prepareStatement(query);
-            stmt.setInt(1, contactId);
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, contactId);
 
-            rs = stmt.executeQuery();
+            rs = ps.executeQuery();
 
             if (rs.next()) {
                 int id = rs.getInt("Contact_ID");
@@ -114,8 +116,8 @@ public class ContactQuery {
             if (rs != null) {
                 rs.close();
             }
-            if (stmt != null) {
-                stmt.close();
+            if (ps != null) {
+                ps.close();
             }
 
         }
@@ -125,17 +127,17 @@ public class ContactQuery {
 
     public Contact getContactByName(String contactName) throws SQLException {
         Connection conn = null;
-        PreparedStatement stmt = null;
+        PreparedStatement ps = null;
         ResultSet rs = null;
 
         try {
             conn = DriverManager.getConnection();
 
             String query = "SELECT * FROM contacts WHERE Contact_Name=?";
-            stmt = conn.prepareStatement(query);
-            stmt.setString(1, contactName);
+            ps = conn.prepareStatement(query);
+            ps.setString(1, contactName);
 
-            rs = stmt.executeQuery();
+            rs = ps.executeQuery();
 
             if (rs.next()) {
                 int id = rs.getInt("Contact_ID");
@@ -151,8 +153,8 @@ public class ContactQuery {
             if (rs != null) {
                 rs.close();
             }
-            if (stmt != null) {
-                stmt.close();
+            if (ps != null) {
+                ps.close();
             }
         }
         // Return null if no contact found with the given name

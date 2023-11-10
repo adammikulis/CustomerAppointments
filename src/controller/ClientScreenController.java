@@ -4,7 +4,6 @@ import helper.ClientQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,7 +18,6 @@ import model.ClientList;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -68,16 +66,6 @@ public class ClientScreenController implements Initializable {
     @FXML
     private ComboBox<String> clientDivisionComboBox;
 
-    @FXML
-    private void onCountryComboBoxChanged(ActionEvent event) {
-        String country = clientCountryComboBox.getValue() != null ? clientCountryComboBox.getValue().toString() : null;
-        if (country != null) {
-            populateDivisionComboBox(country);
-        } else {
-            clearDivisionComboBox();
-        }
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         clientTableView.setItems(ClientList.getAllClients());
@@ -87,8 +75,8 @@ public class ClientScreenController implements Initializable {
         postalCodeColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
 
-        clientCountryComboBox.getItems().addAll("U.S", "UK", "Canada");
-        clientCountryComboBox.setOnAction(event -> onCountryComboBoxChanged(event));
+        clientCountryComboBox.getItems().addAll(ClientQuery.getClientCountries());
+        clientDivisionComboBox.setOnAction(this::onCountryComboBoxChanged);
 
         clientTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -182,10 +170,14 @@ public class ClientScreenController implements Initializable {
         streetAddress = clientScreenAddressTextField.getText();
         postalCode = clientScreenPostalCodeTextField.getText();
         phone = clientScreenPhoneTextField.getText();
-        country = clientCountryComboBox.getValue().toString();
-        division = clientDivisionComboBox.getValue().toString();
-    }
 
+        String countryValue = (String) clientCountryComboBox.getValue();
+        country = (countryValue != null) ? countryValue : "";
+
+        String divisionValue = (String) clientDivisionComboBox.getValue();
+        division = (divisionValue != null) ? divisionValue : "";
+
+    }
 
     public void onClientScreenSaveNewClientButtonPressed(ActionEvent actionEvent) throws IOException {
         // Get the data from the input fields
@@ -199,35 +191,26 @@ public class ClientScreenController implements Initializable {
         LocalDateTime now = LocalDateTime.now();
 
         // Create a new Client object with the input data and current time and user for create and last update info
-        Client newClient = new Client(
-                0,
-                name,
-                streetAddress,
-                postalCode,
-                phone,
-                now,
-                "admin",
-                now,
-                "admin",
-                divisionId
-        );
-
-        try {
-            ClientList.addClient(newClient);
-        } catch (SQLException e) {
-            System.out.println("Error adding new client to list.");
-            e.printStackTrace();
+        if (validateClientInputs(name, streetAddress, postalCode, phone, division)) {
+            Client newClient = new Client(
+                    0,
+                    name,
+                    streetAddress,
+                    postalCode,
+                    phone,
+                    now,
+                    "admin",
+                    now,
+                    "admin",
+                    divisionId
+            );
+            try {
+                ClientList.addClient(newClient);
+            } catch (SQLException e) {
+                System.out.println("Error adding new client to list.");
+                e.printStackTrace();
+            }
         }
-
-
-        // Save the new client to the database using the insertClient method from ClientQuery
-        try {
-            clientQuery.insertClient(newClient);
-        } catch (SQLException e) {
-            System.out.println("Error inserting new client into database.");
-            e.printStackTrace();
-        }
-
         clearFieldsAndRefresh();
     }
 
@@ -238,13 +221,28 @@ public class ClientScreenController implements Initializable {
         clientScreenPostalCodeTextField.clear();
         clientScreenPhoneTextField.clear();
         clearCountryComboBox();
+        clientCountryComboBox.getItems().addAll(ClientQuery.getClientCountries());
         clearDivisionComboBox();
 
         // Refresh table view and clear selection
         clientTableView.refresh();
         clientTableView.getSelectionModel().clearSelection();
     }
+    @FXML
+    private void onCountryComboBoxChanged(ActionEvent event) {
+        String country = clientCountryComboBox.getValue() != null ? clientCountryComboBox.getValue().toString() : null;
+        if (country != null) {
+            populateDivisionComboBox(country);
+        }
+        else {
+            clearDivisionComboBox();
+        }
+    }
 
+    private void populateCountryComboBox() {
+        ObservableList<String> countries = FXCollections.observableArrayList();
+
+    }
     private void populateDivisionComboBox(String country) {
         ObservableList<String> divisions = FXCollections.observableArrayList();
 
@@ -278,16 +276,15 @@ public class ClientScreenController implements Initializable {
         clearFieldsAndRefresh();
     }
 
-    private boolean validateClientInputs(String name, String streetAddress, String postalCode, String phone) {
-        if (name.trim().isEmpty() || streetAddress.trim().isEmpty() || postalCode.trim().isEmpty() || phone.trim().isEmpty()) {
+    private boolean validateClientInputs(String name, String streetAddress, String postalCode, String phone, String division) {
+        if (name.isEmpty() || streetAddress.isEmpty() || postalCode.isEmpty() || phone.isEmpty() || division.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Invalid Input");
             alert.setHeaderText("Please fill in all the required fields.");
-            alert.setContentText("Name, street address, postal code, and phone number must not be empty.");
+            alert.setContentText("Name, street address, postal code, phone number, and country/division must not be empty.");
             alert.showAndWait();
             return false;
         }
         return true;
     }
-
 }

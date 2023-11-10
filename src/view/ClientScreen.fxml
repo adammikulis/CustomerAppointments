@@ -58,6 +58,6 @@
       <Button layoutX="666.0" layoutY="404.0" mnemonicParsing="false" onAction="#onClientScreenDeleteClientButtonPressed" text="Delete Client" />
       <Button layoutX="664.0" layoutY="525.0" mnemonicParsing="false" onAction="#onClientScreenBackButtonPressed" text="Back" />
       <Label text="Label" />
-      <Button layoutX="646.0" layoutY="114.0" mnemonicParsing="false" onAction="#onClientScreenClearSelectionButtonPressed" text="Clear Selection" />
+      <Button layoutX="646.0" layoutY="114.0" mnemonicParsing="false" onAction="#onClientScreenClearSelectionButtonPressed" text="Clear Fields/Selection" />
    </children>
 </AnchorPane>

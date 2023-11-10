@@ -1,13 +1,21 @@
 package model;
 
+import helper.ClientQuery;
+import helper.ContactQuery;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ContactList {
 
-    private static List<Contact> allContacts = new ArrayList<>();
+    private static ContactQuery contactQuery = new ContactQuery();
+    private static List<Contact> contacts = contactQuery.getAllContacts();
+    private static ObservableList<Contact> allContacts = FXCollections.observableArrayList(contacts);
+    private static ObservableList<Contact> filteredContacts = FXCollections.observableArrayList();
 
-    public static List<Contact> getAllContacts() {
+    public static ObservableList<Contact> getAllContacts() {
         return allContacts;
     }
 
