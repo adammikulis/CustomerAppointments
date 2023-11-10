@@ -76,7 +76,6 @@ public class ClientScreenController implements Initializable {
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
 
         clientCountryComboBox.getItems().addAll(ClientQuery.getClientCountries());
-        clientDivisionComboBox.setOnAction(this::onCountryComboBoxChanged);
 
         clientTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
