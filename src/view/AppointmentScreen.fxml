@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentScreenController">
    <children>
+      <Label layoutX="217.0" layoutY="21.0" text="View Customer Appointments">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="756.0" spacing="70.0">
+         <children>
+            <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="103.0" selected="true" text="View by Week">
+               <toggleGroup>
+                  <ToggleGroup fx:id="ViewByGroup" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="View by Month" toggleGroup="$ViewByGroup" />
+            <Label fx:id="localTimeLabel" text="Local Time: " />
+            <Label fx:id="easternTimeLabel" layoutX="493.0" layoutY="77.0" text="Eastern Time: " />
+            <Label fx:id="UTCLabel" layoutX="524.0" layoutY="77.0" text="UTC: " />
+         </children>
+         <padding>
+            <Insets left="20.0" top="50.0" />
+         </padding>
+      </HBox>
       <TableView fx:id="appointmentTableView" layoutX="10.0" layoutY="94.0" prefHeight="325.0" prefWidth="780.0">
         <columns>
           <TableColumn fx:id="appointmentIdColumn" prefWidth="72.66666984558105" text="Appointment_ID" />
@@ -20,24 +42,6 @@
             <TableColumn fx:id="userIdColumn" prefWidth="70.0" text="User_ID" />
         </columns>
       </TableView>
-      <RadioButton layoutX="298.0" layoutY="67.0" mnemonicParsing="false" selected="true" text="View by Week">
-         <toggleGroup>
-            <ToggleGroup fx:id="ViewByGroup" />
-         </toggleGroup></RadioButton>
-      <RadioButton layoutX="405.0" layoutY="67.0" mnemonicParsing="false" text="View by Month" toggleGroup="$ViewByGroup" />
-      <Label layoutX="217.0" layoutY="21.0" text="View Customer Appointments">
-         <font>
-            <Font name="System Bold" size="26.0" />
-         </font>
-      </Label>
-      <ButtonBar layoutX="69.0" layoutY="539.0" prefHeight="40.0" prefWidth="701.0">
-        <buttons>
-            <Button mnemonicParsing="false" onAction="#onCreateNewAppointmentButtonPressed" prefHeight="25.0" text="Create New Appointment" />
-          <Button mnemonicParsing="false" onAction="#onUpdateAppointmentButtonPressed" text="Update Appointment" />
-            <Button mnemonicParsing="false" onAction="#onDeleteAppointmentButtonPressed" text="Delete Appointment" />
-            <Button fx:id="backbutton" minWidth="39.0" mnemonicParsing="false" onAction="#onAppointmentBackButtonPressed" prefHeight="25.0" text="Back" />
-        </buttons>
-      </ButtonBar>
       <GridPane layoutX="11.0" layoutY="430.0" prefHeight="73.0" prefWidth="780.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="107.0" minWidth="10.0" prefWidth="82.99999237060547" />
@@ -78,6 +82,14 @@
             <ComboBox fx:id="appointmentContactComboBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
          </children>
       </GridPane>
+      <ButtonBar layoutX="69.0" layoutY="539.0" prefHeight="40.0" prefWidth="701.0">
+        <buttons>
+            <Button mnemonicParsing="false" onAction="#onCreateNewAppointmentButtonPressed" prefHeight="25.0" text="Create New Appointment" />
+          <Button mnemonicParsing="false" onAction="#onUpdateAppointmentButtonPressed" text="Update Appointment" />
+            <Button mnemonicParsing="false" onAction="#onDeleteAppointmentButtonPressed" text="Delete Appointment" />
+            <Button fx:id="backbutton" minWidth="39.0" mnemonicParsing="false" onAction="#onAppointmentBackButtonPressed" prefHeight="25.0" text="Back" />
+        </buttons>
+      </ButtonBar>
       <Button layoutX="328.0" layoutY="503.0" mnemonicParsing="false" onAction="#onAppointmentClearAllFieldsButtonPressed" text="Clear Fields and Selection" />
    </children>
 </AnchorPane>

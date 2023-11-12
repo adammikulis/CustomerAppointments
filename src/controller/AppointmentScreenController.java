@@ -28,8 +28,16 @@ import java.util.ResourceBundle;
 
 public class AppointmentScreenController implements Initializable {
 
+
     Stage stage;
     Parent scene;
+
+    @FXML
+    private Label localTimeLabel;
+    @FXML
+    private Label easternTimeLabel;
+    @FXML
+    private Label UTCLabel;
 
     @FXML
     private TableView<Appointment> appointmentTableView;
@@ -75,6 +83,7 @@ public class AppointmentScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        localTimeLabel.setText("Local Time: " + String.valueOf(LocalDateTime.now()));
         appointmentTableView.setItems(AppointmentList.getAllAppointments());
         appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
