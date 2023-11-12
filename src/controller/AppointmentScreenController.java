@@ -191,6 +191,7 @@ public class AppointmentScreenController implements Initializable {
         String location = appointmentLocationTextField.getText();
         String type = appointmentTypeTextField.getText();
         String lastUpdatedBy = SessionManager.getInstance().getCurrentUserName();
+        String createdBy = SessionManager.getInstance().getCurrentUserName();
         LocalDateTime startDateTime = LocalDateTime.parse(appointmentStartDateTimeTextField.getText());
         LocalDateTime endDateTime = LocalDateTime.parse(appointmentEndDateTimeTextField.getText());
         LocalDateTime createDate = LocalDateTime.now();
@@ -205,7 +206,7 @@ public class AppointmentScreenController implements Initializable {
                 description,
                 location,
                 type,
-                "test",
+                createdBy,
                 lastUpdatedBy,
                 startDateTime,
                 endDateTime,
@@ -252,7 +253,6 @@ public class AppointmentScreenController implements Initializable {
         String description = appointmentDescriptionTextField.getText();
         String location = appointmentLocationTextField.getText();
         String type = appointmentTypeTextField.getText();
-        String createdBy = "test";
         String lastUpdatedBy = SessionManager.getInstance().getCurrentUserName();
         LocalDateTime startDateTime = LocalDateTime.parse(appointmentStartDateTimeTextField.getText());
         LocalDateTime endDateTime = LocalDateTime.parse(appointmentEndDateTimeTextField.getText());

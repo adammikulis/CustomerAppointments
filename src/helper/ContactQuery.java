@@ -14,35 +14,35 @@ public class ContactQuery {
     public List<Contact> getAllContacts() {
         List<Contact> contacts = new ArrayList<>();
         Connection conn = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
 
         try {
-            conn = DriverManager.getConnection();
+            conn = ConnectionManager.getConnection();
             String query = "SELECT * FROM contacts";
-            preparedStatement = conn.prepareStatement(query);
-            resultSet = preparedStatement.executeQuery();
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
 
-            while (resultSet.next()) {
-                int contactId = resultSet.getInt("Contact_ID");
-                String contactName = resultSet.getString("Contact_Name");
-                String email = resultSet.getString("Email");
+            while (rs.next()) {
+                int contactId = rs.getInt("Contact_ID");
+                String contactName = rs.getString("Contact_Name");
+                String email = rs.getString("Email");
                 contacts.add(new Contact(contactId, contactName, email));
             }
         } catch (SQLException e) {
             System.out.println("SQL Error");
             e.printStackTrace(System.out);
         } finally {
-            if (resultSet != null) {
+            if (rs != null) {
                 try {
-                    resultSet.close();
+                    rs.close();
                 } catch (SQLException e) {
                     e.printStackTrace(System.out);
                 }
             }
-            if (preparedStatement != null) {
+            if (ps != null) {
                 try {
-                    preparedStatement.close();
+                    ps.close();
                 } catch (SQLException e) {
                     e.printStackTrace(System.out);
                 }
@@ -56,7 +56,7 @@ public class ContactQuery {
     public String getContactName(int contactId) {
         String query = "SELECT Contact_Name FROM contacts WHERE Contact_ID = ?";
         try {
-            Connection conn = DriverManager.getConnection();
+            Connection conn = ConnectionManager.getConnection();
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, contactId);
             ResultSet resultSet = ps.executeQuery();
@@ -74,7 +74,7 @@ public class ContactQuery {
         List<String> contactNames = new ArrayList<>();
 
         String query = "SELECT Contact_Name FROM contacts";
-        try (PreparedStatement preparedStatement = DriverManager.getConnection().prepareStatement(query);
+        try (PreparedStatement preparedStatement = ConnectionManager.getConnection().prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 String contactName = resultSet.getString("Contact_Name");
@@ -94,7 +94,7 @@ public class ContactQuery {
         ResultSet rs = null;
 
         try {
-            conn = DriverManager.getConnection();
+            conn = ConnectionManager.getConnection();
 
             String query = "SELECT * FROM contacts WHERE Contact_ID=?";
             ps = conn.prepareStatement(query);
@@ -131,7 +131,7 @@ public class ContactQuery {
         ResultSet rs = null;
 
         try {
-            conn = DriverManager.getConnection();
+            conn = ConnectionManager.getConnection();
 
             String query = "SELECT * FROM contacts WHERE Contact_Name=?";
             ps = conn.prepareStatement(query);

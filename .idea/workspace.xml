@@ -4,11 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="tidied up excess line breaks and made main launch to login screen">
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="fixed errors when clicking on duplicate clients">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ClientScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClientScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/ClientQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/ClientQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/ContactQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/ContactQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/DriverManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/ConnectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/LoginQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/LoginQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/SessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/SessionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/AppointmentList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/AppointmentList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +36,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2KYYReOdWuFezM6iOFSWD5SicQ4" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -45,11 +54,11 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Windows/Java/openjfx-17.0.2/javafx-sdk-17.0.2/lib&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Java/JavaFX/javafx-sdk-20.0.2/lib&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;
   }
 }</component>
   <component name="RunManager">
@@ -225,7 +234,58 @@
       <option name="project" value="LOCAL" />
       <updated>1685033633410</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="tidied up excess line breaks and made main launch to login screen">
+      <created>1685044665628</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1685044665628</updated>
+    </task>
+    <task id="LOCAL-00024" summary="can clear appointment fields">
+      <created>1686700883457</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1686700883457</updated>
+    </task>
+    <task id="LOCAL-00025" summary="can clear appointment fields">
+      <created>1686701226980</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1686701226980</updated>
+    </task>
+    <task id="LOCAL-00026" summary="contact combobox functions, can save new appointment and update">
+      <created>1686705962767</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1686705962767</updated>
+    </task>
+    <task id="LOCAL-00027" summary="deleting appointments now removes from sqldb properly">
+      <created>1686706773283</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1686706773283</updated>
+    </task>
+    <task id="LOCAL-00028" summary="cleaned up queries">
+      <option name="closed" value="true" />
+      <created>1699658893419</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1699658893419</updated>
+    </task>
+    <task id="LOCAL-00029" summary="fixed errors when clicking on duplicate clients">
+      <option name="closed" value="true" />
+      <created>1699659008088</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1699659008088</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -233,15 +293,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added various model classes" />
-    <MESSAGE value="added SQL database connection and select statement for login" />
     <MESSAGE value="login field checks against SQL database and brings user to home screen" />
     <MESSAGE value="Added functionality to HomeScreenController, can link to Appointment view" />
     <MESSAGE value="filled out Appointment and AppointmentQuery class" />
@@ -262,7 +326,12 @@
     <MESSAGE value="appointments show contact name, error when selecting appointment" />
     <MESSAGE value="appointments show contact name,  no error but does not populate combobox, need to make delete SQL query" />
     <MESSAGE value="tidied up excess line breaks and made main launch to login screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="tidied up excess line breaks and made main launch to login screen" />
+    <MESSAGE value="can clear appointment fields" />
+    <MESSAGE value="contact combobox functions, can save new appointment and update" />
+    <MESSAGE value="deleting appointments now removes from sqldb properly" />
+    <MESSAGE value="cleaned up queries" />
+    <MESSAGE value="fixed errors when clicking on duplicate clients" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed errors when clicking on duplicate clients" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -273,5 +342,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

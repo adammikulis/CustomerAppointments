@@ -1,6 +1,7 @@
 package controller;
 
 import helper.ClientQuery;
+import helper.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -145,7 +146,7 @@ public class ClientScreenController implements Initializable {
             selectedClient.setPostalCode(postalCode);
             selectedClient.setPhone(phone);
             selectedClient.setLastUpdate(LocalDateTime.now());
-            selectedClient.setLastUpdatedBy("admin");
+            selectedClient.setLastUpdatedBy(SessionManager.getInstance().getCurrentUserName());
             selectedClient.setDivisionId(divisionId);
 
             // Update the client in the database using the updateClient method from ClientQuery
@@ -198,9 +199,9 @@ public class ClientScreenController implements Initializable {
                     postalCode,
                     phone,
                     now,
-                    "admin",
+                    SessionManager.getInstance().getCurrentUserName(),
                     now,
-                    "admin",
+                    SessionManager.getInstance().getCurrentUserName(),
                     divisionId
             );
             try {

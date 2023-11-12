@@ -17,7 +17,7 @@ public class AppointmentQuery {
                 "FROM appointments a " +
                 "JOIN contacts c ON a.Contact_ID = c.Contact_ID";
 
-        try (PreparedStatement preparedStatement = DriverManager.getConnection().prepareStatement(query);
+        try (PreparedStatement preparedStatement = ConnectionManager.getConnection().prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 int appointmentId = resultSet.getInt("Appointment_ID");
@@ -44,36 +44,37 @@ public class AppointmentQuery {
         return appointments;
     }
 
-    private void setAppointmentFields(PreparedStatement preparedStatement, Appointment appointment) throws SQLException {
-        preparedStatement.setInt(1, appointment.getContactId());
-        preparedStatement.setInt(2, appointment.getCustomerId());
-        preparedStatement.setInt(3, appointment.getUserId());
-        preparedStatement.setString(4, appointment.getTitle());
-        preparedStatement.setString(5, appointment.getDescription());
-        preparedStatement.setString(6, appointment.getLocation());
-        preparedStatement.setString(7, appointment.getType());
-        preparedStatement.setTimestamp(8, Timestamp.valueOf(appointment.getStartDateTime()));
-        preparedStatement.setTimestamp(9, Timestamp.valueOf(appointment.getEndDateTime()));
-        preparedStatement.setTimestamp(10, Timestamp.valueOf(appointment.getLastUpdate()));
-        preparedStatement.setString(11, appointment.getLastUpdatedBy());
+    private void setAppointmentFields(PreparedStatement ps, Appointment appointment) throws SQLException {
+        ps.setInt(1, appointment.getContactId());
+        ps.setInt(2, appointment.getCustomerId());
+        ps.setInt(3, appointment.getUserId());
+        ps.setString(4, appointment.getTitle());
+        ps.setString(5, appointment.getDescription());
+        ps.setString(6, appointment.getLocation());
+        ps.setString(7, appointment.getType());
+        ps.setTimestamp(8, Timestamp.valueOf(appointment.getStartDateTime()));
+        ps.setTimestamp(9, Timestamp.valueOf(appointment.getEndDateTime()));
+        ps.setTimestamp(10, Timestamp.valueOf(appointment.getLastUpdate()));
+        ps.setString(11, appointment.getLastUpdatedBy());
+        ps.setInt(12, SessionManager.getInstance().getCurrentUserId());
     }
 
     public void updateAppointment(Appointment updatedAppointment) throws SQLException {
-        Connection conn = DriverManager.getConnection();
+        Connection conn = ConnectionManager.getConnection();
         String updateStatement = "UPDATE appointments SET Contact_ID = ?, Customer_ID = ?, User_ID = ?, Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Last_Update = ?, Last_Updated_By = ? "
                 + "WHERE Appointment_ID = ?";
 
-        PreparedStatement preparedStatement = conn.prepareStatement(updateStatement);
+        PreparedStatement ps = conn.prepareStatement(updateStatement);
 
-        setAppointmentFields(preparedStatement, updatedAppointment);
-        preparedStatement.setInt(12, updatedAppointment.getAppointmentId());
+        setAppointmentFields(ps, updatedAppointment);
+        ps.setInt(12, updatedAppointment.getAppointmentId());
 
-        preparedStatement.executeUpdate();
+        ps.executeUpdate();
     }
 
     public int insertAppointment(Appointment appointment) throws SQLException {
         String insertSql = "INSERT INTO appointments (contact_id, customer_id, user_id, title, description, location, type, start, end, last_update, last_updated_by, create_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        Connection conn = DriverManager.getConnection();
+        Connection conn = ConnectionManager.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet generatedKeys = null;
 
@@ -113,7 +114,7 @@ public class AppointmentQuery {
         String deleteSql = "DELETE FROM appointments WHERE appointment_id = ?";
 
         try {
-            Connection conn = DriverManager.getConnection();
+            Connection conn = ConnectionManager.getConnection();
             PreparedStatement preparedStatement = conn.prepareStatement(deleteSql);
             preparedStatement.setInt(1, appointmentId);
             preparedStatement.executeUpdate();

@@ -13,7 +13,7 @@ public class ClientQuery {
         List<Client> clients = new ArrayList<>();
 
         String query = "SELECT * FROM customers";
-        try (PreparedStatement preparedStatement = DriverManager.getConnection().prepareStatement(query);
+        try (PreparedStatement preparedStatement = ConnectionManager.getConnection().prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
                 int clientId = resultSet.getInt("Customer_ID");
@@ -37,7 +37,7 @@ public class ClientQuery {
     }
 
     public static int insertClient(Client client) throws SQLException {
-        Connection conn = DriverManager.getConnection();
+        Connection conn = ConnectionManager.getConnection();
         String insertStatement = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, "
                 + "Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -80,7 +80,7 @@ public class ClientQuery {
         List<String> countries = new ArrayList<>();
 
         try {
-            PreparedStatement ps = DriverManager.getConnection().prepareStatement("SELECT Country FROM countries");
+            PreparedStatement ps = ConnectionManager.getConnection().prepareStatement("SELECT Country FROM countries");
             try (ResultSet resultSet = ps.executeQuery()) {
                 while (resultSet.next()) {
                     String country = resultSet.getString("Country");
@@ -101,7 +101,7 @@ public class ClientQuery {
         List<String> divisions = new ArrayList<>();
 
         try {
-            PreparedStatement ps = DriverManager.getConnection().prepareStatement("SELECT Division FROM first_level_divisions WHERE Country_ID = (SELECT Country_ID FROM countries WHERE Country = ?)");
+            PreparedStatement ps = ConnectionManager.getConnection().prepareStatement("SELECT Division FROM first_level_divisions WHERE Country_ID = (SELECT Country_ID FROM countries WHERE Country = ?)");
             ps.setString(1, country);
 
             try (ResultSet resultSet = ps.executeQuery()) {
@@ -121,7 +121,7 @@ public class ClientQuery {
 
     public boolean deleteClient(Client clientToDelete) throws SQLException {
         try {
-            Connection conn = DriverManager.getConnection();
+            Connection conn = ConnectionManager.getConnection();
 
             // Delete all associated appointments
             PreparedStatement deleteAppointmentsStatement = conn.prepareStatement("DELETE FROM appointments WHERE Customer_Id = ?");
@@ -151,7 +151,7 @@ public class ClientQuery {
         Connection conn = null;
 
         try {
-            conn = DriverManager.getConnection();
+            conn = ConnectionManager.getConnection();
             statement = conn.prepareStatement(updateStatement);
             statement.setString(1, client.getClientName());
             statement.setString(2, client.getStreetAddress());
@@ -174,7 +174,7 @@ public class ClientQuery {
     public int getNextClientId() throws SQLException {
         int nextId = 0;
         try {
-            Connection conn = DriverManager.getConnection();
+            Connection conn = ConnectionManager.getConnection();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT MAX(Customer_ID) + 1 AS next_id FROM client_schedule.customers");
 
@@ -196,7 +196,7 @@ public class ClientQuery {
         int divisionId = -1;
 
         try {
-            PreparedStatement ps = DriverManager.getConnection().prepareStatement("SELECT Division_ID FROM first_level_divisions WHERE Division = ? AND Country_ID = (SELECT Country_ID FROM countries WHERE Country = ?)");
+            PreparedStatement ps = ConnectionManager.getConnection().prepareStatement("SELECT Division_ID FROM first_level_divisions WHERE Division = ? AND Country_ID = (SELECT Country_ID FROM countries WHERE Country = ?)");
             ps.setString(1, division);
             ps.setString(2, country);
 
@@ -223,7 +223,7 @@ public class ClientQuery {
         String country = null;
 
         try  {
-            PreparedStatement ps = DriverManager.getConnection().prepareStatement("SELECT Country FROM first_level_divisions INNER JOIN countries ON first_level_divisions.Country_ID = countries.Country_ID WHERE Division_ID = ?");
+            PreparedStatement ps = ConnectionManager.getConnection().prepareStatement("SELECT Country FROM first_level_divisions INNER JOIN countries ON first_level_divisions.Country_ID = countries.Country_ID WHERE Division_ID = ?");
             ps.setInt(1, divisionId);
 
             try {
@@ -248,7 +248,7 @@ public class ClientQuery {
         String division = null;
 
         try {
-            PreparedStatement ps = DriverManager.getConnection().prepareStatement("SELECT Division FROM first_level_divisions WHERE Division_ID = ?");
+            PreparedStatement ps = ConnectionManager.getConnection().prepareStatement("SELECT Division FROM first_level_divisions WHERE Division_ID = ?");
             ps.setInt(1, divisionId);
 
             try {
