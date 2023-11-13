@@ -22,15 +22,20 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AppointmentScreenController implements Initializable {
 
-
     Stage stage;
     Parent scene;
+
+    private LocalDateTime localDateTime;
+    private LocalDateTime easternDateTime;
+    private LocalDateTime UTCTime;
 
     @FXML
     private Label localTimeLabel;
@@ -83,7 +88,10 @@ public class AppointmentScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        localTimeLabel.setText("Local Time: " + String.valueOf(LocalDateTime.now()));
+        setTimes();
+        localTimeLabel.setText("Local: " + String.valueOf(localDateTime));
+        easternTimeLabel.setText("ET: " + String.valueOf(easternDateTime));
+        UTCLabel.setText("UTC: " + String.valueOf(UTCTime));
         appointmentTableView.setItems(AppointmentList.getAllAppointments());
         appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -140,6 +148,20 @@ public class AppointmentScreenController implements Initializable {
         refreshContactComboBox();
     }
 
+    public void setTimes() {
+        localDateTime = LocalDateTime.now();
+        easternDateTime = localDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
+        UTCTime = localDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
+    }
+
+    public LocalDateTime convertLocalToUTC(LocalDateTime currentDateTime) {
+        return currentDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
+    }
+
+    public LocalDateTime convertUTCToLocal(LocalDateTime UTCDateTime) {
+        return UTCDateTime.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
     public void onAppointmentBackButtonPressed(ActionEvent actionEvent) throws IOException {
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
@@ -167,6 +189,7 @@ public class AppointmentScreenController implements Initializable {
             AppointmentQuery appointmentQuery = new AppointmentQuery();
             appointmentQuery.deleteAppointment(selectedAppointment.getAppointmentId());
             System.out.println("Deleted appointment with id " + selectedAppointment.getAppointmentId() + " from the database.");
+            clearFieldsAndRefresh();
         }
     }
 
@@ -187,7 +210,6 @@ public class AppointmentScreenController implements Initializable {
     }
 
     public void onCreateNewAppointmentButtonPressed(ActionEvent actionEvent) {
-
         // Get the values from the text fields
         int customerId = Integer.parseInt(customerIdTextField.getText());
         Contact selectedContact = appointmentContactComboBox.getSelectionModel().getSelectedItem();
@@ -220,9 +242,6 @@ public class AppointmentScreenController implements Initializable {
                 createDate,
                 lastUpdate
         );
-
-
-
         // Insert the new appointment into the database
         try {
             AppointmentQuery appointmentQuery = new AppointmentQuery();
@@ -232,25 +251,20 @@ public class AppointmentScreenController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         // Add the new appointment to the list and refresh the table view
         AppointmentList.addAppointment(newAppointment);
-        appointmentTableView.refresh();
         clearFieldsAndRefresh();
         refreshContactComboBox();
     }
 
     public void onUpdateAppointmentButtonPressed(ActionEvent actionEvent) {
-
         Appointment selectedAppointment = appointmentTableView.getSelectionModel().getSelectedItem();
-
         if(selectedAppointment == null) {
             // No appointment selected, show error message
             Alert alert = new Alert(Alert.AlertType.ERROR, "Please select an appointment to update.");
             alert.showAndWait();
             return;
         }
-
         // Get the values from the text fields
         int customerId = Integer.parseInt(customerIdTextField.getText());
         Contact selectedContact = appointmentContactComboBox.getSelectionModel().getSelectedItem();
@@ -287,7 +301,6 @@ public class AppointmentScreenController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         clearFieldsAndRefresh();
         refreshContactComboBox();
     }

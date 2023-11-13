@@ -20,7 +20,7 @@ public class SessionManager {
         if (currentUserName != null) {
             return currentUserName;}
         else {
-            return "test"; //Fallback if no logged in user when testing
+            return "test"; //Fallback if login screen is skipped for testing
         }
     }
 
