@@ -6,12 +6,11 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeScreenController">
    <children>
-      <Label layoutX="101.0" layoutY="39.0" text="Client Appointment Viewer - Home">
+      <Label layoutX="101.0" layoutY="39.0" text="Client Appointment DB - Home">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label layoutX="323.0" layoutY="102.0" text="No Upcoming Appointments" />
       <ButtonBar layoutX="170.0" layoutY="247.0" prefHeight="40.0" prefWidth="401.0">
         <buttons>
             <Button mnemonicParsing="false" onAction="#onViewAllAppointmentsButtonPressed" text="View All Appointments" />

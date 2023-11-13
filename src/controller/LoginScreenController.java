@@ -13,11 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
-
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Locale;
@@ -106,5 +105,16 @@ public class LoginScreenController implements Initializable {
             userNameTextField.clear();
             passwordPasswordField.clear();
         }
+    }
+
+    public void loginActivity() throws IOException {
+        try {
+            File loginActivity = new File("login_activity.txt");
+            loginActivity.createNewFile();
+
+        } catch (IOException e) {
+            System.out.println("IO Exception " + e);
+        }
+        // Write code that provides the ability to track user activity by recording all user log-in attempts, dates, and time stamps and whether each attempt was successful in a file named login_activity.txt. Append each new record to the existing file, and save to the root folder of the application.
     }
 }
