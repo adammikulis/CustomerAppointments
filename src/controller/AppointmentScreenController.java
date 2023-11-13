@@ -170,8 +170,6 @@ public class AppointmentScreenController implements Initializable {
         }
     }
 
-
-
     public void refreshContactComboBox() {
         List<Contact> contacts = null;
         try {

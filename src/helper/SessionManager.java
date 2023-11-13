@@ -17,7 +17,11 @@ public class SessionManager {
     }
 
     public String getCurrentUserName() {
-        return currentUserName;
+        if (currentUserName != null) {
+            return currentUserName;}
+        else {
+            return "test"; //Fallback if no logged in user when testing
+        }
     }
 
     public void setCurrentUserName(String userName) {
