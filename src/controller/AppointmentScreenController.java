@@ -38,11 +38,7 @@ public class AppointmentScreenController implements Initializable {
     private LocalDateTime UTCTime;
 
     @FXML
-    private Label localTimeLabel;
-    @FXML
-    private Label easternTimeLabel;
-    @FXML
-    private Label UTCLabel;
+    private Label appointmentAlertLabel;
 
     @FXML
     private TableView<Appointment> appointmentTableView;
@@ -89,9 +85,7 @@ public class AppointmentScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setTimes();
-        localTimeLabel.setText("Local: " + String.valueOf(localDateTime));
-        easternTimeLabel.setText("ET: " + String.valueOf(easternDateTime));
-        UTCLabel.setText("UTC: " + String.valueOf(UTCTime));
+        appointmentAlertLabel.setText("No upcoming appointments");
         appointmentTableView.setItems(AppointmentList.getAllAppointments());
         appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -330,12 +324,29 @@ public class AppointmentScreenController implements Initializable {
 
     public void refreshAppointmentTable() {
         List<Appointment> appointments = AppointmentList.getAllAppointments();
+        LocalDateTime now = LocalDateTime.now();
+
+        Appointment upcomingAppointment = null;
+
         for (Appointment appointment : appointments) {
             LocalDateTime startLocal = convertUTCToLocal(appointment.getStartDateTime());
             LocalDateTime endLocal = convertUTCToLocal(appointment.getEndDateTime());
             appointment.setStartDateTime(startLocal);
             appointment.setEndDateTime(endLocal);
+            if (startLocal.isAfter(now) && startLocal.isBefore(now.plusMinutes(15))) {
+                if (upcomingAppointment == null || startLocal.isBefore(upcomingAppointment.getStartDateTime())) {
+                    upcomingAppointment = appointment;
+                }
+            }
         }
+
+        if (upcomingAppointment == null) {
+            appointmentAlertLabel.setText("No appointments in the next 15 minutes");
+        }
+        else {
+            appointmentAlertLabel.setText("Upcoming appointment ID: " + upcomingAppointment.getAppointmentId() + " at: " + convertUTCToLocal(upcomingAppointment.getStartDateTime()));
+        }
+
         appointmentTableView.setItems(FXCollections.observableArrayList(appointments));
         appointmentTableView.refresh();
     }
