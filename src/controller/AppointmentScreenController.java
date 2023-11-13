@@ -143,7 +143,7 @@ public class AppointmentScreenController implements Initializable {
             }
         });
 
-
+        refreshAppointmentTable();
         // Populate the contact combo box with Contact objects
         refreshContactComboBox();
     }
@@ -322,8 +322,21 @@ public class AppointmentScreenController implements Initializable {
         appointmentEndDateTimeTextField.clear();
 
         // Refresh table view and clear selection
-        appointmentTableView.refresh();
+        refreshAppointmentTable();
         refreshContactComboBox();
         appointmentTableView.getSelectionModel().clearSelection();
+    }
+
+
+    public void refreshAppointmentTable() {
+        List<Appointment> appointments = AppointmentList.getAllAppointments();
+        for (Appointment appointment : appointments) {
+            LocalDateTime startLocal = convertUTCToLocal(appointment.getStartDateTime());
+            LocalDateTime endLocal = convertUTCToLocal(appointment.getEndDateTime());
+            appointment.setStartDateTime(startLocal);
+            appointment.setEndDateTime(endLocal);
+        }
+        appointmentTableView.setItems(FXCollections.observableArrayList(appointments));
+        appointmentTableView.refresh();
     }
 }
