@@ -31,10 +31,6 @@ public class AppointmentList {
         allAppointments.remove(appointment);
     }
 
-    public static int getNextAppointmentId() {
-        return -1;
-    }
-
     public static Appointment checkUpcomingAppointments(List<Appointment> appointments) {
 
         LocalDateTime now = LocalDateTime.now();
@@ -42,9 +38,6 @@ public class AppointmentList {
 
         for (Appointment appointment : appointments) {
             LocalDateTime startLocal = convertUTCToLocal(appointment.getStartDateTime());
-            LocalDateTime endLocal = convertUTCToLocal(appointment.getEndDateTime());
-            appointment.setStartDateTime(startLocal);
-            appointment.setEndDateTime(endLocal);
             if (startLocal.isAfter(now) && startLocal.isBefore(now.plusMinutes(15))) {
                 if (upcomingAppointment == null || startLocal.isBefore(upcomingAppointment.getStartDateTime())) {
                     upcomingAppointment = appointment;

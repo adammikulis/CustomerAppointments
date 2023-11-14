@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
@@ -184,10 +183,10 @@ public class AppointmentScreenController implements Initializable {
         try {
             ContactQuery contactQuery = new ContactQuery();
             contacts = contactQuery.getAllContacts();
+            appointmentContactComboBox.setItems(FXCollections.observableArrayList(contacts));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        appointmentContactComboBox.setItems(FXCollections.observableArrayList(contacts));
     }
 
 
@@ -207,10 +206,10 @@ public class AppointmentScreenController implements Initializable {
         String type = appointmentTypeTextField.getText();
         String lastUpdatedBy = SessionManager.getInstance().getCurrentUserName();
         String createdBy = SessionManager.getInstance().getCurrentUserName();
-        LocalDateTime startDateTime = LocalDateTime.parse(appointmentStartDateTimeTextField.getText());
-        LocalDateTime endDateTime = LocalDateTime.parse(appointmentEndDateTimeTextField.getText());
-        LocalDateTime createDate = LocalDateTime.now();
-        LocalDateTime lastUpdate = LocalDateTime.now();
+        LocalDateTime startDateTime = AppointmentList.convertLocalToUTC(LocalDateTime.parse(appointmentStartDateTimeTextField.getText()));
+        LocalDateTime endDateTime = AppointmentList.convertLocalToUTC(LocalDateTime.parse(appointmentEndDateTimeTextField.getText()));
+        LocalDateTime createDate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
+        LocalDateTime lastUpdate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
         // Create a new appointment object
         Appointment newAppointment = new Appointment(
                 -1,
@@ -274,10 +273,10 @@ public class AppointmentScreenController implements Initializable {
         selectedAppointment.setDescription(description);
         selectedAppointment.setLocation(location);
         selectedAppointment.setType(type);
-        selectedAppointment.setStartDateTime(startDateTime);
-        selectedAppointment.setEndDateTime(endDateTime);
+        selectedAppointment.setStartDateTime(AppointmentList.convertLocalToUTC(startDateTime));
+        selectedAppointment.setEndDateTime(AppointmentList.convertLocalToUTC(endDateTime));
         selectedAppointment.setLastUpdatedBy(lastUpdatedBy);
-        selectedAppointment.setLastUpdate(LocalDateTime.now());
+        selectedAppointment.setLastUpdate(AppointmentList.convertLocalToUTC(LocalDateTime.now()));
 
         // Save the changes to the database
         try {
@@ -312,7 +311,6 @@ public class AppointmentScreenController implements Initializable {
         refreshContactComboBox();
         appointmentTableView.getSelectionModel().clearSelection();
     }
-
 
     public void refreshAppointmentTable() {
         List<Appointment> appointments = AppointmentList.getAllAppointments();
