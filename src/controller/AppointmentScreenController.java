@@ -148,14 +148,6 @@ public class AppointmentScreenController implements Initializable {
         UTCTime = localDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
     }
 
-    public LocalDateTime convertLocalToUTC(LocalDateTime currentDateTime) {
-        return currentDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
-    }
-
-    public LocalDateTime convertUTCToLocal(LocalDateTime UTCDateTime) {
-        return UTCDateTime.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
-    }
-
     public void onAppointmentBackButtonPressed(ActionEvent actionEvent) throws IOException {
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
@@ -324,30 +316,16 @@ public class AppointmentScreenController implements Initializable {
 
     public void refreshAppointmentTable() {
         List<Appointment> appointments = AppointmentList.getAllAppointments();
-        LocalDateTime now = LocalDateTime.now();
-
-        Appointment upcomingAppointment = null;
-
-        for (Appointment appointment : appointments) {
-            LocalDateTime startLocal = convertUTCToLocal(appointment.getStartDateTime());
-            LocalDateTime endLocal = convertUTCToLocal(appointment.getEndDateTime());
-            appointment.setStartDateTime(startLocal);
-            appointment.setEndDateTime(endLocal);
-            if (startLocal.isAfter(now) && startLocal.isBefore(now.plusMinutes(15))) {
-                if (upcomingAppointment == null || startLocal.isBefore(upcomingAppointment.getStartDateTime())) {
-                    upcomingAppointment = appointment;
-                }
-            }
-        }
-
-        if (upcomingAppointment == null) {
-            appointmentAlertLabel.setText("No appointments in the next 15 minutes");
+        Appointment upcomingAppointment = AppointmentList.checkUpcomingAppointments(appointments);
+        if (upcomingAppointment != null) {
+            appointmentAlertLabel.setText("Upcoming appointment ID: " + upcomingAppointment.getAppointmentId() + " at: " + AppointmentList.convertUTCToLocal(upcomingAppointment.getStartDateTime()));
         }
         else {
-            appointmentAlertLabel.setText("Upcoming appointment ID: " + upcomingAppointment.getAppointmentId() + " at: " + convertUTCToLocal(upcomingAppointment.getStartDateTime()));
+            appointmentAlertLabel.setText("No appointments in the next 15 minutes");
         }
-
         appointmentTableView.setItems(FXCollections.observableArrayList(appointments));
         appointmentTableView.refresh();
     }
+
+
 }

@@ -47,7 +47,6 @@ public class LoginScreenController implements Initializable {
         }
     }
 
-
     public void onLoginButtonAction(ActionEvent actionEvent) throws SQLException, IOException {
         String userName = userNameTextField.getText();
         String password = passwordPasswordField.getText();
