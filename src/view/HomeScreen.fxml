@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeScreenController">
    <children>
-      <HBox layoutX="33.0" layoutY="125.0" prefHeight="40.0" prefWidth="282.0" spacing="10.0">
+      <HBox layoutX="71.0" layoutY="126.0" prefHeight="25.0" prefWidth="265.0" spacing="10.0">
          <children>
-            <Label text="View Schedule Of:" />
-            <ComboBox fx:id="homeScreenContactComboBox" prefWidth="150.0" />
+            <Label text="View Schedule Of:">
+               <padding>
+                  <Insets top="7.0" />
+               </padding></Label>
+            <ComboBox fx:id="homeContactComboBox" prefWidth="150.0" />
          </children>
       </HBox>
       <Label layoutX="101.0" layoutY="39.0" text="Client Appointment DB - Home">
@@ -17,24 +21,24 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <ButtonBar layoutX="335.0" layoutY="119.0" prefHeight="40.0" prefWidth="282.0">
+      <ButtonBar layoutX="400.0" layoutY="119.0" prefHeight="40.0" prefWidth="282.0">
         <buttons>
             <Button mnemonicParsing="false" onAction="#onViewAllAppointmentsButtonPressed" text="Appointment Screen" />
           <Button fx:id="addUpdateClientButton" mnemonicParsing="false" onAction="#onAddUpdateClientButtonPressed" text="Client Screen" />
         </buttons>
       </ButtonBar>
       <Button layoutX="318.0" layoutY="510.0" mnemonicParsing="false" onAction="#onHomeScreenExitButtonPressed" text="Exit" />
-      <Label fx:id="CurrentTimeLabel" layoutX="670.0" layoutY="560.0" text="Current Time" />
-      <TableView layoutX="70.0" layoutY="200.0" prefHeight="200.0" prefWidth="531.0">
+      <TableView fx:id="homeScheduleTableView" layoutX="134.0" layoutY="191.0" prefHeight="200.0" prefWidth="531.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Appt_ID" />
-          <TableColumn prefWidth="75.0" text="Title" />
-            <TableColumn prefWidth="75.0" text="Type" />
-            <TableColumn prefWidth="75.0" text="Desc" />
-            <TableColumn prefWidth="75.0" text="Start" />
-            <TableColumn prefWidth="75.0" text="End" />
-            <TableColumn prefWidth="75.0" text="Cust_ID" />
+          <TableColumn fx:id="homeScheduleAppointmentIdColumn" prefWidth="75.0" text="Appt_ID" />
+          <TableColumn fx:id="homeScheduleTitleColumn" prefWidth="75.0" text="Title" />
+            <TableColumn fx:id="homeScheduleTypeColumn" prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="homeScheduleDescriptionColumn" prefWidth="75.0" text="Desc" />
+            <TableColumn fx:id="homeScheduleStartColumn" prefWidth="75.0" text="Start" />
+            <TableColumn fx:id="homeScheduleEndColumn" prefWidth="75.0" text="End" />
+            <TableColumn fx:id="homeScheduleCustomerId" prefWidth="75.0" text="Cust_ID" />
         </columns>
       </TableView>
+      <Label fx:id="homeAppointmentAlertLabel" layoutX="317.0" layoutY="159.0" text="Appointment Alert" />
    </children>
 </AnchorPane>

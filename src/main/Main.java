@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
         primaryStage.setTitle("Client Database");
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();

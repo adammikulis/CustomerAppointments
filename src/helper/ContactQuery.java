@@ -160,4 +160,8 @@ public class ContactQuery {
         // Return null if no contact found with the given name
         return null;
     }
+
+    public int getContactIdByName(String contactName) throws SQLException {
+        return getContactByName(contactName).getContactId();
+    }
 }

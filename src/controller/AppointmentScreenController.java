@@ -164,7 +164,7 @@ public class AppointmentScreenController implements Initializable {
         }
 
         // Confirm the deletion with the user
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this appointment?");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete appointment " + selectedAppointment.getAppointmentId() +"?");
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
             // Delete the appointment from the table

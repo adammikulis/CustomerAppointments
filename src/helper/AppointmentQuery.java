@@ -2,7 +2,9 @@ package helper;
 
 
 import model.Appointment;
+import model.Contact;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -17,30 +19,34 @@ public class AppointmentQuery {
                 "FROM appointments a " +
                 "JOIN contacts c ON a.Contact_ID = c.Contact_ID";
 
-        try (PreparedStatement preparedStatement = ConnectionManager.getConnection().prepareStatement(query);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            while (resultSet.next()) {
-                int appointmentId = resultSet.getInt("Appointment_ID");
-                int customerId = resultSet.getInt("Customer_ID");
-                int contactId = resultSet.getInt("Contact_ID");
-                int userId = resultSet.getInt("User_ID");
-                String title = resultSet.getString("Title");
-                String description = resultSet.getString("Description");
-                String location = resultSet.getString("Location");
-                String type = resultSet.getString("Type");
-                String createdBy = resultSet.getString("Created_By");
-                String lastUpdatedBy = resultSet.getString("Last_Updated_By");
-                LocalDateTime start = resultSet.getTimestamp("Start").toLocalDateTime();
-                LocalDateTime end = resultSet.getTimestamp("End").toLocalDateTime();
-                LocalDateTime createDate = resultSet.getTimestamp("Create_Date").toLocalDateTime();
-                LocalDateTime lastUpdate = resultSet.getTimestamp("Last_Update").toLocalDateTime();
+        try {
+            PreparedStatement ps = ConnectionManager.getConnection().prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int appointmentId = rs.getInt("Appointment_ID");
+                int customerId = rs.getInt("Customer_ID");
+                int contactId = rs.getInt("Contact_ID");
+                int userId = rs.getInt("User_ID");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String location = rs.getString("Location");
+                String type = rs.getString("Type");
+                String createdBy = rs.getString("Created_By");
+                String lastUpdatedBy = rs.getString("Last_Updated_By");
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                LocalDateTime createDate = rs.getTimestamp("Create_Date").toLocalDateTime();
+                LocalDateTime lastUpdate = rs.getTimestamp("Last_Update").toLocalDateTime();
 
                 appointments.add(new Appointment(appointmentId, contactId, customerId, userId, title, description, location, type, createdBy, lastUpdatedBy, start, end, createDate, lastUpdate));
             }
+            ps.close();
+            rs.close();
         } catch (SQLException e) {
             System.out.println("SQL Error");
             e.printStackTrace(System.out);
         }
+
         return appointments;
     }
 
@@ -122,5 +128,41 @@ public class AppointmentQuery {
             System.out.println("SQL Error");
             e.printStackTrace(System.out);
         }
+    }
+
+    public List<Appointment> getAppointmentsByContact(Contact contact) {
+        List<Appointment> appointments = new ArrayList<>();
+        String query = "SELECT * FROM appointments WHERE Contact_ID = ?";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, contact.getContactId());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int appointmentId = rs.getInt("Appointment_ID");
+                int contactId = rs.getInt("Contact_ID");
+                int customerId = rs.getInt("Customer_ID");
+                int userId = rs.getInt("User_ID");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String location = rs.getString("Location");
+                String type = rs.getString("Type");
+                String createdBy = rs.getString("Created_By");
+                String lastUpdatedBy = rs.getString("Last_Updated_By");
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                LocalDateTime createDate = rs.getTimestamp("Create_Date").toLocalDateTime();
+                LocalDateTime lastUpdate = rs.getTimestamp("Last_Update").toLocalDateTime();
+
+                appointments.add(new Appointment(appointmentId, contactId, customerId, userId, title, description, location, type, createdBy, lastUpdatedBy, start, end, createDate, lastUpdate));
+            }
+        }
+        catch (SQLException e) {
+            System.out.println("SQL Error");
+            e.printStackTrace(System.out);
+        }
+
+        return appointments;
     }
 }
