@@ -31,12 +31,12 @@ public class AppointmentList {
         allAppointments.remove(appointment);
     }
 
-    public static Appointment checkUpcomingAppointments(List<Appointment> appointments) {
+    public static Appointment checkUpcomingAppointments() {
 
         LocalDateTime now = LocalDateTime.now();
         Appointment upcomingAppointment = null;
 
-        for (Appointment appointment : appointments) {
+        for (Appointment appointment : getAllAppointments()) {
             LocalDateTime startLocal = convertUTCToLocal(appointment.getStartDateTime());
             if (startLocal.isAfter(now) && startLocal.isBefore(now.plusMinutes(15))) {
                 if (upcomingAppointment == null || startLocal.isBefore(upcomingAppointment.getStartDateTime())) {

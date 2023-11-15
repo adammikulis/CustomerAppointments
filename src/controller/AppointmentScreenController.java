@@ -313,15 +313,14 @@ public class AppointmentScreenController implements Initializable {
     }
 
     public void refreshAppointmentTable() {
-        List<Appointment> appointments = AppointmentList.getAllAppointments();
-        Appointment upcomingAppointment = AppointmentList.checkUpcomingAppointments(appointments);
+        Appointment upcomingAppointment = AppointmentList.checkUpcomingAppointments();
         if (upcomingAppointment != null) {
             appointmentAlertLabel.setText("Upcoming appointment ID: " + upcomingAppointment.getAppointmentId() + " at: " + AppointmentList.convertUTCToLocal(upcomingAppointment.getStartDateTime()));
         }
         else {
             appointmentAlertLabel.setText("No appointments in the next 15 minutes");
         }
-        appointmentTableView.setItems(FXCollections.observableArrayList(appointments));
+        appointmentTableView.setItems(FXCollections.observableArrayList(AppointmentList.getAllAppointments()));
         appointmentTableView.refresh();
     }
 
