@@ -3,9 +3,10 @@ package controller;
 import helper.AppointmentQuery;
 import helper.ContactQuery;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import model.Appointment;
+import model.AppointmentList;
 import model.Contact;
-import model.ContactList;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +15,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.Contact;
 
 import java.io.IOException;
 import java.net.URL;
@@ -55,16 +55,12 @@ public class HomeScreenController implements Initializable {
 
         homeContactComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
-                // Set the contactId for the appointment
-                Appointment selectedAppointment = homeScheduleTableView.getSelectionModel().getSelectedItem();
-                if (selectedAppointment != null) {
-                    refreshAppointmentTableView(newSelection);
-                }
+                refreshHomeScheduleTableView(newSelection);
             }
         });
     }
 
-    private void refreshAppointmentTableView(Contact contact) {
+    private void refreshHomeScheduleTableView(Contact contact) {
         System.out.println("Refreshing schedule");
         try {
             AppointmentQuery appointmentQuery = new AppointmentQuery();
@@ -74,6 +70,14 @@ public class HomeScreenController implements Initializable {
         catch (Exception e) {
             e.printStackTrace();
         }
+        homeScheduleAppointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
+        homeScheduleTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        homeScheduleDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
+        homeScheduleTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        homeScheduleStartColumn.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
+        homeScheduleEndColumn.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
+        homeScheduleCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+
     }
 
     public void onViewAllAppointmentsButtonPressed(ActionEvent actionEvent) throws IOException {
