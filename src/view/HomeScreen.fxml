@@ -27,7 +27,7 @@
           <Button fx:id="addUpdateClientButton" mnemonicParsing="false" onAction="#onAddUpdateClientButtonPressed" text="Client Screen" />
         </buttons>
       </ButtonBar>
-      <Button layoutX="318.0" layoutY="510.0" mnemonicParsing="false" onAction="#onHomeScreenExitButtonPressed" text="Exit" />
+      <Button layoutX="398.0" layoutY="507.0" mnemonicParsing="false" onAction="#onHomeScreenExitButtonPressed" text="Exit" />
       <TableView fx:id="homeScheduleTableView" layoutX="134.0" layoutY="191.0" prefHeight="200.0" prefWidth="531.0">
         <columns>
           <TableColumn fx:id="homeScheduleAppointmentIdColumn" prefWidth="75.0" text="Appt_ID" />

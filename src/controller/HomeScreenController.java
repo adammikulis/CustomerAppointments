@@ -100,7 +100,7 @@ public class HomeScreenController implements Initializable {
         System.exit(0); // Exit the JavaFX application
     }
 
-    public void refreshContactComboBox() {
+    private void refreshContactComboBox() {
         List<Contact> contacts = null;
         try {
             ContactQuery contactQuery = new ContactQuery();

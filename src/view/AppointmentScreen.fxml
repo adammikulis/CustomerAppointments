@@ -28,16 +28,16 @@
       </HBox>
       <TableView fx:id="appointmentTableView" layoutX="10.0" layoutY="94.0" prefHeight="325.0" prefWidth="780.0">
         <columns>
-          <TableColumn fx:id="appointmentIdColumn" prefWidth="72.66666984558105" text="Appointment_ID" />
-          <TableColumn fx:id="titleColumn" prefWidth="71.33332061767578" text="Title" />
-            <TableColumn fx:id="descriptionColumn" prefWidth="103.3333740234375" text="Description" />
-            <TableColumn fx:id="locationColumn" prefWidth="71.0" text="Location" />
-            <TableColumn fx:id="contactColumn" prefWidth="61.0" text="Contact" />
-            <TableColumn fx:id="typeColumn" prefWidth="44.3333740234375" text="Type" />
-            <TableColumn fx:id="startDateTimeColumn" prefWidth="101.0" text="Start Date/Time" />
-            <TableColumn fx:id="endDateTimeColumn" prefWidth="89.33331298828125" text="End Date/Time" />
-            <TableColumn fx:id="customerIdColumn" prefWidth="81.0" text="Customer_ID" />
-            <TableColumn fx:id="userIdColumn" prefWidth="70.0" text="User_ID" />
+          <TableColumn fx:id="appointmentIdColumn" prefWidth="58.0" text="Appt_ID" />
+          <TableColumn fx:id="titleColumn" prefWidth="87.0" text="Title" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="98.0" text="Description" />
+            <TableColumn fx:id="locationColumn" prefWidth="77.0" text="Location" />
+            <TableColumn fx:id="contactColumn" prefWidth="71.0" text="Contact" />
+            <TableColumn fx:id="typeColumn" prefWidth="50.0" text="Type" />
+            <TableColumn fx:id="startDateTimeColumn" prefWidth="99.0" text="Start Date/Time" />
+            <TableColumn fx:id="endDateTimeColumn" prefWidth="105.0" text="End Date/Time" />
+            <TableColumn fx:id="customerIdColumn" prefWidth="72.0" text="Cust_ID" />
+            <TableColumn fx:id="userIdColumn" prefWidth="59.0" text="User_ID" />
         </columns>
       </TableView>
       <GridPane layoutX="11.0" layoutY="430.0" prefHeight="73.0" prefWidth="780.0">
@@ -66,7 +66,7 @@
             <Label text="Type" GridPane.columnIndex="5" />
             <Label text="Start Date/Time" GridPane.columnIndex="6" />
             <Label text="End Date/Time" GridPane.columnIndex="7" />
-            <Label text="Customer_ID" GridPane.columnIndex="8" />
+            <Label text="Cust_ID" GridPane.columnIndex="8" />
             <Label prefHeight="17.0" prefWidth="49.0" text="User_ID" GridPane.columnIndex="9" />
             <TextField editable="false" promptText="Auto-Generated" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentTitleTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
