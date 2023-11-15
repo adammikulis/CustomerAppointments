@@ -32,10 +32,6 @@ public class AppointmentScreenController implements Initializable {
     Stage stage;
     Parent scene;
 
-    private LocalDateTime localDateTime;
-    private LocalDateTime easternDateTime;
-    private LocalDateTime UTCTime;
-
     @FXML
     private Label appointmentAlertLabel;
 
@@ -83,8 +79,7 @@ public class AppointmentScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setTimes();
-        appointmentAlertLabel.setText("No upcoming appointments");
+        appointmentAlertLabel.setText("No appointments in the next 15 minutes");
         appointmentTableView.setItems(AppointmentList.getAllAppointments());
         appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -141,11 +136,6 @@ public class AppointmentScreenController implements Initializable {
         refreshContactComboBox();
     }
 
-    public void setTimes() {
-        localDateTime = LocalDateTime.now();
-        easternDateTime = localDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
-        UTCTime = localDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
-    }
 
     public void onAppointmentBackButtonPressed(ActionEvent actionEvent) throws IOException {
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();

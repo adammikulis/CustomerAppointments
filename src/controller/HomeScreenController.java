@@ -51,7 +51,7 @@ public class HomeScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         refreshContactComboBox();
-        homeAppointmentAlertLabel.setText("No upcoming appointments");
+        homeAppointmentAlertLabel.setText("No appointments in the next 15 minutes");
 
         homeContactComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -61,7 +61,6 @@ public class HomeScreenController implements Initializable {
     }
 
     private void refreshHomeScheduleTableView(Contact contact) {
-        System.out.println("Refreshing schedule");
         try {
             AppointmentQuery appointmentQuery = new AppointmentQuery();
             List<Appointment> appointments = appointmentQuery.getAppointmentsByContact(contact);
@@ -77,7 +76,6 @@ public class HomeScreenController implements Initializable {
         homeScheduleStartColumn.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
         homeScheduleEndColumn.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
         homeScheduleCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-
     }
 
     public void onViewAllAppointmentsButtonPressed(ActionEvent actionEvent) throws IOException {
@@ -101,10 +99,9 @@ public class HomeScreenController implements Initializable {
     }
 
     private void refreshContactComboBox() {
-        List<Contact> contacts = null;
         try {
             ContactQuery contactQuery = new ContactQuery();
-            contacts = contactQuery.getAllContacts();
+            List<Contact> contacts = contactQuery.getAllContacts();
             homeContactComboBox.setItems(FXCollections.observableArrayList(contacts));
         } catch (Exception e) {
             e.printStackTrace();
