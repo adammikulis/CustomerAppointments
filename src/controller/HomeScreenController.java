@@ -25,6 +25,18 @@ import java.util.ResourceBundle;
 public class HomeScreenController implements Initializable {
 
     @FXML
+    private TableView<Appointment> appointmentTypeReportTableView;
+    @FXML
+    private TableColumn<Appointment, String> appointmentTypeReportColumn;
+    @FXML
+    private TableColumn<Appointment, Integer> appointmentTypeTotalReportColumn;
+    @FXML
+    private TableView<Appointment> appointmentMonthTotalReportTableView;
+    @FXML
+    private TableColumn<Appointment, String> appointmentMonthReportColumn;
+    @FXML
+    private TableColumn<Appointment, Integer> appointmentMonthTotalReportColumn;
+    @FXML
     private Label homeAppointmentAlertLabel;
     @FXML
     private TableView<Appointment> homeScheduleTableView;
