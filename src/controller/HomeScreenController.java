@@ -2,11 +2,10 @@ package controller;
 
 import helper.AppointmentQuery;
 import helper.ContactQuery;
+import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Appointment;
-import model.AppointmentList;
-import model.Contact;
+import model.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,22 +19,23 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class HomeScreenController implements Initializable {
 
     @FXML
-    private TableView<Appointment> appointmentTypeReportTableView;
+    private TableView<AppointmentTypeCount> appointmentTypeReportTableView;
     @FXML
-    private TableColumn<Appointment, String> appointmentTypeReportColumn;
+    private TableColumn<AppointmentTypeCount, String> appointmentTypeReportColumn;
     @FXML
-    private TableColumn<Appointment, Integer> appointmentTypeTotalReportColumn;
+    private TableColumn<AppointmentTypeCount, Integer> appointmentTypeTotalReportColumn;
     @FXML
-    private TableView<Appointment> appointmentMonthTotalReportTableView;
+    private TableView<AppointmentMonth> appointmentMonthTotalReportTableView;
     @FXML
-    private TableColumn<Appointment, String> appointmentMonthReportColumn;
+    private TableColumn<AppointmentMonth, String> appointmentMonthReportColumn;
     @FXML
-    private TableColumn<Appointment, Integer> appointmentMonthTotalReportColumn;
+    private TableColumn<AppointmentMonth, Integer> appointmentMonthTotalReportColumn;
     @FXML
     private Label homeAppointmentAlertLabel;
     @FXML
@@ -63,7 +63,8 @@ public class HomeScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         refreshContactComboBox();
-        homeAppointmentAlertLabel.setText("No appointments in the next 15 minutes");
+        refreshAppointmentTypeReportTableView();
+        homeAppointmentAlertLabel.setText("<Appointment Alert>");
 
         homeContactComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -72,6 +73,14 @@ public class HomeScreenController implements Initializable {
         });
     }
 
+    private void refreshAppointmentTypeReportTableView() {
+        List<AppointmentTypeCount> appointmentTypeCount = AppointmentQuery.getAppointmentCountByType();
+        ObservableList<AppointmentTypeCount> appointmentTypeCountData = FXCollections.observableArrayList(appointmentTypeCount);
+
+        appointmentTypeReportColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
+        appointmentTypeTotalReportColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
+        appointmentTypeReportTableView.setItems(appointmentTypeCountData);
+    }
     private void refreshHomeScheduleTableView(Contact contact) {
         try {
             AppointmentQuery appointmentQuery = new AppointmentQuery();

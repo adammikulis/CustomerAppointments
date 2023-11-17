@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="shortened some column names">
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="added UI for home screen reports">
+      <change afterPath="$PROJECT_DIR$/src/model/AppointmentMonth.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/AppointmentTypeCount.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/HomeScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/HomeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomeScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,10 +64,10 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Java/JavaFX/javafx-sdk-20.0.2/lib&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.Mappings&quot;
   }
 }</component>
   <component name="RunManager">
@@ -403,7 +406,31 @@
       <option name="project" value="LOCAL" />
       <updated>1700083069294</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="removed extraneous DateTime variables and setTime method">
+      <option name="closed" value="true" />
+      <created>1700083344097</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1700083344097</updated>
+    </task>
+    <task id="LOCAL-00045" summary="created README.txt">
+      <option name="closed" value="true" />
+      <created>1700086647542</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1700086647542</updated>
+    </task>
+    <task id="LOCAL-00046" summary="added UI for home screen reports">
+      <option name="closed" value="true" />
+      <created>1700151580069</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1700151580069</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -424,9 +451,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added functionality for client screen comboboxes" />
-    <MESSAGE value="can sucessfully add, delete, and update clients but issue with country combobox" />
-    <MESSAGE value="login screen fully functions" />
     <MESSAGE value="appointments show contact name, error when selecting appointment" />
     <MESSAGE value="appointments show contact name,  no error but does not populate combobox, need to make delete SQL query" />
     <MESSAGE value="tidied up excess line breaks and made main launch to login screen" />
@@ -449,7 +473,10 @@
     <MESSAGE value="added contact schedule viewer on HomeScreen, nonfunctional" />
     <MESSAGE value="contact schedule viewer is functional" />
     <MESSAGE value="shortened some column names" />
-    <option name="LAST_COMMIT_MESSAGE" value="shortened some column names" />
+    <MESSAGE value="removed extraneous DateTime variables and setTime method" />
+    <MESSAGE value="created README.txt" />
+    <MESSAGE value="added UI for home screen reports" />
+    <option name="LAST_COMMIT_MESSAGE" value="added UI for home screen reports" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

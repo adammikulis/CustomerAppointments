@@ -2,6 +2,7 @@ package helper;
 
 
 import model.Appointment;
+import model.AppointmentTypeCount;
 import model.Contact;
 
 import javax.xml.transform.Result;
@@ -9,6 +10,8 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AppointmentQuery {
 
@@ -164,5 +167,27 @@ public class AppointmentQuery {
         }
 
         return appointments;
+    }
+
+    public static List<AppointmentTypeCount> getAppointmentCountByType() {
+        List<AppointmentTypeCount> appointmentCountByType = new ArrayList<>();
+        String query = "SELECT Type, COUNT(*) as count FROM appointments GROUP BY Type";
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String type = rs.getString("Type");
+                int count = rs.getInt("count");
+                appointmentCountByType.add(new AppointmentTypeCount(type, count));
+            }
+        }
+
+        catch (SQLException e) {
+            System.out.println("SQL Error");
+            e.printStackTrace(System.out);
+        }
+        return appointmentCountByType;
     }
 }

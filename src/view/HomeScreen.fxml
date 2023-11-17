@@ -35,7 +35,7 @@
             <TableColumn fx:id="homeScheduleCustomerId" prefWidth="76.66668701171875" text="Cust_ID" />
         </columns>
       </TableView>
-      <Label fx:id="homeAppointmentAlertLabel" layoutX="344.0" layoutY="131.0" text="&lt;Appointment Alert&gt;" />
+      <Label fx:id="homeAppointmentAlertLabel" layoutX="197.0" layoutY="103.0" text="&lt;Appointment Alert&gt;" />
       <VBox layoutX="136.0" layoutY="400.0" prefHeight="183.0" prefWidth="177.0">
          <children>
             <Label text="Total Appointments by Type:" />
