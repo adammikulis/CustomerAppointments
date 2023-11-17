@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="table report on appointments by contact is complete">
-      <change afterPath="$PROJECT_DIR$/src/helper/LoginLogger.java" afterDir="false" />
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="logger for login screen complete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/LoginScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/LoginQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/LoginQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/HomeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomeScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/LoginLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/LoginLogger.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,14 +274,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00029" summary="fixed errors when clicking on duplicate clients">
-      <option name="closed" value="true" />
-      <created>1699659008088</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1699659008088</updated>
-    </task>
     <task id="LOCAL-00030" summary="refactored DriverManager to ConnectionManager, added lastUpdatedBy and createdBy functionality to appointments via SessionManager">
       <option name="closed" value="true" />
       <created>1699812978597</created>
@@ -454,7 +442,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700247772576</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="logger for login screen complete">
+      <option name="closed" value="true" />
+      <created>1700251521665</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1700251521665</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -475,7 +471,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="contact combobox functions, can save new appointment and update" />
     <MESSAGE value="deleting appointments now removes from sqldb properly" />
     <MESSAGE value="cleaned up queries" />
     <MESSAGE value="fixed errors when clicking on duplicate clients" />
@@ -500,7 +495,8 @@
     <MESSAGE value="appointments by month report table finished" />
     <MESSAGE value="started appointments by contact report table" />
     <MESSAGE value="table report on appointments by contact is complete" />
-    <option name="LAST_COMMIT_MESSAGE" value="table report on appointments by contact is complete" />
+    <MESSAGE value="logger for login screen complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="logger for login screen complete" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
