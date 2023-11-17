@@ -1,13 +1,18 @@
 package helper;
 
+import helper.LoginLogger;
+import java.io.*;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoginQuery {
 
-    public static boolean checkLogin(String inputUserName, String inputPassword) throws SQLException {
+    public static boolean checkLogin(String inputUserName, String inputPassword) throws SQLException, IOException {
+        boolean loginSuccess = false;
         if (inputUserName.isEmpty() || inputPassword.isEmpty()) {
+            LoginLogger.logLoginAttempt(inputUserName, inputPassword, loginSuccess);
             throw new IllegalArgumentException("Username and password are required");
         }
 
@@ -18,12 +23,18 @@ public class LoginQuery {
         if (rs.next()) {
             String storedPassword = rs.getString("Password");
             if (inputPassword.equals(storedPassword)) {
+                loginSuccess = true;
+                LoginLogger.logLoginAttempt(inputUserName, inputPassword, loginSuccess);
                 return true;
             } else {
+                LoginLogger.logLoginAttempt(inputUserName, inputPassword, loginSuccess);
                 throw new IllegalArgumentException("Incorrect password");
             }
         } else {
+            LoginLogger.logLoginAttempt(inputUserName, inputPassword, loginSuccess);
             throw new IllegalArgumentException("Username not found");
         }
     }
+
+
 }

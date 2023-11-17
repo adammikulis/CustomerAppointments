@@ -82,21 +82,22 @@ public class LoginScreenController implements Initializable {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Error");
 
-            if (Locale.getDefault().getLanguage().equals("fr")) {
-                if (e.getMessage().equals("Incorrect password")) {
-                    alert.setHeaderText("Mot de passe incorrect");
-                    alert.setContentText("Le mot de passe que vous avez entré est incorrect. Veuillez réessayer.");
-                } else if (e.getMessage().equals("User not found")) {
-                    alert.setHeaderText("Utilisateur introuvable");
-                    alert.setContentText("L'utilisateur que vous avez entré n'a pas été trouvé. Veuillez réessayer.");
-                }
-            } else {
+            if (Locale.getDefault().getLanguage().equals("en")) {
                 if (e.getMessage().equals("Incorrect password")) {
                     alert.setHeaderText("Incorrect password");
                     alert.setContentText("The password you entered is incorrect. Please try again.");
-                } else if (e.getMessage().equals("User not found")) {
+                } else if (e.getMessage().equals("Username not found")) {
                     alert.setHeaderText("User not found");
                     alert.setContentText("The user you entered was not found. Please try again.");
+                }
+
+            } else {
+                if (e.getMessage().equals("Incorrect password")) {
+                    alert.setHeaderText("Mot de passe incorrect");
+                    alert.setContentText("Le mot de passe que vous avez entré est incorrect. Veuillez réessayer.");
+                } else if (e.getMessage().equals("Username not found")) {
+                    alert.setHeaderText("Utilisateur introuvable");
+                    alert.setContentText("L'utilisateur que vous avez entré n'a pas été trouvé. Veuillez réessayer.");
                 }
             }
 

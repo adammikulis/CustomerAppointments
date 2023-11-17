@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="started appointments by contact report table">
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="table report on appointments by contact is complete">
+      <change afterPath="$PROJECT_DIR$/src/helper/LoginLogger.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/HomeScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/LoginScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/LoginQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/LoginQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/HomeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomeScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -276,14 +278,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00028" summary="cleaned up queries">
-      <option name="closed" value="true" />
-      <created>1699658893419</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1699658893419</updated>
-    </task>
     <task id="LOCAL-00029" summary="fixed errors when clicking on duplicate clients">
       <option name="closed" value="true" />
       <created>1699659008088</created>
@@ -452,7 +446,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700246834067</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="table report on appointments by contact is complete">
+      <option name="closed" value="true" />
+      <created>1700247772576</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1700247772576</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -473,7 +475,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="can clear appointment fields" />
     <MESSAGE value="contact combobox functions, can save new appointment and update" />
     <MESSAGE value="deleting appointments now removes from sqldb properly" />
     <MESSAGE value="cleaned up queries" />
@@ -498,7 +499,8 @@
     <MESSAGE value="appointments by type report table finished" />
     <MESSAGE value="appointments by month report table finished" />
     <MESSAGE value="started appointments by contact report table" />
-    <option name="LAST_COMMIT_MESSAGE" value="started appointments by contact report table" />
+    <MESSAGE value="table report on appointments by contact is complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="table report on appointments by contact is complete" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
