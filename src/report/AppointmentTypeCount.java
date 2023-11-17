@@ -1,4 +1,4 @@
-package model;
+package report;
 
 public class AppointmentTypeCount {
     private String type;

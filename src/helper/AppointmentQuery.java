@@ -2,11 +2,11 @@ package helper;
 
 
 import model.Appointment;
-import model.AppointmentMonthCount;
-import model.AppointmentTypeCount;
+import report.AppointmentContactCount;
+import report.AppointmentMonthCount;
+import report.AppointmentTypeCount;
 import model.Contact;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -213,4 +213,27 @@ public class AppointmentQuery {
         }
         return appointmentCountByMonth;
     }
+
+    public static List<AppointmentContactCount> getAppointmentCountByContact() {
+        List<AppointmentContactCount> appointmentCountByContact = new ArrayList<>();
+        String query = "SELECT Type, COUNT(*) as count FROM appointments GROUP BY Type";
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String type = rs.getString("Type");
+                int count = rs.getInt("count");
+                appointmentCountByContact.add(new AppointmentContactCount(type, count));
+            }
+        }
+
+        catch (SQLException e) {
+            System.out.println("SQL Error");
+            e.printStackTrace(System.out);
+        }
+        return appointmentCountByContact;
+    }
+
 }

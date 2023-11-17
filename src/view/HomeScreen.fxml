@@ -7,56 +7,76 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeScreenController">
    <children>
-      <HBox layoutX="136.0" layoutY="159.0" prefHeight="25.0" prefWidth="531.0" spacing="10.0">
+      <VBox layoutX="120.0" layoutY="128.0" prefHeight="246.0" prefWidth="531.0" spacing="10.0">
          <children>
-            <Label text="View Schedule Of:">
-               <padding>
-                  <Insets top="7.0" />
-               </padding></Label>
-            <ComboBox fx:id="homeContactComboBox" prefHeight="25.0" prefWidth="119.0" />
-            <Button mnemonicParsing="false" onAction="#onViewAllAppointmentsButtonPressed" prefHeight="25.0" prefWidth="137.0" text="Appointment Screen" />
-          <Button fx:id="addUpdateClientButton" mnemonicParsing="false" onAction="#onAddUpdateClientButtonPressed" prefHeight="25.0" prefWidth="116.0" text="Client Screen" />
-         </children>
-      </HBox>
-      <Label layoutX="101.0" layoutY="39.0" text="Client Appointment DB - Home">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <Button layoutX="665.0" layoutY="535.0" mnemonicParsing="false" onAction="#onHomeScreenExitButtonPressed" text="Exit" />
-      <TableView fx:id="homeScheduleTableView" layoutX="134.0" layoutY="191.0" prefHeight="200.0" prefWidth="531.0">
-        <columns>
-          <TableColumn fx:id="homeScheduleAppointmentIdColumn" prefWidth="75.0" text="Appt_ID" />
-          <TableColumn fx:id="homeScheduleTitleColumn" prefWidth="75.0" text="Title" />
-            <TableColumn fx:id="homeScheduleTypeColumn" prefWidth="75.0" text="Type" />
-            <TableColumn fx:id="homeScheduleDescriptionColumn" prefWidth="75.0" text="Desc" />
-            <TableColumn fx:id="homeScheduleStartColumn" prefWidth="75.0" text="Start" />
-            <TableColumn fx:id="homeScheduleEndColumn" prefWidth="75.0" text="End" />
-            <TableColumn fx:id="homeScheduleCustomerId" prefWidth="76.66668701171875" text="Cust_ID" />
-        </columns>
-      </TableView>
-      <Label fx:id="homeAppointmentAlertLabel" layoutX="197.0" layoutY="103.0" text="&lt;Appointment Alert&gt;" />
-      <VBox layoutX="136.0" layoutY="400.0" prefHeight="183.0" prefWidth="177.0">
-         <children>
-            <Label text="Total Appointments by Type:" />
-            <TableView fx:id="appointmentTypeReportTableView" prefHeight="168.0" prefWidth="177.0">
+            <HBox prefHeight="25.0" prefWidth="531.0" spacing="10.0">
+               <children>
+                  <Label text="View Schedule Of:">
+                     <padding>
+                        <Insets top="7.0" />
+                     </padding>
+                  </Label>
+                  <ComboBox fx:id="homeContactComboBox" prefHeight="25.0" prefWidth="119.0" />
+                  <Button mnemonicParsing="false" onAction="#onViewAllAppointmentsButtonPressed" prefHeight="25.0" prefWidth="137.0" text="Appointment Screen" />
+                <Button fx:id="addUpdateClientButton" mnemonicParsing="false" onAction="#onAddUpdateClientButtonPressed" prefHeight="25.0" prefWidth="116.0" text="Client Screen" />
+               </children>
+            </HBox>
+            <TableView fx:id="homeScheduleTableView" prefHeight="200.0" prefWidth="531.0">
               <columns>
-                <TableColumn fx:id="appointmentTypeReportColumn" prefWidth="97.33334350585938" text="Appt Type" />
-                <TableColumn fx:id="appointmentTypeTotalReportColumn" prefWidth="72.00000508626303" text="Total" />
+                <TableColumn fx:id="homeScheduleAppointmentIdColumn" prefWidth="75.0" text="Appt_ID" />
+                <TableColumn fx:id="homeScheduleTitleColumn" prefWidth="75.0" text="Title" />
+                  <TableColumn fx:id="homeScheduleTypeColumn" prefWidth="75.0" text="Type" />
+                  <TableColumn fx:id="homeScheduleDescriptionColumn" prefWidth="75.0" text="Desc" />
+                  <TableColumn fx:id="homeScheduleStartColumn" prefWidth="75.0" text="Start" />
+                  <TableColumn fx:id="homeScheduleEndColumn" prefWidth="75.0" text="End" />
+                  <TableColumn fx:id="homeScheduleCustomerId" prefWidth="76.66668701171875" text="Cust_ID" />
               </columns>
             </TableView>
          </children>
       </VBox>
-      <VBox layoutX="420.0" layoutY="400.0" prefHeight="183.0" prefWidth="177.0">
+      <Label layoutX="120.0" layoutY="40.0" text="Client Appointment DB - Home">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Button layoutX="691.0" layoutY="528.0" mnemonicParsing="false" onAction="#onHomeScreenExitButtonPressed" text="Exit" />
+      <Label fx:id="homeAppointmentAlertLabel" layoutX="327.0" layoutY="100.0" text="&lt;Appointment Alert&gt;" />
+      <HBox layoutX="118.0" layoutY="374.0" prefHeight="180.0" prefWidth="564.0" spacing="10.0">
          <children>
-            <Label text="Total Appointments by Month:" />
-            <TableView fx:id="appointmentMonthTotalReportTableView" prefHeight="165.0" prefWidth="177.0">
-               <columns>
-                  <TableColumn fx:id="appointmentMonthReportColumn" prefWidth="97.33334350585938" text="Month" />
-                  <TableColumn fx:id="appointmentMonthTotalReportColumn" prefWidth="72.00000508626303" text="Total" />
-               </columns>
-            </TableView>
+            <VBox prefHeight="180.0" prefWidth="174.0">
+               <children>
+                  <Label text="Total Appointments by Type:" />
+                  <TableView fx:id="appointmentTypeReportTableView" prefHeight="163.0" prefWidth="183.0">
+                    <columns>
+                      <TableColumn fx:id="appointmentTypeReportColumn" prefWidth="97.33334350585938" text="Appt Type" />
+                      <TableColumn fx:id="appointmentTypeTotalReportColumn" prefWidth="72.00000508626303" text="Total" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+            <VBox prefHeight="180.0" prefWidth="175.0">
+               <children>
+                  <Label text="Total Appointments by Month:" />
+                  <TableView fx:id="appointmentMonthTotalReportTableView" prefHeight="165.0" prefWidth="141.0">
+                     <columns>
+                        <TableColumn fx:id="appointmentMonthReportColumn" prefWidth="97.33334350585938" text="Month" />
+                        <TableColumn fx:id="appointmentMonthTotalReportColumn" prefWidth="72.00000508626303" text="Total" />
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
+            <VBox layoutX="190.0" layoutY="10.0" prefHeight="180.0" prefWidth="173.0">
+               <children>
+                  <Label text="Total Appointments by Contact:" />
+                  <TableView fx:id="appointmentMonthTotalReportTableView1" prefHeight="165.0" prefWidth="141.0">
+                     <columns>
+                        <TableColumn fx:id="appointmentContactReportColumn" prefWidth="97.33334350585938" text="Contact" />
+                        <TableColumn fx:id="appointmentContactTotalReportColumn" prefWidth="72.00000508626303" text="Total" />
+                     </columns>
+                  </TableView>
+               </children>
+            </VBox>
          </children>
-      </VBox>
+      </HBox>
    </children>
 </AnchorPane>

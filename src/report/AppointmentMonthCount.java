@@ -1,4 +1,4 @@
-package model;
+package report;
 
 public class AppointmentMonthCount {
 
