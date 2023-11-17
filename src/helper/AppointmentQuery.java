@@ -216,16 +216,16 @@ public class AppointmentQuery {
 
     public static List<AppointmentContactCount> getAppointmentCountByContact() {
         List<AppointmentContactCount> appointmentCountByContact = new ArrayList<>();
-        String query = "SELECT Type, COUNT(*) as count FROM appointments GROUP BY Type";
+        String query = "SELECT c.Contact_Name, COUNT(*) as count FROM appointments a JOIN contacts c ON a.Contact_ID = c.Contact_ID GROUP BY c.Contact_Name";
         try {
             Connection conn = ConnectionManager.getConnection();
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                String type = rs.getString("Type");
+                String contactName = rs.getString("Contact_Name");
                 int count = rs.getInt("count");
-                appointmentCountByContact.add(new AppointmentContactCount(type, count));
+                appointmentCountByContact.add(new AppointmentContactCount(contactName, count));
             }
         }
 

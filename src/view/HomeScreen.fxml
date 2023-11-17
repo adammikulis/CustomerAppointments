@@ -9,7 +9,7 @@
    <children>
       <VBox layoutX="120.0" layoutY="128.0" prefHeight="246.0" prefWidth="531.0" spacing="10.0">
          <children>
-            <HBox prefHeight="25.0" prefWidth="531.0" spacing="10.0">
+            <HBox prefHeight="25.0" prefWidth="531.0" spacing="20.0">
                <children>
                   <Label text="View Schedule Of:">
                      <padding>
@@ -21,7 +21,7 @@
                 <Button fx:id="addUpdateClientButton" mnemonicParsing="false" onAction="#onAddUpdateClientButtonPressed" prefHeight="25.0" prefWidth="116.0" text="Client Screen" />
                </children>
             </HBox>
-            <TableView fx:id="homeScheduleTableView" prefHeight="200.0" prefWidth="531.0">
+            <TableView fx:id="homeScheduleTableView" prefHeight="200.0" prefWidth="540.0">
               <columns>
                 <TableColumn fx:id="homeScheduleAppointmentIdColumn" prefWidth="75.0" text="Appt_ID" />
                 <TableColumn fx:id="homeScheduleTitleColumn" prefWidth="75.0" text="Title" />
@@ -65,10 +65,10 @@
                   </TableView>
                </children>
             </VBox>
-            <VBox layoutX="190.0" layoutY="10.0" prefHeight="180.0" prefWidth="173.0">
+            <VBox layoutX="190.0" layoutY="10.0" prefHeight="180.0" prefWidth="175.0">
                <children>
                   <Label text="Total Appointments by Contact:" />
-                  <TableView fx:id="appointmentMonthTotalReportTableView1" prefHeight="165.0" prefWidth="141.0">
+                  <TableView fx:id="appointmentContactTotalReportTableView" prefHeight="163.0" prefWidth="182.0">
                      <columns>
                         <TableColumn fx:id="appointmentContactReportColumn" prefWidth="97.33334350585938" text="Contact" />
                         <TableColumn fx:id="appointmentContactTotalReportColumn" prefWidth="72.00000508626303" text="Total" />

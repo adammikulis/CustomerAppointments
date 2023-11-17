@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import report.AppointmentContactCount;
 import report.AppointmentMonthCount;
 import report.AppointmentTypeCount;
 
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class HomeScreenController implements Initializable {
+
 
     @FXML
     private TableView<AppointmentTypeCount> appointmentTypeReportTableView;
@@ -37,6 +39,13 @@ public class HomeScreenController implements Initializable {
     private TableColumn<AppointmentMonthCount, String> appointmentMonthReportColumn;
     @FXML
     private TableColumn<AppointmentMonthCount, Integer> appointmentMonthTotalReportColumn;
+    @FXML
+    private TableView<AppointmentContactCount> appointmentContactTotalReportTableView;
+    @FXML
+    private TableColumn<AppointmentContactCount, String> appointmentContactReportColumn;
+    @FXML
+    private TableColumn<AppointmentContactCount, Integer> appointmentContactTotalReportColumn;
+
     @FXML
     private Label homeAppointmentAlertLabel;
     @FXML
@@ -66,6 +75,7 @@ public class HomeScreenController implements Initializable {
         refreshContactComboBox();
         refreshAppointmentTypeReportTableView();
         refreshAppointmentMonthReportTableView();
+        refreshAppointmentContactReportTableView();
         homeAppointmentAlertLabel.setText("<Appointment Alert>");
 
         homeContactComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -91,10 +101,16 @@ public class HomeScreenController implements Initializable {
         appointmentMonthReportColumn.setCellValueFactory(new PropertyValueFactory<>("month"));
         appointmentMonthTotalReportColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
         appointmentMonthTotalReportTableView.setItems(appointmentMonthCountList);
-
-
     }
 
+    private void refreshAppointmentContactReportTableView() {
+        List<AppointmentContactCount> appointmentContactCount = AppointmentQuery.getAppointmentCountByContact();
+        ObservableList<AppointmentContactCount> appointmentContactCountList = FXCollections.observableArrayList(appointmentContactCount);
+
+        appointmentContactReportColumn.setCellValueFactory(new PropertyValueFactory<>("contact"));
+        appointmentContactTotalReportColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
+        appointmentContactTotalReportTableView.setItems(appointmentContactCountList);
+    }
 
 
     private void refreshHomeScheduleTableView(Contact contact) {
