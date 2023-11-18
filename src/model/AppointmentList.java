@@ -93,7 +93,7 @@ public class AppointmentList {
      * @return eastern time
      */
     public static LocalDateTime convertUTCToEastern(LocalDateTime localDateTime) {
-        return localDateTime.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.of("ET")).toLocalDateTime();
+        return localDateTime.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
     }
 
     /** Converts eastern to local time
@@ -102,7 +102,7 @@ public class AppointmentList {
      * @return local time
      */
     public static LocalDateTime convertEasternToUTC(LocalDateTime easternDateTime) {
-        return easternDateTime.atZone(ZoneId.of("ET")).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
+        return easternDateTime.atZone(ZoneId.of("America/New_York")).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
     }
 
 }

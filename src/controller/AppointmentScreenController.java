@@ -201,49 +201,42 @@ public class AppointmentScreenController implements Initializable {
         LocalDateTime endDateTime = AppointmentList.convertLocalToUTC(LocalDateTime.parse(appointmentEndDateTimeTextField.getText()));
         LocalDateTime createDate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
         LocalDateTime lastUpdate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
-        if (AppointmentTimeChecker.businessHourChecker(startDateTime)) {
-            if (!AppointmentTimeChecker.overlapChecker(customerId, startDateTime, endDateTime)) {
-                // Create a new appointment object
-                Appointment newAppointment = new Appointment(
-                        -1,
-                        contactId,
-                        customerId,
-                        userId,
-                        title,
-                        description,
-                        location,
-                        type,
-                        createdBy,
-                        lastUpdatedBy,
-                        startDateTime,
-                        endDateTime,
-                        createDate,
-                        lastUpdate
-                );
-                // Insert the new appointment into the database
-                try {
-                    AppointmentQuery appointmentQuery = new AppointmentQuery();
-                    int generatedId = appointmentQuery.insertAppointment(newAppointment);
-                    newAppointment.setAppointmentId(generatedId); // Update the appointment object with the generated ID
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                // Add the new appointment to the list and refresh the table view
-                AppointmentList.addAppointment(newAppointment);
-                clearFieldsAndRefresh();
-                refreshContactComboBox();
+        if (AppointmentTimeChecker.appointmentChecker(customerId, startDateTime, endDateTime)) {
+            // Create a new appointment object
+            Appointment newAppointment = new Appointment(
+                    -1,
+                    contactId,
+                    customerId,
+                    userId,
+                    title,
+                    description,
+                    location,
+                    type,
+                    createdBy,
+                    lastUpdatedBy,
+                    startDateTime,
+                    endDateTime,
+                    createDate,
+                    lastUpdate
+            );
+            // Insert the new appointment into the database
+            try {
+                AppointmentQuery appointmentQuery = new AppointmentQuery();
+                int generatedId = appointmentQuery.insertAppointment(newAppointment);
+                newAppointment.setAppointmentId(generatedId); // Update the appointment object with the generated ID
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        }
-        else {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Please schedule during business hours (8am-10pm ET Mon-Fri)");
-            alert.showAndWait();
-            return;
+            // Add the new appointment to the list and refresh the table view
+            AppointmentList.addAppointment(newAppointment);
+            clearFieldsAndRefresh();
+            refreshContactComboBox();
         }
     }
 
     public void onUpdateAppointmentButtonPressed(ActionEvent actionEvent) {
         Appointment selectedAppointment = appointmentTableView.getSelectionModel().getSelectedItem();
-        if(selectedAppointment == null) {
+        if (selectedAppointment == null) {
             // No appointment selected, show error message
             Alert alert = new Alert(Alert.AlertType.ERROR, "Please select an appointment to update.");
             alert.showAndWait();
@@ -259,34 +252,36 @@ public class AppointmentScreenController implements Initializable {
         String location = appointmentLocationTextField.getText();
         String type = appointmentTypeTextField.getText();
         String lastUpdatedBy = SessionManager.getInstance().getCurrentUserName();
-        LocalDateTime startDateTime = LocalDateTime.parse(appointmentStartDateTimeTextField.getText());
-        LocalDateTime endDateTime = LocalDateTime.parse(appointmentEndDateTimeTextField.getText());
-        LocalDateTime createDate = LocalDateTime.now();
-        LocalDateTime lastUpdate = LocalDateTime.now();
+        LocalDateTime startDateTime = AppointmentList.convertLocalToUTC(LocalDateTime.parse(appointmentStartDateTimeTextField.getText()));
+        LocalDateTime endDateTime = AppointmentList.convertLocalToUTC(LocalDateTime.parse(appointmentEndDateTimeTextField.getText()));
+        LocalDateTime createDate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
+        LocalDateTime lastUpdate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
 
-        // Update the selected appointment
-        selectedAppointment.setCustomerId(customerId);
-        selectedAppointment.setContactId(contactId);
-        selectedAppointment.setUserId(userId);
-        selectedAppointment.setTitle(title);
-        selectedAppointment.setDescription(description);
-        selectedAppointment.setLocation(location);
-        selectedAppointment.setType(type);
-        selectedAppointment.setStartDateTime(AppointmentList.convertLocalToUTC(startDateTime));
-        selectedAppointment.setEndDateTime(AppointmentList.convertLocalToUTC(endDateTime));
-        selectedAppointment.setLastUpdatedBy(lastUpdatedBy);
-        selectedAppointment.setLastUpdate(AppointmentList.convertLocalToUTC(LocalDateTime.now()));
+        if (AppointmentTimeChecker.appointmentChecker(customerId, startDateTime, endDateTime)) {
+            // Update the selected appointment
+            selectedAppointment.setCustomerId(customerId);
+            selectedAppointment.setContactId(contactId);
+            selectedAppointment.setUserId(userId);
+            selectedAppointment.setTitle(title);
+            selectedAppointment.setDescription(description);
+            selectedAppointment.setLocation(location);
+            selectedAppointment.setType(type);
+            selectedAppointment.setStartDateTime(AppointmentList.convertLocalToUTC(startDateTime));
+            selectedAppointment.setEndDateTime(AppointmentList.convertLocalToUTC(endDateTime));
+            selectedAppointment.setLastUpdatedBy(lastUpdatedBy);
+            selectedAppointment.setLastUpdate(AppointmentList.convertLocalToUTC(LocalDateTime.now()));
 
-        // Save the changes to the database
-        try {
-            AppointmentQuery appointmentQuery = new AppointmentQuery();
-            appointmentQuery.updateAppointment(selectedAppointment);
-            System.out.println("Updated appointment with id " + selectedAppointment.getAppointmentId() + " in the database.");
-        } catch (SQLException e) {
-            e.printStackTrace();
+            // Save the changes to the database
+            try {
+                AppointmentQuery appointmentQuery = new AppointmentQuery();
+                appointmentQuery.updateAppointment(selectedAppointment);
+                System.out.println("Updated appointment with id " + selectedAppointment.getAppointmentId() + " in the database.");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            clearFieldsAndRefresh();
+            refreshContactComboBox();
         }
-        clearFieldsAndRefresh();
-        refreshContactComboBox();
     }
 
     private void clearAppointmentContactComboBox() {
@@ -322,6 +317,4 @@ public class AppointmentScreenController implements Initializable {
         appointmentTableView.setItems(FXCollections.observableArrayList(AppointmentList.getAllAppointments()));
         appointmentTableView.refresh();
     }
-
-
 }

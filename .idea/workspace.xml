@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="finished javadocs for model">
-      <change afterPath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" afterDir="false" />
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="appointment overlap coded and being implemented">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login_activity.txt" beforeDir="false" afterPath="$PROJECT_DIR$/login_activity.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/ClientQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/ClientQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/AppointmentList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/AppointmentList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -281,14 +278,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00035" summary="upcoming appointment alert added">
-      <option name="closed" value="true" />
-      <created>1699897887710</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1699897887710</updated>
-    </task>
     <task id="LOCAL-00036" summary="began loginActivity logger method">
       <option name="closed" value="true" />
       <created>1699903088104</created>
@@ -457,7 +446,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700332717655</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="appointment overlap coded and being implemented">
+      <option name="closed" value="true" />
+      <created>1700336463635</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1700336463635</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -479,7 +476,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added currentUserName fallback if login screen is skipped for testing" />
     <MESSAGE value="fixed field refreshes and added timezone conversion methods (not yet implemented)" />
     <MESSAGE value="table now displays appointments in local time" />
     <MESSAGE value="upcoming appointment alert added" />
@@ -504,7 +500,8 @@
     <MESSAGE value="Login screen now translates everything to French when needed" />
     <MESSAGE value="javadocs and eastern time zone conversion added" />
     <MESSAGE value="finished javadocs for model" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished javadocs for model" />
+    <MESSAGE value="appointment overlap coded and being implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="appointment overlap coded and being implemented" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
