@@ -268,4 +268,5 @@ public class ClientQuery {
         }
         return division;
     }
+
 }

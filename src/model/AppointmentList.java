@@ -92,8 +92,8 @@ public class AppointmentList {
      * @param localDateTime local time to convert to eastern time
      * @return eastern time
      */
-    public static LocalDateTime convertLocalToEastern(LocalDateTime localDateTime) {
-        return localDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("ET")).toLocalDateTime();
+    public static LocalDateTime convertUTCToEastern(LocalDateTime localDateTime) {
+        return localDateTime.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.of("ET")).toLocalDateTime();
     }
 
     /** Converts eastern to local time
@@ -101,8 +101,8 @@ public class AppointmentList {
      * @param easternDateTime local time to convert to UTC
      * @return local time
      */
-    public static LocalDateTime convertEasternToLocal(LocalDateTime easternDateTime) {
-        return easternDateTime.atZone(ZoneId.of("ET")).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
+    public static LocalDateTime convertEasternToUTC(LocalDateTime easternDateTime) {
+        return easternDateTime.atZone(ZoneId.of("ET")).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
     }
 
 }

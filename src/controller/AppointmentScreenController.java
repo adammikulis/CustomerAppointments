@@ -1,6 +1,7 @@
 package controller;
 
 import helper.AppointmentQuery;
+import helper.AppointmentTimeChecker;
 import helper.ContactQuery;
 import helper.SessionManager;
 import javafx.collections.FXCollections;
@@ -124,8 +125,8 @@ public class AppointmentScreenController implements Initializable {
                     e.printStackTrace();
                 }
 
-                appointmentStartDateTimeTextField.setText(newSelection.getStartDateTime().toString());
-                appointmentEndDateTimeTextField.setText(newSelection.getEndDateTime().toString());
+                appointmentStartDateTimeTextField.setText(AppointmentList.convertUTCToLocal(newSelection.getStartDateTime()).toString());
+                appointmentEndDateTimeTextField.setText(AppointmentList.convertUTCToLocal(newSelection.getEndDateTime()).toString());
                 customerIdTextField.setText(Integer.toString(newSelection.getCustomerId()));
                 userIdTextField.setText(Integer.toString(newSelection.getUserId()));
             }
@@ -200,36 +201,44 @@ public class AppointmentScreenController implements Initializable {
         LocalDateTime endDateTime = AppointmentList.convertLocalToUTC(LocalDateTime.parse(appointmentEndDateTimeTextField.getText()));
         LocalDateTime createDate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
         LocalDateTime lastUpdate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
-        // Create a new appointment object
-        Appointment newAppointment = new Appointment(
-                -1,
-                contactId,
-                customerId,
-                userId,
-                title,
-                description,
-                location,
-                type,
-                createdBy,
-                lastUpdatedBy,
-                startDateTime,
-                endDateTime,
-                createDate,
-                lastUpdate
-        );
-        // Insert the new appointment into the database
-        try {
-            AppointmentQuery appointmentQuery = new AppointmentQuery();
-            int generatedId = appointmentQuery.insertAppointment(newAppointment);
-            newAppointment.setAppointmentId(generatedId); // Update the appointment object with the generated ID
-            System.out.println("Created new appointment with id " + newAppointment.getAppointmentId() + " in the database.");
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (AppointmentTimeChecker.businessHourChecker(startDateTime)) {
+            if (!AppointmentTimeChecker.overlapChecker(customerId, startDateTime, endDateTime)) {
+                // Create a new appointment object
+                Appointment newAppointment = new Appointment(
+                        -1,
+                        contactId,
+                        customerId,
+                        userId,
+                        title,
+                        description,
+                        location,
+                        type,
+                        createdBy,
+                        lastUpdatedBy,
+                        startDateTime,
+                        endDateTime,
+                        createDate,
+                        lastUpdate
+                );
+                // Insert the new appointment into the database
+                try {
+                    AppointmentQuery appointmentQuery = new AppointmentQuery();
+                    int generatedId = appointmentQuery.insertAppointment(newAppointment);
+                    newAppointment.setAppointmentId(generatedId); // Update the appointment object with the generated ID
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                // Add the new appointment to the list and refresh the table view
+                AppointmentList.addAppointment(newAppointment);
+                clearFieldsAndRefresh();
+                refreshContactComboBox();
+            }
         }
-        // Add the new appointment to the list and refresh the table view
-        AppointmentList.addAppointment(newAppointment);
-        clearFieldsAndRefresh();
-        refreshContactComboBox();
+        else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please schedule during business hours (8am-10pm ET Mon-Fri)");
+            alert.showAndWait();
+            return;
+        }
     }
 
     public void onUpdateAppointmentButtonPressed(ActionEvent actionEvent) {

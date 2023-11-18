@@ -2,6 +2,7 @@ package helper;
 
 
 import model.Appointment;
+import model.Client;
 import report.AppointmentContactCount;
 import report.AppointmentMonthCount;
 import report.AppointmentTypeCount;
@@ -99,7 +100,7 @@ public class AppointmentQuery {
             if (generatedKeys.next()) {
                 return generatedKeys.getInt(1);
             } else {
-                throw new SQLException("Creating appointment failed, no ID obtained.");
+                throw new SQLException("Creating appointment failed, no ID generated.");
             }
         } finally {
             if (generatedKeys != null) {
@@ -131,6 +132,42 @@ public class AppointmentQuery {
             System.out.println("SQL Error");
             e.printStackTrace(System.out);
         }
+    }
+
+    public List<Appointment> getAppointmentsByClient(int clientId) {
+        List<Appointment> appointments = new ArrayList<>();
+        String query = "SELECT * FROM appointments WHERE Customer_ID = ?";
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, clientId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int appointmentId = rs.getInt("Appointment_ID");
+                int contactId = rs.getInt("Contact_ID");
+                int customerId = rs.getInt("Customer_ID");
+                int userId = rs.getInt("User_ID");
+                String title = rs.getString("Title");
+                String description = rs.getString("Description");
+                String location = rs.getString("Location");
+                String type = rs.getString("Type");
+                String createdBy = rs.getString("Created_By");
+                String lastUpdatedBy = rs.getString("Last_Updated_By");
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                LocalDateTime createDate = rs.getTimestamp("Create_Date").toLocalDateTime();
+                LocalDateTime lastUpdate = rs.getTimestamp("Last_Update").toLocalDateTime();
+
+                appointments.add(new Appointment(appointmentId, contactId, customerId, userId, title, description, location, type, createdBy, lastUpdatedBy, start, end, createDate, lastUpdate));
+
+            }
+        }
+        catch (SQLException e) {
+                System.out.println("SQL Error");
+                e.printStackTrace(System.out);
+        }
+        return appointments;
     }
 
     public List<Appointment> getAppointmentsByContact(Contact contact) {
