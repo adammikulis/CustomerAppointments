@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 
+/** Class for creating lists of appointments.*/
 public class AppointmentList {
     private static AppointmentQuery appointmentQuery = new AppointmentQuery();
     private static List<Appointment> appointments = appointmentQuery.getAppointments();
@@ -15,22 +16,42 @@ public class AppointmentList {
     private static ObservableList<Appointment> allAppointments = FXCollections.observableArrayList(appointments);
     private static ObservableList<Appointment> filteredAppointments = FXCollections.observableArrayList();
 
+    /** Gets a list of all appointments
+     *
+     * @return allAppointments
+     */
     public static ObservableList<Appointment> getAllAppointments() {
         return allAppointments;
     }
 
+    /** Gets a list of filtered appointments
+     *
+     * @return filteredAppointments
+     */
     public static ObservableList<Appointment> getFilteredAppointments() {
         return filteredAppointments;
     }
 
+    /** Adds appointment to list
+     *
+     * @param appointment appointment to add
+     */
     public static void addAppointment(Appointment appointment) {
         allAppointments.add(appointment);
     }
 
+    /** Deletes appointment from list
+     *
+     * @param appointment appointment to delete
+     */
     public static void deleteAppointment(Appointment appointment) {
         allAppointments.remove(appointment);
     }
 
+    /** Gets possible appointment in the next 15 minutes
+     *
+     * @return upcomingAppointment
+     */
     public static Appointment checkUpcomingAppointments() {
 
         LocalDateTime now = LocalDateTime.now();
@@ -48,12 +69,40 @@ public class AppointmentList {
         return upcomingAppointment;
     }
 
-    public static LocalDateTime convertLocalToUTC(LocalDateTime currentDateTime) {
-        return currentDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
+    /** Converts local time to UTC
+     *
+     * @param localDateTime local time to convert to UTC
+     * @return UTC time
+     */
+    public static LocalDateTime convertLocalToUTC(LocalDateTime localDateTime) {
+        return localDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
     }
 
+    /** Converts UTC to local time
+     *
+     * @param UTCDateTime local time to convert to UTC
+     * @return local time
+     */
     public static LocalDateTime convertUTCToLocal(LocalDateTime UTCDateTime) {
         return UTCDateTime.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
+    /** Converts local time to eastern time
+     *
+     * @param localDateTime local time to convert to eastern time
+     * @return eastern time
+     */
+    public static LocalDateTime convertLocalToEastern(LocalDateTime localDateTime) {
+        return localDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("ET")).toLocalDateTime();
+    }
+
+    /** Converts eastern to local time
+     *
+     * @param easternDateTime local time to convert to UTC
+     * @return local time
+     */
+    public static LocalDateTime convertEasternToLocal(LocalDateTime easternDateTime) {
+        return easternDateTime.atZone(ZoneId.of("ET")).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
     }
 
 }

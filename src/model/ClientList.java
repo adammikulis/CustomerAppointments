@@ -24,7 +24,6 @@ public class ClientList {
      * Insert a new client into the database.
      *
      * @param client The client to be inserted
-     * @return The newly inserted client object
      */
     public static void addClient(Client client) throws SQLException {
         int clientId = clientQuery.getNextClientId();

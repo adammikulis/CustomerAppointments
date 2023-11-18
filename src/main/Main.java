@@ -9,7 +9,10 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
+/** Class begins the ClientAppointments application.*/
 public class Main extends Application {
+
+    /** Method calls up the initial LoginScreen.*/
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/view/LoginScreen.fxml"));
@@ -18,6 +21,7 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    /** Method opens the database connection and launches the application.*/
     public static void main(String[] args) throws SQLException {
         ConnectionManager.openConnection();
         launch(args);
