@@ -60,6 +60,8 @@ public class AppointmentScreenController implements Initializable {
     private TableColumn<Appointment, Integer> userIdColumn;
 
     @FXML
+    private TextField appointmentIdTextField;
+    @FXML
     private TextField appointmentTitleTextField;
     @FXML
     private TextField appointmentDescriptionTextField;
@@ -80,7 +82,7 @@ public class AppointmentScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        appointmentAlertLabel.setText("No appointments in the next 15 minutes");
+        appointmentAlertLabel.setText("<Appointment Alert>");
         appointmentTableView.setItems(AppointmentList.getAllAppointments());
         appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -88,8 +90,8 @@ public class AppointmentScreenController implements Initializable {
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         contactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        startDateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
-        endDateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
+        startDateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("localStartDateTime"));
+        endDateTimeColumn.setCellValueFactory(new PropertyValueFactory<>("localEndDateTime"));
         customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
@@ -108,6 +110,7 @@ public class AppointmentScreenController implements Initializable {
         appointmentTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 // Set the text fields to show the appointment's information
+                appointmentIdTextField.setText(Integer.toString(newSelection.getAppointmentId()));
                 appointmentTypeTextField.setText(newSelection.getType());
                 appointmentTitleTextField.setText(newSelection.getTitle());
                 appointmentDescriptionTextField.setText(newSelection.getDescription());
@@ -164,7 +167,6 @@ public class AppointmentScreenController implements Initializable {
             // Delete the appointment from the database
             AppointmentQuery appointmentQuery = new AppointmentQuery();
             appointmentQuery.deleteAppointment(selectedAppointment.getAppointmentId());
-            System.out.println("Deleted appointment with id " + selectedAppointment.getAppointmentId() + " from the database.");
             clearFieldsAndRefresh();
         }
     }
@@ -187,6 +189,7 @@ public class AppointmentScreenController implements Initializable {
 
     public void onCreateNewAppointmentButtonPressed(ActionEvent actionEvent) {
         // Get the values from the text fields
+        int appointmentId = Integer.parseInt(appointmentIdTextField.getText());
         int customerId = Integer.parseInt(customerIdTextField.getText());
         Contact selectedContact = appointmentContactComboBox.getSelectionModel().getSelectedItem();
         int contactId = selectedContact.getContactId();
@@ -201,7 +204,7 @@ public class AppointmentScreenController implements Initializable {
         LocalDateTime endDateTime = AppointmentList.convertLocalToUTC(LocalDateTime.parse(appointmentEndDateTimeTextField.getText()));
         LocalDateTime createDate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
         LocalDateTime lastUpdate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
-        if (AppointmentTimeChecker.appointmentChecker(customerId, startDateTime, endDateTime)) {
+        if (AppointmentTimeChecker.appointmentChecker(appointmentId, customerId, startDateTime, endDateTime, false)) {
             // Create a new appointment object
             Appointment newAppointment = new Appointment(
                     -1,
@@ -243,6 +246,7 @@ public class AppointmentScreenController implements Initializable {
             return;
         }
         // Get the values from the text fields
+        int appointmentId = Integer.parseInt(appointmentIdTextField.getText());
         int customerId = Integer.parseInt(customerIdTextField.getText());
         Contact selectedContact = appointmentContactComboBox.getSelectionModel().getSelectedItem();
         int contactId = selectedContact.getContactId();
@@ -257,7 +261,7 @@ public class AppointmentScreenController implements Initializable {
         LocalDateTime createDate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
         LocalDateTime lastUpdate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
 
-        if (AppointmentTimeChecker.appointmentChecker(customerId, startDateTime, endDateTime)) {
+        if (AppointmentTimeChecker.appointmentChecker(appointmentId, customerId, startDateTime, endDateTime, true)) {
             // Update the selected appointment
             selectedAppointment.setCustomerId(customerId);
             selectedAppointment.setContactId(contactId);
@@ -266,10 +270,10 @@ public class AppointmentScreenController implements Initializable {
             selectedAppointment.setDescription(description);
             selectedAppointment.setLocation(location);
             selectedAppointment.setType(type);
-            selectedAppointment.setStartDateTime(AppointmentList.convertLocalToUTC(startDateTime));
-            selectedAppointment.setEndDateTime(AppointmentList.convertLocalToUTC(endDateTime));
+            selectedAppointment.setStartDateTime(startDateTime);
+            selectedAppointment.setEndDateTime(endDateTime);
             selectedAppointment.setLastUpdatedBy(lastUpdatedBy);
-            selectedAppointment.setLastUpdate(AppointmentList.convertLocalToUTC(LocalDateTime.now()));
+            selectedAppointment.setLastUpdate(LocalDateTime.now());
 
             // Save the changes to the database
             try {
@@ -289,8 +293,12 @@ public class AppointmentScreenController implements Initializable {
         appointmentContactComboBox.setValue(null);
     }
     private void clearFieldsAndRefresh() {
-        // Clear the input fields
+
+        appointmentTableView.getSelectionModel().clearSelection();
         clearAppointmentContactComboBox();
+
+        // Clear the input fields
+        appointmentIdTextField.clear();
         customerIdTextField.clear();
         userIdTextField.clear();
         appointmentTitleTextField.clear();
@@ -303,7 +311,7 @@ public class AppointmentScreenController implements Initializable {
         // Refresh table view and clear selection
         refreshAppointmentTable();
         refreshContactComboBox();
-        appointmentTableView.getSelectionModel().clearSelection();
+
     }
 
     public void refreshAppointmentTable() {

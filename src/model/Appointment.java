@@ -23,6 +23,9 @@ public class Appointment {
 
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
+    private LocalDateTime localStartDateTime;
+    private LocalDateTime localEndDateTime;
+
     private LocalDateTime createDate;
     private LocalDateTime lastUpdate;
 
@@ -214,6 +217,32 @@ public class Appointment {
      *
      * @return startDateTime
      */
+    public LocalDateTime getLocalStartDateTime() {
+        localStartDateTime = AppointmentList.convertUTCToLocal(startDateTime);
+        return localStartDateTime;
+    }
+
+    /** Returns end date and time of appointment
+     *
+     * @return endDateTime
+     */
+    public LocalDateTime getLocalEndDateTime() {
+        localEndDateTime = AppointmentList.convertUTCToLocal(endDateTime);
+        return localEndDateTime;
+    }
+
+    /** Sets end date and time for appointment
+     * @param endDateTime end date and time to set for appointment
+     */
+    public void setEndDateTime(LocalDateTime endDateTime) {
+        this.endDateTime = endDateTime;
+    }
+
+
+    /** Returns start date and time of appointment
+     *
+     * @return startDateTime
+     */
     public LocalDateTime getStartDateTime() {
         return startDateTime;
     }
@@ -233,12 +262,6 @@ public class Appointment {
         return endDateTime;
     }
 
-    /** Sets end date and time for appointment
-     * @param endDateTime end date and time to set for appointment
-     */
-    public void setEndDateTime(LocalDateTime endDateTime) {
-        this.endDateTime = endDateTime;
-    }
 
     /** Returns create date and time of appointment
      *

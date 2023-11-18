@@ -22,32 +22,40 @@ public class AppointmentTimeChecker {
                 (easternEndTime.getHour() >= 8 && easternEndTime.getHour() <= 22) && (endDayOfWeek != DayOfWeek.SATURDAY && endDayOfWeek != DayOfWeek.SUNDAY));
     }
 
-    public static boolean overlapChecker(int clientId, LocalDateTime startUTCDateTime, LocalDateTime endUTCDateTime) {
+    public static boolean overlapChecker(int currentAppointmentId, int clientId, LocalDateTime startUTCDateTime, LocalDateTime endUTCDateTime, boolean update) {
         AppointmentQuery appointmentQuery = new AppointmentQuery();
         List<Appointment> appointmentList = appointmentQuery.getAppointmentsByClient(clientId);
 
         for (Appointment appointment : appointmentList) {
+            if (update) {
+                // Skip the current appointment
+                if (appointment.getAppointmentId() == currentAppointmentId) {
+                    continue;
+                }
+            }
+
             LocalDateTime currentStart = appointment.getStartDateTime();
             LocalDateTime currentEnd = appointment.getEndDateTime();
 
             // Check for overlap with starting time
-            if ((startUTCDateTime.isEqual(currentStart)) || startUTCDateTime.isAfter(currentStart) &&
-                    (startUTCDateTime.isEqual(currentEnd) || startUTCDateTime.isBefore(currentEnd))) {
+            if ((startUTCDateTime.isEqual(currentStart) || startUTCDateTime.isAfter(currentStart)) &&
+                    (startUTCDateTime.isBefore(currentEnd))) {
                 return true;
             }
 
             // Check for overlap with end time
-            if ((endUTCDateTime.isEqual(currentStart)) || endUTCDateTime.isAfter(currentStart) &&
-                    (endUTCDateTime.isEqual(currentEnd) || endUTCDateTime.isBefore(currentEnd))) {
+            if ((endUTCDateTime.isEqual(currentStart) || endUTCDateTime.isAfter(currentStart)) &&
+                    (endUTCDateTime.isBefore(currentEnd))) {
                 return true;
             }
         }
         return false;
     }
 
-    public static boolean appointmentChecker(int clientId, LocalDateTime startUTCDateTime, LocalDateTime endUTCDateTime) {
+
+    public static boolean appointmentChecker(int currentAppointmentid, int clientId, LocalDateTime startUTCDateTime, LocalDateTime endUTCDateTime, boolean update) {
         if (businessHourChecker(startUTCDateTime, endUTCDateTime)) {
-            if (!overlapChecker(clientId, startUTCDateTime, endUTCDateTime)) {
+            if (!overlapChecker(currentAppointmentid, clientId, startUTCDateTime, endUTCDateTime, update)) {
                 return true;
             }
             else {

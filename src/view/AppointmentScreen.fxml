@@ -68,7 +68,7 @@
             <Label text="Local End Date/Time" GridPane.columnIndex="7" />
             <Label text="Cust_ID" GridPane.columnIndex="8" />
             <Label prefHeight="17.0" prefWidth="49.0" text="User_ID" GridPane.columnIndex="9" />
-            <TextField editable="false" prefHeight="25.0" prefWidth="28.0" promptText="Auto-Generated" GridPane.rowIndex="1" />
+            <TextField fx:id="appointmentIdTextField" editable="false" prefHeight="25.0" prefWidth="28.0" promptText="Auto-Generated" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentTitleTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentDescriptionTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentLocationTextField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
