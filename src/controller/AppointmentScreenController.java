@@ -5,6 +5,7 @@ import helper.AppointmentTimeChecker;
 import helper.ContactQuery;
 import helper.SessionManager;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,9 +31,16 @@ import java.util.ResourceBundle;
 
 public class AppointmentScreenController implements Initializable {
 
+
     Stage stage;
     Parent scene;
 
+    @FXML
+    private RadioButton noFilterRadioButton;
+    @FXML
+    private RadioButton viewByWeekRadioButton;
+    @FXML
+    private RadioButton viewByMonthRadioButton;
     @FXML
     private Label appointmentAlertLabel;
 
@@ -80,10 +88,15 @@ public class AppointmentScreenController implements Initializable {
     @FXML
     private TextField userIdTextField;
 
+    private ObservableList<Appointment> allAppointments;
+    private ObservableList<Appointment> filteredAppointments;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        allAppointments = AppointmentList.getAllAppointments();
+        filteredAppointments = allAppointments;
         appointmentAlertLabel.setText("<Appointment Alert>");
-        appointmentTableView.setItems(AppointmentList.getAllAppointments());
+        appointmentTableView.setItems(filteredAppointments);
         appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
@@ -135,8 +148,30 @@ public class AppointmentScreenController implements Initializable {
             }
         });
 
+        // Listeners for radio button
+        noFilterRadioButton.setOnAction(event -> showAllAppointments());
+        viewByWeekRadioButton.setOnAction(event -> filterAppointmentsByWeek());
+        viewByMonthRadioButton.setOnAction(event -> filterAppointmentsByMonth());
+
+        showAllAppointments();
+
+
+    }
+
+    private void showAllAppointments() {
+
         refreshAppointmentTable();
-        // Populate the contact combo box with Contact objects
+        refreshContactComboBox();
+    }
+    private void filterAppointmentsByWeek() {
+
+        refreshAppointmentTable();
+        refreshContactComboBox();
+    }
+
+    private void filterAppointmentsByMonth() {
+
+        refreshAppointmentTable();
         refreshContactComboBox();
     }
 
@@ -322,7 +357,7 @@ public class AppointmentScreenController implements Initializable {
         else {
             appointmentAlertLabel.setText("No appointments in the next 15 minutes");
         }
-        appointmentTableView.setItems(FXCollections.observableArrayList(AppointmentList.getAllAppointments()));
+        appointmentTableView.setItems(FXCollections.observableArrayList(filteredAppointments));
         appointmentTableView.refresh();
     }
 }

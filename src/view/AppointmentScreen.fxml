@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -12,19 +11,22 @@
             <Font name="System Bold" size="26.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="756.0" spacing="70.0">
+      <HBox layoutX="334.0" layoutY="63.0" prefHeight="17.0" prefWidth="449.0" spacing="60.0">
          <children>
-            <RadioButton mnemonicParsing="false" prefHeight="17.0" prefWidth="103.0" selected="true" text="View by Week">
+            <Label fx:id="appointmentAlertLabel" prefHeight="17.0" prefWidth="220.0" text="&lt;appointment alert&gt;" />
+            <Label text="All times displayed in Local" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="59.0" prefHeight="25.0" prefWidth="342.0" spacing="5.0">
+         <children>
+            <RadioButton fx:id="noFilterRadioButton" layoutX="30.0" layoutY="77.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="74.0" selected="true" text="No Filter">
                <toggleGroup>
                   <ToggleGroup fx:id="ViewByGroup" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="View by Month" toggleGroup="$ViewByGroup" />
-            <Label fx:id="appointmentAlertLabel" layoutX="493.0" layoutY="77.0" text="&lt;appointment alert&gt;" />
+            <RadioButton fx:id="viewByWeekRadioButton" mnemonicParsing="false" prefHeight="17.0" prefWidth="107.0" text="Appt This Week" toggleGroup="$ViewByGroup" />
+            <RadioButton fx:id="viewByMonthRadioButton" mnemonicParsing="false" text="Appt This Month" toggleGroup="$ViewByGroup" />
          </children>
-         <padding>
-            <Insets left="20.0" top="50.0" />
-         </padding>
       </HBox>
       <TableView fx:id="appointmentTableView" layoutX="10.0" layoutY="94.0" prefHeight="325.0" prefWidth="780.0">
         <columns>
@@ -64,8 +66,8 @@
             <Label text="Location" GridPane.columnIndex="3" />
             <Label text="Contact" GridPane.columnIndex="4" />
             <Label text="Type" GridPane.columnIndex="5" />
-            <Label prefHeight="17.0" prefWidth="119.0" text="Local Start Date/Time" GridPane.columnIndex="6" />
-            <Label text="Local End Date/Time" GridPane.columnIndex="7" />
+            <Label prefHeight="17.0" prefWidth="119.0" text="Start Date/Time" GridPane.columnIndex="6" />
+            <Label text="End Date/Time" GridPane.columnIndex="7" />
             <Label text="Cust_ID" GridPane.columnIndex="8" />
             <Label prefHeight="17.0" prefWidth="49.0" text="User_ID" GridPane.columnIndex="9" />
             <TextField fx:id="appointmentIdTextField" editable="false" prefHeight="25.0" prefWidth="28.0" promptText="Auto-Generated" GridPane.rowIndex="1" />

@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeScreenController">
    <children>
-      <VBox layoutX="120.0" layoutY="128.0" prefHeight="246.0" prefWidth="531.0" spacing="10.0">
+      <VBox layoutX="120.0" layoutY="129.0" prefHeight="245.0" prefWidth="537.0" spacing="10.0">
          <children>
             <HBox prefHeight="25.0" prefWidth="531.0" spacing="20.0">
                <children>

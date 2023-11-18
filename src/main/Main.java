@@ -15,7 +15,7 @@ public class Main extends Application {
     /** Method calls up the initial LoginScreen.*/
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/LoginScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/AppointmentScreen.fxml"));
         primaryStage.setTitle("Client Database");
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
