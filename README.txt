@@ -3,7 +3,7 @@ Purpose: Tracking clients and their associated contacts via a JavaFX front-end a
 Author: Adam Mikulis
 Contact: adam.mikulis@gmail.com
 App Version: 0.85
-Date: 11/15/2023
+Date: 11/18/2023
 
 IDE: IntelliJ IDEA 2023.2.5 (Community Edition)
 JDK: 17.0.9

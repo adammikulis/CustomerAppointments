@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import java.sql.SQLException;
 import java.util.List;
 
+/** Class for creating a list of clients*/
 public class ClientList {
 
     private static ClientQuery clientQuery = new ClientQuery();
@@ -30,14 +31,5 @@ public class ClientList {
         client.setClientId(clientId);
         clientQuery.insertClient(client);
         allClients.add(client);
-    }
-
-    /**
-     * Generates the next client ID.
-     *
-     * @return the next available client ID as an integer
-     */
-    public static int getNextClientId() throws SQLException {
-        return clientQuery.getNextClientId();
     }
 }

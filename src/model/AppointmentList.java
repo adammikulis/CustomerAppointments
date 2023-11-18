@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 
-/** Class for creating lists of appointments.*/
+/** Class for creating a list of appointments*/
 public class AppointmentList {
     private static AppointmentQuery appointmentQuery = new AppointmentQuery();
     private static List<Appointment> appointments = appointmentQuery.getAppointments();
@@ -16,7 +16,7 @@ public class AppointmentList {
     private static ObservableList<Appointment> allAppointments = FXCollections.observableArrayList(appointments);
     private static ObservableList<Appointment> filteredAppointments = FXCollections.observableArrayList();
 
-    /** Gets a list of all appointments
+    /** Returns a list of all appointments
      *
      * @return allAppointments
      */
@@ -24,7 +24,7 @@ public class AppointmentList {
         return allAppointments;
     }
 
-    /** Gets a list of filtered appointments
+    /** Returns a list of filtered appointments
      *
      * @return filteredAppointments
      */
@@ -48,7 +48,7 @@ public class AppointmentList {
         allAppointments.remove(appointment);
     }
 
-    /** Gets possible appointment in the next 15 minutes
+    /** Returns possible appointment in the next 15 minutes
      *
      * @return upcomingAppointment
      */

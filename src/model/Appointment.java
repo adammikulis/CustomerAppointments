@@ -5,7 +5,7 @@ import helper.ContactQuery;
 
 import java.time.LocalDateTime;
 
-/** Class for creating Appointments.*/
+/** Class for creating Appointments*/
 public class Appointment {
 
     private int appointmentId;
@@ -60,7 +60,7 @@ public class Appointment {
         this.lastUpdate = lastUpdate;
     }
 
-    /** Gets the id of the appointment
+    /** Returns the id of the appointment
      *
      * @return appointmentId
      */
@@ -75,7 +75,7 @@ public class Appointment {
         this.appointmentId = appointmentId;
     }
 
-    /** Gets the contact id of the appointment
+    /** Returns the contact id of the appointment
      *
      * @return contactId
      */
@@ -90,7 +90,7 @@ public class Appointment {
         this.contactId = contactId;
     }
 
-    /** Gets customer id for appointment
+    /** Returns customer id for appointment
      *
      * @return customerId
      */
@@ -105,7 +105,7 @@ public class Appointment {
         this.customerId = customerId;
     }
 
-    /** Gets user id for appointment
+    /** Returns user id for appointment
      *
      * @return userId
      */
@@ -120,7 +120,7 @@ public class Appointment {
         this.userId = userId;
     }
 
-    /** Gets title of appointment
+    /** Returns title of appointment
      *
      * @return title
      */
@@ -135,7 +135,7 @@ public class Appointment {
         this.title = title;
     }
 
-    /** Gets description of appointment
+    /** Returns description of appointment
      *
      * @return description
      */
@@ -150,7 +150,7 @@ public class Appointment {
         this.description = description;
     }
 
-    /** Gets location of appointment
+    /** Returns location of appointment
      *
      * @return location
      */
@@ -165,7 +165,7 @@ public class Appointment {
         this.location = location;
     }
 
-    /** Gets type of appointment
+    /** Returns type of appointment
      *
      * @return type
      */
@@ -180,7 +180,7 @@ public class Appointment {
         this.type = type;
     }
 
-    /** Gets created by for appointment
+    /** Returns created by for appointment
      *
      * @return createdBy
      */
@@ -195,7 +195,7 @@ public class Appointment {
         this.createdBy = createdBy;
     }
 
-    /** Gets last updated by for appointment
+    /** Returns last updated by for appointment
      *
      * @return lastUpdatedBy
      */
@@ -210,7 +210,7 @@ public class Appointment {
         this.lastUpdatedBy = lastUpdatedBy;
     }
 
-    /** Gets start date and time of appointment
+    /** Returns start date and time of appointment
      *
      * @return startDateTime
      */
@@ -225,7 +225,7 @@ public class Appointment {
         this.startDateTime = startDateTime;
     }
 
-    /** Gets end date and time of appointment
+    /** Returns end date and time of appointment
      *
      * @return endDateTime
      */
@@ -240,7 +240,7 @@ public class Appointment {
         this.endDateTime = endDateTime;
     }
 
-    /** Gets create date and time of appointment
+    /** Returns create date and time of appointment
      *
      * @return createDate
      */
@@ -255,7 +255,7 @@ public class Appointment {
         this.createDate = createDate;
     }
 
-    /** Gets last updated date and time of appointment
+    /** Returns last updated date and time of appointment
      *
      * @return lastUpdate
      */
@@ -270,7 +270,7 @@ public class Appointment {
         this.lastUpdate = lastUpdate;
     }
 
-    /** Gets contact name for appointment
+    /** Returns contact name for appointment
      *
      * @return contactName
      */

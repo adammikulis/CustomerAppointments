@@ -4,6 +4,7 @@ import helper.ClientQuery;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
+/** Class for creating a client*/
 public class Client {
 
     private int clientId;
@@ -25,8 +26,12 @@ public class Client {
      * @param clientName    client name
      * @param streetAddress client street address
      * @param postalCode    client postalCode
-
      * @param phone         client phone
+     * @param createDate    date created
+     * @param createdBy     created by
+     * @param lastUpdate    last updated date and time
+     * @param lastUpdatedBy last updated by
+     * @param divisionId    division id of client
      */
     public Client(int clientId, String clientName, String streetAddress, String postalCode, String phone, LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy, int divisionId) {
         this.clientId = clientId;
