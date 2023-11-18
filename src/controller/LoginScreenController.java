@@ -24,19 +24,31 @@ import java.util.ResourceBundle;
 
 public class LoginScreenController implements Initializable {
 
+
+
     Stage stage;
     Parent scene;
+
+    String languageCode;
 
     @FXML
     private PasswordField passwordPasswordField;
     @FXML
     private TextField userNameTextField;
     @FXML
+    private Label loginTitleLabel;
+    @FXML
+    private Label loginUsernameLabel;
+    @FXML
+    private Label loginPasswordLabel;
+    @FXML
     private Label localeIdLabel;
+    @FXML
+    private Button loginLoginButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String languageCode = Locale.getDefault().getLanguage();
+        languageCode = Locale.getDefault().getLanguage();
 
         if (languageCode.equals("en")) {
             localeIdLabel.setText("Current Locale: " + Locale.getDefault().toString());
@@ -44,6 +56,9 @@ public class LoginScreenController implements Initializable {
             localeIdLabel.setText("Locale actuelle: " + Locale.getDefault().toString());
             userNameTextField.setPromptText("Nom d'utilisateur");
             passwordPasswordField.setPromptText("Mot de passe");
+            loginUsernameLabel.setText("Nom d'utilisateur");
+            loginPasswordLabel.setText("Mot de passe");
+            loginLoginButton.setText("Connexion");
         }
     }
 
@@ -53,16 +68,18 @@ public class LoginScreenController implements Initializable {
 
         if (userName.isEmpty() || password.isEmpty()) {
             Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
             userNameTextField.clear();
             passwordPasswordField.clear();
 
-            if (Locale.getDefault().getLanguage().equals("fr")) {
-                alert.setHeaderText("Champs vides");
-                alert.setContentText("Veuillez entrer un nom d'utilisateur et un mot de passe.");
-            } else {
+            if (languageCode.equals("en")) {
+                alert.setTitle("Error");
                 alert.setHeaderText("Empty Fields");
                 alert.setContentText("Please enter a username and password.");
+            } else if (languageCode.equals("fr")) {
+                alert.setTitle("Error");
+                alert.setHeaderText("Champs vides");
+                alert.setContentText("Veuillez entrer un nom d'utilisateur et un mot de passe.");
+
             }
             alert.showAndWait();
             return;
@@ -80,9 +97,9 @@ public class LoginScreenController implements Initializable {
             stage.show();
         } catch (IllegalArgumentException e) {
             Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error");
 
-            if (Locale.getDefault().getLanguage().equals("en")) {
+            if (languageCode.equals("en")) {
+                alert.setTitle("Error");
                 if (e.getMessage().equals("Incorrect password")) {
                     alert.setHeaderText("Incorrect password");
                     alert.setContentText("The password you entered is incorrect. Please try again.");
@@ -91,7 +108,8 @@ public class LoginScreenController implements Initializable {
                     alert.setContentText("The user you entered was not found. Please try again.");
                 }
 
-            } else {
+            } else if (languageCode.equals("fr")){
+                alert.setTitle("Erreur");
                 if (e.getMessage().equals("Incorrect password")) {
                     alert.setHeaderText("Mot de passe incorrect");
                     alert.setContentText("Le mot de passe que vous avez entré est incorrect. Veuillez réessayer.");

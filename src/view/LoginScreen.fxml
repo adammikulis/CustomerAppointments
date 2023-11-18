@@ -6,15 +6,15 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginScreenController">
    <children>
-      <Button layoutX="472.0" layoutY="299.0" mnemonicParsing="false" onAction="#onLoginButtonAction" text="Login" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="208.0" layoutY="72.0" prefHeight="104.0" prefWidth="407.0" text="Customer Appointment Database - Employee Login" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="loginLoginButton" layoutX="472.0" layoutY="299.0" mnemonicParsing="false" onAction="#onLoginButtonAction" text="Login" />
+      <Label fx:id="loginTitleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="208.0" layoutY="72.0" prefHeight="104.0" prefWidth="407.0" text="Customer Appointment Database - Employee Login" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
       <TextField fx:id="userNameTextField" layoutX="369.0" layoutY="199.0" promptText="Username" />
-      <Label layoutX="266.0" layoutY="203.0" text="Username" />
-      <Label layoutX="266.0" layoutY="246.0" text="Password" />
+      <Label fx:id="loginUsernameLabel" layoutX="266.0" layoutY="203.0" text="Username" />
+      <Label fx:id="loginPasswordLabel" layoutX="266.0" layoutY="246.0" text="Password" />
       <Label fx:id="localeIdLabel" layoutX="266.0" layoutY="303.0" prefHeight="17.0" prefWidth="184.0" text="Locale" />
       <PasswordField fx:id="passwordPasswordField" layoutX="369.0" layoutY="242.0" promptText="Password" />
    </children>

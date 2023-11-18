@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="logger for login screen complete">
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="updated to version 0.8, need to do appointment deconfliction and javadocs">
+      <change afterPath="$PROJECT_DIR$/login_activity.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/LoginScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginScreenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helper/LoginLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/LoginLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Login.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,19 +57,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Java/JavaFX/javafx-sdk-20.0.2/lib&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.Mappings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Java/JavaFX/javafx-sdk-20.0.2/lib",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propVCSSupport.Mappings"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="ClientAppointments" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="main.Main" />
@@ -274,22 +279,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00030" summary="refactored DriverManager to ConnectionManager, added lastUpdatedBy and createdBy functionality to appointments via SessionManager">
-      <option name="closed" value="true" />
-      <created>1699812978597</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1699812978597</updated>
-    </task>
-    <task id="LOCAL-00031" summary="added local time display in appointment screen">
-      <option name="closed" value="true" />
-      <created>1699816278845</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1699816278845</updated>
-    </task>
     <task id="LOCAL-00032" summary="added currentUserName fallback if login screen is skipped for testing">
       <option name="closed" value="true" />
       <created>1699893343562</created>
@@ -450,7 +439,23 @@
       <option name="project" value="LOCAL" />
       <updated>1700251521665</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="updated logger to store in UTC">
+      <option name="closed" value="true" />
+      <created>1700252006999</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1700252006999</updated>
+    </task>
+    <task id="LOCAL-00053" summary="updated to version 0.8, need to do appointment deconfliction and javadocs">
+      <option name="closed" value="true" />
+      <created>1700252051979</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1700252051979</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -471,8 +476,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="deleting appointments now removes from sqldb properly" />
-    <MESSAGE value="cleaned up queries" />
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="fixed errors when clicking on duplicate clients" />
     <MESSAGE value="refactored DriverManager to ConnectionManager, added lastUpdatedBy and createdBy functionality to appointments via SessionManager" />
     <MESSAGE value="added local time display in appointment screen" />
@@ -496,7 +500,9 @@
     <MESSAGE value="started appointments by contact report table" />
     <MESSAGE value="table report on appointments by contact is complete" />
     <MESSAGE value="logger for login screen complete" />
-    <option name="LAST_COMMIT_MESSAGE" value="logger for login screen complete" />
+    <MESSAGE value="updated logger to store in UTC" />
+    <MESSAGE value="updated to version 0.8, need to do appointment deconfliction and javadocs" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated to version 0.8, need to do appointment deconfliction and javadocs" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
