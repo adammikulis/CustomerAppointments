@@ -23,6 +23,7 @@ import model.ContactList;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
@@ -35,8 +36,7 @@ public class AppointmentScreenController implements Initializable {
     Stage stage;
     Parent scene;
 
-    @FXML
-    private RadioButton noFilterRadioButton;
+    RadioButton noFilterRadioButton;
     @FXML
     private RadioButton viewByWeekRadioButton;
     @FXML
@@ -78,7 +78,9 @@ public class AppointmentScreenController implements Initializable {
     @FXML
     private ComboBox<Contact> appointmentContactComboBox;
     @FXML
-    private TextField appointmentTypeTextField;
+    private ComboBox appointmentTypeComboBox;
+    @FXML
+    private DatePicker appointmentDatePicker;
     @FXML
     private TextField appointmentStartDateTimeTextField;
     @FXML
@@ -159,20 +161,19 @@ public class AppointmentScreenController implements Initializable {
     }
 
     private void showAllAppointments() {
-
-        refreshAppointmentTable();
-        refreshContactComboBox();
+        filteredAppointments = AppointmentList.getAllAppointments();
+        clearFieldsAndRefresh();
     }
     private void filterAppointmentsByWeek() {
+        LocalDate today = LocalDate.now();
 
-        refreshAppointmentTable();
-        refreshContactComboBox();
+
+        clearFieldsAndRefresh();
     }
 
     private void filterAppointmentsByMonth() {
 
-        refreshAppointmentTable();
-        refreshContactComboBox();
+        clearFieldsAndRefresh();
     }
 
 

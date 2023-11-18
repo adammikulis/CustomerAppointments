@@ -50,10 +50,11 @@
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="68.66666666666669" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="89.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="68.33333333333331" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.00003051757812" minWidth="10.0" prefWidth="116.66666666666663" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.00003051757812" minWidth="10.0" prefWidth="114.66666666666663" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.00003051757812" minWidth="10.0" prefWidth="46.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.00003051757812" minWidth="10.0" prefWidth="52.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.00003051757812" minWidth="10.0" prefWidth="83.66663614908856" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.00003051757812" minWidth="10.0" prefWidth="78.99999999999994" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.00003051757812" minWidth="10.0" prefWidth="97.33333333333337" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.00003051757812" minWidth="10.0" prefWidth="55.33333333333337" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.00003051757812" minWidth="10.0" prefWidth="58.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
@@ -62,24 +63,26 @@
          <children>
             <Label prefHeight="17.0" prefWidth="40.0" text="ID" />
             <Label text="Title" GridPane.columnIndex="1" />
-            <Label text="Description" GridPane.columnIndex="2" />
+            <Label prefHeight="17.0" prefWidth="63.0" text="Description" GridPane.columnIndex="2" />
             <Label text="Location" GridPane.columnIndex="3" />
             <Label text="Contact" GridPane.columnIndex="4" />
             <Label text="Type" GridPane.columnIndex="5" />
-            <Label prefHeight="17.0" prefWidth="119.0" text="Start Date/Time" GridPane.columnIndex="6" />
-            <Label text="End Date/Time" GridPane.columnIndex="7" />
-            <Label text="Cust_ID" GridPane.columnIndex="8" />
-            <Label prefHeight="17.0" prefWidth="49.0" text="User_ID" GridPane.columnIndex="9" />
+            <Label layoutX="401.0" layoutY="15.0" text="Date" GridPane.columnIndex="6" />
+            <Label prefHeight="17.0" prefWidth="62.0" text="Start Time" GridPane.columnIndex="7" />
+            <Label text="End Time" GridPane.columnIndex="8" />
+            <Label text="Cust_ID" GridPane.columnIndex="9" />
+            <Label prefHeight="17.0" prefWidth="49.0" text="User_ID" GridPane.columnIndex="10" />
             <TextField fx:id="appointmentIdTextField" editable="false" prefHeight="25.0" prefWidth="28.0" promptText="Auto-Generated" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentTitleTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentDescriptionTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentLocationTextField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <TextField fx:id="appointmentStartDateTimeTextField" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-            <TextField fx:id="appointmentEndDateTimeTextField" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-            <TextField fx:id="customerIdTextField" prefHeight="25.0" prefWidth="49.0" GridPane.columnIndex="8" GridPane.rowIndex="1" />
-            <TextField fx:id="userIdTextField" editable="false" GridPane.columnIndex="9" GridPane.rowIndex="1" />
-            <TextField fx:id="appointmentTypeTextField" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <TextField fx:id="appointmentStartDateTimeTextField" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+            <TextField fx:id="appointmentEndDateTimeTextField" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+            <TextField fx:id="customerIdTextField" prefHeight="25.0" prefWidth="49.0" GridPane.columnIndex="9" GridPane.rowIndex="1" />
+            <TextField fx:id="userIdTextField" editable="false" GridPane.columnIndex="10" GridPane.rowIndex="1" />
             <ComboBox fx:id="appointmentContactComboBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <DatePicker fx:id="appointmentDatePicker" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+            <ComboBox fx:id="appointmentTypeComboBox" layoutX="275.0" layoutY="47.0" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <ButtonBar layoutX="69.0" layoutY="539.0" prefHeight="40.0" prefWidth="701.0">
