@@ -36,7 +36,8 @@ public class AppointmentScreenController implements Initializable {
     Stage stage;
     Parent scene;
 
-    RadioButton noFilterRadioButton;
+    @FXML
+    private RadioButton noFilterRadioButton;
     @FXML
     private RadioButton viewByWeekRadioButton;
     @FXML
@@ -78,7 +79,7 @@ public class AppointmentScreenController implements Initializable {
     @FXML
     private ComboBox<Contact> appointmentContactComboBox;
     @FXML
-    private ComboBox appointmentTypeComboBox;
+    private TextField appointmentTypeTextField;
     @FXML
     private DatePicker appointmentDatePicker;
     @FXML

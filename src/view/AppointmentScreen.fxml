@@ -45,9 +45,9 @@
       <GridPane layoutX="11.0" layoutY="430.0" prefHeight="73.0" prefWidth="780.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.33333333333333" minWidth="10.0" prefWidth="36.66667048136393" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.00000762939453" minWidth="10.0" prefWidth="96.33333333333331" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.99998474121094" minWidth="10.0" prefWidth="97.66666666666669" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="68.66666666666669" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.00000762939453" minWidth="10.0" prefWidth="73.66666666666666" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.99998474121094" minWidth="10.0" prefWidth="92.33333333333334" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="80.33333333333331" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="89.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="68.33333333333331" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.00003051757812" minWidth="10.0" prefWidth="83.66663614908856" />
@@ -82,7 +82,7 @@
             <TextField fx:id="userIdTextField" editable="false" GridPane.columnIndex="10" GridPane.rowIndex="1" />
             <ComboBox fx:id="appointmentContactComboBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <DatePicker fx:id="appointmentDatePicker" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-            <ComboBox fx:id="appointmentTypeComboBox" layoutX="275.0" layoutY="47.0" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <TextField fx:id="appointmentTypeTextField" layoutX="227.0" layoutY="47.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <ButtonBar layoutX="69.0" layoutY="539.0" prefHeight="40.0" prefWidth="701.0">
