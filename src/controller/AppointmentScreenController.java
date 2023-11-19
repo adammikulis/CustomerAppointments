@@ -93,6 +93,21 @@ public class AppointmentScreenController implements Initializable {
 
     private ObservableList<Appointment> allAppointments;
     private ObservableList<Appointment> filteredAppointments;
+    private int appointmentId;
+    private int customerId;
+    private Contact selectedContact;
+    private int contactId;
+    private int userId;
+    private String title;
+    private String description;
+    private String location;
+    private String type;
+    private String lastUpdatedBy;
+    private String createdBy;
+    private LocalDateTime startDateTime;
+    private LocalDateTime endDateTime;
+    private LocalDateTime createDate;
+    private LocalDateTime lastUpdate;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -226,21 +241,7 @@ public class AppointmentScreenController implements Initializable {
 
     public void onCreateNewAppointmentButtonPressed(ActionEvent actionEvent) {
         // Get the values from the text fields
-        int appointmentId = Integer.parseInt(appointmentIdTextField.getText());
-        int customerId = Integer.parseInt(customerIdTextField.getText());
-        Contact selectedContact = appointmentContactComboBox.getSelectionModel().getSelectedItem();
-        int contactId = selectedContact.getContactId();
-        int userId = Integer.parseInt(userIdTextField.getText());
-        String title = appointmentTitleTextField.getText();
-        String description = appointmentDescriptionTextField.getText();
-        String location = appointmentLocationTextField.getText();
-        String type = appointmentTypeTextField.getText();
-        String lastUpdatedBy = SessionManager.getInstance().getCurrentUserName();
-        String createdBy = SessionManager.getInstance().getCurrentUserName();
-        LocalDateTime startDateTime = AppointmentList.convertLocalToUTC(LocalDateTime.parse(appointmentStartDateTimeTextField.getText()));
-        LocalDateTime endDateTime = AppointmentList.convertLocalToUTC(LocalDateTime.parse(appointmentEndDateTimeTextField.getText()));
-        LocalDateTime createDate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
-        LocalDateTime lastUpdate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
+        getValuesFromFields();
         if (AppointmentTimeChecker.appointmentChecker(appointmentId, customerId, startDateTime, endDateTime, false)) {
             // Create a new appointment object
             Appointment newAppointment = new Appointment(
@@ -274,6 +275,24 @@ public class AppointmentScreenController implements Initializable {
         }
     }
 
+    public void getValuesFromFields() {
+        appointmentId = Integer.parseInt(appointmentIdTextField.getText());
+        customerId = Integer.parseInt(customerIdTextField.getText());
+        selectedContact = appointmentContactComboBox.getSelectionModel().getSelectedItem();
+        contactId = selectedContact.getContactId();
+        userId = Integer.parseInt(userIdTextField.getText());
+        title = appointmentTitleTextField.getText();
+        description = appointmentDescriptionTextField.getText();
+        location = appointmentLocationTextField.getText();
+        type = appointmentTypeTextField.getText();
+        lastUpdatedBy = SessionManager.getInstance().getCurrentUserName();
+        createdBy = SessionManager.getInstance().getCurrentUserName();
+        startDateTime = AppointmentList.convertLocalToUTC(LocalDateTime.parse(appointmentStartDateTimeTextField.getText()));
+        endDateTime = AppointmentList.convertLocalToUTC(LocalDateTime.parse(appointmentEndDateTimeTextField.getText()));
+        createDate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
+        lastUpdate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
+    }
+
     public void onUpdateAppointmentButtonPressed(ActionEvent actionEvent) {
         Appointment selectedAppointment = appointmentTableView.getSelectionModel().getSelectedItem();
         if (selectedAppointment == null) {
@@ -282,21 +301,8 @@ public class AppointmentScreenController implements Initializable {
             alert.showAndWait();
             return;
         }
-        // Get the values from the text fields
-        int appointmentId = Integer.parseInt(appointmentIdTextField.getText());
-        int customerId = Integer.parseInt(customerIdTextField.getText());
-        Contact selectedContact = appointmentContactComboBox.getSelectionModel().getSelectedItem();
-        int contactId = selectedContact.getContactId();
-        int userId = Integer.parseInt(userIdTextField.getText());
-        String title = appointmentTitleTextField.getText();
-        String description = appointmentDescriptionTextField.getText();
-        String location = appointmentLocationTextField.getText();
-        String type = appointmentTypeTextField.getText();
-        String lastUpdatedBy = SessionManager.getInstance().getCurrentUserName();
-        LocalDateTime startDateTime = AppointmentList.convertLocalToUTC(LocalDateTime.parse(appointmentStartDateTimeTextField.getText()));
-        LocalDateTime endDateTime = AppointmentList.convertLocalToUTC(LocalDateTime.parse(appointmentEndDateTimeTextField.getText()));
-        LocalDateTime createDate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
-        LocalDateTime lastUpdate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
+
+        getValuesFromFields();
 
         if (AppointmentTimeChecker.appointmentChecker(appointmentId, customerId, startDateTime, endDateTime, true)) {
             // Update the selected appointment
@@ -316,7 +322,6 @@ public class AppointmentScreenController implements Initializable {
             try {
                 AppointmentQuery appointmentQuery = new AppointmentQuery();
                 appointmentQuery.updateAppointment(selectedAppointment);
-                System.out.println("Updated appointment with id " + selectedAppointment.getAppointmentId() + " in the database.");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
