@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="refactored new and update appointment methods with getValuesFromFields()">
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="resolved bug in contact combobox listener that automatically updated appointment contact">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Appointment.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -275,14 +277,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00042" summary="contact schedule viewer is functional">
-      <option name="closed" value="true" />
-      <created>1700081326171</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1700081326171</updated>
-    </task>
     <task id="LOCAL-00043" summary="shortened some column names">
       <option name="closed" value="true" />
       <created>1700083069294</created>
@@ -451,7 +445,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700414817600</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="resolved bug in contact combobox listener that automatically updated appointment contact">
+      <option name="closed" value="true" />
+      <created>1700415365636</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1700415365636</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -473,7 +475,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="refactored upcomingAppointment to not need arg" />
     <MESSAGE value="added some UI functionality to HomeScreen" />
     <MESSAGE value="added contact schedule viewer on HomeScreen, nonfunctional" />
     <MESSAGE value="contact schedule viewer is functional" />
@@ -498,7 +499,8 @@
     <MESSAGE value="added datepicker and changed type from text field to combo box, does not compile yet" />
     <MESSAGE value="reverted type back to text field" />
     <MESSAGE value="refactored new and update appointment methods with getValuesFromFields()" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactored new and update appointment methods with getValuesFromFields()" />
+    <MESSAGE value="resolved bug in contact combobox listener that automatically updated appointment contact" />
+    <option name="LAST_COMMIT_MESSAGE" value="resolved bug in contact combobox listener that automatically updated appointment contact" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

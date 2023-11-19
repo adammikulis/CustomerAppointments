@@ -11,9 +11,9 @@ import java.time.DayOfWeek;
 import java.util.List;
 
 public class AppointmentTimeChecker {
-    public static boolean businessHourChecker(LocalDateTime startUTCDateTime, LocalDateTime endUTCDateTime) {
-        LocalDateTime easternStartTime = AppointmentList.convertUTCToEastern(startUTCDateTime);
-        LocalDateTime easternEndTime = AppointmentList.convertUTCToEastern(endUTCDateTime);
+    public static boolean businessHourChecker(LocalDateTime localStartDateTime, LocalDateTime localEndDateTime) {
+        LocalDateTime easternStartTime = AppointmentList.convertUTCToEastern(AppointmentList.convertLocalToUTC(localStartDateTime));
+        LocalDateTime easternEndTime = AppointmentList.convertUTCToEastern(AppointmentList.convertLocalToUTC(localStartDateTime));
         DayOfWeek startDayOfWeek = easternStartTime.getDayOfWeek();
         DayOfWeek endDayOfWeek = easternEndTime.getDayOfWeek();
 

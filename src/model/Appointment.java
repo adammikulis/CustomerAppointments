@@ -1,9 +1,11 @@
 package model;
 
-import helper.AppointmentQuery;
 import helper.ContactQuery;
 
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 /** Class for creating Appointments*/
 public class Appointment {
@@ -315,4 +317,19 @@ public class Appointment {
     public void setContactName(String contactName) {
         this.contactName = contactName;
     }
+
+    public LocalDate getDate() {
+        return startDateTime.toLocalDate();
+    }
+
+    public LocalTime getStartTime() {
+        return startDateTime.toLocalTime();
+    }
+
+    public LocalTime getEndTime() {
+        return endDateTime.toLocalTime();
+    }
+
+
+
 }
