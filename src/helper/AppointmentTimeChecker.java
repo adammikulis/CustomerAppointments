@@ -22,30 +22,32 @@ public class AppointmentTimeChecker {
                 (easternEndTime.getHour() >= 8 && easternEndTime.getHour() <= 22) && (endDayOfWeek != DayOfWeek.SATURDAY && endDayOfWeek != DayOfWeek.SUNDAY));
     }
 
-    public static boolean overlapChecker(int currentAppointmentId, int clientId, LocalDateTime startUTCDateTime, LocalDateTime endUTCDateTime, boolean update) {
+    /** Checks for overlaps
+     *
+     * @param currentAppointmentId
+     * @param clientId
+     * @param newAppointmentStart
+     * @param newAppointmentEnd
+     * @param update
+     * @return true for overlap
+     */
+    public static boolean overlapChecker(int currentAppointmentId, int clientId, LocalDateTime newAppointmentStart, LocalDateTime newAppointmentEnd, boolean update) {
+
         AppointmentQuery appointmentQuery = new AppointmentQuery();
         List<Appointment> appointmentList = appointmentQuery.getAppointmentsByClient(clientId);
 
         for (Appointment appointment : appointmentList) {
-            if (update) {
-                // Skip the current appointment
-                if (appointment.getAppointmentId() == currentAppointmentId) {
-                    continue;
-                }
+            if (update && appointment.getAppointmentId() == currentAppointmentId) {
+                continue;
             }
 
-            LocalDateTime currentStart = appointment.getStartDateTime();
-            LocalDateTime currentEnd = appointment.getEndDateTime();
+            LocalDateTime currentAppointmentStart = appointment.getStartDateTime();
+            LocalDateTime currentAppointmentEnd = appointment.getEndDateTime();
 
-            // Check for overlap with starting time
-            if (startUTCDateTime.isAfter(currentStart) &&
-                    startUTCDateTime.isBefore(currentEnd)) {
-                return true;
-            }
-
-            // Check for overlap with end time
-            if (endUTCDateTime.isAfter(currentStart) &&
-                    endUTCDateTime.isBefore(currentEnd)) {
+            // Check if the new appointment overlaps current appointment
+            if (((newAppointmentStart.isEqual(currentAppointmentStart) || newAppointmentStart.isAfter(currentAppointmentStart)) && newAppointmentStart.isBefore(currentAppointmentEnd)) ||
+                    ((newAppointmentEnd.isAfter(currentAppointmentStart)) && (newAppointmentEnd.isBefore(currentAppointmentEnd) || newAppointmentEnd.isEqual(currentAppointmentEnd))) ||
+                    (newAppointmentStart.isBefore(currentAppointmentStart) && newAppointmentEnd.isAfter(currentAppointmentEnd))) {
                 return true;
             }
         }

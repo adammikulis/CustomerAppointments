@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="successfully read/writes appointments with new date and time input">
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="fixed date refresh issue and updated appointmentscreen UI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/README.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/HomeScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeScreenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/AppointmentList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/AppointmentList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/HomeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomeScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -282,14 +282,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00045" summary="created README.txt">
-      <option name="closed" value="true" />
-      <created>1700086647542</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1700086647542</updated>
-    </task>
     <task id="LOCAL-00046" summary="added UI for home screen reports">
       <option name="closed" value="true" />
       <created>1700151580069</created>
@@ -458,7 +450,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700420515421</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="fixed date refresh issue and updated appointmentscreen UI">
+      <option name="closed" value="true" />
+      <created>1700421771768</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1700421771768</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -480,7 +480,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="contact schedule viewer is functional" />
     <MESSAGE value="shortened some column names" />
     <MESSAGE value="removed extraneous DateTime variables and setTime method" />
     <MESSAGE value="created README.txt" />
@@ -505,7 +504,8 @@
     <MESSAGE value="resolved bug in contact combobox listener that automatically updated appointment contact" />
     <MESSAGE value="split datetime into separate date and time columns/fields" />
     <MESSAGE value="successfully read/writes appointments with new date and time input" />
-    <option name="LAST_COMMIT_MESSAGE" value="successfully read/writes appointments with new date and time input" />
+    <MESSAGE value="fixed date refresh issue and updated appointmentscreen UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed date refresh issue and updated appointmentscreen UI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

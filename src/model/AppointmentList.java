@@ -14,7 +14,6 @@ public class AppointmentList {
     private static List<Appointment> appointments = appointmentQuery.getAppointments();
 
     private static ObservableList<Appointment> allAppointments = FXCollections.observableArrayList(appointments);
-    private static ObservableList<Appointment> filteredAppointments = FXCollections.observableArrayList();
 
     /** Returns a list of all appointments
      *
@@ -22,14 +21,6 @@ public class AppointmentList {
      */
     public static ObservableList<Appointment> getAllAppointments() {
         return allAppointments;
-    }
-
-    /** Returns a list of filtered appointments
-     *
-     * @return filteredAppointments
-     */
-    public static ObservableList<Appointment> getFilteredAppointments() {
-        return filteredAppointments;
     }
 
     /** Adds appointment to list

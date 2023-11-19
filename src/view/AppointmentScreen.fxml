@@ -30,17 +30,17 @@
       </HBox>
       <TableView fx:id="appointmentTableView" layoutX="10.0" layoutY="94.0" prefHeight="325.0" prefWidth="780.0">
         <columns>
-          <TableColumn fx:id="appointmentIdColumn" prefWidth="58.0" text="Appt_ID" />
-          <TableColumn fx:id="titleColumn" prefWidth="87.0" text="Title" />
-            <TableColumn fx:id="descriptionColumn" prefWidth="98.0" text="Description" />
-            <TableColumn fx:id="locationColumn" prefWidth="77.0" text="Location" />
-            <TableColumn fx:id="contactColumn" prefWidth="71.0" text="Contact" />
-            <TableColumn fx:id="typeColumn" prefWidth="50.0" text="Type" />
-            <TableColumn fx:id="dateColumn" prefWidth="50.0" text="Date" />
-            <TableColumn fx:id="startTimeColumn" prefWidth="67.33328247070312" text="Start Time" />
-            <TableColumn fx:id="endTimeColumn" prefWidth="90.0" text="End Time" />
-            <TableColumn fx:id="customerIdColumn" prefWidth="53.66668701171875" text="Cust_ID" />
-            <TableColumn fx:id="userIdColumn" prefWidth="66.6666259765625" text="User_ID" />
+          <TableColumn fx:id="appointmentIdColumn" prefWidth="50.0" text="Appt_ID" />
+          <TableColumn fx:id="titleColumn" prefWidth="82.66667175292969" text="Title" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="85.33334350585938" text="Description" />
+            <TableColumn fx:id="locationColumn" prefWidth="75.33334350585938" text="Location" />
+            <TableColumn fx:id="contactColumn" prefWidth="79.66668701171875" text="Contact" />
+            <TableColumn fx:id="typeColumn" prefWidth="62.33331298828125" text="Type" />
+            <TableColumn fx:id="dateColumn" prefWidth="94.33328247070312" text="Date" />
+            <TableColumn fx:id="startTimeColumn" prefWidth="79.66665649414062" text="Start Time" />
+            <TableColumn fx:id="endTimeColumn" prefWidth="67.33331298828125" text="End Time" />
+            <TableColumn fx:id="customerIdColumn" prefWidth="48.0" text="Cust_ID" />
+            <TableColumn fx:id="userIdColumn" prefWidth="48.66668701171875" text="User_ID" />
         </columns>
       </TableView>
       <GridPane layoutX="13.0" layoutY="430.0" prefHeight="73.0" prefWidth="773.0">
