@@ -134,34 +134,35 @@ public class ClientScreenController implements Initializable {
         Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
 
         if (selectedClient != null) {
-            getClientDataFromInputFields();
+            if (validateClientInputs()) {
 
-            // Get the Division_ID using the ClientQuery method
-            ClientQuery clientQuery = new ClientQuery();
-            divisionId = clientQuery.getDivisionIdByCountryAndDivision(country, division);
+                // Get the Division_ID using the ClientQuery method
+                ClientQuery clientQuery = new ClientQuery();
+                divisionId = clientQuery.getDivisionIdByCountryAndDivision(country, division);
 
-            // Update the selected client with the new data
-            selectedClient.setClientName(name);
-            selectedClient.setStreetAddress(streetAddress);
-            selectedClient.setPostalCode(postalCode);
-            selectedClient.setPhone(phone);
-            selectedClient.setLastUpdate(LocalDateTime.now());
-            selectedClient.setLastUpdatedBy(SessionManager.getInstance().getCurrentUserName());
-            selectedClient.setDivisionId(divisionId);
+                // Update the selected client with the new data
+                selectedClient.setClientName(name);
+                selectedClient.setStreetAddress(streetAddress);
+                selectedClient.setPostalCode(postalCode);
+                selectedClient.setPhone(phone);
+                selectedClient.setLastUpdate(LocalDateTime.now());
+                selectedClient.setLastUpdatedBy(SessionManager.getInstance().getCurrentUserName());
+                selectedClient.setDivisionId(divisionId);
 
-            // Update the client in the database using the updateClient method from ClientQuery
-            try {
-                clientQuery.updateClient(selectedClient);
-            } catch (SQLException e) {
-                System.out.println("Error updating client.");
-                e.printStackTrace();
+                // Update the client in the database using the updateClient method from ClientQuery
+                try {
+                    clientQuery.updateClient(selectedClient);
+                } catch (SQLException e) {
+                    System.out.println("Error updating client.");
+                    e.printStackTrace();
+                }
+                clearFieldsAndRefresh();
             }
 
 
         } else {
-            System.out.println("No client selected for update.");
+            noClientSelectedAlert();
         }
-        clearFieldsAndRefresh();
     }
 
     private void getClientDataFromInputFields() {
@@ -180,18 +181,17 @@ public class ClientScreenController implements Initializable {
     }
 
     public void onClientScreenSaveNewClientButtonPressed(ActionEvent actionEvent) throws IOException {
-        // Get the data from the input fields
-        getClientDataFromInputFields();
+        // Get the data from the input fields and check for empty
+        if (validateClientInputs()) {
 
-        // Get the Division_ID using the ClientQuery method
-        ClientQuery clientQuery = new ClientQuery();
-        divisionId = clientQuery.getDivisionIdByCountryAndDivision(country, division);
+            // Get the Division_ID using the ClientQuery method
+            ClientQuery clientQuery = new ClientQuery();
+            divisionId = clientQuery.getDivisionIdByCountryAndDivision(country, division);
 
-        // Set the create and last update times to the current time
-        LocalDateTime now = LocalDateTime.now();
+            // Set the create and last update times to the current time
+            LocalDateTime now = LocalDateTime.now();
 
-        // Create a new Client object with the input data and current time and user for create and last update info
-        if (validateClientInputs(name, streetAddress, postalCode, phone, division)) {
+            // Create a new Client object with the input data and current time and user for create and last update info
             Client newClient = new Client(
                     0,
                     name,
@@ -210,8 +210,8 @@ public class ClientScreenController implements Initializable {
                 System.out.println("Error adding new client to list.");
                 e.printStackTrace();
             }
+            clearFieldsAndRefresh();
         }
-        clearFieldsAndRefresh();
     }
 
     private void clearFieldsAndRefresh() {
@@ -276,8 +276,9 @@ public class ClientScreenController implements Initializable {
         clearFieldsAndRefresh();
     }
 
-    private boolean validateClientInputs(String name, String streetAddress, String postalCode, String phone, String division) {
-        if (name.isEmpty() || streetAddress.isEmpty() || postalCode.isEmpty() || phone.isEmpty() || division.isEmpty()) {
+    private boolean validateClientInputs() {
+        getClientDataFromInputFields();
+        if (name.trim().isEmpty() || streetAddress.trim().isEmpty() || postalCode.trim().isEmpty() || phone.trim().isEmpty() || division.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Invalid Input");
             alert.setHeaderText("Please fill in all the required fields.");
@@ -286,5 +287,12 @@ public class ClientScreenController implements Initializable {
             return false;
         }
         return true;
+    }
+
+    private void noClientSelectedAlert() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("No client selected");
+        alert.setHeaderText("Please select a client before attempting to update");
+        alert.showAndWait();
     }
 }
