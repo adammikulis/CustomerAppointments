@@ -131,9 +131,6 @@ public class AppointmentScreenController implements Initializable {
             if (newSelection != null) {
                 // Set the contactId for the appointment
                 Appointment selectedAppointment = appointmentTableView.getSelectionModel().getSelectedItem();
-                if (selectedAppointment != null) {
-                    selectedAppointment.setContactId(newSelection.getContactId());
-                }
             }
         });
 
@@ -223,18 +220,6 @@ public class AppointmentScreenController implements Initializable {
         }
     }
 
-    public void refreshContactComboBox() {
-        List<Contact> contacts = null;
-        try {
-            ContactQuery contactQuery = new ContactQuery();
-            contacts = contactQuery.getAllContacts();
-            appointmentContactComboBox.setItems(FXCollections.observableArrayList(contacts));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
     public void onAppointmentClearAllFieldsButtonPressed(ActionEvent actionEvent) {
         clearFieldsAndRefresh();
     }
@@ -271,7 +256,6 @@ public class AppointmentScreenController implements Initializable {
             // Add the new appointment to the list and refresh the table view
             AppointmentList.addAppointment(newAppointment);
             clearFieldsAndRefresh();
-            refreshContactComboBox();
         }
     }
 
@@ -326,7 +310,6 @@ public class AppointmentScreenController implements Initializable {
                 e.printStackTrace();
             }
             clearFieldsAndRefresh();
-            refreshContactComboBox();
         }
     }
 
@@ -337,7 +320,6 @@ public class AppointmentScreenController implements Initializable {
     private void clearFieldsAndRefresh() {
 
         appointmentTableView.getSelectionModel().clearSelection();
-        clearAppointmentContactComboBox();
 
         // Clear the input fields
         appointmentIdTextField.clear();
@@ -349,11 +331,22 @@ public class AppointmentScreenController implements Initializable {
         appointmentLocationTextField.clear();
         appointmentStartDateTimeTextField.clear();
         appointmentEndDateTimeTextField.clear();
+        clearAppointmentContactComboBox();
 
-        // Refresh table view and clear selection
-        refreshAppointmentTable();
+        // Refresh table view
         refreshContactComboBox();
+        refreshAppointmentTable();
+    }
 
+    public void refreshContactComboBox() {
+        List<Contact> contacts = null;
+        try {
+            ContactQuery contactQuery = new ContactQuery();
+            contacts = contactQuery.getAllContacts();
+            appointmentContactComboBox.setItems(FXCollections.observableArrayList(contacts));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void refreshAppointmentTable() {
