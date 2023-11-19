@@ -47,8 +47,6 @@ public class HomeScreenController implements Initializable {
     private TableColumn<AppointmentContactCount, Integer> appointmentContactTotalReportColumn;
 
     @FXML
-    private Label homeAppointmentAlertLabel;
-    @FXML
     private TableView<Appointment> homeScheduleTableView;
     @FXML
     private TableColumn<Appointment, Integer> homeScheduleAppointmentIdColumn;
@@ -76,7 +74,6 @@ public class HomeScreenController implements Initializable {
         refreshAppointmentTypeReportTableView();
         refreshAppointmentMonthReportTableView();
         refreshAppointmentContactReportTableView();
-        homeAppointmentAlertLabel.setText("<Appointment Alert>");
 
         homeContactComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {

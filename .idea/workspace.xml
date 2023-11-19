@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="resolved bug in contact combobox listener that automatically updated appointment contact">
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="successfully read/writes appointments with new date and time input">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/HomeScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeScreenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Appointment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/HomeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomeScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +42,9 @@
         <option name="url" value="https://github.com/adammikulis/ClientAppointments.git" />
       </UrlAndAccount>
     </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/out/production/ClientAppointments/helper/AppointmentTimeChecker.class" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -277,22 +282,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00043" summary="shortened some column names">
-      <option name="closed" value="true" />
-      <created>1700083069294</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1700083069294</updated>
-    </task>
-    <task id="LOCAL-00044" summary="removed extraneous DateTime variables and setTime method">
-      <option name="closed" value="true" />
-      <created>1700083344097</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1700083344097</updated>
-    </task>
     <task id="LOCAL-00045" summary="created README.txt">
       <option name="closed" value="true" />
       <created>1700086647542</created>
@@ -453,7 +442,23 @@
       <option name="project" value="LOCAL" />
       <updated>1700415365636</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="split datetime into separate date and time columns/fields">
+      <option name="closed" value="true" />
+      <created>1700419677254</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1700419677254</updated>
+    </task>
+    <task id="LOCAL-00066" summary="successfully read/writes appointments with new date and time input">
+      <option name="closed" value="true" />
+      <created>1700420515421</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1700420515421</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -475,8 +480,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added some UI functionality to HomeScreen" />
-    <MESSAGE value="added contact schedule viewer on HomeScreen, nonfunctional" />
     <MESSAGE value="contact schedule viewer is functional" />
     <MESSAGE value="shortened some column names" />
     <MESSAGE value="removed extraneous DateTime variables and setTime method" />
@@ -500,7 +503,9 @@
     <MESSAGE value="reverted type back to text field" />
     <MESSAGE value="refactored new and update appointment methods with getValuesFromFields()" />
     <MESSAGE value="resolved bug in contact combobox listener that automatically updated appointment contact" />
-    <option name="LAST_COMMIT_MESSAGE" value="resolved bug in contact combobox listener that automatically updated appointment contact" />
+    <MESSAGE value="split datetime into separate date and time columns/fields" />
+    <MESSAGE value="successfully read/writes appointments with new date and time input" />
+    <option name="LAST_COMMIT_MESSAGE" value="successfully read/writes appointments with new date and time input" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

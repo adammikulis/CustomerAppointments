@@ -38,14 +38,14 @@ public class AppointmentTimeChecker {
             LocalDateTime currentEnd = appointment.getEndDateTime();
 
             // Check for overlap with starting time
-            if ((startUTCDateTime.isEqual(currentStart) || startUTCDateTime.isAfter(currentStart)) &&
-                    (startUTCDateTime.isBefore(currentEnd))) {
+            if (startUTCDateTime.isAfter(currentStart) &&
+                    startUTCDateTime.isBefore(currentEnd)) {
                 return true;
             }
 
             // Check for overlap with end time
-            if ((endUTCDateTime.isEqual(currentStart) || endUTCDateTime.isAfter(currentStart)) &&
-                    (endUTCDateTime.isBefore(currentEnd))) {
+            if (endUTCDateTime.isAfter(currentStart) &&
+                    endUTCDateTime.isBefore(currentEnd)) {
                 return true;
             }
         }

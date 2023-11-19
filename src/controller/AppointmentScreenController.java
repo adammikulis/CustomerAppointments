@@ -33,7 +33,6 @@ import java.util.ResourceBundle;
 
 public class AppointmentScreenController implements Initializable {
 
-
     Stage stage;
     Parent scene;
 
@@ -176,6 +175,9 @@ public class AppointmentScreenController implements Initializable {
                 appointmentEndTimeTextField.setText(newSelection.getEndTime().toString());
                 customerIdTextField.setText(Integer.toString(newSelection.getCustomerId()));
                 userIdTextField.setText(Integer.toString(newSelection.getUserId()));
+            }
+            else {
+                clearFieldsAndRefresh();
             }
         });
 
@@ -348,6 +350,7 @@ public class AppointmentScreenController implements Initializable {
         appointmentTypeTextField.clear();
         appointmentLocationTextField.clear();
         appointmentDatePicker.getEditor().clear();
+        appointmentDatePicker.setValue(null);
         appointmentStartTimeTextField.clear();
         appointmentEndTimeTextField.clear();
         clearAppointmentContactComboBox();
