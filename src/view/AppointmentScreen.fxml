@@ -36,18 +36,19 @@
             <TableColumn fx:id="locationColumn" prefWidth="77.0" text="Location" />
             <TableColumn fx:id="contactColumn" prefWidth="71.0" text="Contact" />
             <TableColumn fx:id="typeColumn" prefWidth="50.0" text="Type" />
-            <TableColumn fx:id="startDateTimeColumn" prefWidth="99.0" text="Start Date/Time" />
-            <TableColumn fx:id="endDateTimeColumn" prefWidth="105.0" text="End Date/Time" />
-            <TableColumn fx:id="customerIdColumn" prefWidth="72.0" text="Cust_ID" />
-            <TableColumn fx:id="userIdColumn" prefWidth="59.0" text="User_ID" />
+            <TableColumn fx:id="dateColumn" prefWidth="50.0" text="Date" />
+            <TableColumn fx:id="startTimeColumn" prefWidth="67.33328247070312" text="Start Time" />
+            <TableColumn fx:id="endTimeColumn" prefWidth="90.0" text="End Time" />
+            <TableColumn fx:id="customerIdColumn" prefWidth="53.66668701171875" text="Cust_ID" />
+            <TableColumn fx:id="userIdColumn" prefWidth="66.6666259765625" text="User_ID" />
         </columns>
       </TableView>
       <GridPane layoutX="11.0" layoutY="430.0" prefHeight="73.0" prefWidth="780.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.33333333333333" minWidth="10.0" prefWidth="36.66667048136393" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.00000762939453" minWidth="10.0" prefWidth="73.66666666666666" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.99998474121094" minWidth="10.0" prefWidth="92.33333333333334" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="80.33333333333331" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.99998474121094" minWidth="10.0" prefWidth="83.66666666666666" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="83.66666666666669" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="89.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="68.33333333333331" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.00003051757812" minWidth="10.0" prefWidth="83.66663614908856" />
@@ -76,8 +77,8 @@
             <TextField fx:id="appointmentTitleTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentDescriptionTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentLocationTextField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <TextField fx:id="appointmentStartDateTimeTextField" GridPane.columnIndex="7" GridPane.rowIndex="1" />
-            <TextField fx:id="appointmentEndDateTimeTextField" GridPane.columnIndex="8" GridPane.rowIndex="1" />
+            <TextField fx:id="appointmentStartTimeTextField" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+            <TextField fx:id="appointmentEndTimeTextField" GridPane.columnIndex="8" GridPane.rowIndex="1" />
             <TextField fx:id="customerIdTextField" prefHeight="25.0" prefWidth="49.0" GridPane.columnIndex="9" GridPane.rowIndex="1" />
             <TextField fx:id="userIdTextField" editable="false" GridPane.columnIndex="10" GridPane.rowIndex="1" />
             <ComboBox fx:id="appointmentContactComboBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />

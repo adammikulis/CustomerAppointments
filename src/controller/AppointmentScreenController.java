@@ -38,6 +38,8 @@ public class AppointmentScreenController implements Initializable {
     Parent scene;
 
     @FXML
+    private ToggleGroup ViewByGroup;
+    @FXML
     private RadioButton noFilterRadioButton;
     @FXML
     private RadioButton viewByWeekRadioButton;
