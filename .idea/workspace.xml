@@ -4,65 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="corrected appointments by week logic and updated some javadocs">
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="removed unused AlertHandler class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/allclasses-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/allpackages-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/AppointmentScreenController.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/AppointmentScreenController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/ClientScreenController.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/ClientScreenController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/HomeScreenController.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/HomeScreenController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/LoginScreenController.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/LoginScreenController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/help-doc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/AppointmentQuery.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/AppointmentQuery.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/AppointmentTimeChecker.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/AppointmentTimeChecker.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/ClientQuery.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/ClientQuery.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/ConnectionManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/ConnectionManager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/ContactQuery.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/ContactQuery.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/LoginLogger.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/LoginLogger.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/LoginQuery.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/LoginQuery.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/SessionManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/SessionManager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-10.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-11.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-12.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-12.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-13.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-13.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-14.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-14.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-4.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-5.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-6.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-7.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-8.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-9.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/main/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/main/Main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/main/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/main/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/main/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/main/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/member-search-index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/Appointment.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Appointment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/AppointmentList.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/AppointmentList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/Client.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Client.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/ClientList.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/ClientList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/Contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Contact.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/ContactList.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/ContactList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/overview-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/overview-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/report/AppointmentContactCount.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/AppointmentContactCount.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/report/AppointmentMonthCount.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/AppointmentMonthCount.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/report/AppointmentTypeCount.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/AppointmentTypeCount.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/report/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/report/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/type-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/type-search-index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/AlertHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/ClientList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/ClientList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/ClientQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/ClientQuery.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -334,14 +280,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00049" summary="started appointments by contact report table">
-      <option name="closed" value="true" />
-      <created>1700246834067</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1700246834067</updated>
-    </task>
     <task id="LOCAL-00050" summary="table report on appointments by contact is complete">
       <option name="closed" value="true" />
       <created>1700247772576</created>
@@ -510,7 +448,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700496080494</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="removed unused AlertHandler class">
+      <option name="closed" value="true" />
+      <created>1700497280766</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1700497280766</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -532,7 +478,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added UI for home screen reports" />
     <MESSAGE value="appointments by type report table finished" />
     <MESSAGE value="appointments by month report table finished" />
     <MESSAGE value="started appointments by contact report table" />
@@ -557,7 +502,8 @@
     <MESSAGE value="finished filters, guards on blank appt fields and all remaining functionality" />
     <MESSAGE value="empty space guards implemented for client screen" />
     <MESSAGE value="corrected appointments by week logic and updated some javadocs" />
-    <option name="LAST_COMMIT_MESSAGE" value="corrected appointments by week logic and updated some javadocs" />
+    <MESSAGE value="removed unused AlertHandler class" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed unused AlertHandler class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -8,7 +8,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Class to query clients in the database
+ *
+ */
 public class ClientQuery {
+
+    /** Returns a list of all clients
+     *
+     * @return client list
+     */
     public List<Client> getClients() {
         List<Client> clients = new ArrayList<>();
 
@@ -36,26 +44,32 @@ public class ClientQuery {
         return clients;
     }
 
-    public static int insertClient(Client client) throws SQLException {
+    /** Inserts new client into database
+     *
+     * @param newclient
+     * @return newclient ID
+     * @throws SQLException
+     */
+    public static int insertClient(Client newclient) throws SQLException {
         Connection conn = ConnectionManager.getConnection();
         String insertStatement = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, "
                 + "Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement ps = conn.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
-        ps.setString(1, client.getClientName());
-        ps.setString(2, client.getStreetAddress());
-        ps.setString(3, client.getPostalCode());
-        ps.setString(4, client.getPhone());
-        ps.setTimestamp(5, Timestamp.valueOf(client.getCreateDate()));
-        ps.setString(6, client.getCreatedBy());
-        ps.setTimestamp(7, Timestamp.valueOf(client.getLastUpdate()));
-        ps.setString(8, client.getLastUpdatedBy());
-        ps.setInt(9, client.getDivisionId());
+        ps.setString(1, newclient.getClientName());
+        ps.setString(2, newclient.getStreetAddress());
+        ps.setString(3, newclient.getPostalCode());
+        ps.setString(4, newclient.getPhone());
+        ps.setTimestamp(5, Timestamp.valueOf(newclient.getCreateDate()));
+        ps.setString(6, newclient.getCreatedBy());
+        ps.setTimestamp(7, Timestamp.valueOf(newclient.getLastUpdate()));
+        ps.setString(8, newclient.getLastUpdatedBy());
+        ps.setInt(9, newclient.getDivisionId());
 
         int affectedRows = ps.executeUpdate();
         if (affectedRows == 0) {
-            throw new SQLException("Creating client failed, no rows affected.");
+            throw new SQLException("Creating newclient failed, no rows affected.");
         }
 
         int clientId=0;
@@ -64,7 +78,7 @@ public class ClientQuery {
             if (generatedKeys.next()) {
                 clientId = generatedKeys.getInt(1);
             } else {
-                throw new SQLException("Creating client failed, no ID obtained.");
+                throw new SQLException("Creating newclient failed, no ID obtained.");
             }
         }
         catch (SQLException e) {
@@ -76,6 +90,10 @@ public class ClientQuery {
         return clientId;
     }
 
+    /** Returns all countries that a client can be part of for this database
+     *
+     * @return list of countries
+     */
     public static List<String> getClientCountries() {
         List<String> countries = new ArrayList<>();
 
@@ -97,6 +115,11 @@ public class ClientQuery {
 
     }
 
+    /** Returns list of divisions a client can live in based on their country
+     *
+     * @param country
+     * @return list of divisions
+     */
     public static List<String> getClientDivisionsByCountry(String country) {
         List<String> divisions = new ArrayList<>();
 
@@ -119,6 +142,12 @@ public class ClientQuery {
         return divisions;
     }
 
+    /** Deletes client from database
+     *
+     * @param clientToDelete
+     * @return true if client is deleted
+     * @throws SQLException
+     */
     public boolean deleteClient(Client clientToDelete) throws SQLException {
         try {
             Connection conn = ConnectionManager.getConnection();
@@ -145,45 +174,53 @@ public class ClientQuery {
         }
     }
 
-    public void updateClient(Client client) throws SQLException {
-        String updateStatement = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ? WHERE Customer_Id = ?";
-        PreparedStatement statement = null;
-        Connection conn = null;
+    /** Updates existing client in database
+     *
+     * @param currentClient
+     * @throws SQLException
+     */
+    public void updateClient(Client currentClient) throws SQLException {
+        String query = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ? WHERE Customer_Id = ?";
+        Connection conn = ConnectionManager.getConnection();
+        PreparedStatement ps = conn.prepareStatement(query);
 
         try {
-            conn = ConnectionManager.getConnection();
-            statement = conn.prepareStatement(updateStatement);
-            statement.setString(1, client.getClientName());
-            statement.setString(2, client.getStreetAddress());
-            statement.setString(3, client.getPostalCode());
-            statement.setString(4, client.getPhone());
-            statement.setObject(5, client.getLastUpdate());
-            statement.setString(6, client.getLastUpdatedBy());
-            statement.setInt(7, client.getClientId());
+            ps.setString(1, currentClient.getClientName());
+            ps.setString(2, currentClient.getStreetAddress());
+            ps.setString(3, currentClient.getPostalCode());
+            ps.setString(4, currentClient.getPhone());
+            ps.setTimestamp(5, Timestamp.valueOf(currentClient.getLastUpdate()));
+            ps.setString(6, currentClient.getLastUpdatedBy());
+            ps.setInt(7, currentClient.getClientId());
 
-            int rowsAffected = statement.executeUpdate();
-            System.out.println("Updated " + rowsAffected + " row(s) in customers table.");
+            int rowsAffected = ps.executeUpdate();
         }
         finally {
-            if (statement != null) {
-                statement.close();
+            if (ps != null) {
+                ps.close();
             }
         }
     }
 
+    /** Queries db to get next client ID
+     *
+     * @return next client ID
+     * @throws SQLException
+     */
     public int getNextClientId() throws SQLException {
         int nextId = 0;
         try {
+            String query = "SELECT MAX(Customer_ID) + 1 AS next_id FROM client_schedule.customers";
             Connection conn = ConnectionManager.getConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT MAX(Customer_ID) + 1 AS next_id FROM client_schedule.customers");
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 nextId = rs.getInt("next_id");
             }
 
             rs.close();
-            stmt.close();
+            ps.close();
         }
         catch (SQLException e) {
             System.out.println("SQL Error");

@@ -10,7 +10,17 @@ import java.time.LocalDateTime;
 import java.time.DayOfWeek;
 import java.util.List;
 
+/** Class to check if appointment is within a valid timeframe
+ *
+ */
 public class AppointmentTimeChecker {
+
+    /** Checks if appointment is within business hours
+     *
+     * @param localStartDateTime
+     * @param localEndDateTime
+     * @return true if appointment is within business hours
+     */
     public static boolean businessHourChecker(LocalDateTime localStartDateTime, LocalDateTime localEndDateTime) {
         LocalDateTime easternStartTime = AppointmentList.convertUTCToEastern(AppointmentList.convertLocalToUTC(localStartDateTime));
         LocalDateTime easternEndTime = AppointmentList.convertUTCToEastern(AppointmentList.convertLocalToUTC(localStartDateTime));
@@ -22,14 +32,14 @@ public class AppointmentTimeChecker {
                 (easternEndTime.getHour() >= 8 && easternEndTime.getHour() <= 22) && (endDayOfWeek != DayOfWeek.SATURDAY && endDayOfWeek != DayOfWeek.SUNDAY));
     }
 
-    /** Checks for overlaps
+    /** Checks for overlaps with other appointments
      *
      * @param currentAppointmentId
      * @param clientId
      * @param newAppointmentStart
      * @param newAppointmentEnd
      * @param update
-     * @return true for overlap
+     * @return true if there is no overlap
      */
     public static boolean overlapChecker(int currentAppointmentId, int clientId, LocalDateTime newAppointmentStart, LocalDateTime newAppointmentEnd, boolean update) {
 
@@ -48,16 +58,16 @@ public class AppointmentTimeChecker {
             if (((newAppointmentStart.isEqual(currentAppointmentStart) || newAppointmentStart.isAfter(currentAppointmentStart)) && newAppointmentStart.isBefore(currentAppointmentEnd)) ||
                     ((newAppointmentEnd.isAfter(currentAppointmentStart)) && (newAppointmentEnd.isBefore(currentAppointmentEnd) || newAppointmentEnd.isEqual(currentAppointmentEnd))) ||
                     (newAppointmentStart.isBefore(currentAppointmentStart) && newAppointmentEnd.isAfter(currentAppointmentEnd))) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
 
     public static boolean appointmentChecker(int currentAppointmentid, int clientId, LocalDateTime startUTCDateTime, LocalDateTime endUTCDateTime, boolean update) {
         if (businessHourChecker(startUTCDateTime, endUTCDateTime)) {
-            if (!overlapChecker(currentAppointmentid, clientId, startUTCDateTime, endUTCDateTime, update)) {
+            if (overlapChecker(currentAppointmentid, clientId, startUTCDateTime, endUTCDateTime, update)) {
                 return true;
             }
             else {
