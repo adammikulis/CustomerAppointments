@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-/** Controller for appointment screen
+/** Class for controlling for appointment screen
  *
  */
 public class AppointmentScreenController implements Initializable {

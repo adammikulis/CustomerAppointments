@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
-/** Controller for Home Screen
+/** Class for controlling the home screen
  *
  */
 public class HomeScreenController implements Initializable {

@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-/** Generates a report textfile for all login activity
+/** Class to generate a report textfile for all login activity
  *
  */
 public class LoginLogger {

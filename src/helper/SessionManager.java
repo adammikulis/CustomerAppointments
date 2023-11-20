@@ -2,7 +2,7 @@ package helper;
 
 import java.sql.*;
 
-/** Tracks current session/instance for recording current user logged in
+/** Class to track current session/instance for recording current user logged in
  *
  */
 public class SessionManager {
@@ -28,7 +28,7 @@ public class SessionManager {
 
     /** Returns current username with a fallback
      *
-     * @return
+     * @return current username
      */
     public String getCurrentUserName() {
         if (currentUserName != null) {

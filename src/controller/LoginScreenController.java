@@ -1,3 +1,6 @@
+/** Controls interaction with various screens
+ *
+ */
 package controller;
 
 import helper.LoginQuery;
@@ -22,6 +25,9 @@ import java.sql.SQLException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/** Class for controlling the login screen
+ *
+ */
 public class LoginScreenController implements Initializable {
 
 

@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Queries database for contacts
+/** Class to query the database for contacts
  *
  */
 public class ContactQuery {

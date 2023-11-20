@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-/** Controller for client screen
+/** Class for controlling the client screen
  *
  */
 public class ClientScreenController implements Initializable {
