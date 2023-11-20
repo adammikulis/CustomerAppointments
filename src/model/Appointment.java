@@ -318,18 +318,27 @@ public class Appointment {
         this.contactName = contactName;
     }
 
+    /** Converts startDateTime to a LocalDate
+     *
+     * @return startDate
+     */
     public LocalDate getDate() {
         return startDateTime.toLocalDate();
     }
 
+    /** Converts startDateTime to a LocalTime
+     *
+     * @return startTime
+     */
     public LocalTime getStartTime() {
         return startDateTime.toLocalTime();
     }
 
+    /** Converts endDateTime to a LocalTime
+     *
+     * @return endTime
+     */
     public LocalTime getEndTime() {
         return endDateTime.toLocalTime();
     }
-
-
-
 }

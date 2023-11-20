@@ -193,7 +193,6 @@ public class AppointmentScreenController implements Initializable {
     private void showAllAppointments() {
         filteredAppointments.clear();
         filteredAppointments.addAll(allAppointments);
-        clearFields();
     }
 
     /** Displays all appointments this week (MON-SUN)
@@ -201,19 +200,20 @@ public class AppointmentScreenController implements Initializable {
      */
     private void filterAppointmentsByWeek() {
 
+        filteredAppointments.clear();
         LocalDate today = LocalDate.now();
         LocalDate startOfWeek = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-        LocalDate endOfWeek = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.SUNDAY));
+        LocalDate endOfWeek = today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SUNDAY));
 
-        filteredAppointments.clear();
         for (Appointment appointment : allAppointments) {
             LocalDate appointmentDate = appointment.getStartDateTime().toLocalDate();
-            if (!appointmentDate.isBefore(startOfWeek) && !appointmentDate.isAfter(endOfWeek)) {
+            if ((appointmentDate.isEqual(startOfWeek) || appointmentDate.isAfter(startOfWeek)) &&
+                    (appointmentDate.isEqual(endOfWeek) || appointmentDate.isBefore(endOfWeek))) {
                 filteredAppointments.add(appointment);
             }
         }
-        clearFields();
     }
+
 
     /** Displays all appointments this calendar month
      *
@@ -230,13 +230,6 @@ public class AppointmentScreenController implements Initializable {
                 filteredAppointments.add(appointment);
             }
         }
-
-        clearFields();
-    }
-
-    private void refreshAppointmentListAndView() {
-        applyCurrentFilter();
-        appointmentTableView.refresh();
     }
 
     private void applyCurrentFilter() {
@@ -470,5 +463,10 @@ public class AppointmentScreenController implements Initializable {
         else {
             appointmentAlertLabel.setText("No appointments in the next 15 minutes");
         }
+    }
+
+    private void refreshAppointmentListAndView() {
+        applyCurrentFilter();
+        appointmentTableView.refresh();
     }
 }
