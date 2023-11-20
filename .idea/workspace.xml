@@ -5,69 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="finished javadocs, project is complete (v1.0)">
-      <change afterPath="$PROJECT_DIR$/javadoc/report/LoginLogger.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/allclasses-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/allpackages-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/AppointmentScreenController.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/AppointmentScreenController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/ClientScreenController.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/ClientScreenController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/HomeScreenController.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/HomeScreenController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/LoginScreenController.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/LoginScreenController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/help-doc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/AppointmentQuery.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/AppointmentQuery.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/AppointmentTimeChecker.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/AppointmentTimeChecker.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/ClientQuery.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/ClientQuery.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/ConnectionManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/ConnectionManager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/ContactQuery.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/ContactQuery.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/LoginQuery.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/LoginQuery.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/SessionManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/SessionManager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-10.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-11.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-12.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-12.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-13.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-13.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-14.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-14.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-4.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-5.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-6.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-7.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-8.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-9.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/main/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/main/Main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/main/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/main/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/main/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/main/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/member-search-index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/Appointment.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Appointment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/AppointmentList.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/AppointmentList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/Client.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Client.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/ClientList.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/ClientList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/Contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Contact.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/ContactList.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/ContactList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/overview-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/overview-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/report/AppointmentContactCount.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/AppointmentContactCount.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/report/AppointmentMonthCount.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/AppointmentMonthCount.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/report/AppointmentTypeCount.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/AppointmentTypeCount.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/report/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/report/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/type-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/type-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login_activity.txt" beforeDir="false" afterPath="$PROJECT_DIR$/login_activity.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ClientScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClientScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/HomeScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/LoginScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/ConnectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/ContactQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/ContactQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/SessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/SessionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/report/LoginLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/report/LoginLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/AppointmentList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/AppointmentList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -339,14 +282,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00052" summary="updated logger to store in UTC">
-      <option name="closed" value="true" />
-      <created>1700252006999</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1700252006999</updated>
-    </task>
     <task id="LOCAL-00053" summary="updated to version 0.8, need to do appointment deconfliction and javadocs">
       <option name="closed" value="true" />
       <created>1700252051979</created>
@@ -515,7 +450,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700503318569</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="finished javadocs, project is complete (v1.0)">
+      <option name="closed" value="true" />
+      <created>1700503660908</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1700503660908</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

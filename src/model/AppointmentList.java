@@ -11,7 +11,7 @@ import java.util.List;
 /** Class for creating a list of appointments*/
 public class AppointmentList {
     private static AppointmentQuery appointmentQuery = new AppointmentQuery();
-    private static List<Appointment> appointments = appointmentQuery.getAppointments();
+    private static List<Appointment> appointments = appointmentQuery.getAllAppointments();
 
     private static ObservableList<Appointment> allAppointments = FXCollections.observableArrayList(appointments);
 

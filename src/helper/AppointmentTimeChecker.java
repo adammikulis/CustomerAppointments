@@ -3,8 +3,6 @@ package helper;
 import javafx.scene.control.Alert;
 import model.Appointment;
 import model.AppointmentList;
-import helper.AppointmentQuery;
-import model.Client;
 
 import java.time.LocalDateTime;
 import java.time.DayOfWeek;
@@ -41,10 +39,10 @@ public class AppointmentTimeChecker {
      * @param update
      * @return true if there is no overlap
      */
-    public static boolean overlapChecker(int currentAppointmentId, int clientId, LocalDateTime newAppointmentStart, LocalDateTime newAppointmentEnd, boolean update) {
+    public static boolean overlapChecker(int currentAppointmentId, LocalDateTime newAppointmentStart, LocalDateTime newAppointmentEnd, boolean update) {
 
         AppointmentQuery appointmentQuery = new AppointmentQuery();
-        List<Appointment> appointmentList = appointmentQuery.getAppointmentsByClient(clientId);
+        List<Appointment> appointmentList = appointmentQuery.getAllAppointments();
 
         for (Appointment appointment : appointmentList) {
             if (update && appointment.getAppointmentId() == currentAppointmentId) {
@@ -67,15 +65,14 @@ public class AppointmentTimeChecker {
     /** Calls business hours and overlap checker from one method
      *
      * @param currentAppointmentid
-     * @param clientId
      * @param startUTCDateTime
      * @param endUTCDateTime
      * @param update
      * @return
      */
-    public static boolean appointmentChecker(int currentAppointmentid, int clientId, LocalDateTime startUTCDateTime, LocalDateTime endUTCDateTime, boolean update) {
+    public static boolean appointmentChecker(int currentAppointmentid, LocalDateTime startUTCDateTime, LocalDateTime endUTCDateTime, boolean update) {
         if (businessHourChecker(startUTCDateTime, endUTCDateTime)) {
-            if (overlapChecker(currentAppointmentid, clientId, startUTCDateTime, endUTCDateTime, update)) {
+            if (overlapChecker(currentAppointmentid, startUTCDateTime, endUTCDateTime, update)) {
                 return true;
             }
             else {

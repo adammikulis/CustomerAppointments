@@ -312,7 +312,7 @@ public class AppointmentScreenController implements Initializable {
     public void onCreateNewAppointmentButtonPressed(ActionEvent actionEvent) {
         // Get the values from the text fields
         if (getValuesFromFields()) {
-            if (AppointmentTimeChecker.appointmentChecker(appointmentId, customerId, startDateTime, endDateTime, false)) {
+            if (AppointmentTimeChecker.appointmentChecker(appointmentId, startDateTime, endDateTime, false)) {
                 // Create a new appointment object
                 Appointment newAppointment = new Appointment(
                         -1,
@@ -406,7 +406,7 @@ public class AppointmentScreenController implements Initializable {
         }
 
         if (getValuesFromFields()) {
-            if (AppointmentTimeChecker.appointmentChecker(appointmentId, customerId, startDateTime, endDateTime, true)) {
+            if (AppointmentTimeChecker.appointmentChecker(appointmentId, startDateTime, endDateTime, true)) {
                 // Update the selected appointment
                 selectedAppointment.setCustomerId(customerId);
                 selectedAppointment.setContactId(contactId);

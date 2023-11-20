@@ -2,7 +2,6 @@ package helper;
 
 
 import model.Appointment;
-import model.Client;
 import report.AppointmentContactCount;
 import report.AppointmentMonthCount;
 import report.AppointmentTypeCount;
@@ -23,7 +22,7 @@ public class AppointmentQuery {
      *
      * @return appointments
      */
-    public List<Appointment> getAppointments() {
+    public List<Appointment> getAllAppointments() {
         List<Appointment> appointments = new ArrayList<>();
 
         String query = "SELECT a.*, c.Contact_Name " +
