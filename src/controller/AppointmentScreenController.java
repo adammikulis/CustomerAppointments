@@ -44,8 +44,7 @@ public class AppointmentScreenController implements Initializable {
     private RadioButton viewByWeekRadioButton;
     @FXML
     private RadioButton viewByMonthRadioButton;
-    @FXML
-    private Label appointmentAlertLabel;
+
 
     @FXML
     private TableView<Appointment> appointmentTableView;
@@ -126,7 +125,6 @@ public class AppointmentScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         allAppointments = AppointmentList.getAllAppointments();
         filteredAppointments = FXCollections.observableArrayList(allAppointments);
-        appointmentAlertLabel.setText("<Appointment Alert>");
         appointmentTableView.setItems(filteredAppointments);
         appointmentTableView.setItems(filteredAppointments);
         appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
@@ -140,8 +138,6 @@ public class AppointmentScreenController implements Initializable {
         endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
-
-        refreshAppointmentAlert();
         // Listener for changes in the selected item of the contact combo box
         appointmentContactComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -478,18 +474,6 @@ public class AppointmentScreenController implements Initializable {
         }
     }
 
-    /** Refreshes appointment alert at top of GUI
-     *
-     */
-    public void refreshAppointmentAlert() {
-        Appointment upcomingAppointment = AppointmentList.checkUpcomingAppointments();
-        if (upcomingAppointment != null) {
-            appointmentAlertLabel.setText("Upcoming appointment ID: " + upcomingAppointment.getAppointmentId() + " at: " + AppointmentList.convertUTCToLocal(upcomingAppointment.getStartDateTime()));
-        }
-        else {
-            appointmentAlertLabel.setText("No appointments in the next 15 minutes");
-        }
-    }
 
     /** Applies current filter and refreshes table
      *

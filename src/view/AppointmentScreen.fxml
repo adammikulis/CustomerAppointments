@@ -11,13 +11,8 @@
             <Font name="System Bold" size="26.0" />
          </font>
       </Label>
-      <HBox layoutX="334.0" layoutY="63.0" prefHeight="17.0" prefWidth="449.0" spacing="60.0">
-         <children>
-            <Label fx:id="appointmentAlertLabel" prefHeight="17.0" prefWidth="220.0" text="&lt;appointment alert&gt;" />
-            <Label text="All times displayed in Local" />
-         </children>
-      </HBox>
-      <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="59.0" prefHeight="25.0" prefWidth="342.0" spacing="5.0">
+      <Label layoutX="643.0" layoutY="66.0" text="All times displayed in Local" />
+      <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="62.0" prefHeight="25.0" prefWidth="342.0" spacing="5.0">
          <children>
             <RadioButton fx:id="noFilterRadioButton" layoutX="30.0" layoutY="77.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="74.0" selected="true" text="No Filter">
                <toggleGroup>

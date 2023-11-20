@@ -67,6 +67,8 @@ public class HomeScreenController implements Initializable {
     private TableColumn<Appointment, Integer> homeScheduleCustomerId;
     @FXML
     private ComboBox<Contact> homeContactComboBox;
+    @FXML
+    private Label appointmentAlertLabel;
 
     Stage stage;
     Parent scene;
@@ -82,12 +84,26 @@ public class HomeScreenController implements Initializable {
         refreshAppointmentTypeReportTableView();
         refreshAppointmentMonthReportTableView();
         refreshAppointmentContactReportTableView();
+        refreshAppointmentAlert();
 
         homeContactComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 refreshHomeScheduleTableView(newSelection);
             }
         });
+    }
+
+    /** Refreshes appointment alert at top of GUI
+     *
+     */
+    public void refreshAppointmentAlert() {
+        Appointment upcomingAppointment = AppointmentList.checkUpcomingAppointments();
+        if (upcomingAppointment != null) {
+            appointmentAlertLabel.setText("Upcoming appointment ID: " + upcomingAppointment.getAppointmentId() + " at: " + AppointmentList.convertUTCToLocal(upcomingAppointment.getStartDateTime()));
+        }
+        else {
+            appointmentAlertLabel.setText("No appointments in the next 15 minutes");
+        }
     }
 
     /** Refreshes appointment type report tableview
