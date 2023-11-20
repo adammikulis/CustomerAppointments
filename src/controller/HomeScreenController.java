@@ -24,6 +24,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/** Controller for Home Screen
+ *
+ */
 public class HomeScreenController implements Initializable {
 
 
@@ -68,6 +71,11 @@ public class HomeScreenController implements Initializable {
     Stage stage;
     Parent scene;
 
+    /** Initialization method for home screen
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         refreshContactComboBox();
@@ -82,6 +90,9 @@ public class HomeScreenController implements Initializable {
         });
     }
 
+    /** Refreshes appointment type report tableview
+     *
+     */
     private void refreshAppointmentTypeReportTableView() {
         List<AppointmentTypeCount> appointmentTypeCount = AppointmentQuery.getAppointmentCountByType();
         ObservableList<AppointmentTypeCount> appointmentTypeCountList = FXCollections.observableArrayList(appointmentTypeCount);
@@ -90,7 +101,9 @@ public class HomeScreenController implements Initializable {
         appointmentTypeTotalReportColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
         appointmentTypeReportTableView.setItems(appointmentTypeCountList);
     }
-
+    /** Refreshes appointment month report tableview
+     *
+     */
     private void refreshAppointmentMonthReportTableView() {
         List<AppointmentMonthCount> appointmentMonthCount = AppointmentQuery.getAppointmentCountByMonth();
         ObservableList<AppointmentMonthCount> appointmentMonthCountList = FXCollections.observableArrayList(appointmentMonthCount);
@@ -100,6 +113,9 @@ public class HomeScreenController implements Initializable {
         appointmentMonthTotalReportTableView.setItems(appointmentMonthCountList);
     }
 
+    /** Refreshes appointment contact report tableview
+     *
+     */
     private void refreshAppointmentContactReportTableView() {
         List<AppointmentContactCount> appointmentContactCount = AppointmentQuery.getAppointmentCountByContact();
         ObservableList<AppointmentContactCount> appointmentContactCountList = FXCollections.observableArrayList(appointmentContactCount);
@@ -110,6 +126,10 @@ public class HomeScreenController implements Initializable {
     }
 
 
+    /** Refreshes home screen schedule tableview based on selected contact
+     *
+     * @param contact
+     */
     private void refreshHomeScheduleTableView(Contact contact) {
         try {
             AppointmentQuery appointmentQuery = new AppointmentQuery();
@@ -128,6 +148,11 @@ public class HomeScreenController implements Initializable {
         homeScheduleCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
     }
 
+    /** Takes user to appointment screen
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onViewAllAppointmentsButtonPressed(ActionEvent actionEvent) throws IOException {
 
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
@@ -136,6 +161,11 @@ public class HomeScreenController implements Initializable {
         stage.show();
     }
 
+    /** Takes user to client screen
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onAddUpdateClientButtonPressed(ActionEvent actionEvent) throws IOException {
 
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
@@ -144,10 +174,18 @@ public class HomeScreenController implements Initializable {
         stage.show();
     }
 
+    /** Exits program
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onHomeScreenExitButtonPressed(ActionEvent actionEvent) throws IOException {
         System.exit(0); // Exit the JavaFX application
     }
 
+    /** Refreshes contact combo box
+     *
+     */
     private void refreshContactComboBox() {
         try {
             ContactQuery contactQuery = new ContactQuery();

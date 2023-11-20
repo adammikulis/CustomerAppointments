@@ -46,6 +46,11 @@ public class LoginScreenController implements Initializable {
     @FXML
     private Button loginLoginButton;
 
+    /** Initialization method for login screen
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         languageCode = Locale.getDefault().getLanguage();
@@ -62,11 +67,65 @@ public class LoginScreenController implements Initializable {
         }
     }
 
+    /** Logs in user if credentials are correct. Shows alert in English or French based on error
+     *
+     * @param actionEvent
+     * @throws SQLException
+     * @throws IOException
+     */
     public void onLoginButtonAction(ActionEvent actionEvent) throws SQLException, IOException {
         String userName = userNameTextField.getText();
         String password = passwordPasswordField.getText();
+        if (checkEmptyUsernamePassword(userName, password)) {
+            try {
+                LoginQuery.checkLogin(userName, password);
 
-        if (userName.isEmpty() || password.isEmpty()) {
+                SessionManager.getInstance().setCurrentUserName(userName);
+                System.out.println("Current user: " + SessionManager.getInstance().getCurrentUserName());
+
+                stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
+            } catch (IllegalArgumentException e) {
+                Alert alert = new Alert(AlertType.ERROR);
+
+                if (languageCode.equals("en")) {
+                    alert.setTitle("Error");
+                    if (e.getMessage().equals("Incorrect password")) {
+                        alert.setHeaderText("Incorrect password");
+                        alert.setContentText("The password you entered is incorrect. Please try again.");
+                    } else if (e.getMessage().equals("Username not found")) {
+                        alert.setHeaderText("User not found");
+                        alert.setContentText("The user you entered was not found. Please try again.");
+                    }
+
+                } else if (languageCode.equals("fr")) {
+                    alert.setTitle("Erreur");
+                    if (e.getMessage().equals("Incorrect password")) {
+                        alert.setHeaderText("Mot de passe incorrect");
+                        alert.setContentText("Le mot de passe que vous avez entré est incorrect. Veuillez réessayer.");
+                    } else if (e.getMessage().equals("Username not found")) {
+                        alert.setHeaderText("Utilisateur introuvable");
+                        alert.setContentText("L'utilisateur que vous avez entré n'a pas été trouvé. Veuillez réessayer.");
+                    }
+                }
+
+                alert.showAndWait();
+                userNameTextField.clear();
+                passwordPasswordField.clear();
+            }
+        }
+    }
+
+    /** Checks if username or password are empty
+     *
+     * @param userName
+     * @param password
+     * @return
+     */
+    private boolean checkEmptyUsernamePassword(String userName, String password) {
+        if (userName.trim().isEmpty() || password.trim().isEmpty()) {
             Alert alert = new Alert(AlertType.ERROR);
             userNameTextField.clear();
             passwordPasswordField.clear();
@@ -82,57 +141,8 @@ public class LoginScreenController implements Initializable {
 
             }
             alert.showAndWait();
-            return;
+            return false;
         }
-
-        try {
-            LoginQuery.checkLogin(userName, password);
-
-            SessionManager.getInstance().setCurrentUserName(userName);
-            System.out.println("Current user: " + SessionManager.getInstance().getCurrentUserName());
-
-            stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-            scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
-            stage.setScene(new Scene(scene));
-            stage.show();
-        } catch (IllegalArgumentException e) {
-            Alert alert = new Alert(AlertType.ERROR);
-
-            if (languageCode.equals("en")) {
-                alert.setTitle("Error");
-                if (e.getMessage().equals("Incorrect password")) {
-                    alert.setHeaderText("Incorrect password");
-                    alert.setContentText("The password you entered is incorrect. Please try again.");
-                } else if (e.getMessage().equals("Username not found")) {
-                    alert.setHeaderText("User not found");
-                    alert.setContentText("The user you entered was not found. Please try again.");
-                }
-
-            } else if (languageCode.equals("fr")){
-                alert.setTitle("Erreur");
-                if (e.getMessage().equals("Incorrect password")) {
-                    alert.setHeaderText("Mot de passe incorrect");
-                    alert.setContentText("Le mot de passe que vous avez entré est incorrect. Veuillez réessayer.");
-                } else if (e.getMessage().equals("Username not found")) {
-                    alert.setHeaderText("Utilisateur introuvable");
-                    alert.setContentText("L'utilisateur que vous avez entré n'a pas été trouvé. Veuillez réessayer.");
-                }
-            }
-
-            alert.showAndWait();
-            userNameTextField.clear();
-            passwordPasswordField.clear();
-        }
-    }
-
-    public void loginActivity() throws IOException {
-        try {
-            File loginActivity = new File("login_activity.txt");
-            loginActivity.createNewFile();
-
-        } catch (IOException e) {
-            System.out.println("IO Exception " + e);
-        }
-        // Write code that provides the ability to track user activity by recording all user log-in attempts, dates, and time stamps and whether each attempt was successful in a file named login_activity.txt. Append each new record to the existing file, and save to the root folder of the application.
+        return true;
     }
 }

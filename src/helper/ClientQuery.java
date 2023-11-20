@@ -195,10 +195,9 @@ public class ClientQuery {
 
             int rowsAffected = ps.executeUpdate();
         }
-        finally {
-            if (ps != null) {
-                ps.close();
-            }
+        catch (SQLException e) {
+            System.out.println("SQL Error");
+            e.printStackTrace(System.out);
         }
     }
 
@@ -229,6 +228,12 @@ public class ClientQuery {
         return nextId;
     }
 
+    /** Returns division ID by country and division name
+     *
+     * @param country
+     * @param division
+     * @return division ID
+     */
     public static int getDivisionIdByCountryAndDivision(String country, String division) {
         int divisionId = -1;
 
@@ -256,6 +261,11 @@ public class ClientQuery {
         return divisionId;
     }
 
+    /** Returns country by division ID
+     *
+     * @param divisionId
+     * @return name of country
+     */
     public static String getCountryByDivisionId(int divisionId) {
         String country = null;
 
@@ -281,6 +291,11 @@ public class ClientQuery {
         return country;
     }
 
+    /** Returns name of division by division ID
+     *
+     * @param divisionId
+     * @return name of division
+     */
     public static String getDivisionByDivisionId(int divisionId) {
         String division = null;
 
@@ -305,5 +320,4 @@ public class ClientQuery {
         }
         return division;
     }
-
 }

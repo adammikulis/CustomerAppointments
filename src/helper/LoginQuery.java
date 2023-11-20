@@ -1,14 +1,25 @@
 package helper;
 
-import helper.LoginLogger;
+import report.LoginLogger;
 import java.io.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/** Class to check user login and give errors when needed
+ *
+ */
 public class LoginQuery {
 
+    /** Checks user login and returns true is successful
+     *
+     * @param inputUserName
+     * @param inputPassword
+     * @return true if login is successful
+     * @throws SQLException
+     * @throws IOException
+     */
     public static boolean checkLogin(String inputUserName, String inputPassword) throws SQLException, IOException {
         boolean loginSuccess = false;
         if (inputUserName.isEmpty() || inputPassword.isEmpty()) {
@@ -35,6 +46,4 @@ public class LoginQuery {
             throw new IllegalArgumentException("Username not found");
         }
     }
-
-
 }

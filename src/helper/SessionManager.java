@@ -2,13 +2,23 @@ package helper;
 
 import java.sql.*;
 
+/** Tracks current session/instance for recording current user logged in
+ *
+ */
 public class SessionManager {
     private static SessionManager instance;
     private String currentUserName;
 
+    /** Empty constructor
+     *
+     */
     private SessionManager() {
     }
 
+    /** Returns session manager instance or creates new one if null
+     *
+     * @return session manager instance
+     */
     public static SessionManager getInstance() {
         if (instance == null) {
             instance = new SessionManager();
@@ -16,6 +26,10 @@ public class SessionManager {
         return instance;
     }
 
+    /** Returns current username with a fallback
+     *
+     * @return
+     */
     public String getCurrentUserName() {
         if (currentUserName != null) {
             return currentUserName;}
@@ -24,10 +38,18 @@ public class SessionManager {
         }
     }
 
+    /** Sets current username
+     *
+     * @param userName
+     */
     public void setCurrentUserName(String userName) {
         this.currentUserName = userName;
     }
 
+    /** Returns user ID based on current user name
+     *
+     * @return current user ID
+     */
     public int getCurrentUserId()
     {
         String query = "SELECT User_ID FROM users WHERE User_Name = ?";

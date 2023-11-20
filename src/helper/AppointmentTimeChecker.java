@@ -64,7 +64,15 @@ public class AppointmentTimeChecker {
         return true;
     }
 
-
+    /** Calls business hours and overlap checker from one method
+     *
+     * @param currentAppointmentid
+     * @param clientId
+     * @param startUTCDateTime
+     * @param endUTCDateTime
+     * @param update
+     * @return
+     */
     public static boolean appointmentChecker(int currentAppointmentid, int clientId, LocalDateTime startUTCDateTime, LocalDateTime endUTCDateTime, boolean update) {
         if (businessHourChecker(startUTCDateTime, endUTCDateTime)) {
             if (overlapChecker(currentAppointmentid, clientId, startUTCDateTime, endUTCDateTime, update)) {

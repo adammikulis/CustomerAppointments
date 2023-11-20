@@ -24,6 +24,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** Controller for client screen
+ *
+ */
 public class ClientScreenController implements Initializable {
     Stage stage;
     Parent scene;
@@ -67,6 +70,11 @@ public class ClientScreenController implements Initializable {
     @FXML
     private ComboBox<String> clientDivisionComboBox;
 
+    /** Initialization for client screen
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         clientTableView.setItems(ClientList.getAllClients());
@@ -100,6 +108,12 @@ public class ClientScreenController implements Initializable {
         });
     }
 
+    /** Deletes currently selected client from the database
+     *
+     * @param actionEvent
+     * @throws IOException
+     * @throws SQLException
+     */
     public void onClientScreenDeleteClientButtonPressed(ActionEvent actionEvent) throws IOException, SQLException {
         // Get the selected client
         Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
@@ -129,6 +143,11 @@ public class ClientScreenController implements Initializable {
         clearFieldsAndRefresh();
     }
 
+    /** Updates currently selected client in the database
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onUpdateCurrentClientButtonPressed(ActionEvent actionEvent) throws IOException {
         // Get the selected client
         Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
@@ -165,6 +184,9 @@ public class ClientScreenController implements Initializable {
         }
     }
 
+    /** Gets data from input fields to create new or update client
+     *
+     */
     private void getClientDataFromInputFields() {
         // Get the data from the input fields
         name = clientScreenNameTextField.getText();
@@ -180,6 +202,11 @@ public class ClientScreenController implements Initializable {
 
     }
 
+    /** Creates new client in the database
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onClientScreenSaveNewClientButtonPressed(ActionEvent actionEvent) throws IOException {
         // Get the data from the input fields and check for empty
         if (validateClientInputs()) {
@@ -214,6 +241,9 @@ public class ClientScreenController implements Initializable {
         }
     }
 
+    /** Clears input fields and refreshes table view
+     *
+     */
     private void clearFieldsAndRefresh() {
         // Clear the input fields
         clientScreenNameTextField.clear();
@@ -239,10 +269,18 @@ public class ClientScreenController implements Initializable {
         }
     }
 
+    /** Fills country combo box
+     *
+     */
     private void populateCountryComboBox() {
         ObservableList<String> countries = FXCollections.observableArrayList();
 
     }
+
+    /** Fills division combo box based on country
+     *
+     * @param country
+     */
     private void populateDivisionComboBox(String country) {
         ObservableList<String> divisions = FXCollections.observableArrayList();
 
@@ -252,18 +290,28 @@ public class ClientScreenController implements Initializable {
         clientDivisionComboBox.setItems(divisions);
     }
 
+    /** Clears country combo box
+     *
+     */
     private void clearCountryComboBox() {
         clientCountryComboBox.getItems().clear();
         clientCountryComboBox.setValue(null);
     }
 
 
+    /** Clears division combo box
+     *
+     */
     private void clearDivisionComboBox() {
         clientDivisionComboBox.getItems().clear();
         clientCountryComboBox.setValue(null);
     }
 
-
+    /** Takes user back to home screen
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
     public void onClientScreenBackButtonPressed(ActionEvent actionEvent) throws IOException {
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
@@ -271,11 +319,19 @@ public class ClientScreenController implements Initializable {
         stage.show();
     }
 
+    /** Clears selection and refreshes table
+     *
+     * @param actionEvent
+     */
     @FXML
     private void onClientScreenClearSelectionButtonPressed(ActionEvent actionEvent) {
         clearFieldsAndRefresh();
     }
 
+    /** Makes sure that no inputs are empty
+     *
+     * @return true if no fields are empty
+     */
     private boolean validateClientInputs() {
         getClientDataFromInputFields();
         if (name.trim().isEmpty() || streetAddress.trim().isEmpty() || postalCode.trim().isEmpty() || phone.trim().isEmpty() || division.isEmpty()) {
@@ -289,6 +345,9 @@ public class ClientScreenController implements Initializable {
         return true;
     }
 
+    /** Shows alert if no client is selected
+     *
+     */
     private void noClientSelectedAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("No client selected");

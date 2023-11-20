@@ -28,6 +28,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/** Controller for appointment screen
+ *
+ */
 public class AppointmentScreenController implements Initializable {
 
     Stage stage;
@@ -114,6 +117,11 @@ public class AppointmentScreenController implements Initializable {
     private ObservableList<Appointment> allAppointments;
     private ObservableList<Appointment> filteredAppointments;
 
+    /** Initialization method for appointment screen
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         allAppointments = AppointmentList.getAllAppointments();
@@ -232,6 +240,9 @@ public class AppointmentScreenController implements Initializable {
         }
     }
 
+    /** Applies the current radio button selection as a filter
+     *
+     */
     private void applyCurrentFilter() {
         if (noFilterRadioButton.isSelected()) {
             showAllAppointments();
@@ -335,6 +346,10 @@ public class AppointmentScreenController implements Initializable {
         }
     }
 
+    /** Gets all values from appointment fields and returns true if successful
+     *
+     * @return true if all fields have values
+     */
     public boolean getValuesFromFields() {
 
         // Check if any field is empty and show an alert if so
@@ -377,6 +392,10 @@ public class AppointmentScreenController implements Initializable {
         return true;
     }
 
+    /** Updates selected appointment with values from fields
+     *
+     * @param actionEvent
+     */
     public void onUpdateAppointmentButtonPressed(ActionEvent actionEvent) {
         Appointment selectedAppointment = appointmentTableView.getSelectionModel().getSelectedItem();
         if (selectedAppointment == null) {
@@ -415,10 +434,17 @@ public class AppointmentScreenController implements Initializable {
 
     }
 
+    /** Clears appointment contact combo box
+     *
+     */
     private void clearAppointmentContactComboBox() {
         appointmentContactComboBox.getItems().clear();
         appointmentContactComboBox.setValue(null);
     }
+
+    /** Clears all fields
+     *
+     */
     private void clearFields() {
 
         appointmentTableView.getSelectionModel().clearSelection();
@@ -438,12 +464,9 @@ public class AppointmentScreenController implements Initializable {
         clearAppointmentContactComboBox();
     }
 
-    public void refreshAll() {
-        refreshContactComboBox();
-        refreshAppointmentAlert();
-        refreshAppointmentListAndView();
-    }
-
+    /** Refreshes contact combo box
+     *
+     */
     public void refreshContactComboBox() {
         List<Contact> contacts = null;
         try {
@@ -455,6 +478,9 @@ public class AppointmentScreenController implements Initializable {
         }
     }
 
+    /** Refreshes appointment alert at top of GUI
+     *
+     */
     public void refreshAppointmentAlert() {
         Appointment upcomingAppointment = AppointmentList.checkUpcomingAppointments();
         if (upcomingAppointment != null) {
@@ -465,6 +491,9 @@ public class AppointmentScreenController implements Initializable {
         }
     }
 
+    /** Applies current filter and refreshes table
+     *
+     */
     private void refreshAppointmentListAndView() {
         applyCurrentFilter();
         appointmentTableView.refresh();

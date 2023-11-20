@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/** Manages the jdbc driver and connection with SQL database
+ *
+ */
 public abstract class ConnectionManager {
     private static final String protocol = "jdbc";
     private static final String vendor = ":mysql:";
@@ -16,6 +19,9 @@ public abstract class ConnectionManager {
     private static String password = "Passw0rd!"; // Password
     private static Connection connection;  // Connection Interface
 
+    /** Opens connection to database
+     *
+     */
     public static void openConnection() {
         try {
             if (connection == null || connection.isClosed()) {
@@ -28,6 +34,9 @@ public abstract class ConnectionManager {
         }
     }
 
+    /** Closes connection to the database
+     *
+     */
     public static void closeConnection() {
         try {
             if (connection != null && !connection.isClosed()) {
@@ -39,29 +48,11 @@ public abstract class ConnectionManager {
         }
     }
 
+    /** Returns current database connection
+     *
+     * @return database connection
+     */
     public static Connection getConnection() {
         return connection;
-    }
-
-    public static void closeResultSet(ResultSet rs) {
-        if (rs != null) {
-            try {
-                rs.close();
-                System.out.println("ResultSet closed!");
-            } catch (SQLException e) {
-                System.out.println("Error:" + e.getMessage());
-            }
-        }
-    }
-
-    public static void closeStatement(Statement statement) {
-        if (statement != null) {
-            try {
-                statement.close();
-                System.out.println("Statement closed!");
-            } catch (SQLException e) {
-                System.out.println("Error:" + e.getMessage());
-            }
-        }
     }
 }

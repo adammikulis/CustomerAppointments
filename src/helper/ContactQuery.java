@@ -9,8 +9,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Queries database for contacts
+ *
+ */
 public class ContactQuery {
 
+    /** Returns a list of all contacts in the database
+     *
+     * @return list of all contacts
+     */
     public List<Contact> getAllContacts() {
         List<Contact> contacts = new ArrayList<>();
         Connection conn = null;
@@ -51,8 +58,11 @@ public class ContactQuery {
         return contacts;
     }
 
-
-
+    /** Gets contact name based on contact ID
+     *
+     * @param contactId
+     * @return contact name
+     */
     public String getContactName(int contactId) {
         String query = "SELECT Contact_Name FROM contacts WHERE Contact_ID = ?";
         try {
@@ -70,6 +80,10 @@ public class ContactQuery {
         return null;
     }
 
+    /** Returns a list of all contact names
+     *
+     * @return list of all contact names
+     */
     public static List<String> getAllContactNames() {
         List<String> contactNames = new ArrayList<>();
 
@@ -88,6 +102,12 @@ public class ContactQuery {
         return contactNames;
     }
 
+    /** Gets contact based on contact ID
+     *
+     * @param contactId
+     * @return contact
+     * @throws SQLException
+     */
     public Contact getContact(int contactId) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -125,6 +145,12 @@ public class ContactQuery {
         return null;
     }
 
+    /** Returns contact by contact name
+     *
+     * @param contactName
+     * @return contact
+     * @throws SQLException
+     */
     public Contact getContactByName(String contactName) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -161,6 +187,12 @@ public class ContactQuery {
         return null;
     }
 
+    /** Returns contact ID by name
+     *
+     * @param contactName
+     * @return contact ID
+     * @throws SQLException
+     */
     public int getContactIdByName(String contactName) throws SQLException {
         return getContactByName(contactName).getContactId();
     }
