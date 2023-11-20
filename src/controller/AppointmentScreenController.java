@@ -118,7 +118,7 @@ public class AppointmentScreenController implements Initializable {
     private ObservableList<Appointment> filteredAppointments;
 
     /** Initialization method for appointment screen
-     *
+     * Lambda expressions radio button event handlers
      * @param url
      * @param resourceBundle
      */
@@ -189,7 +189,7 @@ public class AppointmentScreenController implements Initializable {
             }
         });
 
-        // Listeners for radio button
+        // Event handlers for radio button
         noFilterRadioButton.setOnAction(event -> showAllAppointments());
         viewByWeekRadioButton.setOnAction(event -> filterAppointmentsByWeek());
         viewByMonthRadioButton.setOnAction(event -> filterAppointmentsByMonth());

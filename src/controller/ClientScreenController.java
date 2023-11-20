@@ -28,12 +28,12 @@ import java.util.ResourceBundle;
  *
  */
 public class ClientScreenController implements Initializable {
+
     Stage stage;
     Parent scene;
 
     private Client currentClient;
     private ClientQuery clientQuery = new ClientQuery();
-
     private String name;
     private String streetAddress;
     private String postalCode;
@@ -71,7 +71,7 @@ public class ClientScreenController implements Initializable {
     private ComboBox<String> clientDivisionComboBox;
 
     /** Initialization for client screen
-     *
+     * Lambda expressions used for listeners
      * @param url
      * @param resourceBundle
      */

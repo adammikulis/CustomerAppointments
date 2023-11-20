@@ -33,7 +33,6 @@ public class AppointmentTimeChecker {
     /** Checks for overlaps with other appointments
      *
      * @param currentAppointmentId
-     * @param clientId
      * @param newAppointmentStart
      * @param newAppointmentEnd
      * @param update
