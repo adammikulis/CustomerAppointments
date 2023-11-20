@@ -19,8 +19,7 @@ public class Client {
     private int divisionId;
 
 
-    /**
-     * Constructor for Client
+    /** Constructor for Client
      *
      * @param clientId      client id
      * @param clientName    client name
@@ -48,8 +47,7 @@ public class Client {
     }
 
 
-    /**
-     * /** Set client id
+    /** Sets client id
      *
      * @param clientId client id
      */
@@ -57,8 +55,7 @@ public class Client {
         this.clientId = clientId;
     }
 
-    /**
-     * Return client id
+    /** Returns client id
      *
      * @return client id
      */
@@ -67,8 +64,7 @@ public class Client {
     }
 
 
-    /**
-     * Set client name
+    /** Sets client name
      *
      * @param clientName
      */
@@ -76,8 +72,7 @@ public class Client {
         this.clientName = clientName;
     }
 
-    /**
-     * Return last name
+    /** Returns last name
      *
      * @return lastName
      */
@@ -85,33 +80,56 @@ public class Client {
         return clientName;
     }
 
+    /** Sets street address
+     *
+     * @param streetAddress name of stree address
+     */
     public void setStreetAddress (String streetAddress) {
         this.streetAddress = streetAddress;
     }
 
+    /** Returns street address
+     *
+     * @return street address
+     */
     public String getStreetAddress () {
         return streetAddress;
     }
 
+    /** Sets postal code
+     *
+     * @param postalCode postal code to set
+     */
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 
+    /** Returns postal code
+     *
+     * @return postal code
+     */
     public String getPostalCode() {
         return postalCode;
     }
 
 
+    /** Sets phone number
+     *
+     * @param phone phone number to set
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    /** Returns phone number
+     *
+     * @return phone number
+     */
     public String getPhone() {
         return phone;
     }
 
-    /**
-     * Get the client's creation date.
+    /** Returns the client's creation date.
      *
      * @return createDate as LocalDateTime
      */
@@ -119,8 +137,7 @@ public class Client {
         return createDate;
     }
 
-    /**
-     * Set the client's creation date.
+    /** Sets the client's creation date.
      *
      * @param createDate LocalDateTime to set the creation date
      */
@@ -128,8 +145,7 @@ public class Client {
         this.createDate = createDate;
     }
 
-    /**
-     * Get the client's creator.
+    /** Returns the client's creator.
      *
      * @return createdBy as String
      */
@@ -137,8 +153,7 @@ public class Client {
         return createdBy;
     }
 
-    /**
-     * Set the client's creator.
+    /** Sets the client's creator.
      *
      * @param createdBy String to set the creator
      */
@@ -146,8 +161,7 @@ public class Client {
         this.createdBy = createdBy;
     }
 
-    /**
-     * Get the client's last update date.
+    /** Returns the client's last update date.
      *
      * @return lastUpdate as LocalDateTime
      */
@@ -155,8 +169,7 @@ public class Client {
         return lastUpdate;
     }
 
-    /**
-     * Set the client's last update date.
+    /** Sets the client's last update date.
      *
      * @param lastUpdate LocalDateTime to set the last update date
      */
@@ -164,8 +177,7 @@ public class Client {
         this.lastUpdate = lastUpdate;
     }
 
-    /**
-     * Get the client's last updater.
+    /** Returns the client's last updater.
      *
      * @return lastUpdatedBy as String
      */
@@ -173,8 +185,7 @@ public class Client {
         return lastUpdatedBy;
     }
 
-    /**
-     * Set the client's last updater.
+    /** Sets the client's last updater.
      *
      * @param lastUpdatedBy String to set the last updater
      */
@@ -182,8 +193,7 @@ public class Client {
         this.lastUpdatedBy = lastUpdatedBy;
     }
 
-    /**
-     * Get the client's division ID.
+    /** Returns the client's division ID.
      *
      * @return divisionId as int
      */
@@ -191,8 +201,7 @@ public class Client {
         return divisionId;
     }
 
-    /**
-     * Set the client's division ID.
+    /** Sets the client's division ID.
      *
      * @param divisionId int to set the division ID
      */
@@ -200,10 +209,17 @@ public class Client {
         this.divisionId = divisionId;
     }
 
+    /** Returnss the client's country by division ID
+     * @return country by division ID
+     */
     public String getCountry() {
         return ClientQuery.getCountryByDivisionId(getDivisionId());
     }
 
+    /** Returns the client's division name by division ID
+     *
+     * @return division name
+     */
     public String getDivision() {
         return ClientQuery.getDivisionByDivisionId(getDivisionId());
     }

@@ -16,13 +16,17 @@ public class ClientList {
     private static ObservableList<Client> allClients = FXCollections.observableArrayList(clients);
     private static ObservableList<Client> filteredClients = FXCollections.observableArrayList();
 
+    /** Returns observable list of all clients
+     *
+     * @return allClients
+     */
     public static ObservableList<Client> getAllClients() {
         return allClients;
     }
 
 
     /**
-     * Insert a new client into the database.
+     * Inserts a new client into the database.
      *
      * @param client The client to be inserted
      */
