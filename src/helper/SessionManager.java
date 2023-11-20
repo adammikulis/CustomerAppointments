@@ -2,7 +2,7 @@ package helper;
 
 import java.sql.*;
 
-/** Class to track current session/instance for recording current user logged in
+/** Class for tracking current session/instance for recording current user logged in
  *
  */
 public class SessionManager {

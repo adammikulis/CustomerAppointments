@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="updated project so that appointment overlap applies to all clients">
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="updated javadocs to include lambda expressions">
+      <change afterPath="$PROJECT_DIR$/src/controller/package-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/helper/package-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/package-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/package-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/report/package-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/package-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javadoc/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/allclasses-index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javadoc/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/allpackages-index.html" afterDir="false" />
@@ -42,7 +48,6 @@
       <change beforePath="$PROJECT_DIR$/javadoc/main/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/main/Main.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javadoc/main/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/main/package-summary.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javadoc/main/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/main/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/member-search-index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javadoc/model/Appointment.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Appointment.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javadoc/model/AppointmentList.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/AppointmentList.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javadoc/model/Client.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Client.html" afterDir="false" />
@@ -59,10 +64,17 @@
       <change beforePath="$PROJECT_DIR$/javadoc/report/LoginLogger.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/LoginLogger.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javadoc/report/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/package-summary.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/javadoc/report/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/login_activity.txt" beforeDir="false" afterPath="$PROJECT_DIR$/login_activity.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/ClientScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ClientScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentQuery.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/ClientQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/ClientQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/ConnectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/ContactQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/ContactQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/LoginQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/LoginQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/SessionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/SessionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/report/AppointmentContactCount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/report/AppointmentContactCount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/report/AppointmentMonthCount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/report/AppointmentMonthCount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/report/AppointmentTypeCount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/report/AppointmentTypeCount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/report/LoginLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/report/LoginLogger.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,6 +86,7 @@
       <list>
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="package-info" />
       </list>
     </option>
   </component>
@@ -334,14 +347,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00054" summary="Login screen now translates everything to French when needed">
-      <option name="closed" value="true" />
-      <created>1700327435789</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1700327435789</updated>
-    </task>
     <task id="LOCAL-00055" summary="javadocs and eastern time zone conversion added">
       <option name="closed" value="true" />
       <created>1700331345471</created>
@@ -510,7 +515,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700508246623</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="updated javadocs to include lambda expressions">
+      <option name="closed" value="true" />
+      <created>1700509341264</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1700509341264</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -532,7 +545,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="table report on appointments by contact is complete" />
     <MESSAGE value="logger for login screen complete" />
     <MESSAGE value="updated logger to store in UTC" />
     <MESSAGE value="updated to version 0.8, need to do appointment deconfliction and javadocs" />
@@ -557,7 +569,8 @@
     <MESSAGE value="fixed updateClient" />
     <MESSAGE value="finished javadocs, project is complete (v1.0)" />
     <MESSAGE value="updated project so that appointment overlap applies to all clients" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated project so that appointment overlap applies to all clients" />
+    <MESSAGE value="updated javadocs to include lambda expressions" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated javadocs to include lambda expressions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

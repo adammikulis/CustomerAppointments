@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.time.DayOfWeek;
 import java.util.List;
 
-/** Class to check if appointment is within a valid timeframe
+/** Class for querying if appointment is within a valid timeframe
  *
  */
 public class AppointmentTimeChecker {

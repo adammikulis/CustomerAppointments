@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-/** Class to check user login and give errors when needed
+/** Class for checking user login and give errors when needed
  *
  */
 public class LoginQuery {

@@ -13,7 +13,7 @@ import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.*;
 
-/** Class to query the SQL database for appointments
+/** Class for querying the SQL database for appointments
  *
  */
 public class AppointmentQuery {

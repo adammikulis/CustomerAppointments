@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Class to query clients in the database
+/** Class for querying clients in the database
  *
  */
 public class ClientQuery {

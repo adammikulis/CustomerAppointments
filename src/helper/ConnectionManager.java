@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/** Class to manage the JDBC driver and connection with SQL database
+/** Class for managing the JDBC driver and connection with SQL database
  *
  */
 public abstract class ConnectionManager {

@@ -1,6 +1,6 @@
 package report;
 
-/** This class is used to generate a report for total appointments by Type
+/** Class for generating a report for total appointments by Type
  *
  */
 public class AppointmentTypeCount {

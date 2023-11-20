@@ -1,6 +1,6 @@
 package report;
 
-/** This class is used to generate a report for total appointments by Contact
+/** Class for generating a report for total appointments by Contact
  *
  */
 public class AppointmentContactCount {
