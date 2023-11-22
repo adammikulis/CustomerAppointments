@@ -16,7 +16,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
-import model.AppointmentChecker;
 import model.Contact;
 
 import java.io.IOException;
@@ -113,8 +112,8 @@ public class AppointmentScreenController implements Initializable {
     private LocalDateTime createDate;
     private LocalDateTime lastUpdate;
 
-    private ObservableList<Appointment> allAppointments;
     private ObservableList<Appointment> filteredAppointments;
+    private ObservableList<Appointment> allAppointments;
 
     /** Initialization method for appointment screen
      * Lambda expressions radio button event handlers
@@ -123,8 +122,7 @@ public class AppointmentScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        allAppointments = AppointmentChecker.getAllAppointments();
-        filteredAppointments = FXCollections.observableArrayList(allAppointments);
+        // Run query
         appointmentTableView.setItems(filteredAppointments);
         appointmentTableView.setItems(filteredAppointments);
         appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
@@ -218,7 +216,6 @@ public class AppointmentScreenController implements Initializable {
         }
     }
 
-
     /** Displays all appointments this calendar month
      *
      */
@@ -251,7 +248,6 @@ public class AppointmentScreenController implements Initializable {
         }
     }
 
-
     /** Sends user back to home screen
      *
      * @param actionEvent
@@ -282,8 +278,6 @@ public class AppointmentScreenController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Confirm delete -- Appt ID: " + selectedAppointment.getAppointmentId() +" Type: " + selectedAppointment.getType());
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
-            // Delete the appointment from the table
-            AppointmentChecker.deleteAppointment(selectedAppointment);
 
             // Delete the appointment from the database
             AppointmentDAO appointmentDAO = new AppointmentDAO();
@@ -378,8 +372,8 @@ public class AppointmentScreenController implements Initializable {
         date = appointmentDatePicker.getValue();
         startTime = LocalTime.parse(appointmentStartTimeTextField.getText());
         endTime = LocalTime.parse(appointmentEndTimeTextField.getText());
-        createDate = AppointmentChecker.convertLocalToUTC(LocalDateTime.now());
-        lastUpdate = AppointmentChecker.convertLocalToUTC(LocalDateTime.now());
+        createDate = AppointmentTimeChecker.convertLocalToUTC(LocalDateTime.now());
+        lastUpdate = AppointmentTimeChecker.convertLocalToUTC(LocalDateTime.now());
 
         startDateTime = LocalDateTime.of(date, startTime);
         endDateTime = LocalDateTime.of(date, endTime);

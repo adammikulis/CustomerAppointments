@@ -2,6 +2,7 @@ package controller;
 
 import dao.AppointmentDAO;
 import dao.ContactDAO;
+import helper.AppointmentTimeChecker;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -97,9 +98,9 @@ public class HomeScreenController implements Initializable {
      *
      */
     public void refreshAppointmentAlert() {
-        Appointment upcomingAppointment = AppointmentChecker.checkUpcomingAppointments();
+        Appointment upcomingAppointment = AppointmentTimeChecker.checkUpcomingAppointments();
         if (upcomingAppointment != null) {
-            appointmentAlertLabel.setText("Upcoming appointment ID: " + upcomingAppointment.getAppointmentId() + " at: " + AppointmentChecker.convertUTCToLocal(upcomingAppointment.getStartDateTime()));
+            appointmentAlertLabel.setText("Upcoming appointment ID: " + upcomingAppointment.getAppointmentId() + " at: " + AppointmentTimeChecker.convertUTCToLocal(upcomingAppointment.getStartDateTime()));
         }
         else {
             appointmentAlertLabel.setText("No appointments in the next 15 minutes");

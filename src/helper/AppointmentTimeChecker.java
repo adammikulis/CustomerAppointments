@@ -3,10 +3,10 @@ package helper;
 import dao.AppointmentDAO;
 import javafx.scene.control.Alert;
 import model.Appointment;
-import model.AppointmentChecker;
 
 import java.time.LocalDateTime;
 import java.time.DayOfWeek;
+import java.time.ZoneId;
 import java.util.List;
 
 /** Class for querying if appointment is within a valid timeframe
@@ -21,8 +21,8 @@ public class AppointmentTimeChecker {
      * @return true if appointment is within business hours
      */
     public static boolean businessHourChecker(LocalDateTime localStartDateTime, LocalDateTime localEndDateTime) {
-        LocalDateTime easternStartTime = AppointmentChecker.convertUTCToEastern(AppointmentChecker.convertLocalToUTC(localStartDateTime));
-        LocalDateTime easternEndTime = AppointmentChecker.convertUTCToEastern(AppointmentChecker.convertLocalToUTC(localStartDateTime));
+        LocalDateTime easternStartTime = convertUTCToEastern(convertLocalToUTC(localStartDateTime));
+        LocalDateTime easternEndTime = convertUTCToEastern(convertLocalToUTC(localStartDateTime));
         DayOfWeek startDayOfWeek = easternStartTime.getDayOfWeek();
         DayOfWeek endDayOfWeek = easternEndTime.getDayOfWeek();
 
@@ -86,5 +86,64 @@ public class AppointmentTimeChecker {
             alert.showAndWait();
             return false;
         }
+    }
+
+    /** Returns possible appointment in the next 15 minutes
+     *
+     * @return upcomingAppointment
+     */
+    public static Appointment checkUpcomingAppointments() {
+
+        LocalDateTime now = LocalDateTime.now();
+        Appointment upcomingAppointment = null;
+
+        AppointmentDAO appointmentDAO = new AppointmentDAO();
+
+        for (Appointment appointment : appointmentDAO.getAllAppointments()) {
+            LocalDateTime startLocal = convertUTCToLocal(appointment.getStartDateTime());
+            if (startLocal.isAfter(now) && startLocal.isBefore(now.plusMinutes(15))) {
+                if (upcomingAppointment == null || startLocal.isBefore(upcomingAppointment.getStartDateTime())) {
+                    upcomingAppointment = appointment;
+                }
+            }
+        }
+
+        return upcomingAppointment;
+    }
+
+    /** Converts local time to UTC
+     *
+     * @param localDateTime local time to convert to UTC
+     * @return UTC time
+     */
+    public static LocalDateTime convertLocalToUTC(LocalDateTime localDateTime) {
+        return localDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
+    }
+
+    /** Converts UTC to local time
+     *
+     * @param UTCDateTime local time to convert to UTC
+     * @return local time
+     */
+    public static LocalDateTime convertUTCToLocal(LocalDateTime UTCDateTime) {
+        return UTCDateTime.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
+    }
+
+    /** Converts local time to eastern time
+     *
+     * @param localDateTime local time to convert to eastern time
+     * @return eastern time
+     */
+    public static LocalDateTime convertUTCToEastern(LocalDateTime localDateTime) {
+        return localDateTime.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
+    }
+
+    /** Converts eastern to local time
+     *
+     * @param easternDateTime local time to convert to UTC
+     * @return local time
+     */
+    public static LocalDateTime convertEasternToUTC(LocalDateTime easternDateTime) {
+        return easternDateTime.atZone(ZoneId.of("America/New_York")).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
     }
 }

@@ -1,6 +1,7 @@
 package model;
 
 import dao.ContactDAO;
+import helper.AppointmentTimeChecker;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -219,7 +220,7 @@ public class Appointment {
      * @return startDateTime
      */
     public LocalDateTime getLocalStartDateTime() {
-        localStartDateTime = AppointmentChecker.convertUTCToLocal(startDateTime);
+        localStartDateTime = AppointmentTimeChecker.convertUTCToLocal(startDateTime);
         return localStartDateTime;
     }
 
@@ -228,7 +229,7 @@ public class Appointment {
      * @return endDateTime
      */
     public LocalDateTime getLocalEndDateTime() {
-        localEndDateTime = AppointmentChecker.convertUTCToLocal(endDateTime);
+        localEndDateTime = AppointmentTimeChecker.convertUTCToLocal(endDateTime);
         return localEndDateTime;
     }
 
