@@ -1,6 +1,6 @@
 package model;
 
-import helper.AppointmentQuery;
+import dao.AppointmentDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -9,9 +9,9 @@ import java.time.ZoneId;
 import java.util.List;
 
 /** Class for creating a list of appointments*/
-public class AppointmentList {
-    private static AppointmentQuery appointmentQuery = new AppointmentQuery();
-    private static List<Appointment> appointments = appointmentQuery.getAllAppointments();
+public class AppointmentChecker {
+    private static AppointmentDAO appointmentDAO = new AppointmentDAO();
+    private static List<Appointment> appointments = appointmentDAO.getAllAppointments();
 
     private static ObservableList<Appointment> allAppointments = FXCollections.observableArrayList(appointments);
 

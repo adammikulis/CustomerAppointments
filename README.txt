@@ -1,5 +1,5 @@
 Application: Client Appointment Database
-Purpose: Tracking clients and their associated contacts via a JavaFX front-end and SQL back-end
+Purpose: Tracking customers and their associated contacts via a JavaFX front-end and SQL back-end
 Author: Adam Mikulis
 Contact: adam.mikulis@gmail.com
 App Version: 1.0

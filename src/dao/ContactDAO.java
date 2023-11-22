@@ -1,5 +1,6 @@
-package helper;
+package dao;
 
+import helper.ConnectionManager;
 import model.Contact;
 
 import java.sql.Connection;
@@ -12,7 +13,7 @@ import java.util.List;
 /** Class for querying the database for contacts
  *
  */
-public class ContactQuery {
+public class ContactDAO {
 
     /** Returns a list of all contacts in the database
      *
@@ -38,23 +39,7 @@ public class ContactQuery {
             }
         } catch (SQLException e) {
             System.out.println("SQL Error");
-            e.printStackTrace(System.out);
-        } finally {
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace(System.out);
-                }
-            }
-            if (ps != null) {
-                try {
-                    ps.close();
-                } catch (SQLException e) {
-                    e.printStackTrace(System.out);
-                }
-            }
-        }
+            e.printStackTrace(System.out); }
         return contacts;
     }
 

@@ -1,6 +1,6 @@
 package controller;
 
-import helper.ClientQuery;
+import dao.CustomerDAO;
 import helper.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,8 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import model.Client;
-import model.ClientList;
+import model.Customer;
+import model.CustomerList;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,8 +32,8 @@ public class ClientScreenController implements Initializable {
     Stage stage;
     Parent scene;
 
-    private Client currentClient;
-    private ClientQuery clientQuery = new ClientQuery();
+    private Customer currentCustomer;
+    private CustomerDAO customerDAO = new CustomerDAO();
     private String name;
     private String streetAddress;
     private String postalCode;
@@ -43,18 +43,18 @@ public class ClientScreenController implements Initializable {
     private int divisionId;
 
     @FXML
-    private TableView<Client> clientTableView;
+    private TableView<Customer> clientTableView;
 
     @FXML
-    private TableColumn<Client, Integer> clientIdColumn;
+    private TableColumn<Customer, Integer> clientIdColumn;
     @FXML
-    private TableColumn<Client, String> clientNameColumn;
+    private TableColumn<Customer, String> clientNameColumn;
     @FXML
-    private TableColumn<Client, String> streetAddressColumn;
+    private TableColumn<Customer, String> streetAddressColumn;
     @FXML
-    private TableColumn<Client, Integer> postalCodeColumn;
+    private TableColumn<Customer, Integer> postalCodeColumn;
     @FXML
-    private TableColumn<Client, Integer> phoneColumn;
+    private TableColumn<Customer, Integer> phoneColumn;
 
     @FXML
     private TextField clientScreenNameTextField;
@@ -77,32 +77,32 @@ public class ClientScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        clientTableView.setItems(ClientList.getAllClients());
+        clientTableView.setItems(CustomerList.getAllClients());
         clientIdColumn.setCellValueFactory(new PropertyValueFactory<>("clientId"));
         clientNameColumn.setCellValueFactory(new PropertyValueFactory<>("clientName"));
         streetAddressColumn.setCellValueFactory(new PropertyValueFactory<>("streetAddress"));
         postalCodeColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
 
-        clientCountryComboBox.getItems().addAll(ClientQuery.getClientCountries());
+        clientCountryComboBox.getItems().addAll(CustomerDAO.getClientCountries());
 
         clientTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 System.out.println("Selected row: " + newValue);
-                currentClient = newValue; // Set the current client
+                currentCustomer = newValue; // Set the current client
 
                 // Populate the textfields with the selected client's data
-                clientScreenNameTextField.setText(currentClient.getClientName());
-                clientScreenAddressTextField.setText(currentClient.getStreetAddress());
-                clientScreenPostalCodeTextField.setText(currentClient.getPostalCode());
-                clientScreenPhoneTextField.setText(currentClient.getPhone());
+                clientScreenNameTextField.setText(currentCustomer.getClientName());
+                clientScreenAddressTextField.setText(currentCustomer.getStreetAddress());
+                clientScreenPostalCodeTextField.setText(currentCustomer.getPostalCode());
+                clientScreenPhoneTextField.setText(currentCustomer.getPhone());
 
                 // Populate the combo boxes with the selected client's country and division
-                clientCountryComboBox.getSelectionModel().select(currentClient.getCountry());
-                List<String> divisions = ClientQuery.getClientDivisionsByCountry(currentClient.getCountry());
+                clientCountryComboBox.getSelectionModel().select(currentCustomer.getCountry());
+                List<String> divisions = CustomerDAO.getClientDivisionsByCountry(currentCustomer.getCountry());
                 clientDivisionComboBox.getItems().clear();
                 clientDivisionComboBox.getItems().addAll(divisions);
-                clientDivisionComboBox.getSelectionModel().select(currentClient.getDivision());
+                clientDivisionComboBox.getSelectionModel().select(currentCustomer.getDivision());
 
             }
         });
@@ -116,9 +116,9 @@ public class ClientScreenController implements Initializable {
      */
     public void onClientScreenDeleteClientButtonPressed(ActionEvent actionEvent) throws IOException, SQLException {
         // Get the selected client
-        Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
+        Customer selectedCustomer = clientTableView.getSelectionModel().getSelectedItem();
 
-        if (selectedClient != null) {
+        if (selectedCustomer != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm Deletion");
             alert.setHeaderText("Are you sure you want to delete this client?");
@@ -127,7 +127,7 @@ public class ClientScreenController implements Initializable {
 
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 try {
-                    boolean isDeleted = clientQuery.deleteClient(selectedClient);
+                    boolean isDeleted = customerDAO.deleteClient(selectedCustomer);
 
                     if (!isDeleted) {
                         System.out.println("Error deleting client.");
@@ -150,27 +150,27 @@ public class ClientScreenController implements Initializable {
      */
     public void onUpdateCurrentClientButtonPressed(ActionEvent actionEvent) throws IOException {
         // Get the selected client
-        Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
+        Customer selectedCustomer = clientTableView.getSelectionModel().getSelectedItem();
 
-        if (selectedClient != null) {
+        if (selectedCustomer != null) {
             if (validateClientInputs()) {
 
-                // Get the Division_ID using the ClientQuery method
-                ClientQuery clientQuery = new ClientQuery();
-                divisionId = clientQuery.getDivisionIdByCountryAndDivision(country, division);
+                // Get the Division_ID using the CustomerDAO method
+                CustomerDAO customerDAO = new CustomerDAO();
+                divisionId = customerDAO.getDivisionIdByCountryAndDivision(country, division);
 
                 // Update the selected client with the new data
-                selectedClient.setClientName(name);
-                selectedClient.setStreetAddress(streetAddress);
-                selectedClient.setPostalCode(postalCode);
-                selectedClient.setPhone(phone);
-                selectedClient.setLastUpdate(LocalDateTime.now());
-                selectedClient.setLastUpdatedBy(SessionManager.getInstance().getCurrentUserName());
-                selectedClient.setDivisionId(divisionId);
+                selectedCustomer.setClientName(name);
+                selectedCustomer.setStreetAddress(streetAddress);
+                selectedCustomer.setPostalCode(postalCode);
+                selectedCustomer.setPhone(phone);
+                selectedCustomer.setLastUpdate(LocalDateTime.now());
+                selectedCustomer.setLastUpdatedBy(SessionManager.getInstance().getCurrentUserName());
+                selectedCustomer.setDivisionId(divisionId);
 
-                // Update the client in the database using the updateClient method from ClientQuery
+                // Update the client in the database using the updateClient method from CustomerDAO
                 try {
-                    clientQuery.updateClient(selectedClient);
+                    customerDAO.updateClient(selectedCustomer);
                 } catch (SQLException e) {
                     System.out.println("Error updating client.");
                     e.printStackTrace();
@@ -211,15 +211,15 @@ public class ClientScreenController implements Initializable {
         // Get the data from the input fields and check for empty
         if (validateClientInputs()) {
 
-            // Get the Division_ID using the ClientQuery method
-            ClientQuery clientQuery = new ClientQuery();
-            divisionId = clientQuery.getDivisionIdByCountryAndDivision(country, division);
+            // Get the Division_ID using the CustomerDAO method
+            CustomerDAO customerDAO = new CustomerDAO();
+            divisionId = customerDAO.getDivisionIdByCountryAndDivision(country, division);
 
             // Set the create and last update times to the current time
             LocalDateTime now = LocalDateTime.now();
 
-            // Create a new Client object with the input data and current time and user for create and last update info
-            Client newClient = new Client(
+            // Create a new Customer object with the input data and current time and user for create and last update info
+            Customer newCustomer = new Customer(
                     0,
                     name,
                     streetAddress,
@@ -232,7 +232,7 @@ public class ClientScreenController implements Initializable {
                     divisionId
             );
             try {
-                ClientList.addClient(newClient);
+                CustomerList.addClient(newCustomer);
             } catch (SQLException e) {
                 System.out.println("Error adding new client to list.");
                 e.printStackTrace();
@@ -251,7 +251,7 @@ public class ClientScreenController implements Initializable {
         clientScreenPostalCodeTextField.clear();
         clientScreenPhoneTextField.clear();
         clearCountryComboBox();
-        clientCountryComboBox.getItems().addAll(ClientQuery.getClientCountries());
+        clientCountryComboBox.getItems().addAll(CustomerDAO.getClientCountries());
         clearDivisionComboBox();
 
         // Refresh table view and clear selection
@@ -284,7 +284,7 @@ public class ClientScreenController implements Initializable {
     private void populateDivisionComboBox(String country) {
         ObservableList<String> divisions = FXCollections.observableArrayList();
 
-        List<String> divisionsList = clientQuery.getClientDivisionsByCountry(country);
+        List<String> divisionsList = customerDAO.getClientDivisionsByCountry(country);
 
         divisions.addAll(divisionsList);
         clientDivisionComboBox.setItems(divisions);

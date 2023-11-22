@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /** Class for creating a contact*/
 public class Contact {
     private int contactId;
@@ -71,4 +74,5 @@ public class Contact {
     public String toString() {
         return contactName;
     }
+
 }

@@ -1,5 +1,6 @@
-package helper;
+package dao;
 
+import helper.ConnectionManager;
 import report.LoginLogger;
 import java.io.*;
 
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 /** Class for checking user login and give errors when needed
  *
  */
-public class LoginQuery {
+public class LoginDAO {
 
     /** Checks user login and returns true is successful
      *
@@ -20,6 +21,8 @@ public class LoginQuery {
      * @throws SQLException
      * @throws IOException
      */
+    public static String currentUserName;
+
     public static boolean checkLogin(String inputUserName, String inputPassword) throws SQLException, IOException {
         boolean loginSuccess = false;
         if (inputUserName.isEmpty() || inputPassword.isEmpty()) {
@@ -36,6 +39,7 @@ public class LoginQuery {
             if (inputPassword.equals(storedPassword)) {
                 loginSuccess = true;
                 LoginLogger.logLoginAttempt(inputUserName, inputPassword, loginSuccess);
+                currentUserName = inputUserName;
                 return true;
             } else {
                 LoginLogger.logLoginAttempt(inputUserName, inputPassword, loginSuccess);

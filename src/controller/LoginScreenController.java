@@ -3,7 +3,7 @@
  */
 package controller;
 
-import helper.LoginQuery;
+import dao.LoginDAO;
 import helper.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -84,7 +84,7 @@ public class LoginScreenController implements Initializable {
         String password = passwordPasswordField.getText();
         if (checkEmptyUsernamePassword(userName, password)) {
             try {
-                LoginQuery.checkLogin(userName, password);
+                LoginDAO.checkLogin(userName, password);
 
                 SessionManager.getInstance().setCurrentUserName(userName);
                 System.out.println("Current user: " + SessionManager.getInstance().getCurrentUserName());

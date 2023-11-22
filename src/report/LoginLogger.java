@@ -1,6 +1,6 @@
 package report;
 
-import model.AppointmentList;
+import model.AppointmentChecker;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class LoginLogger {
     public static void logLoginAttempt(String username, String password, boolean loginSuccess) throws IOException {
         try (FileWriter fw = new FileWriter(filename, true); // Appends to existing file or creates one if not existing
         PrintWriter pw = new PrintWriter(fw)) {
-            String formattedDateTime = AppointmentList.convertLocalToUTC(LocalDateTime.now()).format(dateTimeFormat);
+            String formattedDateTime = AppointmentChecker.convertLocalToUTC(LocalDateTime.now()).format(dateTimeFormat);
             pw.printf(String.format("Username: %s, Password: %s, DateTime (UTC): %s, Success: %s%n", username, password, formattedDateTime, loginSuccess));
         }
         catch (IOException e) {

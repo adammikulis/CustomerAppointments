@@ -1,7 +1,7 @@
 package controller;
 
-import helper.AppointmentQuery;
-import helper.ContactQuery;
+import dao.AppointmentDAO;
+import dao.ContactDAO;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -97,9 +97,9 @@ public class HomeScreenController implements Initializable {
      *
      */
     public void refreshAppointmentAlert() {
-        Appointment upcomingAppointment = AppointmentList.checkUpcomingAppointments();
+        Appointment upcomingAppointment = AppointmentChecker.checkUpcomingAppointments();
         if (upcomingAppointment != null) {
-            appointmentAlertLabel.setText("Upcoming appointment ID: " + upcomingAppointment.getAppointmentId() + " at: " + AppointmentList.convertUTCToLocal(upcomingAppointment.getStartDateTime()));
+            appointmentAlertLabel.setText("Upcoming appointment ID: " + upcomingAppointment.getAppointmentId() + " at: " + AppointmentChecker.convertUTCToLocal(upcomingAppointment.getStartDateTime()));
         }
         else {
             appointmentAlertLabel.setText("No appointments in the next 15 minutes");
@@ -110,7 +110,7 @@ public class HomeScreenController implements Initializable {
      *
      */
     private void refreshAppointmentTypeReportTableView() {
-        List<AppointmentTypeCount> appointmentTypeCount = AppointmentQuery.getAppointmentCountByType();
+        List<AppointmentTypeCount> appointmentTypeCount = AppointmentDAO.getAppointmentCountByType();
         ObservableList<AppointmentTypeCount> appointmentTypeCountList = FXCollections.observableArrayList(appointmentTypeCount);
 
         appointmentTypeReportColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -121,7 +121,7 @@ public class HomeScreenController implements Initializable {
      *
      */
     private void refreshAppointmentMonthReportTableView() {
-        List<AppointmentMonthCount> appointmentMonthCount = AppointmentQuery.getAppointmentCountByMonth();
+        List<AppointmentMonthCount> appointmentMonthCount = AppointmentDAO.getAppointmentCountByMonth();
         ObservableList<AppointmentMonthCount> appointmentMonthCountList = FXCollections.observableArrayList(appointmentMonthCount);
 
         appointmentMonthReportColumn.setCellValueFactory(new PropertyValueFactory<>("month"));
@@ -133,7 +133,7 @@ public class HomeScreenController implements Initializable {
      *
      */
     private void refreshAppointmentContactReportTableView() {
-        List<AppointmentContactCount> appointmentContactCount = AppointmentQuery.getAppointmentCountByContact();
+        List<AppointmentContactCount> appointmentContactCount = AppointmentDAO.getAppointmentCountByContact();
         ObservableList<AppointmentContactCount> appointmentContactCountList = FXCollections.observableArrayList(appointmentContactCount);
 
         appointmentContactReportColumn.setCellValueFactory(new PropertyValueFactory<>("contact"));
@@ -148,8 +148,8 @@ public class HomeScreenController implements Initializable {
      */
     private void refreshHomeScheduleTableView(Contact contact) {
         try {
-            AppointmentQuery appointmentQuery = new AppointmentQuery();
-            List<Appointment> appointments = appointmentQuery.getAppointmentsByContact(contact);
+            AppointmentDAO appointmentDAO = new AppointmentDAO();
+            List<Appointment> appointments = appointmentDAO.getAppointmentsByContact(contact);
             homeScheduleTableView.setItems(FXCollections.observableArrayList(appointments));
         }
         catch (Exception e) {
@@ -204,8 +204,8 @@ public class HomeScreenController implements Initializable {
      */
     private void refreshContactComboBox() {
         try {
-            ContactQuery contactQuery = new ContactQuery();
-            List<Contact> contacts = contactQuery.getAllContacts();
+            ContactDAO contactDAO = new ContactDAO();
+            List<Contact> contacts = contactDAO.getAllContacts();
             homeContactComboBox.setItems(FXCollections.observableArrayList(contacts));
         } catch (Exception e) {
             e.printStackTrace();

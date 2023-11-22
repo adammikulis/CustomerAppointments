@@ -1,8 +1,9 @@
 package helper;
 
+import dao.AppointmentDAO;
 import javafx.scene.control.Alert;
 import model.Appointment;
-import model.AppointmentList;
+import model.AppointmentChecker;
 
 import java.time.LocalDateTime;
 import java.time.DayOfWeek;
@@ -20,8 +21,8 @@ public class AppointmentTimeChecker {
      * @return true if appointment is within business hours
      */
     public static boolean businessHourChecker(LocalDateTime localStartDateTime, LocalDateTime localEndDateTime) {
-        LocalDateTime easternStartTime = AppointmentList.convertUTCToEastern(AppointmentList.convertLocalToUTC(localStartDateTime));
-        LocalDateTime easternEndTime = AppointmentList.convertUTCToEastern(AppointmentList.convertLocalToUTC(localStartDateTime));
+        LocalDateTime easternStartTime = AppointmentChecker.convertUTCToEastern(AppointmentChecker.convertLocalToUTC(localStartDateTime));
+        LocalDateTime easternEndTime = AppointmentChecker.convertUTCToEastern(AppointmentChecker.convertLocalToUTC(localStartDateTime));
         DayOfWeek startDayOfWeek = easternStartTime.getDayOfWeek();
         DayOfWeek endDayOfWeek = easternEndTime.getDayOfWeek();
 
@@ -40,8 +41,8 @@ public class AppointmentTimeChecker {
      */
     public static boolean overlapChecker(int currentAppointmentId, LocalDateTime newAppointmentStart, LocalDateTime newAppointmentEnd, boolean update) {
 
-        AppointmentQuery appointmentQuery = new AppointmentQuery();
-        List<Appointment> appointmentList = appointmentQuery.getAllAppointments();
+        AppointmentDAO appointmentDAO = new AppointmentDAO();
+        List<Appointment> appointmentList = appointmentDAO.getAllAppointments();
 
         for (Appointment appointment : appointmentList) {
             if (update && appointment.getAppointmentId() == currentAppointmentId) {

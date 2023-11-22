@@ -1,10 +1,9 @@
 package model;
 
-import helper.ContactQuery;
+import dao.ContactDAO;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 
 /** Class for creating Appointments*/
@@ -220,7 +219,7 @@ public class Appointment {
      * @return startDateTime
      */
     public LocalDateTime getLocalStartDateTime() {
-        localStartDateTime = AppointmentList.convertUTCToLocal(startDateTime);
+        localStartDateTime = AppointmentChecker.convertUTCToLocal(startDateTime);
         return localStartDateTime;
     }
 
@@ -229,7 +228,7 @@ public class Appointment {
      * @return endDateTime
      */
     public LocalDateTime getLocalEndDateTime() {
-        localEndDateTime = AppointmentList.convertUTCToLocal(endDateTime);
+        localEndDateTime = AppointmentChecker.convertUTCToLocal(endDateTime);
         return localEndDateTime;
     }
 
@@ -303,8 +302,8 @@ public class Appointment {
         // Get the contact name for the appointment
         String contactName = null;
         try {
-            ContactQuery contactQuery = new ContactQuery();
-            contactName = contactQuery.getContactName(contactId);
+            ContactDAO contactDAO = new ContactDAO();
+            contactName = contactDAO.getContactName(contactId);
         } catch (Exception e) {
             e.printStackTrace();
         }

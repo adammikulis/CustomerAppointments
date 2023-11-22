@@ -1,7 +1,8 @@
-package helper;
+package dao;
 
-import model.Client;
-import model.ClientList;
+import helper.ConnectionManager;
+import model.Customer;
+import model.CustomerList;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -11,14 +12,14 @@ import java.util.List;
 /** Class for querying clients in the database
  *
  */
-public class ClientQuery {
+public class CustomerDAO {
 
     /** Returns a list of all clients
      *
      * @return client list
      */
-    public List<Client> getClients() {
-        List<Client> clients = new ArrayList<>();
+    public List<Customer> getClients() {
+        List<Customer> customers = new ArrayList<>();
 
         String query = "SELECT * FROM customers";
         try (PreparedStatement preparedStatement = ConnectionManager.getConnection().prepareStatement(query);
@@ -35,13 +36,13 @@ public class ClientQuery {
                 String lastUpdatedBy = resultSet.getString("Last_Updated_By");
                 Integer divisionId = resultSet.getInt("Division_ID");
 
-                clients.add(new Client(clientId, clientName, streetAddress, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdatedBy, divisionId));
+                customers.add(new Customer(clientId, clientName, streetAddress, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdatedBy, divisionId));
             }
         } catch (SQLException e) {
             System.out.println("SQL Error");
             e.printStackTrace(System.out);
         }
-        return clients;
+        return customers;
     }
 
     /** Inserts new client into database
@@ -50,7 +51,7 @@ public class ClientQuery {
      * @return newclient ID
      * @throws SQLException
      */
-    public static int insertClient(Client newclient) throws SQLException {
+    public static int insertClient(Customer newclient) throws SQLException {
         Connection conn = ConnectionManager.getConnection();
         String insertStatement = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, "
                 + "Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) "
@@ -144,28 +145,28 @@ public class ClientQuery {
 
     /** Deletes client from database
      *
-     * @param clientToDelete
+     * @param customerToDelete
      * @return true if client is deleted
      * @throws SQLException
      */
-    public boolean deleteClient(Client clientToDelete) throws SQLException {
+    public boolean deleteClient(Customer customerToDelete) throws SQLException {
         try {
             Connection conn = ConnectionManager.getConnection();
 
             // Delete all associated appointments
-            PreparedStatement deleteAppointmentsStatement = conn.prepareStatement("DELETE FROM appointments WHERE Customer_Id = ?");
-            deleteAppointmentsStatement.setInt(1, clientToDelete.getClientId());
-            deleteAppointmentsStatement.executeUpdate();
-            System.out.println("Deleted all appointments associated with client with ID " + clientToDelete.getClientId());
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM appointments WHERE Customer_Id = ?");
+            ps.setInt(1, customerToDelete.getClientId());
+            ps.executeUpdate();
+            System.out.println("Deleted all appointments associated with client with ID " + customerToDelete.getClientId());
 
             // Delete the selected client from the database
-            PreparedStatement deleteClientStatement = conn.prepareStatement("DELETE FROM customers WHERE Customer_Id = ?");
-            deleteClientStatement.setInt(1, clientToDelete.getClientId());
-            deleteClientStatement.executeUpdate();
-            System.out.println("Deleted client with ID " + clientToDelete.getClientId());
+            ps = conn.prepareStatement("DELETE FROM customers WHERE Customer_Id = ?");
+            ps.setInt(1, customerToDelete.getClientId());
+            ps.executeUpdate();
+            System.out.println("Deleted client with ID " + customerToDelete.getClientId());
 
             // Remove the selected client from the list of all clients
-            ClientList.getAllClients().remove(clientToDelete);
+            CustomerList.getAllClients().remove(customerToDelete);
 
             return true;
         } catch (SQLException e) {
@@ -176,22 +177,22 @@ public class ClientQuery {
 
     /** Updates existing client in database
      *
-     * @param currentClient
+     * @param currentCustomer
      * @throws SQLException
      */
-    public void updateClient(Client currentClient) throws SQLException {
+    public void updateClient(Customer currentCustomer) throws SQLException {
         String query = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ? WHERE Customer_Id = ?";
         Connection conn = ConnectionManager.getConnection();
         PreparedStatement ps = conn.prepareStatement(query);
 
         try {
-            ps.setString(1, currentClient.getClientName());
-            ps.setString(2, currentClient.getStreetAddress());
-            ps.setString(3, currentClient.getPostalCode());
-            ps.setString(4, currentClient.getPhone());
-            ps.setTimestamp(5, Timestamp.valueOf(currentClient.getLastUpdate()));
-            ps.setString(6, currentClient.getLastUpdatedBy());
-            ps.setInt(7, currentClient.getClientId());
+            ps.setString(1, currentCustomer.getClientName());
+            ps.setString(2, currentCustomer.getStreetAddress());
+            ps.setString(3, currentCustomer.getPostalCode());
+            ps.setString(4, currentCustomer.getPhone());
+            ps.setTimestamp(5, Timestamp.valueOf(currentCustomer.getLastUpdate()));
+            ps.setString(6, currentCustomer.getLastUpdatedBy());
+            ps.setInt(7, currentCustomer.getClientId());
 
             int rowsAffected = ps.executeUpdate();
         }

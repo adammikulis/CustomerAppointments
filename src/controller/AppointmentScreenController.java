@@ -1,8 +1,8 @@
 package controller;
 
-import helper.AppointmentQuery;
+import dao.AppointmentDAO;
 import helper.AppointmentTimeChecker;
-import helper.ContactQuery;
+import dao.ContactDAO;
 import helper.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
-import model.AppointmentList;
+import model.AppointmentChecker;
 import model.Contact;
 
 import java.io.IOException;
@@ -123,7 +123,7 @@ public class AppointmentScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        allAppointments = AppointmentList.getAllAppointments();
+        allAppointments = AppointmentChecker.getAllAppointments();
         filteredAppointments = FXCollections.observableArrayList(allAppointments);
         appointmentTableView.setItems(filteredAppointments);
         appointmentTableView.setItems(filteredAppointments);
@@ -167,9 +167,9 @@ public class AppointmentScreenController implements Initializable {
                 refreshContactComboBox();
 
                 // Get the contact for the appointment
-                ContactQuery contactQuery = new ContactQuery();
+                ContactDAO contactDAO = new ContactDAO();
                 try {
-                    Contact selectedContact = contactQuery.getContact(newSelection.getContactId());
+                    Contact selectedContact = contactDAO.getContact(newSelection.getContactId());
                     appointmentContactComboBox.getSelectionModel().select(selectedContact);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -283,11 +283,11 @@ public class AppointmentScreenController implements Initializable {
         Optional<ButtonType> result = alert.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK) {
             // Delete the appointment from the table
-            AppointmentList.deleteAppointment(selectedAppointment);
+            AppointmentChecker.deleteAppointment(selectedAppointment);
 
             // Delete the appointment from the database
-            AppointmentQuery appointmentQuery = new AppointmentQuery();
-            appointmentQuery.deleteAppointment(selectedAppointment.getAppointmentId());
+            AppointmentDAO appointmentDAO = new AppointmentDAO();
+            appointmentDAO.deleteAppointment(selectedAppointment.getAppointmentId());
             clearFields();
             refreshAppointmentListAndView();
         }
@@ -328,14 +328,13 @@ public class AppointmentScreenController implements Initializable {
                 );
                 // Insert the new appointment into the database
                 try {
-                    AppointmentQuery appointmentQuery = new AppointmentQuery();
-                    int generatedId = appointmentQuery.insertAppointment(newAppointment);
-                    newAppointment.setAppointmentId(generatedId); // Update the appointment object with the generated ID
+                    AppointmentDAO appointmentDAO = new AppointmentDAO();
+                    appointmentDAO.insertAppointment(newAppointment);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 // Add the new appointment to the list and refresh the table view
-                AppointmentList.addAppointment(newAppointment);
                 refreshAppointmentListAndView();
                 clearFields();
             }
@@ -379,8 +378,8 @@ public class AppointmentScreenController implements Initializable {
         date = appointmentDatePicker.getValue();
         startTime = LocalTime.parse(appointmentStartTimeTextField.getText());
         endTime = LocalTime.parse(appointmentEndTimeTextField.getText());
-        createDate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
-        lastUpdate = AppointmentList.convertLocalToUTC(LocalDateTime.now());
+        createDate = AppointmentChecker.convertLocalToUTC(LocalDateTime.now());
+        lastUpdate = AppointmentChecker.convertLocalToUTC(LocalDateTime.now());
 
         startDateTime = LocalDateTime.of(date, startTime);
         endDateTime = LocalDateTime.of(date, endTime);
@@ -418,8 +417,8 @@ public class AppointmentScreenController implements Initializable {
 
                 // Save the changes to the database
                 try {
-                    AppointmentQuery appointmentQuery = new AppointmentQuery();
-                    appointmentQuery.updateAppointment(selectedAppointment);
+                    AppointmentDAO appointmentDAO = new AppointmentDAO();
+                    appointmentDAO.updateAppointment(selectedAppointment);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -466,8 +465,8 @@ public class AppointmentScreenController implements Initializable {
     public void refreshContactComboBox() {
         List<Contact> contacts = null;
         try {
-            ContactQuery contactQuery = new ContactQuery();
-            contacts = contactQuery.getAllContacts();
+            ContactDAO contactDAO = new ContactDAO();
+            contacts = contactDAO.getAllContacts();
             appointmentContactComboBox.setItems(FXCollections.observableArrayList(contacts));
         } catch (Exception e) {
             e.printStackTrace();

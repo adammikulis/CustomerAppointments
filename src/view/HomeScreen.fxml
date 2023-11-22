@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeScreenController">
    <children>
-      <VBox layoutX="120.0" layoutY="129.0" prefHeight="245.0" prefWidth="537.0" spacing="10.0">
+      <VBox layoutX="112.0" layoutY="129.0" prefHeight="245.0" prefWidth="545.0" spacing="10.0">
          <children>
             <HBox prefHeight="25.0" prefWidth="531.0" spacing="20.0">
                <children>
@@ -21,15 +21,15 @@
                 <Button fx:id="addUpdateClientButton" mnemonicParsing="false" onAction="#onAddUpdateClientButtonPressed" prefHeight="25.0" prefWidth="116.0" text="Client Screen" />
                </children>
             </HBox>
-            <TableView fx:id="homeScheduleTableView" prefHeight="200.0" prefWidth="540.0">
+            <TableView fx:id="homeScheduleTableView" prefHeight="200.0" prefWidth="551.0">
               <columns>
                 <TableColumn fx:id="homeScheduleAppointmentIdColumn" prefWidth="75.0" text="Appt_ID" />
                 <TableColumn fx:id="homeScheduleTitleColumn" prefWidth="75.0" text="Title" />
                   <TableColumn fx:id="homeScheduleTypeColumn" prefWidth="75.0" text="Type" />
                   <TableColumn fx:id="homeScheduleDescriptionColumn" prefWidth="75.0" text="Desc" />
-                  <TableColumn fx:id="homeScheduleStartColumn" prefWidth="75.0" text="Start" />
-                  <TableColumn fx:id="homeScheduleEndColumn" prefWidth="75.0" text="End" />
-                  <TableColumn fx:id="homeScheduleCustomerId" prefWidth="76.66668701171875" text="Cust_ID" />
+                  <TableColumn fx:id="homeScheduleStartColumn" prefWidth="81.33331298828125" text="Start" />
+                  <TableColumn fx:id="homeScheduleEndColumn" prefWidth="77.33331298828125" text="End" />
+                  <TableColumn fx:id="homeScheduleCustomerId" prefWidth="82.0" text="Cust_ID" />
               </columns>
             </TableView>
          </children>
@@ -44,7 +44,10 @@
          <children>
             <VBox prefHeight="180.0" prefWidth="174.0">
                <children>
-                  <Label text="Total Appointments by Type:" />
+                  <Label text="Report 1:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <TableView fx:id="appointmentTypeReportTableView" prefHeight="163.0" prefWidth="183.0">
                     <columns>
                       <TableColumn fx:id="appointmentTypeReportColumn" prefWidth="97.33334350585938" text="Appt Type" />
@@ -55,7 +58,10 @@
             </VBox>
             <VBox prefHeight="180.0" prefWidth="175.0">
                <children>
-                  <Label text="Total Appointments by Month:" />
+                  <Label text="Report 2:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <TableView fx:id="appointmentMonthTotalReportTableView" prefHeight="165.0" prefWidth="141.0">
                      <columns>
                         <TableColumn fx:id="appointmentMonthReportColumn" prefWidth="97.33334350585938" text="Month" />
@@ -66,7 +72,10 @@
             </VBox>
             <VBox layoutX="190.0" layoutY="10.0" prefHeight="180.0" prefWidth="175.0">
                <children>
-                  <Label text="Total Appointments by Contact:" />
+                  <Label text="Report 3:">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <TableView fx:id="appointmentContactTotalReportTableView" prefHeight="163.0" prefWidth="182.0">
                      <columns>
                         <TableColumn fx:id="appointmentContactReportColumn" prefWidth="97.33334350585938" text="Contact" />
@@ -77,6 +86,9 @@
             </VBox>
          </children>
       </HBox>
-      <Label fx:id="appointmentAlertLabel" layoutX="294.0" layoutY="100.0" text="&lt;Appointment Alert&gt;" textAlignment="CENTER" />
+      <Label fx:id="appointmentAlertLabel" layoutX="294.0" layoutY="100.0" text="&lt;Appointment Alert&gt;" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
+         </font></Label>
    </children>
 </AnchorPane>

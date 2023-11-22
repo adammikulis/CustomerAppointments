@@ -1,14 +1,14 @@
 package model;
 
-import helper.ClientQuery;
-import java.sql.SQLException;
+import dao.CustomerDAO;
+
 import java.time.LocalDateTime;
 
-/** Class for creating a client*/
-public class Client {
+/** Class for creating a customer*/
+public class Customer {
 
-    private int clientId;
-    private String clientName;
+    private int customerId;
+    private String customerName;
     private String streetAddress;
     private String postalCode;
     private String phone;
@@ -19,22 +19,22 @@ public class Client {
     private int divisionId;
 
 
-    /** Constructor for Client
+    /** Constructor for Customer
      *
-     * @param clientId      client id
-     * @param clientName    client name
-     * @param streetAddress client street address
-     * @param postalCode    client postalCode
-     * @param phone         client phone
+     * @param customerId      customer id
+     * @param customerName    customer name
+     * @param streetAddress customer street address
+     * @param postalCode    customer postalCode
+     * @param phone         customer phone
      * @param createDate    date created
      * @param createdBy     created by
      * @param lastUpdate    last updated date and time
      * @param lastUpdatedBy last updated by
-     * @param divisionId    division id of client
+     * @param divisionId    division id of customer
      */
-    public Client(int clientId, String clientName, String streetAddress, String postalCode, String phone, LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy, int divisionId) {
-        this.clientId = clientId;
-        this.clientName = clientName;
+    public Customer(int customerId, String customerName, String streetAddress, String postalCode, String phone, LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy, int divisionId) {
+        this.customerId = customerId;
+        this.customerName = customerName;
         this.streetAddress = streetAddress;
         this.postalCode = postalCode;
         this.phone = phone;
@@ -47,29 +47,29 @@ public class Client {
     }
 
 
-    /** Sets client id
+    /** Sets customer id
      *
-     * @param clientId client id
+     * @param customerId customer id
      */
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
+    public void setClientId(int customerId) {
+        this.customerId = customerId;
     }
 
-    /** Returns client id
+    /** Returns customer id
      *
-     * @return client id
+     * @return customer id
      */
     public int getClientId() {
-        return clientId;
+        return customerId;
     }
 
 
-    /** Sets client name
+    /** Sets customer name
      *
-     * @param clientName
+     * @param customerName
      */
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
+    public void setClientName(String customerName) {
+        this.customerName = customerName;
     }
 
     /** Returns last name
@@ -77,7 +77,7 @@ public class Client {
      * @return lastName
      */
     public String getClientName() {
-        return clientName;
+        return customerName;
     }
 
     /** Sets street address
@@ -129,7 +129,7 @@ public class Client {
         return phone;
     }
 
-    /** Returns the client's creation date.
+    /** Returns the customer's creation date.
      *
      * @return createDate as LocalDateTime
      */
@@ -137,7 +137,7 @@ public class Client {
         return createDate;
     }
 
-    /** Sets the client's creation date.
+    /** Sets the customer's creation date.
      *
      * @param createDate LocalDateTime to set the creation date
      */
@@ -145,7 +145,7 @@ public class Client {
         this.createDate = createDate;
     }
 
-    /** Returns the client's creator.
+    /** Returns the customer's creator.
      *
      * @return createdBy as String
      */
@@ -153,7 +153,7 @@ public class Client {
         return createdBy;
     }
 
-    /** Sets the client's creator.
+    /** Sets the customer's creator.
      *
      * @param createdBy String to set the creator
      */
@@ -161,7 +161,7 @@ public class Client {
         this.createdBy = createdBy;
     }
 
-    /** Returns the client's last update date.
+    /** Returns the customer's last update date.
      *
      * @return lastUpdate as LocalDateTime
      */
@@ -169,7 +169,7 @@ public class Client {
         return lastUpdate;
     }
 
-    /** Sets the client's last update date.
+    /** Sets the customer's last update date.
      *
      * @param lastUpdate LocalDateTime to set the last update date
      */
@@ -177,7 +177,7 @@ public class Client {
         this.lastUpdate = lastUpdate;
     }
 
-    /** Returns the client's last updater.
+    /** Returns the customer's last updater.
      *
      * @return lastUpdatedBy as String
      */
@@ -185,7 +185,7 @@ public class Client {
         return lastUpdatedBy;
     }
 
-    /** Sets the client's last updater.
+    /** Sets the customer's last updater.
      *
      * @param lastUpdatedBy String to set the last updater
      */
@@ -193,7 +193,7 @@ public class Client {
         this.lastUpdatedBy = lastUpdatedBy;
     }
 
-    /** Returns the client's division ID.
+    /** Returns the customer's division ID.
      *
      * @return divisionId as int
      */
@@ -201,7 +201,7 @@ public class Client {
         return divisionId;
     }
 
-    /** Sets the client's division ID.
+    /** Sets the customer's division ID.
      *
      * @param divisionId int to set the division ID
      */
@@ -209,19 +209,19 @@ public class Client {
         this.divisionId = divisionId;
     }
 
-    /** Returnss the client's country by division ID
+    /** Returnss the customer's country by division ID
      * @return country by division ID
      */
     public String getCountry() {
-        return ClientQuery.getCountryByDivisionId(getDivisionId());
+        return CustomerDAO.getCountryByDivisionId(getDivisionId());
     }
 
-    /** Returns the client's division name by division ID
+    /** Returns the customer's division name by division ID
      *
      * @return division name
      */
     public String getDivision() {
-        return ClientQuery.getDivisionByDivisionId(getDivisionId());
+        return CustomerDAO.getDivisionByDivisionId(getDivisionId());
     }
 
 

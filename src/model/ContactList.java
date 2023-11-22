@@ -1,7 +1,6 @@
 package model;
 
-import helper.ClientQuery;
-import helper.ContactQuery;
+import dao.ContactDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -11,8 +10,8 @@ import java.util.List;
 /** Class for creating a list of contacts*/
 public class ContactList {
 
-    private static ContactQuery contactQuery = new ContactQuery();
-    private static List<Contact> contacts = contactQuery.getAllContacts();
+    private static ContactDAO contactDAO = new ContactDAO();
+    private static List<Contact> contacts = contactDAO.getAllContacts();
     private static ObservableList<Contact> allContacts = FXCollections.observableArrayList(contacts);
     private static ObservableList<Contact> filteredContacts = FXCollections.observableArrayList();
 
@@ -45,16 +44,5 @@ public class ContactList {
      * @param contactNames string list of contact names to parse
      * @return contacts
      */
-    public static List<Contact> getContactsByNames(List<String> contactNames) {
-        List<Contact> contacts = new ArrayList<>();
-        for (String contactName : contactNames) {
-            for (Contact contact : allContacts) {
-                if (contact.getContactName().equals(contactName)) {
-                    contacts.add(contact);
-                    break;
-                }
-            }
-        }
-        return contacts;
-    }
+
 }
