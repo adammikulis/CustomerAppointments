@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerScreenController">
    <children>
-      <Label layoutX="348.0" layoutY="53.0" text="Client List">
+      <Label layoutX="348.0" layoutY="53.0" text="Customer List">
          <font>
             <Font size="24.0" />
          </font>
@@ -35,7 +35,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Client ID" />
+            <Label text="Customer ID" />
             <Label text="Name" GridPane.rowIndex="1" />
             <Label text="Street Address" GridPane.rowIndex="2" />
             <Label text="Postal Code" GridPane.rowIndex="3" />
@@ -51,13 +51,13 @@
             <ComboBox fx:id="customerDivisionComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
-      <Label layoutX="478.0" layoutY="118.0" text="Client Information" />
+      <Label layoutX="478.0" layoutY="118.0" text="Customer Information" />
       <ButtonBar layoutX="116.0" layoutY="494.0" prefHeight="40.0" prefWidth="503.0" />
-      <Button layoutX="618.0" layoutY="362.0" mnemonicParsing="false" onAction="#onUpdateCurrentClientButtonPressed" text="Update Current Client" />
-      <Button fx:id="customerScreenDeleteClientButton" layoutX="499.0" layoutY="362.0" mnemonicParsing="false" onAction="#onClientScreenSaveNewClientButtonPressed" text="Save New Client" />
-      <Button layoutX="666.0" layoutY="404.0" mnemonicParsing="false" onAction="#onClientScreenDeleteClientButtonPressed" text="Delete Client" />
-      <Button layoutX="664.0" layoutY="525.0" mnemonicParsing="false" onAction="#onClientScreenBackButtonPressed" text="Back" />
+      <Button layoutX="618.0" layoutY="362.0" mnemonicParsing="false" onAction="#onUpdateCurrentCustomerButtonPressed" text="Update Current Customer" />
+      <Button fx:id="customerScreenDeleteCustomerButton" layoutX="499.0" layoutY="362.0" mnemonicParsing="false" onAction="#onCustomerScreenSaveNewCustomerButtonPressed" text="Save New Customer" />
+      <Button layoutX="666.0" layoutY="404.0" mnemonicParsing="false" onAction="#onCustomerScreenDeleteCustomerButtonPressed" text="Delete Customer" />
+      <Button layoutX="664.0" layoutY="525.0" mnemonicParsing="false" onAction="#onCustomerScreenBackButtonPressed" text="Back" />
       <Label text="Label" />
-      <Button layoutX="646.0" layoutY="114.0" mnemonicParsing="false" onAction="#onClientScreenClearSelectionButtonPressed" text="Clear Fields/Selection" />
+      <Button layoutX="646.0" layoutY="114.0" mnemonicParsing="false" onAction="#onCustomerScreenClearSelectionButtonPressed" text="Clear Fields/Selection" />
    </children>
 </AnchorPane>

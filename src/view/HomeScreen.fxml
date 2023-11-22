@@ -34,7 +34,7 @@
             </TableView>
          </children>
       </VBox>
-      <Label layoutX="120.0" layoutY="40.0" text="Client Appointment DB - Home">
+      <Label layoutX="109.0" layoutY="40.0" text="Customer Appointments - Home">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>

@@ -186,7 +186,7 @@ public class HomeScreenController implements Initializable {
     public void onAddUpdateClientButtonPressed(ActionEvent actionEvent) throws IOException {
 
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/ClientScreen.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }

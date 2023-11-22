@@ -32,7 +32,6 @@ public class CustomerScreenController implements Initializable {
     Parent scene;
 
     private Customer currentCustomer;
-    private CustomerDAO customerDAO = new CustomerDAO();
     private String name;
     private String streetAddress;
     private String postalCode;
@@ -126,7 +125,7 @@ public class CustomerScreenController implements Initializable {
 
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 try {
-                    boolean isDeleted = customerDAO.deleteCustomer(selectedCustomer);
+                    boolean isDeleted = CustomerDAO.deleteCustomer(selectedCustomer);
 
                     if (!isDeleted) {
                         System.out.println("Error deleting customer.");
@@ -254,6 +253,7 @@ public class CustomerScreenController implements Initializable {
         clearDivisionComboBox();
 
         // Refresh table view and clear selection
+        customerTableView.setItems(CustomerDAO.getAllCustomers());
         customerTableView.refresh();
         customerTableView.getSelectionModel().clearSelection();
     }
@@ -268,13 +268,6 @@ public class CustomerScreenController implements Initializable {
         }
     }
 
-    /** Fills country combo box
-     *
-     */
-    private void populateCountryComboBox() {
-        ObservableList<String> countries = FXCollections.observableArrayList();
-
-    }
 
     /** Fills division combo box based on country
      *
@@ -283,7 +276,7 @@ public class CustomerScreenController implements Initializable {
     private void populateDivisionComboBox(String country) {
         ObservableList<String> divisions = FXCollections.observableArrayList();
 
-        List<String> divisionsList = customerDAO.getCustomerDivisionsByCountry(country);
+        List<String> divisionsList = CustomerDAO.getCustomerDivisionsByCountry(country);
 
         divisions.addAll(divisionsList);
         customerDivisionComboBox.setItems(divisions);

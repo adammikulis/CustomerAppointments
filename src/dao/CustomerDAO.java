@@ -150,7 +150,7 @@ public class CustomerDAO {
      * @return true if client is deleted
      * @throws SQLException
      */
-    public boolean deleteCustomer(Customer customerToDelete) throws SQLException {
+    public static boolean deleteCustomer(Customer customerToDelete) throws SQLException {
         try {
             Connection conn = ConnectionManager.getConnection();
 
@@ -178,7 +178,7 @@ public class CustomerDAO {
      * @param currentCustomer
      * @throws SQLException
      */
-    public void updateCustomer(Customer currentCustomer) throws SQLException {
+    public static void updateCustomer(Customer currentCustomer) throws SQLException {
         String query = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ? WHERE Customer_Id = ?";
         Connection conn = ConnectionManager.getConnection();
         PreparedStatement ps = conn.prepareStatement(query);
@@ -198,33 +198,6 @@ public class CustomerDAO {
             System.out.println("SQL Error");
             e.printStackTrace(System.out);
         }
-    }
-
-    /** Queries db to get next client ID
-     *
-     * @return next client ID
-     * @throws SQLException
-     */
-    public int getNextCustomerId() throws SQLException {
-        int nextId = 0;
-        try {
-            String query = "SELECT MAX(Customer_ID) + 1 AS next_id FROM client_schedule.customers";
-            Connection conn = ConnectionManager.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                nextId = rs.getInt("next_id");
-            }
-
-            rs.close();
-            ps.close();
-        }
-        catch (SQLException e) {
-            System.out.println("SQL Error");
-            e.printStackTrace(System.out);
-        }
-        return nextId;
     }
 
     /** Returns division ID by country and division name
