@@ -4,17 +4,17 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ClientScreenController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerScreenController">
    <children>
       <Label layoutX="348.0" layoutY="53.0" text="Client List">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <TableView fx:id="clientTableView" layoutX="14.0" layoutY="117.0" prefHeight="330.0" prefWidth="449.0">
+      <TableView fx:id="customerTableView" layoutX="14.0" layoutY="117.0" prefHeight="330.0" prefWidth="449.0">
         <columns>
-            <TableColumn fx:id="clientIdColumn" prefWidth="30.0" text="ID" />
-          <TableColumn fx:id="clientNameColumn" prefWidth="108.33334732055664" text="Name" />
+            <TableColumn fx:id="customerIdColumn" prefWidth="30.0" text="ID" />
+          <TableColumn fx:id="customerNameColumn" prefWidth="108.33334732055664" text="Name" />
           <TableColumn fx:id="streetAddressColumn" prefWidth="117.99995422363281" text="Street Address" />
             <TableColumn fx:id="postalCodeColumn" prefWidth="77.3333740234375" text="Postal Code" />
             <TableColumn fx:id="phoneColumn" prefWidth="111.3333740234375" text="Phone" />
@@ -41,20 +41,20 @@
             <Label text="Postal Code" GridPane.rowIndex="3" />
             <Label text="Phone" GridPane.rowIndex="4" />
             <TextField editable="false" prefHeight="25.0" prefWidth="166.0" promptText="Auto-Generated" GridPane.columnIndex="1" />
-            <TextField fx:id="clientScreenNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="clientScreenAddressTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="clientScreenPostalCodeTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="clientScreenPhoneTextField" prefHeight="67.0" prefWidth="142.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="customerScreenNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="customerScreenAddressTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="customerScreenPostalCodeTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="customerScreenPhoneTextField" prefHeight="67.0" prefWidth="142.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="Country" GridPane.rowIndex="5" />
-            <ComboBox fx:id="clientCountryComboBox" onAction="#onCountryComboBoxChanged" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ComboBox fx:id="customerCountryComboBox" onAction="#onCountryComboBoxChanged" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label text="State/Territory" GridPane.rowIndex="6" />
-            <ComboBox fx:id="clientDivisionComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ComboBox fx:id="customerDivisionComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
       <Label layoutX="478.0" layoutY="118.0" text="Client Information" />
       <ButtonBar layoutX="116.0" layoutY="494.0" prefHeight="40.0" prefWidth="503.0" />
       <Button layoutX="618.0" layoutY="362.0" mnemonicParsing="false" onAction="#onUpdateCurrentClientButtonPressed" text="Update Current Client" />
-      <Button fx:id="clientScreenDeleteClientButton" layoutX="499.0" layoutY="362.0" mnemonicParsing="false" onAction="#onClientScreenSaveNewClientButtonPressed" text="Save New Client" />
+      <Button fx:id="customerScreenDeleteClientButton" layoutX="499.0" layoutY="362.0" mnemonicParsing="false" onAction="#onClientScreenSaveNewClientButtonPressed" text="Save New Client" />
       <Button layoutX="666.0" layoutY="404.0" mnemonicParsing="false" onAction="#onClientScreenDeleteClientButtonPressed" text="Delete Client" />
       <Button layoutX="664.0" layoutY="525.0" mnemonicParsing="false" onAction="#onClientScreenBackButtonPressed" text="Back" />
       <Label text="Label" />

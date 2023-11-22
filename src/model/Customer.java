@@ -51,7 +51,7 @@ public class Customer {
      *
      * @param customerId customer id
      */
-    public void setClientId(int customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
@@ -59,7 +59,7 @@ public class Customer {
      *
      * @return customer id
      */
-    public int getClientId() {
+    public int getCustomerId() {
         return customerId;
     }
 
@@ -68,7 +68,7 @@ public class Customer {
      *
      * @param customerName
      */
-    public void setClientName(String customerName) {
+    public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
 
@@ -76,7 +76,7 @@ public class Customer {
      *
      * @return lastName
      */
-    public String getClientName() {
+    public String getCustomerName() {
         return customerName;
     }
 

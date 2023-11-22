@@ -75,7 +75,7 @@
             <TextField fx:id="appointmentStartTimeTextField" GridPane.columnIndex="7" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentEndTimeTextField" GridPane.columnIndex="8" GridPane.rowIndex="1" />
             <TextField fx:id="customerIdTextField" prefHeight="25.0" prefWidth="49.0" GridPane.columnIndex="9" GridPane.rowIndex="1" />
-            <TextField fx:id="userIdTextField" editable="false" GridPane.columnIndex="10" GridPane.rowIndex="1" />
+            <TextField fx:id="userIdTextField" GridPane.columnIndex="10" GridPane.rowIndex="1" />
             <ComboBox fx:id="appointmentContactComboBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <DatePicker fx:id="appointmentDatePicker" GridPane.columnIndex="6" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentTypeTextField" layoutX="227.0" layoutY="47.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />

@@ -4,15 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="major refactoring started with renaming classes">
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="removed list classes and moved functionality into helpers and controllers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/AppointmentList.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/AppointmentList.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/controller/ClientScreenController.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/ClientScreenController.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/HomeScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Appointment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/AppointmentChecker.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/report/LoginLogger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/report/LoginLogger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ClientScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/AppointmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/AppointmentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/CustomerDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/ContactList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/CustomerList.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ClientScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ClientScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/HomeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomeScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -290,14 +294,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00058" summary="appointment overlap and biz hours nearly finished">
-      <option name="closed" value="true" />
-      <created>1700338132716</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1700338132716</updated>
-    </task>
     <task id="LOCAL-00059" summary="appointment overlap and biz hours work properly">
       <option name="closed" value="true" />
       <created>1700340412143</created>
@@ -466,7 +462,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700677312061</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="removed list classes and moved functionality into helpers and controllers">
+      <option name="closed" value="true" />
+      <created>1700678216993</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1700678216993</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -488,7 +492,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Login screen now translates everything to French when needed" />
     <MESSAGE value="javadocs and eastern time zone conversion added" />
     <MESSAGE value="finished javadocs for model" />
     <MESSAGE value="appointment overlap coded and being implemented" />
@@ -513,7 +516,8 @@
     <MESSAGE value="javadocs updated for consistent wording" />
     <MESSAGE value="moved appointment alert to home screen" />
     <MESSAGE value="major refactoring started with renaming classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="major refactoring started with renaming classes" />
+    <MESSAGE value="removed list classes and moved functionality into helpers and controllers" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed list classes and moved functionality into helpers and controllers" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

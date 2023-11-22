@@ -14,7 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Customer;
-import model.CustomerList;
 
 import java.io.IOException;
 import java.net.URL;
@@ -24,10 +23,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-/** Class for controlling the client screen
+/** Class for controlling the customer screen
  *
  */
-public class ClientScreenController implements Initializable {
+public class CustomerScreenController implements Initializable {
 
     Stage stage;
     Parent scene;
@@ -43,12 +42,12 @@ public class ClientScreenController implements Initializable {
     private int divisionId;
 
     @FXML
-    private TableView<Customer> clientTableView;
+    private TableView<Customer> customerTableView;
 
     @FXML
-    private TableColumn<Customer, Integer> clientIdColumn;
+    private TableColumn<Customer, Integer> customerIdColumn;
     @FXML
-    private TableColumn<Customer, String> clientNameColumn;
+    private TableColumn<Customer, String> customerNameColumn;
     @FXML
     private TableColumn<Customer, String> streetAddressColumn;
     @FXML
@@ -57,110 +56,110 @@ public class ClientScreenController implements Initializable {
     private TableColumn<Customer, Integer> phoneColumn;
 
     @FXML
-    private TextField clientScreenNameTextField;
+    private TextField customerScreenNameTextField;
     @FXML
-    private TextField clientScreenAddressTextField;
+    private TextField customerScreenAddressTextField;
     @FXML
-    private TextField clientScreenPostalCodeTextField;
+    private TextField customerScreenPostalCodeTextField;
     @FXML
-    private TextField clientScreenPhoneTextField;
+    private TextField customerScreenPhoneTextField;
 
     @FXML
-    private ComboBox<String> clientCountryComboBox;
+    private ComboBox<String> customerCountryComboBox;
     @FXML
-    private ComboBox<String> clientDivisionComboBox;
+    private ComboBox<String> customerDivisionComboBox;
 
-    /** Initialization for client screen
+    /** Initialization for customer screen
      * Lambda expressions used for listeners
      * @param url
      * @param resourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        clientTableView.setItems(CustomerList.getAllClients());
-        clientIdColumn.setCellValueFactory(new PropertyValueFactory<>("clientId"));
-        clientNameColumn.setCellValueFactory(new PropertyValueFactory<>("clientName"));
+        customerTableView.setItems(CustomerDAO.getAllCustomers());
+        customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         streetAddressColumn.setCellValueFactory(new PropertyValueFactory<>("streetAddress"));
         postalCodeColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
 
-        clientCountryComboBox.getItems().addAll(CustomerDAO.getClientCountries());
+        customerCountryComboBox.getItems().addAll(CustomerDAO.getCustomerCountries());
 
-        clientTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        customerTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 System.out.println("Selected row: " + newValue);
-                currentCustomer = newValue; // Set the current client
+                currentCustomer = newValue; // Set the current customer
 
-                // Populate the textfields with the selected client's data
-                clientScreenNameTextField.setText(currentCustomer.getClientName());
-                clientScreenAddressTextField.setText(currentCustomer.getStreetAddress());
-                clientScreenPostalCodeTextField.setText(currentCustomer.getPostalCode());
-                clientScreenPhoneTextField.setText(currentCustomer.getPhone());
+                // Populate the textfields with the selected customer's data
+                customerScreenNameTextField.setText(currentCustomer.getCustomerName());
+                customerScreenAddressTextField.setText(currentCustomer.getStreetAddress());
+                customerScreenPostalCodeTextField.setText(currentCustomer.getPostalCode());
+                customerScreenPhoneTextField.setText(currentCustomer.getPhone());
 
-                // Populate the combo boxes with the selected client's country and division
-                clientCountryComboBox.getSelectionModel().select(currentCustomer.getCountry());
-                List<String> divisions = CustomerDAO.getClientDivisionsByCountry(currentCustomer.getCountry());
-                clientDivisionComboBox.getItems().clear();
-                clientDivisionComboBox.getItems().addAll(divisions);
-                clientDivisionComboBox.getSelectionModel().select(currentCustomer.getDivision());
+                // Populate the combo boxes with the selected customer's country and division
+                customerCountryComboBox.getSelectionModel().select(currentCustomer.getCountry());
+                List<String> divisions = CustomerDAO.getCustomerDivisionsByCountry(currentCustomer.getCountry());
+                customerDivisionComboBox.getItems().clear();
+                customerDivisionComboBox.getItems().addAll(divisions);
+                customerDivisionComboBox.getSelectionModel().select(currentCustomer.getDivision());
 
             }
         });
     }
 
-    /** Deletes currently selected client from the database
+    /** Deletes currently selected customer from the database
      *
      * @param actionEvent
      * @throws IOException
      * @throws SQLException
      */
-    public void onClientScreenDeleteClientButtonPressed(ActionEvent actionEvent) throws IOException, SQLException {
-        // Get the selected client
-        Customer selectedCustomer = clientTableView.getSelectionModel().getSelectedItem();
+    public void onCustomerScreenDeleteCustomerButtonPressed(ActionEvent actionEvent) throws IOException, SQLException {
+        // Get the selected customer
+        Customer selectedCustomer = customerTableView.getSelectionModel().getSelectedItem();
 
         if (selectedCustomer != null) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm Deletion");
-            alert.setHeaderText("Are you sure you want to delete this client?");
-            alert.setContentText("Deleting a client will also delete all appointments associated with this client.");
+            alert.setHeaderText("Are you sure you want to delete this customer?");
+            alert.setContentText("Deleting a customer will also delete all appointments associated with this customer.");
             Optional<ButtonType> result = alert.showAndWait();
 
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 try {
-                    boolean isDeleted = customerDAO.deleteClient(selectedCustomer);
+                    boolean isDeleted = customerDAO.deleteCustomer(selectedCustomer);
 
                     if (!isDeleted) {
-                        System.out.println("Error deleting client.");
+                        System.out.println("Error deleting customer.");
                     }
                 } catch (SQLException e) {
-                    System.out.println("Error deleting client.");
+                    System.out.println("Error deleting customer.");
                     e.printStackTrace();
                 }
             }
         } else {
-            System.out.println("No client selected for deletion.");
+            System.out.println("No customer selected for deletion.");
         }
         clearFieldsAndRefresh();
     }
 
-    /** Updates currently selected client in the database
+    /** Updates currently selected customer in the database
      *
      * @param actionEvent
      * @throws IOException
      */
-    public void onUpdateCurrentClientButtonPressed(ActionEvent actionEvent) throws IOException {
-        // Get the selected client
-        Customer selectedCustomer = clientTableView.getSelectionModel().getSelectedItem();
+    public void onUpdateCurrentCustomerButtonPressed(ActionEvent actionEvent) throws IOException {
+        // Get the selected customer
+        Customer selectedCustomer = customerTableView.getSelectionModel().getSelectedItem();
 
         if (selectedCustomer != null) {
-            if (validateClientInputs()) {
+            if (validateCustomerInputs()) {
 
                 // Get the Division_ID using the CustomerDAO method
                 CustomerDAO customerDAO = new CustomerDAO();
                 divisionId = customerDAO.getDivisionIdByCountryAndDivision(country, division);
 
-                // Update the selected client with the new data
-                selectedCustomer.setClientName(name);
+                // Update the selected customer with the new data
+                selectedCustomer.setCustomerName(name);
                 selectedCustomer.setStreetAddress(streetAddress);
                 selectedCustomer.setPostalCode(postalCode);
                 selectedCustomer.setPhone(phone);
@@ -168,11 +167,11 @@ public class ClientScreenController implements Initializable {
                 selectedCustomer.setLastUpdatedBy(SessionManager.getInstance().getCurrentUserName());
                 selectedCustomer.setDivisionId(divisionId);
 
-                // Update the client in the database using the updateClient method from CustomerDAO
+                // Update the customer in the database using the updateCustomer method from CustomerDAO
                 try {
-                    customerDAO.updateClient(selectedCustomer);
+                    customerDAO.updateCustomer(selectedCustomer);
                 } catch (SQLException e) {
-                    System.out.println("Error updating client.");
+                    System.out.println("Error updating customer.");
                     e.printStackTrace();
                 }
                 clearFieldsAndRefresh();
@@ -180,36 +179,36 @@ public class ClientScreenController implements Initializable {
 
 
         } else {
-            noClientSelectedAlert();
+            noCustomerSelectedAlert();
         }
     }
 
-    /** Gets data from input fields to create new or update client
+    /** Gets data from input fields to create new or update customer
      *
      */
-    private void getClientDataFromInputFields() {
+    private void getCustomerDataFromInputFields() {
         // Get the data from the input fields
-        name = clientScreenNameTextField.getText();
-        streetAddress = clientScreenAddressTextField.getText();
-        postalCode = clientScreenPostalCodeTextField.getText();
-        phone = clientScreenPhoneTextField.getText();
+        name = customerScreenNameTextField.getText();
+        streetAddress = customerScreenAddressTextField.getText();
+        postalCode = customerScreenPostalCodeTextField.getText();
+        phone = customerScreenPhoneTextField.getText();
 
-        String countryValue = (String) clientCountryComboBox.getValue();
+        String countryValue = (String) customerCountryComboBox.getValue();
         country = (countryValue != null) ? countryValue : "";
 
-        String divisionValue = (String) clientDivisionComboBox.getValue();
+        String divisionValue = (String) customerDivisionComboBox.getValue();
         division = (divisionValue != null) ? divisionValue : "";
 
     }
 
-    /** Creates new client in the database
+    /** Creates new customer in the database
      *
      * @param actionEvent
      * @throws IOException
      */
-    public void onClientScreenSaveNewClientButtonPressed(ActionEvent actionEvent) throws IOException {
+    public void onCustomerScreenSaveNewCustomerButtonPressed(ActionEvent actionEvent) throws IOException {
         // Get the data from the input fields and check for empty
-        if (validateClientInputs()) {
+        if (validateCustomerInputs()) {
 
             // Get the Division_ID using the CustomerDAO method
             CustomerDAO customerDAO = new CustomerDAO();
@@ -232,9 +231,9 @@ public class ClientScreenController implements Initializable {
                     divisionId
             );
             try {
-                CustomerList.addClient(newCustomer);
+                CustomerDAO.insertCustomer(newCustomer);
             } catch (SQLException e) {
-                System.out.println("Error adding new client to list.");
+                System.out.println("Error adding new customer to list.");
                 e.printStackTrace();
             }
             clearFieldsAndRefresh();
@@ -246,21 +245,21 @@ public class ClientScreenController implements Initializable {
      */
     private void clearFieldsAndRefresh() {
         // Clear the input fields
-        clientScreenNameTextField.clear();
-        clientScreenAddressTextField.clear();
-        clientScreenPostalCodeTextField.clear();
-        clientScreenPhoneTextField.clear();
+        customerScreenNameTextField.clear();
+        customerScreenAddressTextField.clear();
+        customerScreenPostalCodeTextField.clear();
+        customerScreenPhoneTextField.clear();
         clearCountryComboBox();
-        clientCountryComboBox.getItems().addAll(CustomerDAO.getClientCountries());
+        customerCountryComboBox.getItems().addAll(CustomerDAO.getCustomerCountries());
         clearDivisionComboBox();
 
         // Refresh table view and clear selection
-        clientTableView.refresh();
-        clientTableView.getSelectionModel().clearSelection();
+        customerTableView.refresh();
+        customerTableView.getSelectionModel().clearSelection();
     }
     @FXML
     private void onCountryComboBoxChanged(ActionEvent event) {
-        String country = clientCountryComboBox.getValue() != null ? clientCountryComboBox.getValue().toString() : null;
+        String country = customerCountryComboBox.getValue() != null ? customerCountryComboBox.getValue().toString() : null;
         if (country != null) {
             populateDivisionComboBox(country);
         }
@@ -284,18 +283,18 @@ public class ClientScreenController implements Initializable {
     private void populateDivisionComboBox(String country) {
         ObservableList<String> divisions = FXCollections.observableArrayList();
 
-        List<String> divisionsList = customerDAO.getClientDivisionsByCountry(country);
+        List<String> divisionsList = customerDAO.getCustomerDivisionsByCountry(country);
 
         divisions.addAll(divisionsList);
-        clientDivisionComboBox.setItems(divisions);
+        customerDivisionComboBox.setItems(divisions);
     }
 
     /** Clears country combo box
      *
      */
     private void clearCountryComboBox() {
-        clientCountryComboBox.getItems().clear();
-        clientCountryComboBox.setValue(null);
+        customerCountryComboBox.getItems().clear();
+        customerCountryComboBox.setValue(null);
     }
 
 
@@ -303,8 +302,8 @@ public class ClientScreenController implements Initializable {
      *
      */
     private void clearDivisionComboBox() {
-        clientDivisionComboBox.getItems().clear();
-        clientCountryComboBox.setValue(null);
+        customerDivisionComboBox.getItems().clear();
+        customerCountryComboBox.setValue(null);
     }
 
     /** Takes user back to home screen
@@ -312,7 +311,7 @@ public class ClientScreenController implements Initializable {
      * @param actionEvent
      * @throws IOException
      */
-    public void onClientScreenBackButtonPressed(ActionEvent actionEvent) throws IOException {
+    public void onCustomerScreenBackButtonPressed(ActionEvent actionEvent) throws IOException {
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
         stage.setScene(new Scene(scene));
@@ -324,7 +323,7 @@ public class ClientScreenController implements Initializable {
      * @param actionEvent
      */
     @FXML
-    private void onClientScreenClearSelectionButtonPressed(ActionEvent actionEvent) {
+    private void onCustomerScreenClearSelectionButtonPressed(ActionEvent actionEvent) {
         clearFieldsAndRefresh();
     }
 
@@ -332,8 +331,8 @@ public class ClientScreenController implements Initializable {
      *
      * @return true if no fields are empty
      */
-    private boolean validateClientInputs() {
-        getClientDataFromInputFields();
+    private boolean validateCustomerInputs() {
+        getCustomerDataFromInputFields();
         if (name.trim().isEmpty() || streetAddress.trim().isEmpty() || postalCode.trim().isEmpty() || phone.trim().isEmpty() || division.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Invalid Input");
@@ -345,13 +344,13 @@ public class ClientScreenController implements Initializable {
         return true;
     }
 
-    /** Shows alert if no client is selected
+    /** Shows alert if no customer is selected
      *
      */
-    private void noClientSelectedAlert() {
+    private void noCustomerSelectedAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("No client selected");
-        alert.setHeaderText("Please select a client before attempting to update");
+        alert.setTitle("No customer selected");
+        alert.setHeaderText("Please select a customer before attempting to update");
         alert.showAndWait();
     }
 }

@@ -2,6 +2,8 @@ package dao;
 
 
 import helper.ConnectionManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.Appointment;
 import report.AppointmentContactCount;
 import report.AppointmentMonthCount;
@@ -23,8 +25,8 @@ public class AppointmentDAO {
      *
      * @return appointments
      */
-    public List<Appointment> getAllAppointments() {
-        List<Appointment> appointments = new ArrayList<>();
+    public static ObservableList<Appointment> getAllAppointments() {
+        ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
 
         String query = "SELECT a.*, c.Contact_Name " +
                 "FROM appointments a " +
@@ -49,7 +51,7 @@ public class AppointmentDAO {
                 LocalDateTime createDate = rs.getTimestamp("Create_Date").toLocalDateTime();
                 LocalDateTime lastUpdate = rs.getTimestamp("Last_Update").toLocalDateTime();
 
-                appointments.add(new Appointment(appointmentId, contactId, customerId, userId, title, description, location, type, createdBy, lastUpdatedBy, start, end, createDate, lastUpdate));
+                allAppointments.add(new Appointment(appointmentId, contactId, customerId, userId, title, description, location, type, createdBy, lastUpdatedBy, start, end, createDate, lastUpdate));
             }
             ps.close();
             rs.close();
@@ -58,7 +60,7 @@ public class AppointmentDAO {
             e.printStackTrace(System.out);
         }
 
-        return appointments;
+        return allAppointments;
     }
 
 

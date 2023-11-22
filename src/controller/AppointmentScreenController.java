@@ -122,8 +122,8 @@ public class AppointmentScreenController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Run query
-        appointmentTableView.setItems(filteredAppointments);
+        allAppointments = AppointmentDAO.getAllAppointments();
+        filteredAppointments = allAppointments;
         appointmentTableView.setItems(filteredAppointments);
         appointmentIdColumn.setCellValueFactory(new PropertyValueFactory<>("appointmentId"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -194,6 +194,7 @@ public class AppointmentScreenController implements Initializable {
      */
     private void showAllAppointments() {
         filteredAppointments.clear();
+        allAppointments = AppointmentDAO.getAllAppointments();
         filteredAppointments.addAll(allAppointments);
     }
 
@@ -202,6 +203,7 @@ public class AppointmentScreenController implements Initializable {
      */
     private void filterAppointmentsByWeek() {
 
+        allAppointments = AppointmentDAO.getAllAppointments();
         filteredAppointments.clear();
         LocalDate today = LocalDate.now();
         LocalDate startOfWeek = today.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
@@ -220,6 +222,7 @@ public class AppointmentScreenController implements Initializable {
      *
      */
     private void filterAppointmentsByMonth() {
+        allAppointments = AppointmentDAO.getAllAppointments();
         filteredAppointments.clear();
         LocalDate today = LocalDate.now();
         LocalDate startOfMonth = today.with(TemporalAdjusters.firstDayOfMonth());
@@ -293,6 +296,7 @@ public class AppointmentScreenController implements Initializable {
      */
     public void onAppointmentClearAllFieldsButtonPressed(ActionEvent actionEvent) {
         clearFields();
+        refreshAppointmentListAndView();
     }
 
     /** Creates new appointment if there are no conflicts and all
@@ -473,6 +477,7 @@ public class AppointmentScreenController implements Initializable {
      */
     private void refreshAppointmentListAndView() {
         applyCurrentFilter();
+        refreshContactComboBox();
         appointmentTableView.refresh();
     }
 }

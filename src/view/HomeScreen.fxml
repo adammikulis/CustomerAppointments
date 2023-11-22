@@ -18,7 +18,7 @@
                   </Label>
                   <ComboBox fx:id="homeContactComboBox" prefHeight="25.0" prefWidth="119.0" />
                   <Button mnemonicParsing="false" onAction="#onViewAllAppointmentsButtonPressed" prefHeight="25.0" prefWidth="137.0" text="Appointment Screen" />
-                <Button fx:id="addUpdateClientButton" mnemonicParsing="false" onAction="#onAddUpdateClientButtonPressed" prefHeight="25.0" prefWidth="116.0" text="Client Screen" />
+                <Button fx:id="addUpdateClientButton" mnemonicParsing="false" onAction="#onAddUpdateClientButtonPressed" prefHeight="25.0" prefWidth="116.0" text="Customer Screen" />
                </children>
             </HBox>
             <TableView fx:id="homeScheduleTableView" prefHeight="200.0" prefWidth="551.0">

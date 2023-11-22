@@ -1,8 +1,9 @@
 package dao;
 
 import helper.ConnectionManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.Customer;
-import model.CustomerList;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -18,8 +19,8 @@ public class CustomerDAO {
      *
      * @return client list
      */
-    public List<Customer> getClients() {
-        List<Customer> customers = new ArrayList<>();
+    public static ObservableList<Customer> getAllCustomers() {
+        ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
 
         String query = "SELECT * FROM customers";
         try (PreparedStatement preparedStatement = ConnectionManager.getConnection().prepareStatement(query);
@@ -36,13 +37,13 @@ public class CustomerDAO {
                 String lastUpdatedBy = resultSet.getString("Last_Updated_By");
                 Integer divisionId = resultSet.getInt("Division_ID");
 
-                customers.add(new Customer(clientId, clientName, streetAddress, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdatedBy, divisionId));
+                allCustomers.add(new Customer(clientId, clientName, streetAddress, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdatedBy, divisionId));
             }
         } catch (SQLException e) {
             System.out.println("SQL Error");
             e.printStackTrace(System.out);
         }
-        return customers;
+        return allCustomers;
     }
 
     /** Inserts new client into database
@@ -51,14 +52,14 @@ public class CustomerDAO {
      * @return newclient ID
      * @throws SQLException
      */
-    public static int insertClient(Customer newclient) throws SQLException {
+    public static int insertCustomer(Customer newclient) throws SQLException {
         Connection conn = ConnectionManager.getConnection();
         String insertStatement = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, "
                 + "Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement ps = conn.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
-        ps.setString(1, newclient.getClientName());
+        ps.setString(1, newclient.getCustomerName());
         ps.setString(2, newclient.getStreetAddress());
         ps.setString(3, newclient.getPostalCode());
         ps.setString(4, newclient.getPhone());
@@ -95,7 +96,7 @@ public class CustomerDAO {
      *
      * @return list of countries
      */
-    public static List<String> getClientCountries() {
+    public static List<String> getCustomerCountries() {
         List<String> countries = new ArrayList<>();
 
         try {
@@ -121,7 +122,7 @@ public class CustomerDAO {
      * @param country
      * @return list of divisions
      */
-    public static List<String> getClientDivisionsByCountry(String country) {
+    public static List<String> getCustomerDivisionsByCountry(String country) {
         List<String> divisions = new ArrayList<>();
 
         try {
@@ -149,24 +150,21 @@ public class CustomerDAO {
      * @return true if client is deleted
      * @throws SQLException
      */
-    public boolean deleteClient(Customer customerToDelete) throws SQLException {
+    public boolean deleteCustomer(Customer customerToDelete) throws SQLException {
         try {
             Connection conn = ConnectionManager.getConnection();
 
             // Delete all associated appointments
             PreparedStatement ps = conn.prepareStatement("DELETE FROM appointments WHERE Customer_Id = ?");
-            ps.setInt(1, customerToDelete.getClientId());
+            ps.setInt(1, customerToDelete.getCustomerId());
             ps.executeUpdate();
-            System.out.println("Deleted all appointments associated with client with ID " + customerToDelete.getClientId());
+            System.out.println("Deleted all appointments associated with client with ID " + customerToDelete.getCustomerId());
 
             // Delete the selected client from the database
             ps = conn.prepareStatement("DELETE FROM customers WHERE Customer_Id = ?");
-            ps.setInt(1, customerToDelete.getClientId());
+            ps.setInt(1, customerToDelete.getCustomerId());
             ps.executeUpdate();
-            System.out.println("Deleted client with ID " + customerToDelete.getClientId());
-
-            // Remove the selected client from the list of all clients
-            CustomerList.getAllClients().remove(customerToDelete);
+            System.out.println("Deleted client with ID " + customerToDelete.getCustomerId());
 
             return true;
         } catch (SQLException e) {
@@ -180,19 +178,19 @@ public class CustomerDAO {
      * @param currentCustomer
      * @throws SQLException
      */
-    public void updateClient(Customer currentCustomer) throws SQLException {
+    public void updateCustomer(Customer currentCustomer) throws SQLException {
         String query = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ? WHERE Customer_Id = ?";
         Connection conn = ConnectionManager.getConnection();
         PreparedStatement ps = conn.prepareStatement(query);
 
         try {
-            ps.setString(1, currentCustomer.getClientName());
+            ps.setString(1, currentCustomer.getCustomerName());
             ps.setString(2, currentCustomer.getStreetAddress());
             ps.setString(3, currentCustomer.getPostalCode());
             ps.setString(4, currentCustomer.getPhone());
             ps.setTimestamp(5, Timestamp.valueOf(currentCustomer.getLastUpdate()));
             ps.setString(6, currentCustomer.getLastUpdatedBy());
-            ps.setInt(7, currentCustomer.getClientId());
+            ps.setInt(7, currentCustomer.getCustomerId());
 
             int rowsAffected = ps.executeUpdate();
         }
@@ -207,7 +205,7 @@ public class CustomerDAO {
      * @return next client ID
      * @throws SQLException
      */
-    public int getNextClientId() throws SQLException {
+    public int getNextCustomerId() throws SQLException {
         int nextId = 0;
         try {
             String query = "SELECT MAX(Customer_ID) + 1 AS next_id FROM client_schedule.customers";
