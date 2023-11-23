@@ -46,13 +46,13 @@ public class CustomerDAO {
         return allCustomers;
     }
 
-    /** Inserts new client into database
+    /**
+     * Inserts new client into database
      *
      * @param newclient
-     * @return newclient ID
      * @throws SQLException
      */
-    public static int insertCustomer(Customer newclient) throws SQLException {
+    public static void insertCustomer(Customer newclient) throws SQLException {
         Connection conn = ConnectionManager.getConnection();
         String insertStatement = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, "
                 + "Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) "
@@ -74,74 +74,7 @@ public class CustomerDAO {
             throw new SQLException("Creating newclient failed, no rows affected.");
         }
 
-        int clientId=0;
-        try  {
-            ResultSet generatedKeys = ps.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                clientId = generatedKeys.getInt(1);
-            } else {
-                throw new SQLException("Creating newclient failed, no ID obtained.");
-            }
-        }
-        catch (SQLException e) {
-            System.out.println("SQL Error");
-            e.printStackTrace(System.out);
-        }
-
         ps.close();
-        return clientId;
-    }
-
-    /** Returns all countries that a client can be part of for this database
-     *
-     * @return list of countries
-     */
-    public static List<String> getCustomerCountries() {
-        List<String> countries = new ArrayList<>();
-
-        try {
-            PreparedStatement ps = ConnectionManager.getConnection().prepareStatement("SELECT Country FROM countries");
-            try (ResultSet resultSet = ps.executeQuery()) {
-                while (resultSet.next()) {
-                    String country = resultSet.getString("Country");
-                    countries.add(country);
-                }
-            }
-        }
-        catch (SQLException e) {
-            System.out.println("SQL Error");
-            e.printStackTrace(System.out);
-        }
-
-        return countries;
-
-    }
-
-    /** Returns list of divisions a client can live in based on their country
-     *
-     * @param country
-     * @return list of divisions
-     */
-    public static List<String> getCustomerDivisionsByCountry(String country) {
-        List<String> divisions = new ArrayList<>();
-
-        try {
-            PreparedStatement ps = ConnectionManager.getConnection().prepareStatement("SELECT Division FROM first_level_divisions WHERE Country_ID = (SELECT Country_ID FROM countries WHERE Country = ?)");
-            ps.setString(1, country);
-
-            try (ResultSet resultSet = ps.executeQuery()) {
-                while (resultSet.next()) {
-                    String division = resultSet.getString("Division");
-                    divisions.add(division);
-                }
-            }
-        }
-        catch (SQLException e) {
-            System.out.println("SQL Error");
-            e.printStackTrace(System.out);
-        }
-
-        return divisions;
     }
 
     /** Deletes client from database

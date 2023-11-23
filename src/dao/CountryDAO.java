@@ -14,9 +14,9 @@ import java.util.List;
 
 public class CountryDAO {
 
-    /** Returns a list of all contacts in the database
+    /** Returns a list of all countries in the database
      *
-     * @return list of all contacts
+     * @return list of all countries
      */
     public static List<Country> getAllCountries() {
         List<Country> allCountries = new ArrayList<>();

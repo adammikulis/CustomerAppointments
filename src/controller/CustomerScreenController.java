@@ -2,6 +2,7 @@ package controller;
 
 import dao.CountryDAO;
 import dao.CustomerDAO;
+import dao.DivisionDAO;
 import helper.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Country;
 import model.Customer;
+import model.Division;
 
 import java.io.IOException;
 import java.net.URL;
@@ -68,7 +70,7 @@ public class CustomerScreenController implements Initializable {
     @FXML
     private ComboBox<Country> customerCountryComboBox;
     @FXML
-    private ComboBox<String> customerDivisionComboBox;
+    private ComboBox<Division> customerDivisionComboBox;
 
     /** Initialization for customer screen
      * Lambda expressions used for listeners
@@ -155,8 +157,7 @@ public class CustomerScreenController implements Initializable {
             if (validateCustomerInputs()) {
 
                 // Get the Division_ID using the CustomerDAO method
-                CustomerDAO customerDAO = new CustomerDAO();
-                divisionId = customerDAO.getDivisionIdByCountryAndDivision(country, division);
+                divisionId = CustomerDAO.getDivisionIdByCountryAndDivision(country, division);
 
                 // Update the selected customer with the new data
                 selectedCustomer.setCustomerName(name);
@@ -169,7 +170,7 @@ public class CustomerScreenController implements Initializable {
 
                 // Update the customer in the database using the updateCustomer method from CustomerDAO
                 try {
-                    customerDAO.updateCustomer(selectedCustomer);
+                    CustomerDAO.updateCustomer(selectedCustomer);
                 } catch (SQLException e) {
                     System.out.println("Error updating customer.");
                     e.printStackTrace();
@@ -259,7 +260,7 @@ public class CustomerScreenController implements Initializable {
     }
     @FXML
     private void onCountryComboBoxChanged(ActionEvent event) {
-        String country = customerCountryComboBox.getValue() != null ? customerCountryComboBox.getValue().toString() : null;
+        Country country = customerCountryComboBox.getValue();
         if (country != null) {
             populateDivisionComboBox(country);
         }
@@ -268,18 +269,29 @@ public class CustomerScreenController implements Initializable {
         }
     }
 
+    public void refreshCountryComboBox() {
+        List<Country> countries = null;
+        try {
+            countries = CountryDAO.getAllCountries();
+            customerCountryComboBox.setItems(FXCollections.observableArrayList(countries));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     /** Fills division combo box based on country
      *
      * @param country
      */
-    private void populateDivisionComboBox(String country) {
-        ObservableList<String> divisions = FXCollections.observableArrayList();
+    private void populateDivisionComboBox(Country country) {
+        List<Division> divisions = null;
 
-        List<String> divisionsList = CustomerDAO.getCustomerDivisionsByCountry(country);
-
-        divisions.addAll(divisionsList);
-        customerDivisionComboBox.setItems(divisions);
+        try {
+            divisions = DivisionDAO.getDivisionsByCountry(country);
+            customerDivisionComboBox.setItems(FXCollections.observableArrayList(divisions));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /** Clears country combo box
@@ -345,16 +357,6 @@ public class CustomerScreenController implements Initializable {
         alert.setTitle("No customer selected");
         alert.setHeaderText("Please select a customer before attempting to update");
         alert.showAndWait();
-    }
-
-    public void refreshCountryComboBox() {
-        List<Country> countries = null;
-        try {
-            countries = CountryDAO.getAllCountries();
-            customerCountryComboBox.setItems(FXCollections.observableArrayList(countries));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 }
