@@ -210,8 +210,7 @@ public class CustomerScreenController implements Initializable {
         if (validateCustomerInputs()) {
 
             // Get the Division_ID using the CustomerDAO method
-            CustomerDAO customerDAO = new CustomerDAO();
-            divisionId = customerDAO.getDivisionIdByCountryAndDivision(country, division);
+            divisionId = CustomerDAO.getDivisionIdByCountryAndDivision(country, division);
 
             // Set the create and last update times to the current time
             LocalDateTime now = LocalDateTime.now();

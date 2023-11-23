@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="removed list classes and moved functionality into helpers and controllers">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="renamed client to customer and got rid of extraneous methods">
+      <change afterPath="$PROJECT_DIR$/src/model/Country.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/FirstLevelDivision.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ClientAppointments.iml" beforeDir="false" afterPath="$PROJECT_DIR$/CustomerAppointments.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/HomeScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/CustomerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/ClientScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CustomerScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/HomeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomeScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +20,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="package-info" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -65,20 +60,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/adamm/IdeaProjects/CustomerAppointments",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pathVariables"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/adamm/IdeaProjects/CustomerAppointments&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="helper.AppointmentTimeChecker" />
@@ -89,19 +84,6 @@
       <option name="MAIN_CLASS_NAME" value="main.Main" />
       <module name="CustomerAppointments" />
       <option name="VM_PARAMETERS" value="--module-path ${PATH_TO_FX} --add-modules javafx.fxml,javafx.controls,javafx.graphics" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="CustomerAppointments" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="CustomerAppointments" />
-      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -305,14 +287,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00059" summary="appointment overlap and biz hours work properly">
-      <option name="closed" value="true" />
-      <created>1700340412143</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1700340412143</updated>
-    </task>
     <task id="LOCAL-00060" summary="add no filter radio button and using filtered list for appointments">
       <option name="closed" value="true" />
       <created>1700342339599</created>
@@ -481,7 +455,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700678216993</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="renamed client to customer and got rid of extraneous methods">
+      <option name="closed" value="true" />
+      <created>1700681823946</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1700681823947</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -503,7 +485,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="javadocs and eastern time zone conversion added" />
     <MESSAGE value="finished javadocs for model" />
     <MESSAGE value="appointment overlap coded and being implemented" />
     <MESSAGE value="appointment overlap and biz hours nearly finished" />
@@ -528,7 +509,8 @@
     <MESSAGE value="moved appointment alert to home screen" />
     <MESSAGE value="major refactoring started with renaming classes" />
     <MESSAGE value="removed list classes and moved functionality into helpers and controllers" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed list classes and moved functionality into helpers and controllers" />
+    <MESSAGE value="renamed client to customer and got rid of extraneous methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="renamed client to customer and got rid of extraneous methods" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
