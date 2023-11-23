@@ -1,5 +1,6 @@
 package model;
 
+import dao.CountryDAO;
 import dao.CustomerDAO;
 
 import java.time.LocalDateTime;
@@ -212,17 +213,7 @@ public class Customer {
     /** Returnss the customer's country by division ID
      * @return country by division ID
      */
-    public String getCountry() {
-        return CustomerDAO.getCountryByDivisionId(getDivisionId());
+    public Country getCountry() {
+        return CountryDAO.getCountryByDivisionId(getDivisionId());
     }
-
-    /** Returns the customer's division name by division ID
-     *
-     * @return division name
-     */
-    public String getDivision() {
-        return CustomerDAO.getDivisionByDivisionId(getDivisionId());
-    }
-
-
 }

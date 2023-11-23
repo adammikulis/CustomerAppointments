@@ -44,4 +44,34 @@ public class CountryDAO {
             e.printStackTrace(System.out); }
         return allCountries;
     }
+
+    public static Country getCountryByDivisionId(int divisionId) {
+        Country countryByDivisionId;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionManager.getConnection();
+            String query = "SELECT * FROM countries";
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+
+           if (rs.next()) {
+                int countryId = rs.getInt("Country_ID");
+                String country = rs.getString("Country");
+                LocalDateTime createDate = rs.getTimestamp("Create_Date").toLocalDateTime();
+                String createdBy = rs.getString("Created_By");
+                LocalDateTime lastUpdate = rs.getTimestamp("Last_Update").toLocalDateTime();
+                String lastUpdatedBy = rs.getString("Last_Updated_By");
+                countryByDivisionId = new Country(countryId, country, createDate, createdBy, lastUpdate, lastUpdatedBy);
+                return countryByDivisionId;
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Error");
+            e.printStackTrace(System.out); }
+        return null;
+    }
+
+
 }

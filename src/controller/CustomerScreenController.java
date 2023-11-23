@@ -100,7 +100,7 @@ public class CustomerScreenController implements Initializable {
                 customerScreenPhoneTextField.setText(currentCustomer.getPhone());
 
                 // Populate the combo boxes with the selected customer's country and division
-                //customerCountryComboBox.getSelectionModel().select(currentCustomer.getCountry());
+                customerCountryComboBox.getSelectionModel().select(currentCustomer.getCountry());
                 //List<String> divisions = CustomerDAO.getCustomerDivisionsByCountry(currentCustomer.getCountry());
                 //customerDivisionComboBox.getItems().clear();
                 //customerDivisionComboBox.getItems().addAll(divisions);
