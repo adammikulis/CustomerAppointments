@@ -1,5 +1,6 @@
 package controller;
 
+import dao.CountryDAO;
 import dao.CustomerDAO;
 import helper.SessionManager;
 import javafx.collections.FXCollections;
@@ -13,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Country;
 import model.Customer;
 
 import java.io.IOException;
@@ -64,7 +66,7 @@ public class CustomerScreenController implements Initializable {
     private TextField customerScreenPhoneTextField;
 
     @FXML
-    private ComboBox<String> customerCountryComboBox;
+    private ComboBox<Country> customerCountryComboBox;
     @FXML
     private ComboBox<String> customerDivisionComboBox;
 
@@ -82,7 +84,7 @@ public class CustomerScreenController implements Initializable {
         postalCodeColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
 
-        customerCountryComboBox.getItems().addAll(CustomerDAO.getCustomerCountries());
+        refreshCountryComboBox();
 
         customerTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -96,12 +98,11 @@ public class CustomerScreenController implements Initializable {
                 customerScreenPhoneTextField.setText(currentCustomer.getPhone());
 
                 // Populate the combo boxes with the selected customer's country and division
-                customerCountryComboBox.getSelectionModel().select(currentCustomer.getCountry());
-                List<String> divisions = CustomerDAO.getCustomerDivisionsByCountry(currentCustomer.getCountry());
-                customerDivisionComboBox.getItems().clear();
-                customerDivisionComboBox.getItems().addAll(divisions);
-                customerDivisionComboBox.getSelectionModel().select(currentCustomer.getDivision());
-
+                //customerCountryComboBox.getSelectionModel().select(currentCustomer.getCountry());
+                //List<String> divisions = CustomerDAO.getCustomerDivisionsByCountry(currentCustomer.getCountry());
+                //customerDivisionComboBox.getItems().clear();
+                //customerDivisionComboBox.getItems().addAll(divisions);
+                //customerDivisionComboBox.getSelectionModel().select(currentCustomer.getDivision());
             }
         });
     }
@@ -192,11 +193,11 @@ public class CustomerScreenController implements Initializable {
         postalCode = customerScreenPostalCodeTextField.getText();
         phone = customerScreenPhoneTextField.getText();
 
-        String countryValue = (String) customerCountryComboBox.getValue();
-        country = (countryValue != null) ? countryValue : "";
+        //String countryValue = (String) customerCountryComboBox.getValue();
+        //country = (countryValue != null) ? countryValue : "";
 
-        String divisionValue = (String) customerDivisionComboBox.getValue();
-        division = (divisionValue != null) ? divisionValue : "";
+        //String divisionValue = (String) customerDivisionComboBox.getValue();
+        //division = (divisionValue != null) ? divisionValue : "";
 
     }
 
@@ -248,13 +249,13 @@ public class CustomerScreenController implements Initializable {
         customerScreenPostalCodeTextField.clear();
         customerScreenPhoneTextField.clear();
         clearCountryComboBox();
-        customerCountryComboBox.getItems().addAll(CustomerDAO.getCustomerCountries());
         clearDivisionComboBox();
 
         // Refresh table view and clear selection
         customerTableView.setItems(CustomerDAO.getAllCustomers());
         customerTableView.refresh();
         customerTableView.getSelectionModel().clearSelection();
+        refreshCountryComboBox();
     }
     @FXML
     private void onCountryComboBoxChanged(ActionEvent event) {
@@ -345,4 +346,15 @@ public class CustomerScreenController implements Initializable {
         alert.setHeaderText("Please select a customer before attempting to update");
         alert.showAndWait();
     }
+
+    public void refreshCountryComboBox() {
+        List<Country> countries = null;
+        try {
+            countries = CountryDAO.getAllCountries();
+            customerCountryComboBox.setItems(FXCollections.observableArrayList(countries));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

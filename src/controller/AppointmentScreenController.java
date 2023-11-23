@@ -463,8 +463,7 @@ public class AppointmentScreenController implements Initializable {
     public void refreshContactComboBox() {
         List<Contact> contacts = null;
         try {
-            ContactDAO contactDAO = new ContactDAO();
-            contacts = contactDAO.getAllContacts();
+            contacts = ContactDAO.getAllContacts();
             appointmentContactComboBox.setItems(FXCollections.observableArrayList(contacts));
         } catch (Exception e) {
             e.printStackTrace();

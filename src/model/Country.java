@@ -6,7 +6,8 @@ public class Country {
 
     private int countryId;
     private String country;
-    private LocalDateTime createdBy;
+    private LocalDateTime createDate;
+    private String createdBy;
     private LocalDateTime lastUpdate;
     private String lastUpdatedBy;
 
@@ -14,13 +15,15 @@ public class Country {
      *
      * @param countryId
      * @param country
+     * @param createDate
      * @param createdBy
      * @param lastUpdate
      * @param lastUpdatedBy
      */
-    public Country(int countryId, String country, LocalDateTime createdBy, LocalDateTime lastUpdate, String lastUpdatedBy) {
+    public Country(int countryId, String country, LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy) {
         this.countryId = countryId;
         this.country = country;
+        this.createDate = createDate;
         this.createdBy = createdBy;
         this.lastUpdate = lastUpdate;
         this.lastUpdatedBy = lastUpdatedBy;
@@ -43,11 +46,19 @@ public class Country {
         this.country = country;
     }
 
-    public LocalDateTime getCreatedBy() {
+    public String getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(LocalDateTime createdBy) {
+    public LocalDateTime getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
+    }
+
+    public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
 

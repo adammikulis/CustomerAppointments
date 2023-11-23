@@ -19,7 +19,7 @@ public class ContactDAO {
      *
      * @return list of all contacts
      */
-    public List<Contact> getAllContacts() {
+    public static List<Contact> getAllContacts() {
         List<Contact> contacts = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ps = null;
@@ -48,7 +48,7 @@ public class ContactDAO {
      * @param contactId
      * @return contact name
      */
-    public String getContactName(int contactId) {
+    public static String getContactName(int contactId) {
         String query = "SELECT Contact_Name FROM contacts WHERE Contact_ID = ?";
         try {
             Connection conn = ConnectionManager.getConnection();
@@ -93,7 +93,7 @@ public class ContactDAO {
      * @return contact
      * @throws SQLException
      */
-    public Contact getContact(int contactId) throws SQLException {
+    public static Contact getContact(int contactId) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -136,7 +136,7 @@ public class ContactDAO {
      * @return contact
      * @throws SQLException
      */
-    public Contact getContactByName(String contactName) throws SQLException {
+    public static Contact getContactByName(String contactName) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -178,7 +178,7 @@ public class ContactDAO {
      * @return contact ID
      * @throws SQLException
      */
-    public int getContactIdByName(String contactName) throws SQLException {
+    public static int getContactIdByName(String contactName) throws SQLException {
         return getContactByName(contactName).getContactId();
     }
 }

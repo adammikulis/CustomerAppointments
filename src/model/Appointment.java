@@ -303,8 +303,7 @@ public class Appointment {
         // Get the contact name for the appointment
         String contactName = null;
         try {
-            ContactDAO contactDAO = new ContactDAO();
-            contactName = contactDAO.getContactName(contactId);
+            contactName = ContactDAO.getContactName(contactId);
         } catch (Exception e) {
             e.printStackTrace();
         }
