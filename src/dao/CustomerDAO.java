@@ -10,14 +10,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Class for querying clients in the database
+/** Class for querying customers in the database
  *
  */
 public class CustomerDAO {
 
-    /** Returns a list of all clients
+    /** Returns a list of all customers
      *
-     * @return client list
+     * @return customer list
      */
     public static ObservableList<Customer> getAllCustomers() {
         ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
@@ -26,8 +26,8 @@ public class CustomerDAO {
         try (PreparedStatement preparedStatement = ConnectionManager.getConnection().prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
-                int clientId = resultSet.getInt("Customer_ID");
-                String clientName = resultSet.getString("Customer_Name");
+                int customerId = resultSet.getInt("Customer_ID");
+                String customerName = resultSet.getString("Customer_Name");
                 String streetAddress = resultSet.getString("Address");
                 String postalCode = resultSet.getString("Postal_Code");
                 String phone = resultSet.getString("Phone");
@@ -37,7 +37,7 @@ public class CustomerDAO {
                 String lastUpdatedBy = resultSet.getString("Last_Updated_By");
                 Integer divisionId = resultSet.getInt("Division_ID");
 
-                allCustomers.add(new Customer(clientId, clientName, streetAddress, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdatedBy, divisionId));
+                allCustomers.add(new Customer(customerId, customerName, streetAddress, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdatedBy, divisionId));
             }
         } catch (SQLException e) {
             System.out.println("SQL Error");
@@ -47,40 +47,40 @@ public class CustomerDAO {
     }
 
     /**
-     * Inserts new client into database
+     * Inserts new customer into database
      *
-     * @param newclient
+     * @param newcustomer
      * @throws SQLException
      */
-    public static void insertCustomer(Customer newclient) throws SQLException {
+    public static void insertCustomer(Customer newcustomer) throws SQLException {
         Connection conn = ConnectionManager.getConnection();
         String insertStatement = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, "
                 + "Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement ps = conn.prepareStatement(insertStatement, Statement.RETURN_GENERATED_KEYS);
-        ps.setString(1, newclient.getCustomerName());
-        ps.setString(2, newclient.getStreetAddress());
-        ps.setString(3, newclient.getPostalCode());
-        ps.setString(4, newclient.getPhone());
-        ps.setTimestamp(5, Timestamp.valueOf(newclient.getCreateDate()));
-        ps.setString(6, newclient.getCreatedBy());
-        ps.setTimestamp(7, Timestamp.valueOf(newclient.getLastUpdate()));
-        ps.setString(8, newclient.getLastUpdatedBy());
-        ps.setInt(9, newclient.getDivisionId());
+        ps.setString(1, newcustomer.getCustomerName());
+        ps.setString(2, newcustomer.getStreetAddress());
+        ps.setString(3, newcustomer.getPostalCode());
+        ps.setString(4, newcustomer.getPhone());
+        ps.setTimestamp(5, Timestamp.valueOf(newcustomer.getCreateDate()));
+        ps.setString(6, newcustomer.getCreatedBy());
+        ps.setTimestamp(7, Timestamp.valueOf(newcustomer.getLastUpdate()));
+        ps.setString(8, newcustomer.getLastUpdatedBy());
+        ps.setInt(9, newcustomer.getDivisionId());
 
         int affectedRows = ps.executeUpdate();
         if (affectedRows == 0) {
-            throw new SQLException("Creating newclient failed, no rows affected.");
+            throw new SQLException("Creating newcustomer failed, no rows affected.");
         }
 
         ps.close();
     }
 
-    /** Deletes client from database
+    /** Deletes customer from database
      *
      * @param customerToDelete
-     * @return true if client is deleted
+     * @return true if customer is deleted
      * @throws SQLException
      */
     public static boolean deleteCustomer(Customer customerToDelete) throws SQLException {
@@ -91,13 +91,13 @@ public class CustomerDAO {
             PreparedStatement ps = conn.prepareStatement("DELETE FROM appointments WHERE Customer_Id = ?");
             ps.setInt(1, customerToDelete.getCustomerId());
             ps.executeUpdate();
-            System.out.println("Deleted all appointments associated with client with ID " + customerToDelete.getCustomerId());
+            System.out.println("Deleted all appointments associated with customer with ID " + customerToDelete.getCustomerId());
 
-            // Delete the selected client from the database
+            // Delete the selected customer from the database
             ps = conn.prepareStatement("DELETE FROM customers WHERE Customer_Id = ?");
             ps.setInt(1, customerToDelete.getCustomerId());
             ps.executeUpdate();
-            System.out.println("Deleted client with ID " + customerToDelete.getCustomerId());
+            System.out.println("Deleted customer with ID " + customerToDelete.getCustomerId());
 
             return true;
         } catch (SQLException e) {
@@ -106,7 +106,7 @@ public class CustomerDAO {
         }
     }
 
-    /** Updates existing client in database
+    /** Updates existing customer in database
      *
      * @param currentCustomer
      * @throws SQLException
@@ -131,98 +131,5 @@ public class CustomerDAO {
             System.out.println("SQL Error");
             e.printStackTrace(System.out);
         }
-    }
-
-    /** Returns division ID by country and division name
-     *
-     * @param country
-     * @param division
-     * @return division ID
-     */
-    public static int getDivisionIdByCountryAndDivision(String country, String division) {
-        int divisionId = -1;
-
-        try {
-            PreparedStatement ps = ConnectionManager.getConnection().prepareStatement("SELECT Division_ID FROM first_level_divisions WHERE Division = ? AND Country_ID = (SELECT Country_ID FROM countries WHERE Country = ?)");
-            ps.setString(1, division);
-            ps.setString(2, country);
-
-            try {
-                ResultSet resultSet = ps.executeQuery();
-                if (resultSet.next()) {
-                    divisionId = resultSet.getInt("Division_ID");
-                }
-            }
-            catch (SQLException e) {
-                System.out.println("SQL Error");
-                e.printStackTrace(System.out);
-            }
-        }
-        catch (SQLException e) {
-            System.out.println("SQL Error");
-            e.printStackTrace(System.out);
-        }
-
-        return divisionId;
-    }
-
-    /** Returns country by division ID
-     *
-     * @param divisionId
-     * @return name of country
-     */
-    public static String getCountryByDivisionId(int divisionId) {
-        String country = null;
-
-        try  {
-            PreparedStatement ps = ConnectionManager.getConnection().prepareStatement("SELECT Country FROM first_level_divisions INNER JOIN countries ON first_level_divisions.Country_ID = countries.Country_ID WHERE Division_ID = ?");
-            ps.setInt(1, divisionId);
-
-            try {
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    country = rs.getString("Country");
-                }
-            }
-            catch (SQLException e) {
-                System.out.println("SQL Error");
-                e.printStackTrace(System.out);
-            }
-        } catch (SQLException e) {
-            System.out.println("SQL Error");
-            e.printStackTrace(System.out);
-        }
-
-        return country;
-    }
-
-    /** Returns name of division by division ID
-     *
-     * @param divisionId
-     * @return name of division
-     */
-    public static String getDivisionByDivisionId(int divisionId) {
-        String division = null;
-
-        try {
-            PreparedStatement ps = ConnectionManager.getConnection().prepareStatement("SELECT Division FROM first_level_divisions WHERE Division_ID = ?");
-            ps.setInt(1, divisionId);
-
-            try {
-                ResultSet resultSet = ps.executeQuery();
-                if (resultSet.next()) {
-                    division = resultSet.getString("Division");
-                }
-            }
-            catch (SQLException e) {
-                System.out.println("SQL Error");
-                e.printStackTrace(System.out);
-            }
-
-        } catch (SQLException e) {
-            System.out.println("SQL Error");
-            e.printStackTrace(System.out);
-        }
-        return division;
     }
 }

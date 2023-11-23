@@ -2,6 +2,7 @@ package model;
 
 import dao.CountryDAO;
 import dao.CustomerDAO;
+import dao.DivisionDAO;
 
 import java.time.LocalDateTime;
 
@@ -215,5 +216,9 @@ public class Customer {
      */
     public Country getCountry() {
         return CountryDAO.getCountryByDivisionId(getDivisionId());
+    }
+
+    public Division getDivisionObject(int divisionId) {
+        return DivisionDAO.getDivisionByDivisionId(divisionId);
     }
 }

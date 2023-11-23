@@ -53,8 +53,9 @@ public class CountryDAO {
 
         try {
             conn = ConnectionManager.getConnection();
-            String query = "SELECT * FROM countries";
+            String query = "SELECT countries.* FROM countries JOIN first_level_divisions ON countries.Country_ID = first_level_divisions.Country_ID WHERE first_level_divisions.Division_ID = ?";
             ps = conn.prepareStatement(query);
+            ps.setInt(1, divisionId);
             rs = ps.executeQuery();
 
            if (rs.next()) {

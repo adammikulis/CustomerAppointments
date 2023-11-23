@@ -5,7 +5,6 @@ import dao.CustomerDAO;
 import dao.DivisionDAO;
 import helper.SessionManager;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,9 +39,9 @@ public class CustomerScreenController implements Initializable {
     private String streetAddress;
     private String postalCode;
     private String phone;
-    private String country;
-    private String division;
     private int divisionId;
+    private Country selectedCountry;
+    private Division selectedDivision;
 
     @FXML
     private TableView<Customer> customerTableView;
@@ -90,7 +89,6 @@ public class CustomerScreenController implements Initializable {
 
         customerTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                System.out.println("Selected row: " + newValue);
                 currentCustomer = newValue; // Set the current customer
 
                 // Populate the textfields with the selected customer's data
@@ -100,11 +98,13 @@ public class CustomerScreenController implements Initializable {
                 customerScreenPhoneTextField.setText(currentCustomer.getPhone());
 
                 // Populate the combo boxes with the selected customer's country and division
+                List<Division> divisionsByCountry = DivisionDAO.getDivisionsByCountry(currentCustomer.getCountry());
+
+                customerDivisionComboBox.getItems().clear();
+                customerDivisionComboBox.getItems().addAll(divisionsByCountry);
+
                 customerCountryComboBox.getSelectionModel().select(currentCustomer.getCountry());
-                //List<String> divisions = CustomerDAO.getCustomerDivisionsByCountry(currentCustomer.getCountry());
-                //customerDivisionComboBox.getItems().clear();
-                //customerDivisionComboBox.getItems().addAll(divisions);
-                //customerDivisionComboBox.getSelectionModel().select(currentCustomer.getDivision());
+                customerDivisionComboBox.getSelectionModel().select(currentCustomer.getDivisionObject(currentCustomer.getDivisionId()));
             }
         });
     }
@@ -154,10 +154,8 @@ public class CustomerScreenController implements Initializable {
         Customer selectedCustomer = customerTableView.getSelectionModel().getSelectedItem();
 
         if (selectedCustomer != null) {
+            // Takes all field input and checks for empty/null values
             if (validateCustomerInputs()) {
-
-                // Get the Division_ID using the CustomerDAO method
-                divisionId = CustomerDAO.getDivisionIdByCountryAndDivision(country, division);
 
                 // Update the selected customer with the new data
                 selectedCustomer.setCustomerName(name);
@@ -177,8 +175,6 @@ public class CustomerScreenController implements Initializable {
                 }
                 clearFieldsAndRefresh();
             }
-
-
         } else {
             noCustomerSelectedAlert();
         }
@@ -187,18 +183,16 @@ public class CustomerScreenController implements Initializable {
     /** Gets data from input fields to create new or update customer
      *
      */
-    private void getCustomerDataFromInputFields() {
+    private void getValuesFromFields() {
         // Get the data from the input fields
         name = customerScreenNameTextField.getText();
         streetAddress = customerScreenAddressTextField.getText();
         postalCode = customerScreenPostalCodeTextField.getText();
         phone = customerScreenPhoneTextField.getText();
 
-        //String countryValue = (String) customerCountryComboBox.getValue();
-        //country = (countryValue != null) ? countryValue : "";
-
-        //String divisionValue = (String) customerDivisionComboBox.getValue();
-        //division = (divisionValue != null) ? divisionValue : "";
+        selectedCountry = customerCountryComboBox.getSelectionModel().getSelectedItem();
+        selectedDivision = customerDivisionComboBox.getSelectionModel().getSelectedItem();
+        divisionId = selectedDivision.getDivisionId();
 
     }
 
@@ -210,9 +204,6 @@ public class CustomerScreenController implements Initializable {
     public void onCustomerScreenSaveNewCustomerButtonPressed(ActionEvent actionEvent) throws IOException {
         // Get the data from the input fields and check for empty
         if (validateCustomerInputs()) {
-
-            // Get the Division_ID using the CustomerDAO method
-            divisionId = CustomerDAO.getDivisionIdByCountryAndDivision(country, division);
 
             // Set the create and last update times to the current time
             LocalDateTime now = LocalDateTime.now();
@@ -308,7 +299,7 @@ public class CustomerScreenController implements Initializable {
      */
     private void clearDivisionComboBox() {
         customerDivisionComboBox.getItems().clear();
-        customerCountryComboBox.setValue(null);
+        customerDivisionComboBox.setValue(null);
     }
 
     /** Takes user back to home screen
@@ -337,8 +328,8 @@ public class CustomerScreenController implements Initializable {
      * @return true if no fields are empty
      */
     private boolean validateCustomerInputs() {
-        getCustomerDataFromInputFields();
-        if (name.trim().isEmpty() || streetAddress.trim().isEmpty() || postalCode.trim().isEmpty() || phone.trim().isEmpty() || division.isEmpty()) {
+        getValuesFromFields();
+        if (name.trim().isEmpty() || streetAddress.trim().isEmpty() || postalCode.trim().isEmpty() || phone.trim().isEmpty() || customerCountryComboBox.getSelectionModel().getSelectedItem() == null || customerDivisionComboBox.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Invalid Input");
             alert.setHeaderText("Please fill in all the required fields.");
