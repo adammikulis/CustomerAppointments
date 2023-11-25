@@ -140,6 +140,11 @@ public class AppointmentScreenController implements Initializable {
         endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
+
+        populateCustomerComboBox();
+        populateContactComboBox();
+        populateUserComboBox();
+
         // Listener for changes in the selected item of the contact combo box
         appointmentContactComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -510,6 +515,8 @@ public class AppointmentScreenController implements Initializable {
     private void refreshAppointmentListAndView() {
         applyCurrentFilter();
         populateContactComboBox();
+        populateCustomerComboBox();
+        populateUserComboBox();
         appointmentTableView.refresh();
     }
 }
