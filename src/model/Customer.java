@@ -225,4 +225,9 @@ public class Customer {
         division = DivisionDAO.getDivisionByDivisionId(divisionId);
         return division;
     }
+
+    @Override
+    public String toString() {
+        return customerName;
+    }
 }

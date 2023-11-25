@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="resolved combo box bug by making separate customer update screen">
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="finished separate update customer screen">
+      <change afterPath="$PROJECT_DIR$/src/dao/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/CustomerUpdateScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CustomerUpdateScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CustomerUpdateScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CustomerUpdateScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CustomerScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CustomerScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +85,7 @@
       <recent name="helper.AppointmentTimeChecker" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="dao" />
       <recent name="controller" />
     </key>
   </component>
@@ -292,14 +297,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00069" summary="empty space guards implemented for client screen">
-      <option name="closed" value="true" />
-      <created>1700437104429</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1700437104429</updated>
-    </task>
     <task id="LOCAL-00070" summary="corrected appointments by week logic and updated some javadocs">
       <option name="closed" value="true" />
       <created>1700496080493</created>
@@ -468,7 +465,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700946743067</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="finished separate update customer screen">
+      <option name="closed" value="true" />
+      <created>1700948573001</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1700948573001</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -490,7 +495,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="split datetime into separate date and time columns/fields" />
     <MESSAGE value="successfully read/writes appointments with new date and time input" />
     <MESSAGE value="fixed date refresh issue and updated appointmentscreen UI" />
     <MESSAGE value="finished filters, guards on blank appt fields and all remaining functionality" />
@@ -515,7 +519,8 @@
     <MESSAGE value="fixed updating customer's division, table columns display country/division, issue with updating combo boxes" />
     <MESSAGE value="issue with combo boxes not updating if there was a selection with previous customer (same issue on appointment screen)" />
     <MESSAGE value="resolved combo box bug by making separate customer update screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="resolved combo box bug by making separate customer update screen" />
+    <MESSAGE value="finished separate update customer screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished separate update customer screen" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -524,11 +529,6 @@
           <properties class="java.lang.IllegalStateException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/model/Customer.java</url>
-          <line>225</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

@@ -10,9 +10,9 @@ public class User {
     private LocalDateTime createDate;
     private String createdBy;
     private LocalDateTime lastUpdate;
-    private LocalDateTime lastUpdatedBy;
+    private String lastUpdatedBy;
 
-    public User(int userId, String userName, String password, LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, LocalDateTime lastUpdatedBy) {
+    public User(int userId, String userName, String password, LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
@@ -70,11 +70,11 @@ public class User {
         this.lastUpdate = lastUpdate;
     }
 
-    public LocalDateTime getLastUpdatedBy() {
+    public String getLastUpdatedBy() {
         return lastUpdatedBy;
     }
 
-    public void setLastUpdatedBy(LocalDateTime lastUpdatedBy) {
+    public void setLastUpdatedBy(String lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
     }
 

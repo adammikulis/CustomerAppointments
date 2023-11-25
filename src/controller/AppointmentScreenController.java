@@ -1,6 +1,8 @@
 package controller;
 
 import dao.AppointmentDAO;
+import dao.CustomerDAO;
+import dao.UserDAO;
 import helper.AppointmentTimeChecker;
 import dao.ContactDAO;
 import helper.SessionManager;
@@ -17,6 +19,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
 import model.Contact;
+import model.Customer;
+import model.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -89,9 +93,9 @@ public class AppointmentScreenController implements Initializable {
     @FXML
     private TextField appointmentEndTimeTextField;
     @FXML
-    private TextField customerIdTextField;
+    private ComboBox<Customer> appointmentCustomerComboBox;
     @FXML
-    private TextField userIdTextField;
+    private ComboBox<User> appointmentUserComboBox;
 
     private int appointmentId;
     private int customerId;
@@ -162,7 +166,7 @@ public class AppointmentScreenController implements Initializable {
                 appointmentEndTimeTextField.setText(localEndTime.toString());
 
                 // Populate the contact combo box
-                refreshContactComboBox();
+                populateContactComboBox();
 
                 // Get the contact for the appointment
                 ContactDAO contactDAO = new ContactDAO();
@@ -175,8 +179,6 @@ public class AppointmentScreenController implements Initializable {
 
                 appointmentStartTimeTextField.setText(newSelection.getStartTime().toString());
                 appointmentEndTimeTextField.setText(newSelection.getEndTime().toString());
-                customerIdTextField.setText(Integer.toString(newSelection.getCustomerId()));
-                userIdTextField.setText(Integer.toString(newSelection.getUserId()));
             }
             else {
                 clearFields();
@@ -347,9 +349,8 @@ public class AppointmentScreenController implements Initializable {
 
         // Check if any field is empty and show an alert if so
         if (appointmentIdTextField.getText().trim().isEmpty() ||
-                customerIdTextField.getText().trim().isEmpty() ||
-                appointmentContactComboBox.getSelectionModel().getSelectedItem() == null ||
-                userIdTextField.getText().trim().isEmpty() ||
+                appointmentCustomerComboBox.getValue() == null ||
+                appointmentUserComboBox.getValue() == null ||
                 appointmentTitleTextField.getText().trim().isEmpty() ||
                 appointmentDescriptionTextField.getText().trim().isEmpty() ||
                 appointmentLocationTextField.getText().trim().isEmpty() ||
@@ -363,10 +364,10 @@ public class AppointmentScreenController implements Initializable {
             return false;
         }
         appointmentId = Integer.parseInt(appointmentIdTextField.getText());
-        customerId = Integer.parseInt(customerIdTextField.getText());
+        customerId = appointmentCustomerComboBox.getSelectionModel().getSelectedItem().getCustomerId();
+        userId = appointmentUserComboBox.getSelectionModel().getSelectedItem().getUserId();
         selectedContact = appointmentContactComboBox.getSelectionModel().getSelectedItem();
         contactId = selectedContact.getContactId();
-        userId = Integer.parseInt(userIdTextField.getText());
         title = appointmentTitleTextField.getText();
         description = appointmentDescriptionTextField.getText();
         location = appointmentLocationTextField.getText();
@@ -444,8 +445,6 @@ public class AppointmentScreenController implements Initializable {
 
         // Clear the input fields
         appointmentIdTextField.clear();
-        customerIdTextField.clear();
-        userIdTextField.clear();
         appointmentTitleTextField.clear();
         appointmentDescriptionTextField.clear();
         appointmentTypeTextField.clear();
@@ -455,16 +454,50 @@ public class AppointmentScreenController implements Initializable {
         appointmentStartTimeTextField.clear();
         appointmentEndTimeTextField.clear();
         clearAppointmentContactComboBox();
+        clearAppointmentCustomerComboBox();
+        clearAppointmentUserComboBox();
+    }
+
+    private void clearAppointmentUserComboBox() {
+    }
+
+    private void clearAppointmentCustomerComboBox() {
     }
 
     /** Refreshes contact combo box
      *
      */
-    public void refreshContactComboBox() {
+    public void populateContactComboBox() {
         List<Contact> contacts = null;
         try {
             contacts = ContactDAO.getAllContacts();
             appointmentContactComboBox.setItems(FXCollections.observableArrayList(contacts));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /** Refreshes customer combo box
+     *
+     */
+    public void populateCustomerComboBox() {
+        List<Customer> customers = null;
+        try {
+            customers = CustomerDAO.getAllCustomers();
+            appointmentCustomerComboBox.setItems(FXCollections.observableArrayList(customers));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /** Refreshes user combo box
+     *
+     */
+    public void populateUserComboBox() {
+        List<User> users = null;
+        try {
+            users = UserDAO.getAllUsers();
+            appointmentUserComboBox.setItems(FXCollections.observableArrayList(users));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -476,7 +509,7 @@ public class AppointmentScreenController implements Initializable {
      */
     private void refreshAppointmentListAndView() {
         applyCurrentFilter();
-        refreshContactComboBox();
+        populateContactComboBox();
         appointmentTableView.refresh();
     }
 }
