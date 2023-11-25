@@ -11,15 +11,15 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <TableView fx:id="customerTableView" layoutX="144.0" layoutY="112.0" prefHeight="58.0" prefWidth="511.0">
+      <TableView fx:id="customerTableView" layoutX="71.0" layoutY="97.0" prefHeight="75.0" prefWidth="677.0">
         <columns>
             <TableColumn fx:id="customerIdColumn" prefWidth="30.0" text="ID" />
-          <TableColumn fx:id="customerNameColumn" prefWidth="89.66667175292969" text="Name" />
-          <TableColumn fx:id="streetAddressColumn" prefWidth="99.33332824707031" text="Street Address" />
-            <TableColumn fx:id="postalCodeColumn" prefWidth="71.33334350585938" text="Postal Code" />
-            <TableColumn fx:id="phoneColumn" prefWidth="71.0" text="Phone" />
-            <TableColumn fx:id="countryColumn" prefWidth="49.66668701171875" text="Country" />
-            <TableColumn fx:id="divisionColumn" prefWidth="93.33331298828125" text="Division" />
+          <TableColumn fx:id="customerNameColumn" prefWidth="114.33333587646484" text="Name" />
+          <TableColumn fx:id="streetAddressColumn" prefWidth="143.66664123535156" text="Street Address" />
+            <TableColumn fx:id="postalCodeColumn" prefWidth="92.00003051757812" text="Postal Code" />
+            <TableColumn fx:id="phoneColumn" prefWidth="101.66671752929688" text="Phone" />
+            <TableColumn fx:id="countryColumn" prefWidth="56.999969482421875" text="Country" />
+            <TableColumn fx:id="divisionColumn" prefWidth="137.0" text="Division" />
         </columns>
       </TableView>
       <GridPane layoutX="278.0" layoutY="186.0" minWidth="-Infinity" prefHeight="187.0" prefWidth="243.0">

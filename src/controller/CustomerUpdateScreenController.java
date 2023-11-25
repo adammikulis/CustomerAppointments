@@ -5,6 +5,7 @@ import dao.CustomerDAO;
 import dao.DivisionDAO;
 import helper.SessionManager;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,7 +34,7 @@ public class CustomerUpdateScreenController implements Initializable {
     Stage stage;
     Parent scene;
 
-    private Customer currentCustomer;
+    private Customer updatedCustomer;
     private String name;
     private String streetAddress;
     private String postalCode;
@@ -44,6 +45,9 @@ public class CustomerUpdateScreenController implements Initializable {
 
     @FXML
     private TableView<Customer> customerTableView;
+
+    @FXML
+    private ObservableList<Customer> updatedCustomerList;
 
     @FXML
     private TableColumn<Customer, Integer> customerIdColumn;
@@ -79,10 +83,10 @@ public class CustomerUpdateScreenController implements Initializable {
      * Lambda expressions used for listeners
      * @param url
      * @param resourceBundle
+     * @param resourceBundle
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        customerTableView.setItems(CustomerDAO.getAllCustomers());
         customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         customerNameColumn.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         streetAddressColumn.setCellValueFactory(new PropertyValueFactory<>("streetAddress"));
@@ -97,6 +101,21 @@ public class CustomerUpdateScreenController implements Initializable {
                 populateDivisionComboBox(newVal);
             }
         });
+    }
+
+    public void transferCustomer(Customer transferredCustomer) {
+        updatedCustomerList = FXCollections.observableArrayList();
+        updatedCustomerList.add(transferredCustomer);
+        updatedCustomer = transferredCustomer;
+        customerTableView.setItems(updatedCustomerList);
+
+        // Update text fields
+        customerScreenNameTextField.setText(transferredCustomer.getCustomerName());
+        customerScreenAddressTextField.setText(transferredCustomer.getStreetAddress());
+        customerScreenPostalCodeTextField.setText(transferredCustomer.getPostalCode());
+        customerScreenPhoneTextField.setText(transferredCustomer.getPhone());
+
+        updateCountryAndDivisionForSelectedCustomer(transferredCustomer);
     }
 
     // Update country and division based on selected customer
@@ -120,31 +139,33 @@ public class CustomerUpdateScreenController implements Initializable {
      * @throws IOException
      */
     public void onUpdateCustomerButtonPressed(ActionEvent actionEvent) throws IOException {
-        // Get the selected customer
-        Customer selectedCustomer = customerTableView.getSelectionModel().getSelectedItem();
-
+        
         // Takes all field input and checks for empty/null values
         if (validateCustomerInputs()) {
 
             // Update the selected customer with the new data
-            selectedCustomer.setCustomerName(name);
-            selectedCustomer.setStreetAddress(streetAddress);
-            selectedCustomer.setPostalCode(postalCode);
-            selectedCustomer.setPhone(phone);
-            selectedCustomer.setLastUpdate(LocalDateTime.now());
-            selectedCustomer.setLastUpdatedBy(SessionManager.getInstance().getCurrentUserName());
-            selectedCustomer.setDivisionId(divisionId);
+            updatedCustomer.setCustomerName(name);
+            updatedCustomer.setStreetAddress(streetAddress);
+            updatedCustomer.setPostalCode(postalCode);
+            updatedCustomer.setPhone(phone);
+            updatedCustomer.setLastUpdate(LocalDateTime.now());
+            updatedCustomer.setLastUpdatedBy(SessionManager.getInstance().getCurrentUserName());
+            updatedCustomer.setDivisionId(divisionId);
 
             // Update the customer in the database using the updateCustomer method from CustomerDAO
             try {
-                CustomerDAO.updateCustomer(selectedCustomer);
+                CustomerDAO.updateCustomer(updatedCustomer);
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/view/CustomerScreen.fxml"));
+                loader.load();
+                stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+                scene = loader.getRoot();
+                stage.setScene(new Scene(scene));
+                stage.show();
             } catch (SQLException e) {
                 System.out.println("Error updating customer.");
                 e.printStackTrace();
             }
-            clearFields();
-            refreshTableView();
-            customerTableView.getSelectionModel().clearSelection();
         }
     }
 

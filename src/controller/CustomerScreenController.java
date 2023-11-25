@@ -110,21 +110,6 @@ public class CustomerScreenController implements Initializable {
         });
     }
 
-    // Update country and division based on selected customer
-    private void updateCountryAndDivisionForSelectedCustomer(Customer customer) {
-
-        populateCountryComboBox();
-        populateDivisionComboBox(customer.getCountry());
-
-        // Set the selection in combo boxes
-        customerCountryComboBox.getSelectionModel().select(customer.getCountry());
-        customerDivisionComboBox.getSelectionModel().select(customer.getDivision());
-
-        // Forcefully refresh the combo boxes
-        customerCountryComboBox.setVisibleRowCount(customerCountryComboBox.getItems().size());
-        customerDivisionComboBox.setVisibleRowCount(customerDivisionComboBox.getItems().size());
-    }
-
     /** Creates new customer in the database
      *
      * @param actionEvent
@@ -205,10 +190,25 @@ public class CustomerScreenController implements Initializable {
      * @throws IOException
      */
     public void onUpdateCurrentCustomerButtonPressed(ActionEvent actionEvent) throws IOException {
-        stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/CustomerUpdateScreen.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/CustomerUpdateScreen.fxml"));
+            loader.load();
+
+            CustomerUpdateScreenController CSController = loader.getController();
+            CSController.transferCustomer(customerTableView.getSelectionModel().getSelectedItem());
+
+            stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
+            scene = loader.getRoot();
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
+        catch (Exception e)
+        {
+            noCustomerSelectedAlert();
+        }
+
+
     }
 
     /** Gets data from input fields to create new or update customer
