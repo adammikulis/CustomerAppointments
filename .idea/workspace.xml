@@ -4,9 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="added UserDAO and changed combo boxes in Appointment screen">
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="combo boxes populate and can be properly read from">
+      <change afterPath="$PROJECT_DIR$/src/controller/AppointmentUpdateScreenController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/view/AppointmentUpdateScreen.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login_activity.txt" beforeDir="false" afterPath="$PROJECT_DIR$/login_activity.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/CustomerUpdateScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CustomerUpdateScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/LoginScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/AppointmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/AppointmentDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/ContactDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/ContactDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/CustomerDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/LoginDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/LoginDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/ConnectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/SessionManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,20 +72,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/adamm/IdeaProjects/CustomerAppointments/src/view",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pathVariables"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/adamm/IdeaProjects/CustomerAppointments/src/view&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\adamm\IdeaProjects\CustomerAppointments\src\view" />
@@ -79,8 +94,8 @@
       <recent name="helper.AppointmentTimeChecker" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="dao" />
       <recent name="controller" />
+      <recent name="dao" />
     </key>
   </component>
   <component name="RunManager">
@@ -291,14 +306,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00071" summary="removed unused AlertHandler class">
-      <option name="closed" value="true" />
-      <created>1700497280766</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1700497280766</updated>
-    </task>
     <task id="LOCAL-00072" summary="fixed updateClient">
       <option name="closed" value="true" />
       <created>1700500398542</created>
@@ -467,7 +474,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700950398019</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="combo boxes populate and can be properly read from">
+      <option name="closed" value="true" />
+      <created>1700950612725</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1700950612725</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -489,7 +504,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fixed date refresh issue and updated appointmentscreen UI" />
     <MESSAGE value="finished filters, guards on blank appt fields and all remaining functionality" />
     <MESSAGE value="empty space guards implemented for client screen" />
     <MESSAGE value="corrected appointments by week logic and updated some javadocs" />
@@ -514,7 +528,8 @@
     <MESSAGE value="resolved combo box bug by making separate customer update screen" />
     <MESSAGE value="finished separate update customer screen" />
     <MESSAGE value="added UserDAO and changed combo boxes in Appointment screen" />
-    <option name="LAST_COMMIT_MESSAGE" value="added UserDAO and changed combo boxes in Appointment screen" />
+    <MESSAGE value="combo boxes populate and can be properly read from" />
+    <option name="LAST_COMMIT_MESSAGE" value="combo boxes populate and can be properly read from" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,6 +1,7 @@
 package dao;
 
 import helper.ConnectionManager;
+import model.User;
 import report.LoginLogger;
 import java.io.*;
 
@@ -22,6 +23,7 @@ public class LoginDAO {
      * @throws IOException
      */
     public static String currentUserName;
+    public static User currentUser;
 
     public static boolean checkLogin(String inputUserName, String inputPassword) throws SQLException, IOException {
         boolean loginSuccess = false;
@@ -39,7 +41,7 @@ public class LoginDAO {
             if (inputPassword.equals(storedPassword)) {
                 loginSuccess = true;
                 LoginLogger.logLoginAttempt(inputUserName, inputPassword, loginSuccess);
-                currentUserName = inputUserName;
+                UserDAO.setCurrentUser(UserDAO.getUserByName(inputUserName));
                 return true;
             } else {
                 LoginLogger.logLoginAttempt(inputUserName, inputPassword, loginSuccess);
@@ -49,5 +51,9 @@ public class LoginDAO {
             LoginLogger.logLoginAttempt(inputUserName, inputPassword, loginSuccess);
             throw new IllegalArgumentException("Username not found");
         }
+    }
+
+    public static String getCurrentUserName() {
+        return currentUserName;
     }
 }

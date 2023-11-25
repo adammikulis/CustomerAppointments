@@ -3,7 +3,7 @@ package controller;
 import dao.CountryDAO;
 import dao.CustomerDAO;
 import dao.DivisionDAO;
-import helper.SessionManager;
+import dao.LoginDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -149,7 +149,7 @@ public class CustomerUpdateScreenController implements Initializable {
             updatedCustomer.setPostalCode(postalCode);
             updatedCustomer.setPhone(phone);
             updatedCustomer.setLastUpdate(LocalDateTime.now());
-            updatedCustomer.setLastUpdatedBy(SessionManager.getInstance().getCurrentUserName());
+            updatedCustomer.setLastUpdatedBy(LoginDAO.getCurrentUserName());
             updatedCustomer.setDivisionId(divisionId);
 
             // Update the customer in the database using the updateCustomer method from CustomerDAO
@@ -187,25 +187,7 @@ public class CustomerUpdateScreenController implements Initializable {
 
     }
 
-    /** Clears input fields and refreshes table view
-     *
-     */
-    private void clearFields() {
-        // Clear the input fields
-        customerScreenNameTextField.clear();
-        customerScreenAddressTextField.clear();
-        customerScreenPostalCodeTextField.clear();
-        customerScreenPhoneTextField.clear();
-        clearCountryComboBox();
 
-        clearDivisionComboBox();
-
-    }
-
-    private void refreshTableView() {
-        customerTableView.setItems(CustomerDAO.getAllCustomers());
-        customerTableView.refresh();
-    }
     @FXML
     private void onCountryComboBoxChanged(ActionEvent event) {
         Country country = customerCountryComboBox.getValue();

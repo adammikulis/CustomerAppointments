@@ -70,7 +70,7 @@ public class AppointmentDAO {
      * @param appointment appointment to manipulate
      * @throws SQLException
      */
-    private void setAppointmentFields(PreparedStatement ps, Appointment appointment) throws SQLException {
+    private static void setAppointmentFields(PreparedStatement ps, Appointment appointment) throws SQLException {
         ps.setInt(1, appointment.getContactId());
         ps.setInt(2, appointment.getCustomerId());
         ps.setInt(3, appointment.getUserId());
@@ -90,7 +90,7 @@ public class AppointmentDAO {
      * @param updatedAppointment appointment to update
      * @throws SQLException
      */
-    public void updateAppointment(Appointment updatedAppointment) throws SQLException {
+    public static void updateAppointment(Appointment updatedAppointment) throws SQLException {
         Connection conn = ConnectionManager.getConnection();
         String query = "UPDATE appointments SET Contact_ID = ?, Customer_ID = ?, User_ID = ?, Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Last_Update = ?, Last_Updated_By = ? "
                 + "WHERE Appointment_ID = ?";

@@ -3,7 +3,7 @@ package controller;
 import dao.CountryDAO;
 import dao.CustomerDAO;
 import dao.DivisionDAO;
-import helper.SessionManager;
+import dao.LoginDAO;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -130,9 +130,9 @@ public class CustomerScreenController implements Initializable {
                     postalCode,
                     phone,
                     now,
-                    SessionManager.getInstance().getCurrentUserName(),
+                    LoginDAO.getCurrentUserName(),
                     now,
-                    SessionManager.getInstance().getCurrentUserName(),
+                    LoginDAO.getCurrentUserName(),
                     divisionId
             );
             try {

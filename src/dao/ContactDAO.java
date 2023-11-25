@@ -95,14 +95,6 @@ public class ContactDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
-
         }
         // Return null if no contact found with the given ID
         return null;

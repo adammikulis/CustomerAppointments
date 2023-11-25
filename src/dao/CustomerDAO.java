@@ -4,6 +4,7 @@ import helper.ConnectionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Customer;
+import model.User;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -23,19 +24,19 @@ public class CustomerDAO {
         ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
 
         String query = "SELECT * FROM customers";
-        try (PreparedStatement preparedStatement = ConnectionManager.getConnection().prepareStatement(query);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
-            while (resultSet.next()) {
-                int customerId = resultSet.getInt("Customer_ID");
-                String customerName = resultSet.getString("Customer_Name");
-                String streetAddress = resultSet.getString("Address");
-                String postalCode = resultSet.getString("Postal_Code");
-                String phone = resultSet.getString("Phone");
-                LocalDateTime createDate = resultSet.getTimestamp("Create_Date").toLocalDateTime();
-                String createdBy = resultSet.getString("Created_By");
-                LocalDateTime lastUpdate = resultSet.getTimestamp("Last_Update").toLocalDateTime();
-                String lastUpdatedBy = resultSet.getString("Last_Updated_By");
-                Integer divisionId = resultSet.getInt("Division_ID");
+        try (PreparedStatement ps = ConnectionManager.getConnection().prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                int customerId = rs.getInt("Customer_ID");
+                String customerName = rs.getString("Customer_Name");
+                String streetAddress = rs.getString("Address");
+                String postalCode = rs.getString("Postal_Code");
+                String phone = rs.getString("Phone");
+                LocalDateTime createDate = rs.getTimestamp("Create_Date").toLocalDateTime();
+                String createdBy = rs.getString("Created_By");
+                LocalDateTime lastUpdate = rs.getTimestamp("Last_Update").toLocalDateTime();
+                String lastUpdatedBy = rs.getString("Last_Updated_By");
+                Integer divisionId = rs.getInt("Division_ID");
 
                 allCustomers.add(new Customer(customerId, customerName, streetAddress, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdatedBy, divisionId));
             }
@@ -45,6 +46,43 @@ public class CustomerDAO {
         }
         return allCustomers;
     }
+
+    public static Customer getCustomer(int customerId) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionManager.getConnection();
+
+            String query = "SELECT * FROM customers WHERE Customer_ID=?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, customerId);
+
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                customerId = rs.getInt("Customer_ID");
+                String customerName = rs.getString("Customer_Name");
+                String streetAddress = rs.getString("Address");
+                String postalCode = rs.getString("Postal_Code");
+                String phone = rs.getString("Phone");
+                LocalDateTime createDate = rs.getTimestamp("Create_Date").toLocalDateTime();
+                String createdBy = rs.getString("Created_By");
+                LocalDateTime lastUpdate = rs.getTimestamp("Last_Update").toLocalDateTime();
+                String lastUpdatedBy = rs.getString("Last_Updated_By");
+                Integer divisionId = rs.getInt("Division_ID");
+
+                return new Customer(customerId, customerName, streetAddress, postalCode, phone, createDate, createdBy, lastUpdate, lastUpdatedBy, divisionId);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        // Return null if no user found with the given ID
+        return null;
+    }
+
 
     /**
      * Inserts new customer into database

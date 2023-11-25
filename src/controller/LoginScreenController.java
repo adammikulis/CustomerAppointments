@@ -4,7 +4,7 @@
 package controller;
 
 import dao.LoginDAO;
-import helper.SessionManager;
+import dao.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -85,9 +85,7 @@ public class LoginScreenController implements Initializable {
         if (checkEmptyUsernamePassword(userName, password)) {
             try {
                 LoginDAO.checkLogin(userName, password);
-
-                SessionManager.getInstance().setCurrentUserName(userName);
-                System.out.println("Current user: " + SessionManager.getInstance().getCurrentUserName());
+                System.out.println("Current user: " + UserDAO.getCurrentUser().getUserName());
 
                 stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
                 scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));

@@ -27,7 +27,6 @@ public abstract class ConnectionManager {
             if (connection == null || connection.isClosed()) {
                 Class.forName(driver); // Locate Driver
                 connection = java.sql.DriverManager.getConnection(jdbcUrl, userName, password); // Reference Connection object
-                System.out.println("Connection successful!");
             }
         } catch (Exception e) {
             System.out.println("Error:" + e.getMessage());
