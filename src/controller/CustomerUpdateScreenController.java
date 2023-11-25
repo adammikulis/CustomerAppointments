@@ -1,9 +1,6 @@
 package controller;
 
-import dao.CountryDAO;
-import dao.CustomerDAO;
-import dao.DivisionDAO;
-import dao.LoginDAO;
+import dao.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -149,7 +146,7 @@ public class CustomerUpdateScreenController implements Initializable {
             updatedCustomer.setPostalCode(postalCode);
             updatedCustomer.setPhone(phone);
             updatedCustomer.setLastUpdate(LocalDateTime.now());
-            updatedCustomer.setLastUpdatedBy(LoginDAO.getCurrentUserName());
+            updatedCustomer.setLastUpdatedBy(UserDAO.getCurrentUser().getUserName());
             updatedCustomer.setDivisionId(divisionId);
 
             // Update the customer in the database using the updateCustomer method from CustomerDAO

@@ -323,8 +323,8 @@ public class AppointmentScreenController implements Initializable {
     public boolean getValuesFromFields() {
 
         // Check if any field is empty and show an alert if so
-        if (appointmentIdTextField.getText().trim().isEmpty() ||
-                appointmentCustomerComboBox.getValue() == null ||
+        if (    appointmentCustomerComboBox.getValue() == null ||
+                appointmentContactComboBox.getValue() == null ||
                 appointmentUserComboBox.getValue() == null ||
                 appointmentTitleTextField.getText().trim().isEmpty() ||
                 appointmentDescriptionTextField.getText().trim().isEmpty() ||
@@ -338,7 +338,6 @@ public class AppointmentScreenController implements Initializable {
             alert.showAndWait();
             return false;
         }
-        appointmentId = Integer.parseInt(appointmentIdTextField.getText());
         customerId = appointmentCustomerComboBox.getSelectionModel().getSelectedItem().getCustomerId();
         userId = appointmentUserComboBox.getSelectionModel().getSelectedItem().getUserId();
         selectedContact = appointmentContactComboBox.getSelectionModel().getSelectedItem();
@@ -347,8 +346,8 @@ public class AppointmentScreenController implements Initializable {
         description = appointmentDescriptionTextField.getText();
         location = appointmentLocationTextField.getText();
         type = appointmentTypeTextField.getText();
-        lastUpdatedBy = LoginDAO.getCurrentUserName();
-        createdBy = LoginDAO.getCurrentUserName();
+        lastUpdatedBy = UserDAO.getCurrentUser().getUserName();
+        createdBy = UserDAO.getCurrentUser().getUserName();
         date = appointmentDatePicker.getValue();
         startTime = LocalTime.parse(appointmentStartTimeTextField.getText());
         endTime = LocalTime.parse(appointmentEndTimeTextField.getText());

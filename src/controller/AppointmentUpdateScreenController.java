@@ -241,8 +241,8 @@ public class AppointmentUpdateScreenController implements Initializable {
         description = appointmentDescriptionTextField.getText();
         location = appointmentLocationTextField.getText();
         type = appointmentTypeTextField.getText();
-        lastUpdatedBy = LoginDAO.getCurrentUserName();
-        createdBy = LoginDAO.getCurrentUserName();
+        lastUpdatedBy = UserDAO.getCurrentUser().getUserName();
+        createdBy = UserDAO.getCurrentUser().getUserName();
         date = appointmentDatePicker.getValue();
         startTime = LocalTime.parse(appointmentStartTimeTextField.getText());
         endTime = LocalTime.parse(appointmentEndTimeTextField.getText());

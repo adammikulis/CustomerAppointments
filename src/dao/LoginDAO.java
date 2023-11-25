@@ -22,9 +22,6 @@ public class LoginDAO {
      * @throws SQLException
      * @throws IOException
      */
-    public static String currentUserName;
-    public static User currentUser;
-
     public static boolean checkLogin(String inputUserName, String inputPassword) throws SQLException, IOException {
         boolean loginSuccess = false;
         if (inputUserName.isEmpty() || inputPassword.isEmpty()) {
@@ -53,7 +50,4 @@ public class LoginDAO {
         }
     }
 
-    public static String getCurrentUserName() {
-        return currentUserName;
-    }
 }
