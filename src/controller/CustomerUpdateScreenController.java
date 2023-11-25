@@ -23,13 +23,12 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 /** Class for controlling the customer screen
  *
  */
-public class CustomerScreenController implements Initializable {
+public class CustomerUpdateScreenController implements Initializable {
 
     Stage stage;
     Parent scene;
@@ -92,16 +91,6 @@ public class CustomerScreenController implements Initializable {
         countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
         divisionColumn.setCellValueFactory(new PropertyValueFactory<>("division"));
 
-
-        // Listener for selected customer
-        customerTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                currentCustomer = newValue;
-                clearFields();
-                populateCountryComboBox();
-            }
-        });
-
         // Listener for country combo box
         customerCountryComboBox.valueProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
@@ -125,90 +114,38 @@ public class CustomerScreenController implements Initializable {
         customerDivisionComboBox.setVisibleRowCount(customerDivisionComboBox.getItems().size());
     }
 
-    /** Creates new customer in the database
+    /** Updates currently selected customer in the database
      *
      * @param actionEvent
      * @throws IOException
      */
-    public void onCustomerScreenSaveNewCustomerButtonPressed(ActionEvent actionEvent) throws IOException {
-        // Get the data from the input fields and check for empty
+    public void onUpdateCustomerButtonPressed(ActionEvent actionEvent) throws IOException {
+        // Get the selected customer
+        Customer selectedCustomer = customerTableView.getSelectionModel().getSelectedItem();
+
+        // Takes all field input and checks for empty/null values
         if (validateCustomerInputs()) {
 
-            // Set the create and last update times to the current time
-            LocalDateTime now = LocalDateTime.now();
+            // Update the selected customer with the new data
+            selectedCustomer.setCustomerName(name);
+            selectedCustomer.setStreetAddress(streetAddress);
+            selectedCustomer.setPostalCode(postalCode);
+            selectedCustomer.setPhone(phone);
+            selectedCustomer.setLastUpdate(LocalDateTime.now());
+            selectedCustomer.setLastUpdatedBy(SessionManager.getInstance().getCurrentUserName());
+            selectedCustomer.setDivisionId(divisionId);
 
-            // Create a new Customer object with the input data and current time and user for create and last update info
-            Customer newCustomer = new Customer(
-                    0,
-                    name,
-                    streetAddress,
-                    postalCode,
-                    phone,
-                    now,
-                    SessionManager.getInstance().getCurrentUserName(),
-                    now,
-                    SessionManager.getInstance().getCurrentUserName(),
-                    divisionId
-            );
+            // Update the customer in the database using the updateCustomer method from CustomerDAO
             try {
-                CustomerDAO.insertCustomer(newCustomer);
+                CustomerDAO.updateCustomer(selectedCustomer);
             } catch (SQLException e) {
-                System.out.println("Error adding new customer to list.");
+                System.out.println("Error updating customer.");
                 e.printStackTrace();
             }
             clearFields();
             refreshTableView();
             customerTableView.getSelectionModel().clearSelection();
         }
-    }
-
-    /** Deletes currently selected customer from the database
-     *
-     * @param actionEvent
-     * @throws IOException
-     * @throws SQLException
-     */
-    public void onCustomerScreenDeleteCustomerButtonPressed(ActionEvent actionEvent) throws IOException, SQLException {
-        // Get the selected customer
-        Customer selectedCustomer = customerTableView.getSelectionModel().getSelectedItem();
-
-        if (selectedCustomer != null) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirm Deletion");
-            alert.setHeaderText("Are you sure you want to delete this customer?");
-            alert.setContentText("Deleting a customer will also delete all appointments associated with this customer.");
-            Optional<ButtonType> result = alert.showAndWait();
-
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                try {
-                    boolean isDeleted = CustomerDAO.deleteCustomer(selectedCustomer);
-
-                    if (!isDeleted) {
-                        System.out.println("Error deleting customer.");
-                    }
-                } catch (SQLException e) {
-                    System.out.println("Error deleting customer.");
-                    e.printStackTrace();
-                }
-            }
-        } else {
-            System.out.println("No customer selected for deletion.");
-        }
-        clearFields();
-        refreshTableView();
-        customerTableView.getSelectionModel().clearSelection();
-    }
-
-    /** Updates currently selected customer in the database
-     *
-     * @param actionEvent
-     * @throws IOException
-     */
-    public void onUpdateCurrentCustomerButtonPressed(ActionEvent actionEvent) throws IOException {
-        stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/CustomerUpdateScreen.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
     }
 
     /** Gets data from input fields to create new or update customer
@@ -229,8 +166,6 @@ public class CustomerScreenController implements Initializable {
 
     }
 
-
-
     /** Clears input fields and refreshes table view
      *
      */
@@ -241,7 +176,9 @@ public class CustomerScreenController implements Initializable {
         customerScreenPostalCodeTextField.clear();
         customerScreenPhoneTextField.clear();
         clearCountryComboBox();
+
         clearDivisionComboBox();
+
     }
 
     private void refreshTableView() {
@@ -275,7 +212,6 @@ public class CustomerScreenController implements Initializable {
         customerDivisionComboBox.setItems(FXCollections.observableArrayList(divisions));
     }
 
-
     /** Clears country combo box
      *
      */
@@ -283,7 +219,6 @@ public class CustomerScreenController implements Initializable {
         customerCountryComboBox.getItems().clear();
         customerCountryComboBox.setValue(null);
     }
-
 
     /** Clears division combo box
      *
@@ -298,21 +233,11 @@ public class CustomerScreenController implements Initializable {
      * @param actionEvent
      * @throws IOException
      */
-    public void onCustomerScreenBackButtonPressed(ActionEvent actionEvent) throws IOException {
+    public void onCustomerUpdateScreenBackButtonPressed(ActionEvent actionEvent) throws IOException {
         stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
+        scene = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
-    }
-
-    /** Clears selection and refreshes table
-     *
-     * @param actionEvent
-     */
-    @FXML
-    private void onCustomerScreenClearSelectionButtonPressed(ActionEvent actionEvent) {
-        clearFields();
-        customerTableView.getSelectionModel().clearSelection();
     }
 
     /** Makes sure that no inputs are empty
@@ -330,15 +255,5 @@ public class CustomerScreenController implements Initializable {
             return false;
         }
         return true;
-    }
-
-    /** Shows alert if no customer is selected
-     *
-     */
-    private void noCustomerSelectedAlert() {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("No customer selected");
-        alert.setHeaderText("Please select a customer before attempting to update");
-        alert.showAndWait();
     }
 }
