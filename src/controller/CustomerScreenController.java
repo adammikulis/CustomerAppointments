@@ -94,13 +94,15 @@ public class CustomerScreenController implements Initializable {
         countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
         divisionColumn.setCellValueFactory(new PropertyValueFactory<>("division"));
 
-        refreshCountryComboBox();
+        populateCountryComboBox();
         clearDivisionComboBox();
 
         // Listener for selected customer
         customerTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 currentCustomer = newValue;
+                clearFields();
+                isTableSelection = true;
 
                 // Update text fields
                 customerScreenNameTextField.setText(currentCustomer.getCustomerName());
@@ -108,25 +110,29 @@ public class CustomerScreenController implements Initializable {
                 customerScreenPostalCodeTextField.setText(currentCustomer.getPostalCode());
                 customerScreenPhoneTextField.setText(currentCustomer.getPhone());
 
-                refreshCountryComboBox();
-                clearDivisionComboBox();
-                // Update country and division combo boxes
-                customerCountryComboBox.getSelectionModel().select(currentCustomer.getCountry());
-                // Repopulate division combo box when a new customer is selected
-                populateDivisionComboBox(currentCustomer.getCountry());
-                customerDivisionComboBox.getSelectionModel().select(currentCustomer.getDivision());
+                updateCountryAndDivisionForSelectedCustomer(currentCustomer);
+
+                isTableSelection = false;
             }
         });
 
         // Listener for country combo box
         customerCountryComboBox.valueProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal != null) {
+            if (!isTableSelection && newVal != null) {
                 populateDivisionComboBox(newVal);
-            } else {
-                clearCountryComboBox();
-                clearDivisionComboBox();
             }
         });
+    }
+
+    // Update country and division based on selected customer
+    private void updateCountryAndDivisionForSelectedCustomer(Customer customer) {
+        // Forcefully refresh countries and divisions list
+        populateCountryComboBox();
+        populateDivisionComboBox(customer.getCountry());
+
+        // Set the selection in combo boxes
+        customerCountryComboBox.getSelectionModel().select(customer.getCountry());
+        customerDivisionComboBox.getSelectionModel().select(customer.getDivision());
     }
 
     /** Creates new customer in the database
@@ -160,7 +166,9 @@ public class CustomerScreenController implements Initializable {
                 System.out.println("Error adding new customer to list.");
                 e.printStackTrace();
             }
-            clearFieldsAndRefresh();
+            clearFields();
+            refreshTableView();
+            customerTableView.getSelectionModel().clearSelection();
         }
     }
 
@@ -196,7 +204,9 @@ public class CustomerScreenController implements Initializable {
         } else {
             System.out.println("No customer selected for deletion.");
         }
-        clearFieldsAndRefresh();
+        clearFields();
+        refreshTableView();
+        customerTableView.getSelectionModel().clearSelection();
     }
 
     /** Updates currently selected customer in the database
@@ -228,7 +238,9 @@ public class CustomerScreenController implements Initializable {
                     System.out.println("Error updating customer.");
                     e.printStackTrace();
                 }
-                clearFieldsAndRefresh();
+                clearFields();
+                refreshTableView();
+                customerTableView.getSelectionModel().clearSelection();
             }
         } else {
             noCustomerSelectedAlert();
@@ -247,7 +259,6 @@ public class CustomerScreenController implements Initializable {
 
         selectedCountry = customerCountryComboBox.getSelectionModel().getSelectedItem();
         selectedDivision = customerDivisionComboBox.getSelectionModel().getSelectedItem();
-        divisionId = selectedDivision.getDivisionId();
         if (selectedDivision != null) {
             divisionId = selectedDivision.getDivisionId();
         }
@@ -259,20 +270,21 @@ public class CustomerScreenController implements Initializable {
     /** Clears input fields and refreshes table view
      *
      */
-    private void clearFieldsAndRefresh() {
+    private void clearFields() {
         // Clear the input fields
         customerScreenNameTextField.clear();
         customerScreenAddressTextField.clear();
         customerScreenPostalCodeTextField.clear();
         customerScreenPhoneTextField.clear();
         clearCountryComboBox();
+
         clearDivisionComboBox();
 
-        // Refresh table view and clear selection
+    }
+
+    private void refreshTableView() {
         customerTableView.setItems(CustomerDAO.getAllCustomers());
         customerTableView.refresh();
-        customerTableView.getSelectionModel().clearSelection();
-        refreshCountryComboBox();
     }
     @FXML
     private void onCountryComboBoxChanged(ActionEvent event) {
@@ -285,10 +297,10 @@ public class CustomerScreenController implements Initializable {
         }
     }
 
-    public void refreshCountryComboBox() {
-        List<Country> countries = null;
+    public void populateCountryComboBox() {
+        clearCountryComboBox();
         try {
-            countries = CountryDAO.getAllCountries();
+            List<Country> countries = CountryDAO.getAllCountries();
             customerCountryComboBox.setItems(FXCollections.observableArrayList(countries));
         } catch (Exception e) {
             e.printStackTrace();
@@ -302,7 +314,7 @@ public class CustomerScreenController implements Initializable {
     private void populateDivisionComboBox(Country country) {
         clearDivisionComboBox();
         List<Division> divisions = DivisionDAO.getDivisionsByCountry(country);
-        customerDivisionComboBox.getItems().addAll(divisions);
+        customerDivisionComboBox.setItems(FXCollections.observableArrayList(divisions));
     }
 
 
@@ -341,7 +353,8 @@ public class CustomerScreenController implements Initializable {
      */
     @FXML
     private void onCustomerScreenClearSelectionButtonPressed(ActionEvent actionEvent) {
-        clearFieldsAndRefresh();
+        clearFields();
+        customerTableView.getSelectionModel().clearSelection();
     }
 
     /** Makes sure that no inputs are empty
