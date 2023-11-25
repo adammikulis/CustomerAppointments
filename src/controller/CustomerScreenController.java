@@ -56,6 +56,10 @@ public class CustomerScreenController implements Initializable {
     private TableColumn<Customer, Integer> postalCodeColumn;
     @FXML
     private TableColumn<Customer, Integer> phoneColumn;
+    @FXML
+    private TableColumn<Customer, Country> countryColumn;
+    @FXML
+    private TableColumn<Customer, Division> divisionColumn;
 
     @FXML
     private TextField customerScreenNameTextField;
@@ -71,6 +75,9 @@ public class CustomerScreenController implements Initializable {
     @FXML
     private ComboBox<Division> customerDivisionComboBox;
 
+    private boolean isTableSelection = false;
+
+
     /** Initialization for customer screen
      * Lambda expressions used for listeners
      * @param url
@@ -84,29 +91,77 @@ public class CustomerScreenController implements Initializable {
         streetAddressColumn.setCellValueFactory(new PropertyValueFactory<>("streetAddress"));
         postalCodeColumn.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+        countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
+        divisionColumn.setCellValueFactory(new PropertyValueFactory<>("division"));
 
         refreshCountryComboBox();
+        clearDivisionComboBox();
 
+        // Listener for selected customer
         customerTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                currentCustomer = newValue; // Set the current customer
+                currentCustomer = newValue;
 
-                // Populate the textfields with the selected customer's data
+                // Update text fields
                 customerScreenNameTextField.setText(currentCustomer.getCustomerName());
                 customerScreenAddressTextField.setText(currentCustomer.getStreetAddress());
                 customerScreenPostalCodeTextField.setText(currentCustomer.getPostalCode());
                 customerScreenPhoneTextField.setText(currentCustomer.getPhone());
 
-                // Populate the combo boxes with the selected customer's country and division
-                List<Division> divisionsByCountry = DivisionDAO.getDivisionsByCountry(currentCustomer.getCountry());
-
-                customerDivisionComboBox.getItems().clear();
-                customerDivisionComboBox.getItems().addAll(divisionsByCountry);
-
+                refreshCountryComboBox();
+                clearDivisionComboBox();
+                // Update country and division combo boxes
                 customerCountryComboBox.getSelectionModel().select(currentCustomer.getCountry());
-                customerDivisionComboBox.getSelectionModel().select(currentCustomer.getDivisionObject(currentCustomer.getDivisionId()));
+                // Repopulate division combo box when a new customer is selected
+                populateDivisionComboBox(currentCustomer.getCountry());
+                customerDivisionComboBox.getSelectionModel().select(currentCustomer.getDivision());
             }
         });
+
+        // Listener for country combo box
+        customerCountryComboBox.valueProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+                populateDivisionComboBox(newVal);
+            } else {
+                clearCountryComboBox();
+                clearDivisionComboBox();
+            }
+        });
+    }
+
+    /** Creates new customer in the database
+     *
+     * @param actionEvent
+     * @throws IOException
+     */
+    public void onCustomerScreenSaveNewCustomerButtonPressed(ActionEvent actionEvent) throws IOException {
+        // Get the data from the input fields and check for empty
+        if (validateCustomerInputs()) {
+
+            // Set the create and last update times to the current time
+            LocalDateTime now = LocalDateTime.now();
+
+            // Create a new Customer object with the input data and current time and user for create and last update info
+            Customer newCustomer = new Customer(
+                    0,
+                    name,
+                    streetAddress,
+                    postalCode,
+                    phone,
+                    now,
+                    SessionManager.getInstance().getCurrentUserName(),
+                    now,
+                    SessionManager.getInstance().getCurrentUserName(),
+                    divisionId
+            );
+            try {
+                CustomerDAO.insertCustomer(newCustomer);
+            } catch (SQLException e) {
+                System.out.println("Error adding new customer to list.");
+                e.printStackTrace();
+            }
+            clearFieldsAndRefresh();
+        }
     }
 
     /** Deletes currently selected customer from the database
@@ -193,43 +248,13 @@ public class CustomerScreenController implements Initializable {
         selectedCountry = customerCountryComboBox.getSelectionModel().getSelectedItem();
         selectedDivision = customerDivisionComboBox.getSelectionModel().getSelectedItem();
         divisionId = selectedDivision.getDivisionId();
-
-    }
-
-    /** Creates new customer in the database
-     *
-     * @param actionEvent
-     * @throws IOException
-     */
-    public void onCustomerScreenSaveNewCustomerButtonPressed(ActionEvent actionEvent) throws IOException {
-        // Get the data from the input fields and check for empty
-        if (validateCustomerInputs()) {
-
-            // Set the create and last update times to the current time
-            LocalDateTime now = LocalDateTime.now();
-
-            // Create a new Customer object with the input data and current time and user for create and last update info
-            Customer newCustomer = new Customer(
-                    0,
-                    name,
-                    streetAddress,
-                    postalCode,
-                    phone,
-                    now,
-                    SessionManager.getInstance().getCurrentUserName(),
-                    now,
-                    SessionManager.getInstance().getCurrentUserName(),
-                    divisionId
-            );
-            try {
-                CustomerDAO.insertCustomer(newCustomer);
-            } catch (SQLException e) {
-                System.out.println("Error adding new customer to list.");
-                e.printStackTrace();
-            }
-            clearFieldsAndRefresh();
+        if (selectedDivision != null) {
+            divisionId = selectedDivision.getDivisionId();
         }
+
     }
+
+
 
     /** Clears input fields and refreshes table view
      *
@@ -275,15 +300,11 @@ public class CustomerScreenController implements Initializable {
      * @param country
      */
     private void populateDivisionComboBox(Country country) {
-        List<Division> divisions = null;
-
-        try {
-            divisions = DivisionDAO.getDivisionsByCountry(country);
-            customerDivisionComboBox.setItems(FXCollections.observableArrayList(divisions));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        clearDivisionComboBox();
+        List<Division> divisions = DivisionDAO.getDivisionsByCountry(country);
+        customerDivisionComboBox.getItems().addAll(divisions);
     }
+
 
     /** Clears country combo box
      *

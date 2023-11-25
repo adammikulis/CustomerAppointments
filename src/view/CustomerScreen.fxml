@@ -18,8 +18,8 @@
           <TableColumn fx:id="streetAddressColumn" prefWidth="99.33332824707031" text="Street Address" />
             <TableColumn fx:id="postalCodeColumn" prefWidth="71.33334350585938" text="Postal Code" />
             <TableColumn fx:id="phoneColumn" prefWidth="71.0" text="Phone" />
-            <TableColumn fx:id="phoneColumn1" prefWidth="49.66668701171875" text="Country" />
-            <TableColumn fx:id="phoneColumn11" prefWidth="93.33331298828125" text="Division" />
+            <TableColumn fx:id="countryColumn" prefWidth="49.66668701171875" text="Country" />
+            <TableColumn fx:id="divisionColumn" prefWidth="93.33331298828125" text="Division" />
         </columns>
       </TableView>
       <GridPane layoutX="536.0" layoutY="145.0" minWidth="-Infinity" prefHeight="187.0" prefWidth="243.0">
@@ -55,7 +55,7 @@
       </GridPane>
       <ButtonBar layoutX="116.0" layoutY="494.0" prefHeight="40.0" prefWidth="503.0" />
       <Button layoutX="536.0" layoutY="349.0" mnemonicParsing="false" onAction="#onUpdateCurrentCustomerButtonPressed" prefHeight="25.0" prefWidth="112.0" text="Update Customer" />
-      <Button fx:id="customerScreenDeleteCustomerButton" layoutX="656.0" layoutY="349.0" mnemonicParsing="false" onAction="#onCustomerScreenSaveNewCustomerButtonPressed" prefHeight="25.0" prefWidth="123.0" text="Save New Customer" />
+      <Button layoutX="656.0" layoutY="349.0" mnemonicParsing="false" onAction="#onCustomerScreenSaveNewCustomerButtonPressed" prefHeight="25.0" prefWidth="123.0" text="Save New Customer" />
       <Button layoutX="673.0" layoutY="386.0" mnemonicParsing="false" onAction="#onCustomerScreenDeleteCustomerButtonPressed" text="Delete Customer" />
       <Button layoutX="664.0" layoutY="525.0" mnemonicParsing="false" onAction="#onCustomerScreenBackButtonPressed" text="Back" />
       <Label text="Label" />

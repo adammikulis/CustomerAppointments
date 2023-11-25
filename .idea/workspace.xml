@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="refactored getCountryByDivisionId out of CustomerDAO into CountryDAO">
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="removed extraneous methods">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/CountryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/CountryDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/CustomerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/DivisionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/DivisionDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CustomerScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CustomerScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,22 +287,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00064" summary="resolved bug in contact combobox listener that automatically updated appointment contact">
-      <option name="closed" value="true" />
-      <created>1700415365636</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1700415365636</updated>
-    </task>
-    <task id="LOCAL-00065" summary="split datetime into separate date and time columns/fields">
-      <option name="closed" value="true" />
-      <created>1700419677254</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1700419677254</updated>
-    </task>
     <task id="LOCAL-00066" summary="successfully read/writes appointments with new date and time input">
       <option name="closed" value="true" />
       <created>1700420515421</created>
@@ -464,7 +447,23 @@
       <option name="project" value="LOCAL" />
       <updated>1700704127410</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="refactored nearly everything relevant into CountryDAO and DivisionDAO, need to fix add/update customer">
+      <option name="closed" value="true" />
+      <created>1700707467647</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1700707467647</updated>
+    </task>
+    <task id="LOCAL-00087" summary="removed extraneous methods">
+      <option name="closed" value="true" />
+      <created>1700799990938</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1700799990938</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -486,8 +485,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="add no filter radio button and using filtered list for appointments" />
-    <MESSAGE value="added datepicker and changed type from text field to combo box, does not compile yet" />
     <MESSAGE value="reverted type back to text field" />
     <MESSAGE value="refactored new and update appointment methods with getValuesFromFields()" />
     <MESSAGE value="resolved bug in contact combobox listener that automatically updated appointment contact" />
@@ -511,7 +508,9 @@
     <MESSAGE value="refactored into Country and CountryDAO, does not yet update based on current customer" />
     <MESSAGE value="refactored into Division and DivisionDAO" />
     <MESSAGE value="refactored getCountryByDivisionId out of CustomerDAO into CountryDAO" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactored getCountryByDivisionId out of CustomerDAO into CountryDAO" />
+    <MESSAGE value="refactored nearly everything relevant into CountryDAO and DivisionDAO, need to fix add/update customer" />
+    <MESSAGE value="removed extraneous methods" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed extraneous methods" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -520,6 +519,16 @@
           <properties class="java.lang.IllegalStateException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/model/Customer.java</url>
+          <line>225</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/controller/CustomerScreenController.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

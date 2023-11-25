@@ -112,7 +112,7 @@ public class CustomerDAO {
      * @throws SQLException
      */
     public static void updateCustomer(Customer currentCustomer) throws SQLException {
-        String query = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ? WHERE Customer_Id = ?";
+        String query = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ?, Division_ID = ? WHERE Customer_Id = ?";
         Connection conn = ConnectionManager.getConnection();
         PreparedStatement ps = conn.prepareStatement(query);
 
@@ -123,9 +123,10 @@ public class CustomerDAO {
             ps.setString(4, currentCustomer.getPhone());
             ps.setTimestamp(5, Timestamp.valueOf(currentCustomer.getLastUpdate()));
             ps.setString(6, currentCustomer.getLastUpdatedBy());
-            ps.setInt(7, currentCustomer.getCustomerId());
+            ps.setInt(7, currentCustomer.getDivisionId());
+            ps.setInt(8, currentCustomer.getCustomerId());
 
-            int rowsAffected = ps.executeUpdate();
+            ps.executeUpdate();
         }
         catch (SQLException e) {
             System.out.println("SQL Error");

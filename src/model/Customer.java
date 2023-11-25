@@ -19,6 +19,8 @@ public class Customer {
     private LocalDateTime lastUpdate;
     private String lastUpdatedBy;
     private int divisionId;
+    private Division division;
+    private Country country;
 
 
     /** Constructor for Customer
@@ -211,14 +213,16 @@ public class Customer {
         this.divisionId = divisionId;
     }
 
-    /** Returnss the customer's country by division ID
+    /** Returns the customer's country by division ID
      * @return country by division ID
      */
     public Country getCountry() {
-        return CountryDAO.getCountryByDivisionId(getDivisionId());
+        country = CountryDAO.getCountryByDivisionId(divisionId);
+        return country;
     }
 
-    public Division getDivisionObject(int divisionId) {
-        return DivisionDAO.getDivisionByDivisionId(divisionId);
+    public Division getDivision() {
+        division = DivisionDAO.getDivisionByDivisionId(divisionId);
+        return division;
     }
 }
