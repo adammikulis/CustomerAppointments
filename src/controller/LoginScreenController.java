@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -60,11 +61,10 @@ public class LoginScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         languageCode = Locale.getDefault().getLanguage();
-
         if (languageCode.equals("en")) {
-            localeIdLabel.setText("Current Locale: " + Locale.getDefault().toString());
+            localeIdLabel.setText("ZoneID: " + ZoneId.systemDefault().toString());
         } else if (languageCode.equals("fr")) {
-            localeIdLabel.setText("Locale actuelle: " + Locale.getDefault().toString());
+            localeIdLabel.setText("Locale actuelle: " + ZoneId.systemDefault().toString());
             userNameTextField.setPromptText("Nom d'utilisateur");
             passwordPasswordField.setPromptText("Mot de passe");
             loginUsernameLabel.setText("Nom d'utilisateur");
