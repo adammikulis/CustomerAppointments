@@ -27,7 +27,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
-/** Class for controlling for appointment screen
+/** Class for controlling the appointment update screen
  *
  */
 public class AppointmentUpdateScreenController implements Initializable {
@@ -137,6 +137,10 @@ public class AppointmentUpdateScreenController implements Initializable {
 
     }
 
+    /** Transfers the selected appointment from the previous screen to be updated
+     *
+     * @param transferredAppointment
+     */
     public void transferAppointment(Appointment transferredAppointment) {
         updatedAppointmentList = FXCollections.observableArrayList();
         updatedAppointmentList.add(transferredAppointment);
@@ -158,47 +162,56 @@ public class AppointmentUpdateScreenController implements Initializable {
 
         // Populate the contact combo box
         populateContactComboBox();
-        setAppointmentContactComboBox(transferredAppointment);
+        setAppointmentContactComboBox();
 
         populateCustomerComboBox();
-        setAppointmentCustomerComboBox(transferredAppointment);
+        setAppointmentCustomerComboBox();
 
         populateUserComboBox();
-        setAppointmentUserComboBox(transferredAppointment);
+        setAppointmentUserComboBox();
 
     }
 
-    private void setAppointmentUserComboBox(Appointment transferredAppointment) {
+    /** Sets the user combo box based on current appointment
+     *
+     */
+    private void setAppointmentUserComboBox() {
         // Get the contact for the appointment
         try {
-            User selectedUser = UserDAO.getUser(transferredAppointment.getContactId());
+            User selectedUser = UserDAO.getUserById(updatedAppointment.getContactId());
             appointmentUserComboBox.getSelectionModel().select(selectedUser);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void setAppointmentCustomerComboBox(Appointment transferredAppointment) {
+    /** Sets the customer combo box based on current appointment
+     *
+     */
+    private void setAppointmentCustomerComboBox() {
         // Get the contact for the appointment
         try {
-            Customer selectedCustomer = CustomerDAO.getCustomer(transferredAppointment.getCustomerId());
+            Customer selectedCustomer = CustomerDAO.getCustomer(updatedAppointment.getCustomerId());
             appointmentCustomerComboBox.getSelectionModel().select(selectedCustomer);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void setAppointmentContactComboBox(Appointment transferredAppointment) {
+    /** Sets the contact combo box based on current appointment
+     *
+     */
+    private void setAppointmentContactComboBox() {
         // Get the contact for the appointment
         try {
-            Contact selectedContact = ContactDAO.getContact(transferredAppointment.getContactId());
+            Contact selectedContact = ContactDAO.getContact(updatedAppointment.getContactId());
             appointmentContactComboBox.getSelectionModel().select(selectedContact);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /** Sends user back to home screen
+    /** Sends user back to Appointment screen
      *
      * @param actionEvent
      * @throws IOException
@@ -255,7 +268,7 @@ public class AppointmentUpdateScreenController implements Initializable {
         return true;
     }
 
-    /** Updates selected appointment with values from fields
+    /** Updates selected appointment with values from fields and returns to Appointment screen
      *
      * @param actionEvent
      */
@@ -289,46 +302,9 @@ public class AppointmentUpdateScreenController implements Initializable {
                     e.printStackTrace();
                 }
                 refreshAppointmentListAndView();
-                clearFields();
             }
         }
 
-    }
-
-    /** Clears appointment contact combo box
-     *
-     */
-    private void clearAppointmentContactComboBox() {
-        appointmentContactComboBox.getItems().clear();
-        appointmentContactComboBox.setValue(null);
-    }
-
-    /** Clears all fields
-     *
-     */
-    private void clearFields() {
-
-        appointmentTableView.getSelectionModel().clearSelection();
-
-        // Clear the input fields
-        appointmentIdTextField.clear();
-        appointmentTitleTextField.clear();
-        appointmentDescriptionTextField.clear();
-        appointmentTypeTextField.clear();
-        appointmentLocationTextField.clear();
-        appointmentDatePicker.getEditor().clear();
-        appointmentDatePicker.setValue(null);
-        appointmentStartTimeTextField.clear();
-        appointmentEndTimeTextField.clear();
-        clearAppointmentContactComboBox();
-        clearAppointmentCustomerComboBox();
-        clearAppointmentUserComboBox();
-    }
-
-    private void clearAppointmentUserComboBox() {
-    }
-
-    private void clearAppointmentCustomerComboBox() {
     }
 
     /** Refreshes contact combo box

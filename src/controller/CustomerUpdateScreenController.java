@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
-/** Class for controlling the customer screen
+/** Class for controlling the customer update screen
  *
  */
 public class CustomerUpdateScreenController implements Initializable {
@@ -91,15 +91,12 @@ public class CustomerUpdateScreenController implements Initializable {
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
         countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
         divisionColumn.setCellValueFactory(new PropertyValueFactory<>("division"));
-
-        // Listener for country combo box
-        customerCountryComboBox.valueProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal != null) {
-                populateDivisionComboBox(newVal);
-            }
-        });
     }
 
+    /** Enables customer from previous screen to be transferred over to update screen
+     *
+     * @param transferredCustomer
+     */
     public void transferCustomer(Customer transferredCustomer) {
         updatedCustomerList = FXCollections.observableArrayList();
         updatedCustomerList.add(transferredCustomer);
@@ -112,18 +109,20 @@ public class CustomerUpdateScreenController implements Initializable {
         customerScreenPostalCodeTextField.setText(transferredCustomer.getPostalCode());
         customerScreenPhoneTextField.setText(transferredCustomer.getPhone());
 
-        updateCountryAndDivisionForSelectedCustomer(transferredCustomer);
+        updateCustomerCountryAndDivision();
     }
 
-    // Update country and division based on selected customer
-    private void updateCountryAndDivisionForSelectedCustomer(Customer customer) {
+    /** Updates country and division for the customer
+     *
+     */
+    private void updateCustomerCountryAndDivision() {
 
         populateCountryComboBox();
-        populateDivisionComboBox(customer.getCountry());
+        populateDivisionComboBox(updatedCustomer.getCountry());
 
         // Set the selection in combo boxes
-        customerCountryComboBox.getSelectionModel().select(customer.getCountry());
-        customerDivisionComboBox.getSelectionModel().select(customer.getDivision());
+        customerCountryComboBox.getSelectionModel().select(updatedCustomer.getCountry());
+        customerDivisionComboBox.getSelectionModel().select(updatedCustomer.getDivision());
 
         // Forcefully refresh the combo boxes
         customerCountryComboBox.setVisibleRowCount(customerCountryComboBox.getItems().size());

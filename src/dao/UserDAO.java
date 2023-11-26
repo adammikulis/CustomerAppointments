@@ -3,8 +3,6 @@ package dao;
 import helper.ConnectionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import model.Contact;
-import model.Customer;
 import model.User;
 
 import java.sql.*;
@@ -17,17 +15,25 @@ public class UserDAO {
 
     static User currentUser;
 
+    /** Sets the current user
+     *
+     * @param inputUser
+     */
     public static void setCurrentUser(User inputUser){
         currentUser = inputUser;
     }
 
+    /** Returns the current user
+     *
+     * @return current user
+     */
     public static User getCurrentUser() {
         return currentUser;
     }
 
     /** Returns a list of all users
      *
-     * @return customer list
+     * @return user list
      */
     public static ObservableList<User> getAllUsers() {
         ObservableList<User> allUsers = FXCollections.observableArrayList();
@@ -52,7 +58,13 @@ public class UserDAO {
         return allUsers;
     }
 
-    public static User getUser(int userId) throws SQLException {
+    /** Returns a user based on userID
+     *
+     * @param userId
+     * @return user
+     * @throws SQLException
+     */
+    public static User getUserById(int userId) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -85,6 +97,12 @@ public class UserDAO {
         return null;
     }
 
+    /** Returns a user by user name
+     *
+     * @param userName
+     * @return user
+     * @throws SQLException
+     */
     public static User getUserByName(String userName) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;

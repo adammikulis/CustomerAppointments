@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-/** Class for controlling for appointment screen
+/** Class for controlling the appointment screen
  *
  */
 public class AppointmentScreenController implements Initializable {
@@ -116,7 +116,7 @@ public class AppointmentScreenController implements Initializable {
     private ObservableList<Appointment> allAppointments;
 
     /** Initialization method for appointment screen
-     * Lambda expressions radio button event handlers
+     * Lambda expressions for radio button event handlers
      * @param url
      * @param resourceBundle
      */
@@ -153,10 +153,6 @@ public class AppointmentScreenController implements Initializable {
         appointmentTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 selectedAppointment = newSelection;
-
-            }
-            else {
-                clearFields();
             }
         });
 
@@ -262,18 +258,8 @@ public class AppointmentScreenController implements Initializable {
             // Delete the appointment from the database
             AppointmentDAO appointmentDAO = new AppointmentDAO();
             appointmentDAO.deleteAppointment(selectedAppointment.getAppointmentId());
-            clearFields();
             refreshAppointmentListAndView();
         }
-    }
-
-    /** Manually calls clearFieldsAndRefresh()
-     *
-     * @param actionEvent
-     */
-    public void onAppointmentClearAllFieldsButtonPressed(ActionEvent actionEvent) {
-        clearFields();
-        refreshAppointmentListAndView();
     }
 
     /** Creates new appointment if there are no conflicts and all
@@ -311,7 +297,6 @@ public class AppointmentScreenController implements Initializable {
                 }
                 // Add the new appointment to the list and refresh the table view
                 refreshAppointmentListAndView();
-                clearFields();
             }
         }
     }
@@ -396,34 +381,6 @@ public class AppointmentScreenController implements Initializable {
     private void clearAppointmentContactComboBox() {
         appointmentContactComboBox.getItems().clear();
         appointmentContactComboBox.setValue(null);
-    }
-
-    /** Clears all fields
-     *
-     */
-    private void clearFields() {
-
-        appointmentTableView.getSelectionModel().clearSelection();
-
-        // Clear the input fields
-        appointmentIdTextField.clear();
-        appointmentTitleTextField.clear();
-        appointmentDescriptionTextField.clear();
-        appointmentTypeTextField.clear();
-        appointmentLocationTextField.clear();
-        appointmentDatePicker.getEditor().clear();
-        appointmentDatePicker.setValue(null);
-        appointmentStartTimeTextField.clear();
-        appointmentEndTimeTextField.clear();
-        clearAppointmentContactComboBox();
-        clearAppointmentCustomerComboBox();
-        clearAppointmentUserComboBox();
-    }
-
-    private void clearAppointmentUserComboBox() {
-    }
-
-    private void clearAppointmentCustomerComboBox() {
     }
 
     /** Refreshes contact combo box

@@ -88,6 +88,7 @@ public class CustomerScreenController implements Initializable {
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
         countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
         divisionColumn.setCellValueFactory(new PropertyValueFactory<>("division"));
+        populateCountryComboBox();
 
 
         // Listener for selected customer
