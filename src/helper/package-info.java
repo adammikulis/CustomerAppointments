@@ -1,4 +1,4 @@
-/** Package that includes classes for querying contacts/clients/appointments and maintaining the session
+/** Package of helpers that includes a class for handling the database connection and a class to check if appointment times are valid
  *
  */
 

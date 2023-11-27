@@ -12,7 +12,7 @@
          </font>
       </Label>
       <Label layoutX="643.0" layoutY="164.0" text="All times displayed in Local" />
-      <TableView fx:id="appointmentTableView" layoutX="7.0" layoutY="188.0" prefHeight="76.0" prefWidth="785.0">
+      <TableView fx:id="appointmentTableView" layoutX="7.0" layoutY="188.0" prefHeight="61.0" prefWidth="785.0">
         <columns>
           <TableColumn fx:id="appointmentIdColumn" prefWidth="50.0" text="Appt_ID" />
           <TableColumn fx:id="titleColumn" prefWidth="82.66667175292969" text="Title" />

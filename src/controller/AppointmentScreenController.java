@@ -33,87 +33,85 @@ public class AppointmentScreenController implements Initializable {
 
     Stage stage;
     Parent scene;
-
+    
     @FXML
-    private ToggleGroup ViewByGroup;
+    protected RadioButton noFilterRadioButton;
     @FXML
-    private RadioButton noFilterRadioButton;
+    protected RadioButton viewByWeekRadioButton;
     @FXML
-    private RadioButton viewByWeekRadioButton;
-    @FXML
-    private RadioButton viewByMonthRadioButton;
+    protected RadioButton viewByMonthRadioButton;
 
 
     @FXML
-    private TableView<Appointment> appointmentTableView;
+    protected TableView<Appointment> appointmentTableView;
     @FXML
-    private TableColumn<Appointment, String> contactColumn;
+    protected TableColumn<Appointment, String> contactColumn;
     @FXML
-    private TableColumn<Appointment, Integer> appointmentIdColumn;
+    protected TableColumn<Appointment, Integer> appointmentIdColumn;
     @FXML
-    private TableColumn<Appointment, String> titleColumn;
+    protected TableColumn<Appointment, String> titleColumn;
     @FXML
-    private TableColumn<Appointment, String> descriptionColumn;
+    protected TableColumn<Appointment, String> descriptionColumn;
     @FXML
-    private TableColumn<Appointment, String> locationColumn;
+    protected TableColumn<Appointment, String> locationColumn;
     @FXML
-    private TableColumn<Appointment, String> typeColumn;
+    protected TableColumn<Appointment, String> typeColumn;
     @FXML
-    private TableColumn<Appointment, LocalDate> dateColumn;
+    protected TableColumn<Appointment, LocalDate> dateColumn;
     @FXML
-    private TableColumn<Appointment, String> startTimeColumn;
+    protected TableColumn<Appointment, String> startTimeColumn;
     @FXML
-    private TableColumn<Appointment, String> endTimeColumn;
+    protected TableColumn<Appointment, String> endTimeColumn;
     @FXML
-    private TableColumn<Appointment, Integer> customerIdColumn;
+    protected TableColumn<Appointment, Integer> customerIdColumn;
     @FXML
-    private TableColumn<Appointment, Integer> userIdColumn;
+    protected TableColumn<Appointment, Integer> userIdColumn;
 
     @FXML
-    private TextField appointmentIdTextField;
+    protected TextField appointmentIdTextField;
     @FXML
-    private TextField appointmentTitleTextField;
+    protected TextField appointmentTitleTextField;
     @FXML
-    private TextField appointmentDescriptionTextField;
+    protected TextField appointmentDescriptionTextField;
     @FXML
-    private TextField appointmentLocationTextField;
+    protected TextField appointmentLocationTextField;
     @FXML
-    private ComboBox<Contact> appointmentContactComboBox;
+    protected ComboBox<Contact> appointmentContactComboBox;
     @FXML
-    private TextField appointmentTypeTextField;
+    protected TextField appointmentTypeTextField;
     @FXML
-    private DatePicker appointmentDatePicker;
+    protected DatePicker appointmentDatePicker;
     @FXML
-    private TextField appointmentStartTimeTextField;
+    protected TextField appointmentStartTimeTextField;
     @FXML
-    private TextField appointmentEndTimeTextField;
+    protected TextField appointmentEndTimeTextField;
     @FXML
-    private ComboBox<Customer> appointmentCustomerComboBox;
+    protected ComboBox<Customer> appointmentCustomerComboBox;
     @FXML
-    private ComboBox<User> appointmentUserComboBox;
+    protected ComboBox<User> appointmentUserComboBox;
 
-    private int appointmentId;
-    private int customerId;
-    private Contact selectedContact;
-    private int contactId;
-    private int userId;
-    private String title;
-    private String description;
-    private String location;
-    private String type;
-    private String lastUpdatedBy;
-    private String createdBy;
-    private LocalDate date;
-    private LocalTime startTime;
-    private LocalTime endTime;
-    private LocalDateTime startDateTime;
-    private LocalDateTime endDateTime;
-    private LocalDateTime createDate;
-    private LocalDateTime lastUpdate;
-    private Appointment selectedAppointment;
+    protected int appointmentId;
+    protected int customerId;
+    protected Contact selectedContact;
+    protected int contactId;
+    protected int userId;
+    protected String title;
+    protected String description;
+    protected String location;
+    protected String type;
+    protected String lastUpdatedBy;
+    protected String createdBy;
+    protected LocalDate date;
+    protected LocalTime startTime;
+    protected LocalTime endTime;
+    protected LocalDateTime startDateTime;
+    protected LocalDateTime endDateTime;
+    protected LocalDateTime createDate;
+    protected LocalDateTime lastUpdate;
+    protected Appointment selectedAppointment;
 
-    private ObservableList<Appointment> filteredAppointments;
-    private ObservableList<Appointment> allAppointments;
+    protected ObservableList<Appointment> filteredAppointments;
+    protected ObservableList<Appointment> allAppointments;
 
     /** Initialization method for appointment screen
      * Lambda expressions for radio button event handlers
@@ -149,13 +147,6 @@ public class AppointmentScreenController implements Initializable {
             }
         });
 
-        // Listener for selecting a row
-        appointmentTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                selectedAppointment = newSelection;
-            }
-        });
-
         // Event handlers for radio button
         noFilterRadioButton.setOnAction(event -> showAllAppointments());
         viewByWeekRadioButton.setOnAction(event -> filterAppointmentsByWeek());
@@ -165,7 +156,7 @@ public class AppointmentScreenController implements Initializable {
     /** Displays every appointment with no filter
      *
      */
-    private void showAllAppointments() {
+    protected void showAllAppointments() {
         filteredAppointments.clear();
         allAppointments = AppointmentDAO.getAllAppointments();
         filteredAppointments.addAll(allAppointments);
@@ -174,7 +165,7 @@ public class AppointmentScreenController implements Initializable {
     /** Displays all appointments this week (MON-SUN)
      *
      */
-    private void filterAppointmentsByWeek() {
+    protected void filterAppointmentsByWeek() {
 
         allAppointments = AppointmentDAO.getAllAppointments();
         filteredAppointments.clear();
@@ -194,7 +185,7 @@ public class AppointmentScreenController implements Initializable {
     /** Displays all appointments this calendar month
      *
      */
-    private void filterAppointmentsByMonth() {
+    protected void filterAppointmentsByMonth() {
         allAppointments = AppointmentDAO.getAllAppointments();
         filteredAppointments.clear();
         LocalDate today = LocalDate.now();
@@ -212,7 +203,7 @@ public class AppointmentScreenController implements Initializable {
     /** Applies the current radio button selection as a filter
      *
      */
-    private void applyCurrentFilter() {
+    protected void applyCurrentFilter() {
         if (noFilterRadioButton.isSelected()) {
             showAllAppointments();
         }
@@ -349,7 +340,7 @@ public class AppointmentScreenController implements Initializable {
      *
      * @param actionEvent
      */
-    public void onUpdateAppointmentButtonPressed(ActionEvent actionEvent) {
+    public void onUpdateAppointmentButtonPressed(ActionEvent actionEvent) throws IOException {
 
         try {
             selectedAppointment = appointmentTableView.getSelectionModel().getSelectedItem();
@@ -378,7 +369,7 @@ public class AppointmentScreenController implements Initializable {
     /** Clears appointment contact combo box
      *
      */
-    private void clearAppointmentContactComboBox() {
+    protected void clearAppointmentContactComboBox() {
         appointmentContactComboBox.getItems().clear();
         appointmentContactComboBox.setValue(null);
     }
@@ -426,7 +417,7 @@ public class AppointmentScreenController implements Initializable {
     /** Applies current filter and refreshes table
      *
      */
-    private void refreshAppointmentListAndView() {
+    protected void refreshAppointmentListAndView() {
         applyCurrentFilter();
         populateContactComboBox();
         populateCustomerComboBox();

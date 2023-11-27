@@ -1,4 +1,4 @@
-/** Package that includes appointment, client, contact, and their associate list classes
+/** Package that includes appointment, contact, country, customer, division, and user models
  *
  */
 
