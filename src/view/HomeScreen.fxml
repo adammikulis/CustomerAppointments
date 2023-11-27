@@ -3,25 +3,32 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeScreenController">
    <children>
-      <VBox layoutX="112.0" layoutY="129.0" prefHeight="245.0" prefWidth="545.0" spacing="10.0">
+      <VBox layoutX="38.0" layoutY="126.0" prefHeight="245.0" prefWidth="545.0" spacing="10.0">
          <children>
-            <HBox prefHeight="25.0" prefWidth="531.0" spacing="20.0">
+            <HBox prefHeight="25.0" prefWidth="531.0" spacing="5.0">
                <children>
-                  <Label text="View Schedule Of:">
+                  <Label prefHeight="25.0" prefWidth="166.0" text="Schedule by Contact Report:">
                      <padding>
                         <Insets top="7.0" />
                      </padding>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
                   </Label>
-                  <ComboBox fx:id="homeContactComboBox" prefHeight="25.0" prefWidth="119.0" />
-                  <Button mnemonicParsing="false" onAction="#onViewAllAppointmentsButtonPressed" prefHeight="25.0" prefWidth="137.0" text="Appointment Screen" />
-                <Button fx:id="addUpdateClientButton" mnemonicParsing="false" onAction="#onAddUpdateClientButtonPressed" prefHeight="25.0" prefWidth="116.0" text="Customer Screen" />
+                  <ComboBox fx:id="homeContactComboBox" prefHeight="25.0" prefWidth="116.0" />
+                  <Label fx:id="appointmentAlertLabel" alignment="CENTER" prefHeight="25.0" prefWidth="251.0" text="&lt;Appointment Alert&gt;" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </Label>
                </children>
             </HBox>
-            <TableView fx:id="homeScheduleTableView" prefHeight="200.0" prefWidth="551.0">
+            <TableView fx:id="homeScheduleTableView" prefHeight="200.0" prefWidth="536.0">
               <columns>
                 <TableColumn fx:id="homeScheduleAppointmentIdColumn" prefWidth="75.0" text="Appt_ID" />
                 <TableColumn fx:id="homeScheduleTitleColumn" prefWidth="75.0" text="Title" />
@@ -39,56 +46,44 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Button layoutX="691.0" layoutY="528.0" mnemonicParsing="false" onAction="#onHomeScreenExitButtonPressed" text="Exit" />
-      <HBox layoutX="112.0" layoutY="374.0" prefHeight="180.0" prefWidth="555.0" spacing="10.0">
+      <VBox layoutX="38.0" layoutY="382.0" prefHeight="180.0" prefWidth="545.0">
          <children>
-            <VBox prefHeight="180.0" prefWidth="174.0">
-               <children>
-                  <Label text="Report 1:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Label>
-                  <TableView fx:id="appointmentTypeReportTableView" prefHeight="163.0" prefWidth="183.0">
-                    <columns>
-                      <TableColumn fx:id="appointmentTypeReportColumn" prefWidth="97.33334350585938" text="Appt Type" />
-                      <TableColumn fx:id="appointmentTypeTotalReportColumn" prefWidth="72.00000508626303" text="Total" />
-                    </columns>
-                  </TableView>
-               </children>
-            </VBox>
-            <VBox prefHeight="180.0" prefWidth="175.0">
-               <children>
-                  <Label text="Report 2:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Label>
-                  <TableView fx:id="appointmentMonthTotalReportTableView" prefHeight="165.0" prefWidth="141.0">
-                     <columns>
-                        <TableColumn fx:id="appointmentMonthReportColumn" prefWidth="97.33334350585938" text="Month" />
-                        <TableColumn fx:id="appointmentMonthTotalReportColumn" prefWidth="72.00000508626303" text="Total" />
-                     </columns>
-                  </TableView>
-               </children>
-            </VBox>
-            <VBox layoutX="190.0" layoutY="10.0" prefHeight="180.0" prefWidth="175.0">
-               <children>
-                  <Label text="Report 3:">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font></Label>
-                  <TableView fx:id="appointmentContactTotalReportTableView" prefHeight="163.0" prefWidth="182.0">
-                     <columns>
-                        <TableColumn fx:id="appointmentContactReportColumn" prefWidth="97.33334350585938" text="Contact" />
-                        <TableColumn fx:id="appointmentContactTotalReportColumn" prefWidth="72.00000508626303" text="Total" />
-                     </columns>
-                  </TableView>
-               </children>
-            </VBox>
+            <Label prefHeight="17.0" prefWidth="251.0" text="Appointments by Type and Month Report:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TableView fx:id="appointmentTypeReportTableView" prefHeight="163.0" prefWidth="550.0">
+              <columns>
+                <TableColumn fx:id="appointmentTypeReportColumn" prefWidth="97.33334350585938" text="Type" />
+                <TableColumn fx:id="janReportColumn" prefWidth="37.33331298828125" text="Jan" />
+                  <TableColumn fx:id="febReportColumn" prefWidth="37.33331298828125" text="Feb" />
+                  <TableColumn fx:id="marReportColumn" prefWidth="37.33331298828125" text="Mar" />
+                  <TableColumn fx:id="aprReportColumn" prefWidth="37.33331298828125" text="Apr" />
+                  <TableColumn fx:id="mayReportColumn" prefWidth="37.33331298828125" text="May" />
+                  <TableColumn fx:id="junReportColumn" prefWidth="37.33331298828125" text="Jun" />
+                  <TableColumn fx:id="julReportColumn" prefWidth="37.33331298828125" text="Jul" />
+                  <TableColumn fx:id="augReportColumn" prefWidth="37.33331298828125" text="Aug" />
+                  <TableColumn fx:id="septReportColumn" prefWidth="37.33331298828125" text="Sept" />
+                  <TableColumn fx:id="octReportColumn" prefWidth="37.33331298828125" text="Oct" />
+                  <TableColumn fx:id="novReportColumn" prefWidth="37.33331298828125" text="Nov" />
+                  <TableColumn fx:id="decReportColumn" prefWidth="32.3333740234375" text="Dec" />
+              </columns>
+            </TableView>
          </children>
-      </HBox>
-      <Label fx:id="appointmentAlertLabel" layoutX="294.0" layoutY="100.0" text="&lt;Appointment Alert&gt;" textAlignment="CENTER">
-         <font>
-            <Font name="System Bold Italic" size="12.0" />
-         </font></Label>
+      </VBox>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9def2" height="200.0" layoutX="608.0" layoutY="165.0" stroke="BLACK" strokeType="INSIDE" width="165.0" />
+      <VBox layoutX="620.0" layoutY="171.0" prefHeight="200.0" prefWidth="140.0" spacing="10.0">
+         <children>
+            <Label text="Navigation">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button mnemonicParsing="false" onAction="#onViewAllAppointmentsButtonPressed" prefHeight="25.0" prefWidth="137.0" text="Appointment Screen" />
+          <Button fx:id="addUpdateClientButton" mnemonicParsing="false" onAction="#onAddUpdateClientButtonPressed" prefHeight="25.0" prefWidth="116.0" text="Customer Screen" />
+            <Button mnemonicParsing="false" onAction="#onHomeScreenExitButtonPressed" text="Exit" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

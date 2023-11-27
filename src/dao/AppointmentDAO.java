@@ -5,15 +5,11 @@ import helper.ConnectionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointment;
-import report.AppointmentContactCount;
-import report.AppointmentMonthCount;
-import report.AppointmentTypeCount;
+import report.AppointmentTypeMonthCountReport;
 import model.Contact;
 
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.time.format.TextStyle;
 import java.util.*;
 
 /** Class for querying the SQL database for appointments
@@ -227,82 +223,51 @@ public class AppointmentDAO {
         return appointments;
     }
 
-    /** Returns list of AppointmentTypeCount for home screen report
-     *
-     * @return list of AppointmentTypeCount
-     */
-    public static List<AppointmentTypeCount> getAppointmentCountByType() {
-        List<AppointmentTypeCount> appointmentCountByType = new ArrayList<>();
-        String query = "SELECT Type, COUNT(*) as count FROM appointments GROUP BY Type";
-        try {
-            Connection conn = ConnectionManager.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
 
+
+    public static List<AppointmentTypeMonthCountReport> getAppointmentCountByTypeAndMonth() {
+        List<AppointmentTypeMonthCountReport> counts = new ArrayList<>();
+
+        String query = "SELECT Type, " +
+                "COUNT(CASE WHEN MONTH(Start) = 1 THEN 1 END) AS January, " +
+                "COUNT(CASE WHEN MONTH(Start) = 2 THEN 1 END) AS February, " +
+                "COUNT(CASE WHEN MONTH(Start) = 3 THEN 1 END) AS March, " +
+                "COUNT(CASE WHEN MONTH(Start) = 4 THEN 1 END) AS April, " +
+                "COUNT(CASE WHEN MONTH(Start) = 5 THEN 1 END) AS May, " +
+                "COUNT(CASE WHEN MONTH(Start) = 6 THEN 1 END) AS June, " +
+                "COUNT(CASE WHEN MONTH(Start) = 7 THEN 1 END) AS July, " +
+                "COUNT(CASE WHEN MONTH(Start) = 8 THEN 1 END) AS August, " +
+                "COUNT(CASE WHEN MONTH(Start) = 9 THEN 1 END) AS September, " +
+                "COUNT(CASE WHEN MONTH(Start) = 10 THEN 1 END) AS October, " +
+                "COUNT(CASE WHEN MONTH(Start) = 11 THEN 1 END) AS November, " +
+                "COUNT(CASE WHEN MONTH(Start) = 12 THEN 1 END) AS December " +
+                "FROM appointments " +
+                "GROUP BY Type";
+
+        try (PreparedStatement ps = ConnectionManager.getConnection().prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 String type = rs.getString("Type");
-                int count = rs.getInt("count");
-                appointmentCountByType.add(new AppointmentTypeCount(type, count));
+                int janCount = rs.getInt("January");
+                int febCount = rs.getInt("February");
+                int marCount = rs.getInt("March");
+                int aprCount = rs.getInt("April");
+                int mayCount = rs.getInt("May");
+                int junCount = rs.getInt("June");
+                int julCount = rs.getInt("July");
+                int augCount = rs.getInt("August");
+                int septCount = rs.getInt("September");
+                int octCount = rs.getInt("October");
+                int novCount = rs.getInt("November");
+                int decCount = rs.getInt("December");
+                counts.add(new AppointmentTypeMonthCountReport(type, janCount, febCount, marCount, aprCount, mayCount, junCount, julCount, augCount, septCount, octCount, novCount, decCount));
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-        catch (SQLException e) {
-            System.out.println("SQL Error");
-            e.printStackTrace(System.out);
-        }
-        return appointmentCountByType;
+        return counts;
     }
 
-    /** Returns list of AppointmentMonthCount for home screen report
-     *
-     * @return list of AppointmentMonthCount
-     */
-    public static List<AppointmentMonthCount> getAppointmentCountByMonth() {
-        List<AppointmentMonthCount> appointmentCountByMonth = new ArrayList<>();
-        String query = "SELECT EXTRACT(MONTH FROM Start) as month, COUNT(*) as count FROM appointments GROUP BY month";
-        try {
-            Connection conn = ConnectionManager.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                int monthNumber = rs.getInt("month");
-                String monthName = Month.of(monthNumber).getDisplayName(TextStyle.FULL, Locale.getDefault());
-                int count = rs.getInt("count");
-                appointmentCountByMonth.add(new AppointmentMonthCount(monthName, count));
-            }
-        }
 
-        catch (SQLException e) {
-            System.out.println("SQL Error");
-            e.printStackTrace(System.out);
-        }
-        return appointmentCountByMonth;
-    }
-
-    /** Returns list of AppointmentContactCount for home screen report
-     *
-     * @return list of AppointmentContactCount
-     */
-    public static List<AppointmentContactCount> getAppointmentCountByContact() {
-        List<AppointmentContactCount> appointmentCountByContact = new ArrayList<>();
-        String query = "SELECT c.Contact_Name, COUNT(*) as count FROM appointments a JOIN contacts c ON a.Contact_ID = c.Contact_ID GROUP BY c.Contact_Name";
-        try {
-            Connection conn = ConnectionManager.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                String contactName = rs.getString("Contact_Name");
-                int count = rs.getInt("count");
-                appointmentCountByContact.add(new AppointmentContactCount(contactName, count));
-            }
-        }
-
-        catch (SQLException e) {
-            System.out.println("SQL Error");
-            e.printStackTrace(System.out);
-        }
-        return appointmentCountByContact;
-    }
 }

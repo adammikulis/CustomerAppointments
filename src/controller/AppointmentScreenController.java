@@ -139,15 +139,7 @@ public class AppointmentScreenController implements Initializable {
         populateContactComboBox();
         populateUserComboBox();
 
-        // Listener for changes in the selected item of the contact combo box
-        appointmentContactComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                // Set the contactId for the appointment
-                Appointment selectedAppointment = appointmentTableView.getSelectionModel().getSelectedItem();
-            }
-        });
-
-        // Event handlers for radio button
+        // Listeners for radio buttons (lambda)
         noFilterRadioButton.setOnAction(event -> showAllAppointments());
         viewByWeekRadioButton.setOnAction(event -> filterAppointmentsByWeek());
         viewByMonthRadioButton.setOnAction(event -> filterAppointmentsByMonth());

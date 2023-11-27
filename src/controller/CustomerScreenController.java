@@ -74,7 +74,6 @@ public class CustomerScreenController implements Initializable {
 
 
     /** Initialization for customer screen
-     * Lambda expressions used for listeners
      * @param url
      * @param resourceBundle
      */

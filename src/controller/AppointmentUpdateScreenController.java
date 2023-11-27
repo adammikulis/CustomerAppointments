@@ -39,7 +39,6 @@ public class AppointmentUpdateScreenController extends AppointmentScreenControll
     private Appointment updatedAppointment;
 
     /** Initialization method for appointment screen
-     * Lambda expressions radio button event handlers
      * @param url
      * @param resourceBundle
      */

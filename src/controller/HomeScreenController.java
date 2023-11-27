@@ -15,9 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import report.AppointmentContactCount;
-import report.AppointmentMonthCount;
-import report.AppointmentTypeCount;
+import report.AppointmentTypeMonthCountReport;
 
 import java.io.IOException;
 import java.net.URL;
@@ -32,23 +30,33 @@ public class HomeScreenController implements Initializable {
 
 
     @FXML
-    private TableView<AppointmentTypeCount> appointmentTypeReportTableView;
+    private TableView<AppointmentTypeMonthCountReport> appointmentTypeReportTableView;
     @FXML
-    private TableColumn<AppointmentTypeCount, String> appointmentTypeReportColumn;
+    private TableColumn<AppointmentTypeMonthCountReport, String> appointmentTypeReportColumn;
     @FXML
-    private TableColumn<AppointmentTypeCount, Integer> appointmentTypeTotalReportColumn;
+    private TableColumn<AppointmentTypeMonthCountReport, Integer> janReportColumn;
     @FXML
-    private TableView<AppointmentMonthCount> appointmentMonthTotalReportTableView;
+    private TableColumn<AppointmentTypeMonthCountReport, Integer> febReportColumn;
     @FXML
-    private TableColumn<AppointmentMonthCount, String> appointmentMonthReportColumn;
+    private TableColumn<AppointmentTypeMonthCountReport, Integer> marReportColumn;
     @FXML
-    private TableColumn<AppointmentMonthCount, Integer> appointmentMonthTotalReportColumn;
+    private TableColumn<AppointmentTypeMonthCountReport, Integer> aprReportColumn;
     @FXML
-    private TableView<AppointmentContactCount> appointmentContactTotalReportTableView;
+    private TableColumn<AppointmentTypeMonthCountReport, Integer> mayReportColumn;
     @FXML
-    private TableColumn<AppointmentContactCount, String> appointmentContactReportColumn;
+    private TableColumn<AppointmentTypeMonthCountReport, Integer> junReportColumn;
     @FXML
-    private TableColumn<AppointmentContactCount, Integer> appointmentContactTotalReportColumn;
+    private TableColumn<AppointmentTypeMonthCountReport, Integer> julReportColumn;
+    @FXML
+    private TableColumn<AppointmentTypeMonthCountReport, Integer> augReportColumn;
+    @FXML
+    private TableColumn<AppointmentTypeMonthCountReport, Integer> septReportColumn;
+    @FXML
+    private TableColumn<AppointmentTypeMonthCountReport, Integer> octReportColumn;
+    @FXML
+    private TableColumn<AppointmentTypeMonthCountReport, Integer> novReportColumn;
+    @FXML
+    private TableColumn<AppointmentTypeMonthCountReport, Number> decReportColumn;
 
     @FXML
     private TableView<Appointment> homeScheduleTableView;
@@ -75,6 +83,7 @@ public class HomeScreenController implements Initializable {
     Parent scene;
 
     /** Initialization method for home screen
+     * Lambda used for contact report combo box listener to trigger refresh
      *
      * @param url
      * @param resourceBundle
@@ -83,8 +92,6 @@ public class HomeScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         refreshContactComboBox();
         refreshAppointmentTypeReportTableView();
-        refreshAppointmentMonthReportTableView();
-        refreshAppointmentContactReportTableView();
         refreshAppointmentAlert();
 
         homeContactComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -111,37 +118,25 @@ public class HomeScreenController implements Initializable {
      *
      */
     private void refreshAppointmentTypeReportTableView() {
-        List<AppointmentTypeCount> appointmentTypeCount = AppointmentDAO.getAppointmentCountByType();
-        ObservableList<AppointmentTypeCount> appointmentTypeCountList = FXCollections.observableArrayList(appointmentTypeCount);
+        List<AppointmentTypeMonthCountReport> appointmentTypeMonthCountReportList = AppointmentDAO.getAppointmentCountByTypeAndMonth();
+        ObservableList<AppointmentTypeMonthCountReport> data = FXCollections.observableArrayList(appointmentTypeMonthCountReportList);
 
         appointmentTypeReportColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        appointmentTypeTotalReportColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
-        appointmentTypeReportTableView.setItems(appointmentTypeCountList);
+        janReportColumn.setCellValueFactory(new PropertyValueFactory<>("janCount"));
+        febReportColumn.setCellValueFactory(new PropertyValueFactory<>("febCount"));
+        marReportColumn.setCellValueFactory(new PropertyValueFactory<>("marCount"));
+        aprReportColumn.setCellValueFactory(new PropertyValueFactory<>("aprCount"));
+        mayReportColumn.setCellValueFactory(new PropertyValueFactory<>("mayCount"));
+        junReportColumn.setCellValueFactory(new PropertyValueFactory<>("junCount"));
+        julReportColumn.setCellValueFactory(new PropertyValueFactory<>("julCount"));
+        augReportColumn.setCellValueFactory(new PropertyValueFactory<>("augCount"));
+        septReportColumn.setCellValueFactory(new PropertyValueFactory<>("septCount"));
+        octReportColumn.setCellValueFactory(new PropertyValueFactory<>("octCount"));
+        novReportColumn.setCellValueFactory(new PropertyValueFactory<>("novCount"));
+        decReportColumn.setCellValueFactory(new PropertyValueFactory<>("decCount"));
+
+        appointmentTypeReportTableView.setItems(data);
     }
-    /** Refreshes appointment month report tableview
-     *
-     */
-    private void refreshAppointmentMonthReportTableView() {
-        List<AppointmentMonthCount> appointmentMonthCount = AppointmentDAO.getAppointmentCountByMonth();
-        ObservableList<AppointmentMonthCount> appointmentMonthCountList = FXCollections.observableArrayList(appointmentMonthCount);
-
-        appointmentMonthReportColumn.setCellValueFactory(new PropertyValueFactory<>("month"));
-        appointmentMonthTotalReportColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
-        appointmentMonthTotalReportTableView.setItems(appointmentMonthCountList);
-    }
-
-    /** Refreshes appointment contact report tableview
-     *
-     */
-    private void refreshAppointmentContactReportTableView() {
-        List<AppointmentContactCount> appointmentContactCount = AppointmentDAO.getAppointmentCountByContact();
-        ObservableList<AppointmentContactCount> appointmentContactCountList = FXCollections.observableArrayList(appointmentContactCount);
-
-        appointmentContactReportColumn.setCellValueFactory(new PropertyValueFactory<>("contact"));
-        appointmentContactTotalReportColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
-        appointmentContactTotalReportTableView.setItems(appointmentContactCountList);
-    }
-
 
     /** Refreshes home screen schedule tableview based on selected contact
      *
@@ -205,8 +200,7 @@ public class HomeScreenController implements Initializable {
      */
     private void refreshContactComboBox() {
         try {
-            ContactDAO contactDAO = new ContactDAO();
-            List<Contact> contacts = contactDAO.getAllContacts();
+            List<Contact> contacts = ContactDAO.getAllContacts();
             homeContactComboBox.setItems(FXCollections.observableArrayList(contacts));
         } catch (Exception e) {
             e.printStackTrace();

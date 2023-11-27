@@ -70,7 +70,6 @@ public class CustomerUpdateScreenController extends CustomerScreenController imp
 
 
     /** Initialization for customer screen
-     * Lambda expressions used for listeners
      * @param url
      * @param resourceBundle
      * @param resourceBundle
