@@ -31,46 +31,46 @@ public class CustomerScreenController implements Initializable {
     Stage stage;
     Parent scene;
 
-    private Customer currentCustomer;
-    private String name;
-    private String streetAddress;
-    private String postalCode;
-    private String phone;
-    private int divisionId;
-    private Country selectedCountry;
-    private Division selectedDivision;
+    protected Customer currentCustomer;
+    protected String name;
+    protected String streetAddress;
+    protected String postalCode;
+    protected String phone;
+    protected int divisionId;
+    protected Country selectedCountry;
+    protected Division selectedDivision;
 
     @FXML
-    private TableView<Customer> customerTableView;
+    protected TableView<Customer> customerTableView;
 
     @FXML
-    private TableColumn<Customer, Integer> customerIdColumn;
+    protected TableColumn<Customer, Integer> customerIdColumn;
     @FXML
-    private TableColumn<Customer, String> customerNameColumn;
+    protected TableColumn<Customer, String> customerNameColumn;
     @FXML
-    private TableColumn<Customer, String> streetAddressColumn;
+    protected TableColumn<Customer, String> streetAddressColumn;
     @FXML
-    private TableColumn<Customer, Integer> postalCodeColumn;
+    protected TableColumn<Customer, Integer> postalCodeColumn;
     @FXML
-    private TableColumn<Customer, Integer> phoneColumn;
+    protected TableColumn<Customer, Integer> phoneColumn;
     @FXML
-    private TableColumn<Customer, Country> countryColumn;
+    protected TableColumn<Customer, Country> countryColumn;
     @FXML
-    private TableColumn<Customer, Division> divisionColumn;
+    protected TableColumn<Customer, Division> divisionColumn;
 
     @FXML
-    private TextField customerScreenNameTextField;
+    protected TextField customerScreenNameTextField;
     @FXML
-    private TextField customerScreenAddressTextField;
+    protected TextField customerScreenAddressTextField;
     @FXML
-    private TextField customerScreenPostalCodeTextField;
+    protected TextField customerScreenPostalCodeTextField;
     @FXML
-    private TextField customerScreenPhoneTextField;
+    protected TextField customerScreenPhoneTextField;
 
     @FXML
-    private ComboBox<Country> customerCountryComboBox;
+    protected ComboBox<Country> customerCountryComboBox;
     @FXML
-    private ComboBox<Division> customerDivisionComboBox;
+    protected ComboBox<Division> customerDivisionComboBox;
 
 
     /** Initialization for customer screen
@@ -89,23 +89,6 @@ public class CustomerScreenController implements Initializable {
         countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
         divisionColumn.setCellValueFactory(new PropertyValueFactory<>("division"));
         populateCountryComboBox();
-
-
-        // Listener for selected customer
-        customerTableView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue != null) {
-                currentCustomer = newValue;
-                clearFields();
-                populateCountryComboBox();
-            }
-        });
-
-        // Listener for country combo box
-        customerCountryComboBox.valueProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal != null) {
-                populateDivisionComboBox(newVal);
-            }
-        });
     }
 
     /** Creates new customer in the database
@@ -212,7 +195,7 @@ public class CustomerScreenController implements Initializable {
     /** Gets data from input fields to create new or update customer
      *
      */
-    private void getValuesFromFields() {
+    protected void getValuesFromFields() {
         // Get the data from the input fields
         name = customerScreenNameTextField.getText();
         streetAddress = customerScreenAddressTextField.getText();
@@ -227,12 +210,10 @@ public class CustomerScreenController implements Initializable {
 
     }
 
-
-
     /** Clears input fields and refreshes table view
      *
      */
-    private void clearFields() {
+    protected void clearFields() {
         // Clear the input fields
         customerScreenNameTextField.clear();
         customerScreenAddressTextField.clear();
@@ -242,12 +223,12 @@ public class CustomerScreenController implements Initializable {
         clearDivisionComboBox();
     }
 
-    private void refreshTableView() {
+    protected void refreshTableView() {
         customerTableView.setItems(CustomerDAO.getAllCustomers());
         customerTableView.refresh();
     }
     @FXML
-    private void onCountryComboBoxChanged(ActionEvent event) {
+    protected void onCountryComboBoxChanged(ActionEvent event) {
         Country country = customerCountryComboBox.getValue();
         if (country != null) {
             populateDivisionComboBox(country);
@@ -257,7 +238,7 @@ public class CustomerScreenController implements Initializable {
         }
     }
 
-    public void populateCountryComboBox() {
+    protected void populateCountryComboBox() {
         clearCountryComboBox();
         List<Country> countries = CountryDAO.getAllCountries();
         customerCountryComboBox.setItems(FXCollections.observableArrayList(countries));
@@ -267,26 +248,24 @@ public class CustomerScreenController implements Initializable {
      *
      * @param country
      */
-    private void populateDivisionComboBox(Country country) {
+    protected void populateDivisionComboBox(Country country) {
         clearDivisionComboBox();
         List<Division> divisions = DivisionDAO.getDivisionsByCountry(country);
         customerDivisionComboBox.setItems(FXCollections.observableArrayList(divisions));
     }
 
-
     /** Clears country combo box
      *
      */
-    private void clearCountryComboBox() {
+    protected void clearCountryComboBox() {
         customerCountryComboBox.getItems().clear();
         customerCountryComboBox.setValue(null);
     }
 
-
     /** Clears division combo box
      *
      */
-    private void clearDivisionComboBox() {
+    protected void clearDivisionComboBox() {
         customerDivisionComboBox.getItems().clear();
         customerDivisionComboBox.setValue(null);
     }
@@ -303,21 +282,11 @@ public class CustomerScreenController implements Initializable {
         stage.show();
     }
 
-    /** Clears selection and refreshes table
-     *
-     * @param actionEvent
-     */
-    @FXML
-    private void onCustomerScreenClearSelectionButtonPressed(ActionEvent actionEvent) {
-        clearFields();
-        customerTableView.getSelectionModel().clearSelection();
-    }
-
     /** Makes sure that no inputs are empty
      *
      * @return true if no fields are empty
      */
-    private boolean validateCustomerInputs() {
+    protected boolean validateCustomerInputs() {
         getValuesFromFields();
         if (name.trim().isEmpty() || streetAddress.trim().isEmpty() || postalCode.trim().isEmpty() || phone.trim().isEmpty() || customerCountryComboBox.getSelectionModel().getSelectedItem() == null || customerDivisionComboBox.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -333,7 +302,7 @@ public class CustomerScreenController implements Initializable {
     /** Shows alert if no customer is selected
      *
      */
-    private void noCustomerSelectedAlert() {
+    protected void noCustomerSelectedAlert() {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("No customer selected");
         alert.setHeaderText("Please select a customer before attempting to update");

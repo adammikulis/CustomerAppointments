@@ -26,19 +26,12 @@ import java.util.ResourceBundle;
 /** Class for controlling the customer update screen
  *
  */
-public class CustomerUpdateScreenController implements Initializable {
+public class CustomerUpdateScreenController extends CustomerScreenController implements Initializable {
 
     Stage stage;
     Parent scene;
 
     private Customer updatedCustomer;
-    private String name;
-    private String streetAddress;
-    private String postalCode;
-    private String phone;
-    private int divisionId;
-    private Country selectedCountry;
-    private Division selectedDivision;
 
     @FXML
     private TableView<Customer> customerTableView;
@@ -165,68 +158,6 @@ public class CustomerUpdateScreenController implements Initializable {
         }
     }
 
-    /** Gets data from input fields to create new or update customer
-     *
-     */
-    private void getValuesFromFields() {
-        // Get the data from the input fields
-        name = customerScreenNameTextField.getText();
-        streetAddress = customerScreenAddressTextField.getText();
-        postalCode = customerScreenPostalCodeTextField.getText();
-        phone = customerScreenPhoneTextField.getText();
-
-        selectedCountry = customerCountryComboBox.getSelectionModel().getSelectedItem();
-        selectedDivision = customerDivisionComboBox.getSelectionModel().getSelectedItem();
-        if (selectedDivision != null) {
-            divisionId = selectedDivision.getDivisionId();
-        }
-
-    }
-
-
-    @FXML
-    private void onCountryComboBoxChanged(ActionEvent event) {
-        Country country = customerCountryComboBox.getValue();
-        if (country != null) {
-            populateDivisionComboBox(country);
-        }
-        else {
-            clearDivisionComboBox();
-        }
-    }
-
-    public void populateCountryComboBox() {
-        clearCountryComboBox();
-        List<Country> countries = CountryDAO.getAllCountries();
-        customerCountryComboBox.setItems(FXCollections.observableArrayList(countries));
-    }
-
-    /** Fills division combo box based on country
-     *
-     * @param country
-     */
-    private void populateDivisionComboBox(Country country) {
-        clearDivisionComboBox();
-        List<Division> divisions = DivisionDAO.getDivisionsByCountry(country);
-        customerDivisionComboBox.setItems(FXCollections.observableArrayList(divisions));
-    }
-
-    /** Clears country combo box
-     *
-     */
-    private void clearCountryComboBox() {
-        customerCountryComboBox.getItems().clear();
-        customerCountryComboBox.setValue(null);
-    }
-
-    /** Clears division combo box
-     *
-     */
-    private void clearDivisionComboBox() {
-        customerDivisionComboBox.getItems().clear();
-        customerDivisionComboBox.setValue(null);
-    }
-
     /** Takes user back to home screen
      *
      * @param actionEvent
@@ -237,22 +168,5 @@ public class CustomerUpdateScreenController implements Initializable {
         scene = FXMLLoader.load(getClass().getResource("/view/CustomerScreen.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
-    }
-
-    /** Makes sure that no inputs are empty
-     *
-     * @return true if no fields are empty
-     */
-    private boolean validateCustomerInputs() {
-        getValuesFromFields();
-        if (name.trim().isEmpty() || streetAddress.trim().isEmpty() || postalCode.trim().isEmpty() || phone.trim().isEmpty() || customerCountryComboBox.getSelectionModel().getSelectedItem() == null || customerDivisionComboBox.getSelectionModel().getSelectedItem() == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Invalid Input");
-            alert.setHeaderText("Please fill in all the required fields.");
-            alert.setContentText("Name, street address, postal code, phone number, and country/division must not be empty.");
-            alert.showAndWait();
-            return false;
-        }
-        return true;
     }
 }

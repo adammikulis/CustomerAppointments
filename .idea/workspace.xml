@@ -4,20 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="updated javadocs and removed extraneous clearFields code from customer screen controllers">
-      <change afterPath="$PROJECT_DIR$/src/dao/package-info.java" afterDir="false" />
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="removed duplicate code from inherited AppointmentUpdateScreenController">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login_activity.txt" beforeDir="false" afterPath="$PROJECT_DIR$/login_activity.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AppointmentUpdateScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentUpdateScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/package-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/package-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/package-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/package-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/package-info.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/package-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/package-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/AppointmentUpdateScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentUpdateScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/package-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/package-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/CustomerUpdateScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CustomerUpdateScreenController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -302,14 +293,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00076" summary="updated javadocs to include lambda expressions">
-      <option name="closed" value="true" />
-      <created>1700509341264</created>
-      <option name="number" value="00076" />
-      <option name="presentableId" value="LOCAL-00076" />
-      <option name="project" value="LOCAL" />
-      <updated>1700509341264</updated>
-    </task>
     <task id="LOCAL-00077" summary="javadocs updated for consistent wording">
       <option name="closed" value="true" />
       <created>1700510061744</created>
@@ -478,7 +461,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701029269460</updated>
     </task>
-    <option name="localTasksCounter" value="98" />
+    <task id="LOCAL-00098" summary="removed duplicate code from inherited AppointmentUpdateScreenController">
+      <option name="closed" value="true" />
+      <created>1701102915968</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1701102915968</updated>
+    </task>
+    <option name="localTasksCounter" value="99" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -500,7 +491,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fixed updateClient" />
     <MESSAGE value="finished javadocs, project is complete (v1.0)" />
     <MESSAGE value="updated project so that appointment overlap applies to all clients" />
     <MESSAGE value="updated javadocs to include lambda expressions" />
@@ -525,7 +515,8 @@
     <MESSAGE value="updated javadocs and fixed new appointment error" />
     <MESSAGE value="updated login page to show zoneid instead of locale" />
     <MESSAGE value="updated javadocs and removed extraneous clearFields code from customer screen controllers" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated javadocs and removed extraneous clearFields code from customer screen controllers" />
+    <MESSAGE value="removed duplicate code from inherited AppointmentUpdateScreenController" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed duplicate code from inherited AppointmentUpdateScreenController" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
