@@ -2,10 +2,13 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentUpdateScreenController">
    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9def2" height="44.0" layoutX="708.0" layoutY="484.0" stroke="BLACK" strokeType="INSIDE" width="83.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff3cb" height="128.0" layoutX="5.0" layoutY="268.0" stroke="BLACK" strokeType="INSIDE" width="785.0" />
       <Label layoutX="217.0" layoutY="21.0" text="Update Customer Appointment">
          <font>
             <Font name="System Bold" size="26.0" />
@@ -44,17 +47,50 @@
             <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="28.333333333333343" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="17.0" prefWidth="40.0" text="ID" />
-            <Label text="Title" GridPane.columnIndex="1" />
-            <Label prefHeight="17.0" prefWidth="63.0" text="Description" GridPane.columnIndex="2" />
-            <Label text="Location" GridPane.columnIndex="3" />
-            <Label text="Contact" GridPane.columnIndex="4" />
-            <Label text="Type" GridPane.rowIndex="2" />
-            <Label layoutX="401.0" layoutY="15.0" text="Date" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label prefHeight="17.0" prefWidth="91.0" text="Start (HH:mm)" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label text="End (HH:mm)" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Label text="Customer" GridPane.columnIndex="5" />
-            <Label prefHeight="27.0" prefWidth="50.0" text="User" GridPane.columnIndex="6" />
+            <Label prefHeight="17.0" prefWidth="40.0" text="ID">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Title" GridPane.columnIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label prefHeight="17.0" prefWidth="78.0" text="Description" GridPane.columnIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Location" GridPane.columnIndex="3">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label prefHeight="17.0" prefWidth="51.0" text="Contact" GridPane.columnIndex="4">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Type" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label layoutX="401.0" layoutY="15.0" text="Date" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label prefHeight="17.0" prefWidth="91.0" text="Start (HH:mm)" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="End (HH:mm)" GridPane.columnIndex="3" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Customer" GridPane.columnIndex="5">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label prefHeight="27.0" prefWidth="50.0" text="User" GridPane.columnIndex="6">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <TextField fx:id="appointmentIdTextField" editable="false" prefHeight="25.0" prefWidth="28.0" promptText="Auto-Generated" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentTitleTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="appointmentDescriptionTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -66,13 +102,17 @@
             <TextField fx:id="appointmentTypeTextField" layoutX="227.0" layoutY="47.0" GridPane.rowIndex="3" />
             <ComboBox fx:id="appointmentCustomerComboBox" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
             <ComboBox fx:id="appointmentUserComboBox" prefWidth="150.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+          <Button mnemonicParsing="false" onAction="#onUpdateAppointmentButtonPressed" prefHeight="25.0" prefWidth="94.0" text="Update" GridPane.columnIndex="6" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
          </children>
       </GridPane>
-      <ButtonBar layoutX="525.0" layoutY="343.0" prefHeight="40.0" prefWidth="236.0">
-        <buttons>
-          <Button mnemonicParsing="false" onAction="#onUpdateAppointmentButtonPressed" text="Update Appointment" />
-            <Button fx:id="backbutton" maxWidth="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#onAppointmentBackButtonPressed" prefHeight="25.0" text="Cancel" />
-        </buttons>
-      </ButtonBar>
+      <Button fx:id="backbutton" layoutX="714.0" layoutY="493.0" maxWidth="71.0" minWidth="20.0" mnemonicParsing="false" onAction="#onAppointmentBackButtonPressed" prefHeight="25.0" prefWidth="71.0" text="Cancel">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

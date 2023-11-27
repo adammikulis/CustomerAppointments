@@ -4,21 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="removed duplicate code from inherited CustomerUpdateScreenController, removed unneeded listeners">
-      <change afterPath="$PROJECT_DIR$/src/report/AppointmentTypeMonthCountReport.java" afterDir="false" />
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="large overhaul to front screen and reports">
+      <change afterPath="$PROJECT_DIR$/src/report/AppointmentHoursByCountryReport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/report/AppointmentTypeCount.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/AppointmentTypeCount.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login_activity.txt" beforeDir="false" afterPath="$PROJECT_DIR$/login_activity.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/AppointmentUpdateScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentUpdateScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/CustomerUpdateScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CustomerUpdateScreenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/HomeScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeScreenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/AppointmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/AppointmentDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/report/AppointmentContactCount.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/report/AppointmentMonthCount.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/report/AppointmentTypeCount.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/AppointmentUpdateScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AppointmentUpdateScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CustomerScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CustomerScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CustomerUpdateScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CustomerUpdateScreen.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/HomeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomeScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +26,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="package-info" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -303,14 +300,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00078" summary="moved appointment alert to home screen">
-      <option name="closed" value="true" />
-      <created>1700510553534</created>
-      <option name="number" value="00078" />
-      <option name="presentableId" value="LOCAL-00078" />
-      <option name="project" value="LOCAL" />
-      <updated>1700510553534</updated>
-    </task>
     <task id="LOCAL-00079" summary="major refactoring started with renaming classes">
       <option name="closed" value="true" />
       <created>1700677312060</created>
@@ -479,7 +468,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701103378397</updated>
     </task>
-    <option name="localTasksCounter" value="100" />
+    <task id="LOCAL-00100" summary="large overhaul to front screen and reports">
+      <option name="closed" value="true" />
+      <created>1701107104885</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1701107104885</updated>
+    </task>
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -501,7 +498,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="updated project so that appointment overlap applies to all clients" />
     <MESSAGE value="updated javadocs to include lambda expressions" />
     <MESSAGE value="javadocs updated for consistent wording" />
     <MESSAGE value="moved appointment alert to home screen" />
@@ -526,7 +522,8 @@
     <MESSAGE value="updated javadocs and removed extraneous clearFields code from customer screen controllers" />
     <MESSAGE value="removed duplicate code from inherited AppointmentUpdateScreenController" />
     <MESSAGE value="removed duplicate code from inherited CustomerUpdateScreenController, removed unneeded listeners" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed duplicate code from inherited CustomerUpdateScreenController, removed unneeded listeners" />
+    <MESSAGE value="large overhaul to front screen and reports" />
+    <option name="LAST_COMMIT_MESSAGE" value="large overhaul to front screen and reports" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -2,10 +2,100 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentScreenController">
    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9def2" height="40.0" layoutX="160.0" layoutY="542.0" stroke="BLACK" strokeType="INSIDE" width="504.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff3cb" height="141.0" layoutX="12.0" layoutY="397.0" stroke="BLACK" strokeType="INSIDE" width="780.0" />
+      <VBox layoutX="20.0" layoutY="399.0" prefHeight="141.0" prefWidth="760.0">
+         <children>
+            <Label prefHeight="20.0" prefWidth="174.0" text="Create New Appointment">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <GridPane hgap="5.0" prefHeight="106.0" prefWidth="780.0" vgap="5.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.33333333333333" minWidth="10.0" prefWidth="75.33333333333334" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.00000762939453" minWidth="10.0" prefWidth="109.33333333333334" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.99998474121094" minWidth="10.0" prefWidth="113.33333333333331" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="98.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="120.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="105.33333333333337" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="80.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="47.0" minHeight="6.333333333333343" prefHeight="21.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="21.33333333333333" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="27.333333333333343" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label prefHeight="17.0" prefWidth="40.0" text="ID">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label text="Title" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label prefHeight="17.0" prefWidth="79.0" text="Description" GridPane.columnIndex="2">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label text="Location" GridPane.columnIndex="3">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label text="Contact" GridPane.columnIndex="4">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label text="Type" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label layoutX="401.0" layoutY="15.0" text="Date" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label prefHeight="17.0" prefWidth="91.0" text="Start (HH:mm)" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label text="End (HH:mm)" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label text="Customer" GridPane.columnIndex="5">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <Label prefHeight="17.0" prefWidth="49.0" text="User" GridPane.columnIndex="6">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField fx:id="appointmentIdTextField" editable="false" prefHeight="25.0" prefWidth="28.0" promptText="Auto-Generated" GridPane.rowIndex="1" />
+                  <TextField fx:id="appointmentTitleTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="appointmentDescriptionTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <TextField fx:id="appointmentLocationTextField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <TextField fx:id="appointmentStartTimeTextField" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <TextField fx:id="appointmentEndTimeTextField" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="appointmentContactComboBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <DatePicker fx:id="appointmentDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="appointmentTypeTextField" layoutX="227.0" layoutY="47.0" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="appointmentCustomerComboBox" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="appointmentUserComboBox" prefHeight="41.0" prefWidth="96.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#onCreateNewAppointmentButtonPressed" prefHeight="25.0" prefWidth="86.0" text="Create New" GridPane.columnIndex="6" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </GridPane>
+         </children></VBox>
       <Label layoutX="217.0" layoutY="21.0" text="View Customer Appointments">
          <font>
             <Font name="System Bold" size="26.0" />
@@ -38,62 +128,20 @@
             <TableColumn fx:id="userIdColumn" prefWidth="48.66668701171875" text="User_ID" />
         </columns>
       </TableView>
-      <GridPane hgap="5.0" layoutX="10.0" layoutY="454.0" prefHeight="106.0" prefWidth="780.0" vgap="5.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="125.33333333333333" minWidth="10.0" prefWidth="36.66667048136393" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.00000762939453" minWidth="10.0" prefWidth="65.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.99998474121094" minWidth="10.0" prefWidth="70.66666666666666" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="152.0" minWidth="10.0" prefWidth="76.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="92.33333333333331" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="61.66669718424481" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="47.0" minHeight="6.333333333333343" prefHeight="21.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="21.33333333333333" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="27.333333333333343" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label prefHeight="17.0" prefWidth="40.0" text="ID" />
-            <Label text="Title" GridPane.columnIndex="1" />
-            <Label prefHeight="17.0" prefWidth="63.0" text="Description" GridPane.columnIndex="2" />
-            <Label text="Location" GridPane.columnIndex="3" />
-            <Label text="Contact" GridPane.columnIndex="4" />
-            <Label text="Type" GridPane.rowIndex="2" />
-            <Label layoutX="401.0" layoutY="15.0" text="Date" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label prefHeight="17.0" prefWidth="91.0" text="Start (HH:mm)" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label text="End (HH:mm)" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Label text="Customer" GridPane.columnIndex="5" />
-            <Label prefHeight="17.0" prefWidth="49.0" text="User" GridPane.columnIndex="6" />
-            <TextField fx:id="appointmentIdTextField" editable="false" prefHeight="25.0" prefWidth="28.0" promptText="Auto-Generated" GridPane.rowIndex="1" />
-            <TextField fx:id="appointmentTitleTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="appointmentDescriptionTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField fx:id="appointmentLocationTextField" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <TextField fx:id="appointmentStartTimeTextField" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <TextField fx:id="appointmentEndTimeTextField" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <ComboBox fx:id="appointmentContactComboBox" prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <DatePicker fx:id="appointmentDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="appointmentTypeTextField" layoutX="227.0" layoutY="47.0" GridPane.rowIndex="3" />
-            <ComboBox fx:id="appointmentCustomerComboBox" prefWidth="150.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <ComboBox fx:id="appointmentUserComboBox" prefHeight="41.0" prefWidth="96.0" GridPane.columnIndex="6" GridPane.rowIndex="1" />
-         </children>
-      </GridPane>
-      <ButtonBar layoutX="181.0" layoutY="399.0" prefHeight="40.0" prefWidth="401.0">
+      <ButtonBar layoutX="151.0" layoutY="540.0" prefHeight="40.0" prefWidth="497.0">
         <buttons>
-          <Button mnemonicParsing="false" onAction="#onUpdateAppointmentButtonPressed" prefHeight="25.0" text="Update Selected Appointment" />
-            <Button mnemonicParsing="false" onAction="#onDeleteAppointmentButtonPressed" prefHeight="25.0" prefWidth="300.0" text="Delete Appointment" />
-        </buttons>
-      </ButtonBar>
-      <Label layoutX="14.0" layoutY="429.0" prefHeight="20.0" prefWidth="174.0" text="Create New Appointment">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <ButtonBar layoutX="514.0" layoutY="533.0" prefHeight="40.0" prefWidth="257.0">
-        <buttons>
-            <Button mnemonicParsing="false" onAction="#onCreateNewAppointmentButtonPressed" prefHeight="25.0" text="Create New Appointment" />
-            <Button fx:id="backbutton" maxWidth="20.0" minWidth="20.0" mnemonicParsing="false" onAction="#onAppointmentBackButtonPressed" prefHeight="25.0" text="Back" />
+          <Button mnemonicParsing="false" onAction="#onUpdateAppointmentButtonPressed" prefHeight="25.0" text="Update Selected Appointment">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#onDeleteAppointmentButtonPressed" prefHeight="25.0" prefWidth="300.0" text="Delete Appointment">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button fx:id="backbutton" maxWidth="92.0" minWidth="20.0" mnemonicParsing="false" onAction="#onAppointmentBackButtonPressed" prefHeight="25.0" text="Back">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
         </buttons>
       </ButtonBar>
    </children>

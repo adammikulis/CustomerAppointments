@@ -2,10 +2,13 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerUpdateScreenController">
    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c9def2" height="40.0" layoutX="462.0" layoutY="441.0" stroke="BLACK" strokeType="INSIDE" width="71.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fff3cb" height="251.0" layoutX="268.0" layoutY="177.0" stroke="BLACK" strokeType="INSIDE" width="266.0" />
       <Label layoutX="320.0" layoutY="53.0" prefHeight="35.0" prefWidth="194.0" text="Update Customer">
          <font>
             <Font size="24.0" />
@@ -37,24 +40,51 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="17.0" prefWidth="77.0" text="Customer ID" />
-            <Label text="Name" GridPane.rowIndex="1" />
-            <Label text="Street Address" GridPane.rowIndex="2" />
-            <Label text="Postal Code" GridPane.rowIndex="3" />
-            <Label text="Phone" GridPane.rowIndex="4" />
+            <Label prefHeight="17.0" prefWidth="77.0" text="Customer ID">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Name" GridPane.rowIndex="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Street Address" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Postal Code" GridPane.rowIndex="3">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
+            <Label text="Phone" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <TextField editable="false" prefHeight="25.0" prefWidth="166.0" promptText="Auto-Generated" GridPane.columnIndex="1" />
             <TextField fx:id="customerScreenNameTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="customerScreenAddressTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="customerScreenPostalCodeTextField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="customerScreenPhoneTextField" prefHeight="67.0" prefWidth="142.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label text="Country" GridPane.rowIndex="5" />
+            <Label text="Country" GridPane.rowIndex="5">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <ComboBox fx:id="customerCountryComboBox" onAction="#onCountryComboBoxChanged" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label text="Division" GridPane.rowIndex="6" />
+            <Label text="Division" GridPane.rowIndex="6">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <ComboBox fx:id="customerDivisionComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
       <ButtonBar layoutX="116.0" layoutY="494.0" prefHeight="40.0" prefWidth="503.0" />
-      <Button layoutX="409.0" layoutY="389.0" mnemonicParsing="false" onAction="#onUpdateCustomerButtonPressed" prefHeight="25.0" prefWidth="112.0" text="Update Customer" />
-      <Button layoutX="348.0" layoutY="389.0" mnemonicParsing="false" onAction="#onCustomerUpdateScreenBackButtonPressed" text="Cancel" />
+      <Button layoutX="388.0" layoutY="389.0" mnemonicParsing="false" onAction="#onUpdateCustomerButtonPressed" prefHeight="25.0" prefWidth="133.0" text="Update Customer">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button layoutX="471.0" layoutY="448.0" mnemonicParsing="false" onAction="#onCustomerUpdateScreenBackButtonPressed" text="Cancel">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
    </children>
 </AnchorPane>

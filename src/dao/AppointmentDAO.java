@@ -5,8 +5,10 @@ import helper.ConnectionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointment;
+import report.AppointmentHoursByCountryReport;
 import report.AppointmentTypeMonthCountReport;
 import model.Contact;
+
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -141,12 +143,14 @@ public class AppointmentDAO {
         }
     }
 
+
+
     /** Returns appointments by client ID
      *
      * @param clientId ID of client to look up appointments for
      * @return returns a list of appointments
      */
-    public List<Appointment> getAppointmentsByClient(int clientId) {
+    public static List<Appointment> getAppointmentsByClient(int clientId) {
         List<Appointment> appointments = new ArrayList<>();
         String query = "SELECT * FROM appointments WHERE Customer_ID = ?";
 
@@ -182,12 +186,15 @@ public class AppointmentDAO {
         return appointments;
     }
 
+
+
+
     /** Returns appointment by contact
      *
      * @param contact contact to look up appointments
      * @return list of appointments
      */
-    public List<Appointment> getAppointmentsByContact(Contact contact) {
+    public static List<Appointment> getAppointmentsByContact(Contact contact) {
         List<Appointment> appointments = new ArrayList<>();
         String query = "SELECT * FROM appointments WHERE Contact_ID = ?";
 
@@ -268,6 +275,40 @@ public class AppointmentDAO {
         return counts;
     }
 
+    /**
+     * Retrieves the total hours of appointments by country.
+     *
+     * @return A list of AppointmentHoursByCountryReport objects.
+     */
+    public static List<AppointmentHoursByCountryReport> getAppointmentHoursByCountry() {
+        List<AppointmentHoursByCountryReport> reportData = new ArrayList<>();
+
+        // SQL query to calculate total hours of appointments by country
+        String query = "SELECT co.Country, SUM(TIMESTAMPDIFF(HOUR, a.Start, a.End)) AS TotalHours " +
+                "FROM appointments a " +
+                "JOIN customers cu ON a.Customer_ID = cu.Customer_ID " +
+                "JOIN first_level_divisions d ON cu.Division_ID = d.Division_ID " +
+                "JOIN countries co ON d.Country_ID = co.Country_ID " +
+                "GROUP BY co.Country";
+
+
+        try {
+            Connection conn = ConnectionManager.getConnection();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String country = rs.getString("Country");
+                int totalHours = rs.getInt("TotalHours");
+
+                reportData.add(new AppointmentHoursByCountryReport(country, totalHours));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return reportData;
+    }
 
 
 }
