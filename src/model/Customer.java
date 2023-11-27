@@ -50,7 +50,6 @@ public class Customer {
 
     }
 
-
     /** Sets customer id
      *
      * @param customerId customer id
@@ -221,11 +220,19 @@ public class Customer {
         return country;
     }
 
+    /** Return customer's division by Division ID
+     *
+     * @return division by division ID
+     */
     public Division getDivision() {
         division = DivisionDAO.getDivisionByDivisionId(divisionId);
         return division;
     }
 
+    /** Overrides toString to return customer's name
+     *
+     * @return customer name
+     */
     @Override
     public String toString() {
         return customerName;

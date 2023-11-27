@@ -91,7 +91,7 @@ public class HomeScreenController implements Initializable {
     Parent scene;
 
     /** Initialization method for home screen
-     * Lambda used for contact report combo box listener to trigger refresh
+     * Lambda used for contact report combo box listener to trigger schedule report table refresh
      *
      * @param url
      * @param resourceBundle

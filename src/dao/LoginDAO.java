@@ -49,5 +49,4 @@ public class LoginDAO {
             throw new IllegalArgumentException("Username not found");
         }
     }
-
 }

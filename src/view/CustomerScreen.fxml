@@ -99,7 +99,6 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
-      <Label text="Label" />
       <Label layoutX="536.0" layoutY="119.0" prefHeight="20.0" prefWidth="153.0" text="Create New Customer">
          <font>
             <Font name="System Bold" size="14.0" />

@@ -47,19 +47,21 @@ public class CustomerDAO {
         return allCustomers;
     }
 
+    /** Returns customer by customer ID
+     *
+     * @param customerId
+     * @return customer by customer ID
+     * @throws SQLException
+     */
     public static Customer getCustomer(int customerId) throws SQLException {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
         try {
-            conn = ConnectionManager.getConnection();
+            Connection conn = ConnectionManager.getConnection();
 
             String query = "SELECT * FROM customers WHERE Customer_ID=?";
-            ps = conn.prepareStatement(query);
+            PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, customerId);
 
-            rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 customerId = rs.getInt("Customer_ID");

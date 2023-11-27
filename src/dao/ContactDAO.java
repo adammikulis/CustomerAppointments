@@ -43,7 +43,7 @@ public class ContactDAO {
         return contacts;
     }
 
-    /** Gets contact name based on contact ID
+    /** Returns contact name based on contact ID
      *
      * @param contactId
      * @return contact name
@@ -65,7 +65,7 @@ public class ContactDAO {
         return null;
     }
 
-    /** Gets contact based on contact ID
+    /** Returns contact based on contact ID
      *
      * @param contactId
      * @return contact

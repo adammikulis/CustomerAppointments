@@ -143,52 +143,6 @@ public class AppointmentDAO {
         }
     }
 
-
-
-    /** Returns appointments by client ID
-     *
-     * @param clientId ID of client to look up appointments for
-     * @return returns a list of appointments
-     */
-    public static List<Appointment> getAppointmentsByClient(int clientId) {
-        List<Appointment> appointments = new ArrayList<>();
-        String query = "SELECT * FROM appointments WHERE Customer_ID = ?";
-
-        try {
-            Connection conn = ConnectionManager.getConnection();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setInt(1, clientId);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                int appointmentId = rs.getInt("Appointment_ID");
-                int contactId = rs.getInt("Contact_ID");
-                int customerId = rs.getInt("Customer_ID");
-                int userId = rs.getInt("User_ID");
-                String title = rs.getString("Title");
-                String description = rs.getString("Description");
-                String location = rs.getString("Location");
-                String type = rs.getString("Type");
-                String createdBy = rs.getString("Created_By");
-                String lastUpdatedBy = rs.getString("Last_Updated_By");
-                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
-                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
-                LocalDateTime createDate = rs.getTimestamp("Create_Date").toLocalDateTime();
-                LocalDateTime lastUpdate = rs.getTimestamp("Last_Update").toLocalDateTime();
-
-                appointments.add(new Appointment(appointmentId, contactId, customerId, userId, title, description, location, type, createdBy, lastUpdatedBy, start, end, createDate, lastUpdate));
-
-            }
-        }
-        catch (SQLException e) {
-                System.out.println("SQL Error");
-                e.printStackTrace(System.out);
-        }
-        return appointments;
-    }
-
-
-
-
     /** Returns appointment by contact
      *
      * @param contact contact to look up appointments
@@ -230,10 +184,8 @@ public class AppointmentDAO {
         return appointments;
     }
 
-
-
     public static List<AppointmentTypeMonthCountReport> getAppointmentCountByTypeAndMonth() {
-        List<AppointmentTypeMonthCountReport> counts = new ArrayList<>();
+        List<AppointmentTypeMonthCountReport> reportData = new ArrayList<>();
 
         String query = "SELECT Type, " +
                 "COUNT(CASE WHEN MONTH(Start) = 1 THEN 1 END) AS January, " +
@@ -267,16 +219,16 @@ public class AppointmentDAO {
                 int octCount = rs.getInt("October");
                 int novCount = rs.getInt("November");
                 int decCount = rs.getInt("December");
-                counts.add(new AppointmentTypeMonthCountReport(type, janCount, febCount, marCount, aprCount, mayCount, junCount, julCount, augCount, septCount, octCount, novCount, decCount));
+                reportData.add(new AppointmentTypeMonthCountReport(type, janCount, febCount, marCount, aprCount, mayCount, junCount, julCount, augCount, septCount, octCount, novCount, decCount));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return counts;
+        return reportData;
     }
 
     /**
-     * Retrieves the total hours of appointments by country.
+     * Returns the total hours of appointments by country.
      *
      * @return A list of AppointmentHoursByCountryReport objects.
      */
@@ -290,7 +242,6 @@ public class AppointmentDAO {
                 "JOIN first_level_divisions d ON cu.Division_ID = d.Division_ID " +
                 "JOIN countries co ON d.Country_ID = co.Country_ID " +
                 "GROUP BY co.Country";
-
 
         try {
             Connection conn = ConnectionManager.getConnection();
@@ -309,6 +260,4 @@ public class AppointmentDAO {
 
         return reportData;
     }
-
-
 }

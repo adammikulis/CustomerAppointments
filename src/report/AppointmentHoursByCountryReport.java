@@ -4,9 +4,7 @@ public class AppointmentHoursByCountryReport {
     private String country;
     private long totalHours;
 
-    /**
-    /**
-     * Constructor for AppointmentHoursByCountryReport.
+    /** Constructor for AppointmentHoursByCountryReport.
      *
      * @param country  name of the country.
      * @param totalHours  total hours of appointments in this country.
@@ -16,8 +14,7 @@ public class AppointmentHoursByCountryReport {
         this.totalHours = totalHours;
     }
 
-    /**
-     * Returns the name of the country.
+    /** Returns the name of the country.
      *
      * @return  name of the country.
      */
@@ -25,8 +22,7 @@ public class AppointmentHoursByCountryReport {
         return country;
     }
 
-    /**
-     * Sets the name of the country.
+    /** Sets the name of the country.
      *
      * @param country  name of the country to set.
      */
@@ -34,8 +30,7 @@ public class AppointmentHoursByCountryReport {
         this.country = country;
     }
 
-    /**
-     * Returns the total hours of appointments in this country.
+    /** Returns the total hours of appointments in this country.
      *
      * @return  total hours of appointments.
      */
@@ -43,8 +38,7 @@ public class AppointmentHoursByCountryReport {
         return totalHours;
     }
 
-    /**
-     * Sets the total hours of appointments in this country.
+    /** Sets the total hours of appointments in this country.
      *
      * @param totalHours  total hours of appointments to set.
      */

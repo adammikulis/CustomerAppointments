@@ -39,109 +39,97 @@ public class AppointmentTypeMonthCountReport {
         this.type = type;
     }
 
-    /**
-     * Returns the count for January.
+    /** Returns the count for January.
      *
-     * @return The count of appointments in January.
+     * @return the count of appointments in January.
      */
     public int getJanCount() {
         return janCount;
     }
 
-    /**
-     * Returns the count for February.
+    /** Returns the count for February.
      *
-     * @return The count of appointments in February.
+     * @return the count of appointments in February.
      */
     public int getFebCount() {
         return febCount;
     }
 
-    /**
-     * Returns the count for March.
+    /** Returns the count for March.
      *
-     * @return The count of appointments in March.
+     * @return the count of appointments in March.
      */
     public int getMarCount() {
         return marCount;
     }
 
-    /**
-     * Returns the count for April.
+    /** Returns the count for April.
      *
-     * @return The count of appointments in April.
+     * @return the count of appointments in April.
      */
     public int getAprCount() {
         return aprCount;
     }
 
-    /**
-     * Returns the count for May.
+    /** Returns the count for May.
      *
-     * @return The count of appointments in May.
+     * @return the count of appointments in May.
      */
     public int getMayCount() {
         return mayCount;
     }
 
-    /**
-     * Returns the count for June.
+    /** Returns the count for June.
      *
-     * @return The count of appointments in June.
+     * @return the count of appointments in June.
      */
     public int getJunCount() {
         return junCount;
     }
 
-    /**
-     * Returns the count for July.
+    /** Returns the count for July.
      *
-     * @return The count of appointments in July.
+     * @return the count of appointments in July.
      */
     public int getJulCount() {
         return julCount;
     }
 
-    /**
-     * Returns the count for August.
+    /** Returns the count for August.
      *
-     * @return The count of appointments in August.
+     * @return the count of appointments in August.
      */
     public int getAugCount() {
         return augCount;
     }
 
-    /**
-     * Returns the count for September.
+    /** Returns the count for September.
      *
-     * @return The count of appointments in September.
+     * @return the count of appointments in September.
      */
     public int getSeptCount() {
         return septCount;
     }
 
-    /**
-     * Returns the count for October.
+    /** Returns the count for October.
      *
-     * @return The count of appointments in October.
+     * @return the count of appointments in October.
      */
     public int getOctCount() {
         return octCount;
     }
 
-    /**
-     * Returns the count for November.
+    /** Returns the count for November.
      *
-     * @return The count of appointments in November.
+     * @return the count of appointments in November.
      */
     public int getNovCount() {
         return novCount;
     }
 
-    /**
-     * Returns the count for December.
+    /** Returns the count for December.
      *
-     * @return The count of appointments in December.
+     * @return the count of appointments in December.
      */
     public int getDecCount() {
         return decCount;

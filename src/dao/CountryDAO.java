@@ -45,18 +45,18 @@ public class CountryDAO {
         return allCountries;
     }
 
+    /** Returns the country by its division ID
+     *
+     * @param divisionId
+     * @return country by division ID
+     */
     public static Country getCountryByDivisionId(int divisionId) {
-        Country countryByDivisionId;
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
         try {
-            conn = ConnectionManager.getConnection();
+            Connection conn = ConnectionManager.getConnection();
             String query = "SELECT countries.* FROM countries JOIN first_level_divisions ON countries.Country_ID = first_level_divisions.Country_ID WHERE first_level_divisions.Division_ID = ?";
-            ps = conn.prepareStatement(query);
+            PreparedStatement ps = conn.prepareStatement(query);
             ps.setInt(1, divisionId);
-            rs = ps.executeQuery();
+            ResultSet rs = ps.executeQuery();
 
            if (rs.next()) {
                 int countryId = rs.getInt("Country_ID");
@@ -65,7 +65,7 @@ public class CountryDAO {
                 String createdBy = rs.getString("Created_By");
                 LocalDateTime lastUpdate = rs.getTimestamp("Last_Update").toLocalDateTime();
                 String lastUpdatedBy = rs.getString("Last_Updated_By");
-                countryByDivisionId = new Country(countryId, country, createDate, createdBy, lastUpdate, lastUpdatedBy);
+                Country countryByDivisionId = new Country(countryId, country, createDate, createdBy, lastUpdate, lastUpdatedBy);
                 return countryByDivisionId;
             }
         } catch (SQLException e) {
@@ -73,6 +73,4 @@ public class CountryDAO {
             e.printStackTrace(System.out); }
         return null;
     }
-
-
 }

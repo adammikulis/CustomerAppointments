@@ -358,14 +358,6 @@ public class AppointmentScreenController implements Initializable {
 
     }
 
-    /** Clears appointment contact combo box
-     *
-     */
-    protected void clearAppointmentContactComboBox() {
-        appointmentContactComboBox.getItems().clear();
-        appointmentContactComboBox.setValue(null);
-    }
-
     /** Refreshes contact combo box
      *
      */
@@ -404,8 +396,7 @@ public class AppointmentScreenController implements Initializable {
             e.printStackTrace();
         }
     }
-
-
+    
     /** Applies current filter and refreshes table
      *
      */

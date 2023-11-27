@@ -1,4 +1,4 @@
-/** Package that contains controllers for login, home, customer, customer update, appointment, and appointment update screens
+/** Package that includes controllers for login, home, customer, customer update, appointment, and appointment update screens
  *
  */
 

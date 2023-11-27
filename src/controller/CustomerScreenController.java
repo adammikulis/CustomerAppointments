@@ -237,6 +237,9 @@ public class CustomerScreenController implements Initializable {
         }
     }
 
+    /** Fills country combo box with all countries
+     *
+     */
     protected void populateCountryComboBox() {
         clearCountryComboBox();
         List<Country> countries = CountryDAO.getAllCountries();

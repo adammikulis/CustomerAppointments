@@ -79,7 +79,6 @@ public class UserDAO {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                int user = rs.getInt("User_ID");
                 String userName = rs.getString("User_Name");
                 String password = rs.getString("Password");
                 LocalDateTime createDate = rs.getTimestamp("Create_Date").toLocalDateTime();
@@ -87,7 +86,7 @@ public class UserDAO {
                 LocalDateTime lastUpdate = rs.getTimestamp("Last_Update").toLocalDateTime();
                 String lastUpdatedBy = rs.getString("Last_Updated_By");
 
-                return new User(user, userName, password, createDate, createdBy, lastUpdate, lastUpdatedBy);
+                return new User(userId, userName, password, createDate, createdBy, lastUpdate, lastUpdatedBy);
             }
 
         } catch (SQLException e) {
@@ -97,7 +96,7 @@ public class UserDAO {
         return null;
     }
 
-    /** Returns a user by user name
+    /** Returns a user by username
      *
      * @param userName
      * @return user

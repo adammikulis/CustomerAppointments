@@ -85,6 +85,11 @@ public class DivisionDAO {
         return divisionsByCountry;
     }
 
+    /** Returns the division by its division ID
+     *
+     * @param divisionId
+     * @return divsion by division ID
+     */
     public static Division getDivisionByDivisionId(int divisionId) {
         Division divisionByDivisionId;
 
