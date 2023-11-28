@@ -1,4 +1,4 @@
-Application: Client Appointment Database
+Application: Customer Appointment Database
 Purpose: Tracking customers and their associated contacts via a JavaFX front-end and SQL back-end
 Author: Adam Mikulis
 Contact: adam.mikulis@gmail.com
@@ -10,5 +10,5 @@ JDK: 17.0.9
 JavaFX: 20.0.2
 MySQL Driver: 8.2.0
 
-Run ClientAppointments in an IDE and login using credentials that match those in the SQL DB
+Run CustomerAppointments in an IDE and login using credentials that match those in the SQL DB
 Additional report: Total number of appointments by contact
