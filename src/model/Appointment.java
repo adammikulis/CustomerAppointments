@@ -330,7 +330,7 @@ public class Appointment {
      * @return startTime
      */
     public LocalTime getStartTime() {
-        return startDateTime.toLocalTime();
+        return AppointmentTimeChecker.convertUTCToLocal(startDateTime).toLocalTime();
     }
 
     /** Converts endDateTime to a LocalTime
@@ -338,6 +338,6 @@ public class Appointment {
      * @return endTime
      */
     public LocalTime getEndTime() {
-        return endDateTime.toLocalTime();
+        return AppointmentTimeChecker.convertUTCToLocal(endDateTime).toLocalTime();
     }
 }

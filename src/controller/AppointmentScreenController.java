@@ -265,10 +265,10 @@ public class AppointmentScreenController implements Initializable {
                         type,
                         createdBy,
                         lastUpdatedBy,
-                        startDateTime,
-                        endDateTime,
+                        AppointmentTimeChecker.convertLocalToUTC(startDateTime),
+                        AppointmentTimeChecker.convertLocalToUTC(endDateTime),
                         createDate,
-                        lastUpdate
+                        AppointmentTimeChecker.convertLocalToUTC(lastUpdate)
                 );
                 // Insert the new appointment into the database
                 try {

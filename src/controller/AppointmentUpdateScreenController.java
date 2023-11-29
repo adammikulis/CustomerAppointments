@@ -100,7 +100,7 @@ public class AppointmentUpdateScreenController extends AppointmentScreenControll
     private void setAppointmentUserComboBox() {
         // Get the contact for the appointment
         try {
-            User selectedUser = UserDAO.getUserById(updatedAppointment.getContactId());
+            User selectedUser = UserDAO.getUserById(updatedAppointment.getUserId());
             appointmentUserComboBox.getSelectionModel().select(selectedUser);
         } catch (Exception e) {
             e.printStackTrace();
@@ -161,10 +161,10 @@ public class AppointmentUpdateScreenController extends AppointmentScreenControll
                 updatedAppointment.setDescription(description);
                 updatedAppointment.setLocation(location);
                 updatedAppointment.setType(type);
-                updatedAppointment.setStartDateTime(startDateTime);
-                updatedAppointment.setEndDateTime(endDateTime);
+                updatedAppointment.setStartDateTime(AppointmentTimeChecker.convertLocalToUTC(startDateTime));
+                updatedAppointment.setEndDateTime(AppointmentTimeChecker.convertLocalToUTC(endDateTime));
                 updatedAppointment.setLastUpdatedBy(lastUpdatedBy);
-                updatedAppointment.setLastUpdate(LocalDateTime.now());
+                updatedAppointment.setLastUpdate(AppointmentTimeChecker.convertLocalToUTC(LocalDateTime.now()));
 
                 // Save the changes to the database
                 try {
