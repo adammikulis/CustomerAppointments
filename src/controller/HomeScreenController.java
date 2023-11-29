@@ -116,7 +116,7 @@ public class HomeScreenController implements Initializable {
     public void refreshAppointmentAlert() {
         Appointment upcomingAppointment = AppointmentTimeChecker.checkUpcomingAppointments();
         if (upcomingAppointment != null) {
-            appointmentAlertLabel.setText("Upcoming appointment ID: " + upcomingAppointment.getAppointmentId() + " at: " + AppointmentTimeChecker.convertUTCToLocal(upcomingAppointment.getStartDateTime()));
+            appointmentAlertLabel.setText("Upcoming appt ID: " + upcomingAppointment.getAppointmentId() + " at: " + upcomingAppointment.getStartDateTime());
         }
         else {
             appointmentAlertLabel.setText("No appointments in the next 15 minutes");

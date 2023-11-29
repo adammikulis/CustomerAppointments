@@ -4,94 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="updated GUI for every page">
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-16.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-17.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-18.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/index-files/index-19.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/report/AppointmentHoursByCountryReport.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/javadoc/report/AppointmentTypeMonthCountReport.html" afterDir="false" />
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="updated readme">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.txt" beforeDir="false" afterPath="$PROJECT_DIR$/README.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/allclasses-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/allpackages-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/AppointmentScreenController.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/AppointmentScreenController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/AppointmentUpdateScreenController.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/AppointmentUpdateScreenController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/CustomerScreenController.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/CustomerScreenController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/CustomerUpdateScreenController.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/CustomerUpdateScreenController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/HomeScreenController.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/HomeScreenController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/LoginScreenController.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/LoginScreenController.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/controller/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/controller/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/dao/AppointmentDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/dao/AppointmentDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/dao/ContactDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/dao/ContactDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/dao/CountryDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/dao/CountryDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/dao/CustomerDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/dao/CustomerDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/dao/DivisionDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/dao/DivisionDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/dao/LoginDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/dao/LoginDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/dao/UserDAO.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/dao/UserDAO.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/dao/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/dao/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/dao/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/dao/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/help-doc.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/AppointmentTimeChecker.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/AppointmentTimeChecker.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/ConnectionManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/ConnectionManager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/helper/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/helper/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-10.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-11.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-12.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-12.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-13.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-13.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-14.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-14.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-15.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-15.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-4.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-5.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-6.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-7.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-8.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index-files/index-9.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/main/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/main/Main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/main/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/main/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/main/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/main/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/member-search-index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/Appointment.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Appointment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/Contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Contact.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/Country.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Country.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/Customer.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Customer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/Division.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/Division.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/User.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/User.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/model/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/model/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/overview-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/overview-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/report/LoginLogger.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/LoginLogger.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/report/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/report/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/report/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/javadoc/type-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/javadoc/type-search-index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login_activity.txt" beforeDir="false" afterPath="$PROJECT_DIR$/login_activity.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/CustomerScreenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/HomeScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/HomeScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/package-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/package-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/AppointmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/AppointmentDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/ContactDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/ContactDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/CountryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/CountryDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/CustomerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/CustomerDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/DivisionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/DivisionDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/LoginDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/LoginDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/package-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/package-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Country.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Division.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Division.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/report/AppointmentHoursByCountryReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/report/AppointmentHoursByCountryReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/report/AppointmentTypeMonthCountReport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/report/AppointmentTypeMonthCountReport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/CustomerScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CustomerScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/HomeScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/HomeScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,10 +70,10 @@
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/adamm/IdeaProjects/CustomerAppointments/src/view&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -376,22 +296,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00080" summary="removed list classes and moved functionality into helpers and controllers">
-      <option name="closed" value="true" />
-      <created>1700678216993</created>
-      <option name="number" value="00080" />
-      <option name="presentableId" value="LOCAL-00080" />
-      <option name="project" value="LOCAL" />
-      <updated>1700678216993</updated>
-    </task>
-    <task id="LOCAL-00081" summary="renamed client to customer and got rid of extraneous methods">
-      <option name="closed" value="true" />
-      <created>1700681823946</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1700681823947</updated>
-    </task>
     <task id="LOCAL-00082" summary="added model classes to reflect sql db">
       <option name="closed" value="true" />
       <created>1700697680546</created>
@@ -552,7 +456,23 @@
       <option name="project" value="LOCAL" />
       <updated>1701111067397</updated>
     </task>
-    <option name="localTasksCounter" value="102" />
+    <task id="LOCAL-00102" summary="updated javadocs, project is complete">
+      <option name="closed" value="true" />
+      <created>1701115720836</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1701115720836</updated>
+    </task>
+    <task id="LOCAL-00103" summary="updated readme">
+      <option name="closed" value="true" />
+      <created>1701186950094</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1701186950094</updated>
+    </task>
+    <option name="localTasksCounter" value="104" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -574,8 +494,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="javadocs updated for consistent wording" />
-    <MESSAGE value="moved appointment alert to home screen" />
     <MESSAGE value="major refactoring started with renaming classes" />
     <MESSAGE value="removed list classes and moved functionality into helpers and controllers" />
     <MESSAGE value="renamed client to customer and got rid of extraneous methods" />
@@ -599,7 +517,9 @@
     <MESSAGE value="removed duplicate code from inherited CustomerUpdateScreenController, removed unneeded listeners" />
     <MESSAGE value="large overhaul to front screen and reports" />
     <MESSAGE value="updated GUI for every page" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated GUI for every page" />
+    <MESSAGE value="updated javadocs, project is complete" />
+    <MESSAGE value="updated readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated readme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

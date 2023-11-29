@@ -1,6 +1,7 @@
 package dao;
 
 
+import helper.AppointmentTimeChecker;
 import helper.ConnectionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,8 +45,8 @@ public class AppointmentDAO {
                 String type = rs.getString("Type");
                 String createdBy = rs.getString("Created_By");
                 String lastUpdatedBy = rs.getString("Last_Updated_By");
-                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
-                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                LocalDateTime start = AppointmentTimeChecker.convertUTCToLocal(rs.getTimestamp("Start").toLocalDateTime());
+                LocalDateTime end = AppointmentTimeChecker.convertUTCToLocal(rs.getTimestamp("End").toLocalDateTime());
                 LocalDateTime createDate = rs.getTimestamp("Create_Date").toLocalDateTime();
                 LocalDateTime lastUpdate = rs.getTimestamp("Last_Update").toLocalDateTime();
 
@@ -58,6 +59,7 @@ public class AppointmentDAO {
             e.printStackTrace(System.out);
         }
 
+        System.out.println(allAppointments);
         return allAppointments;
     }
 
@@ -76,8 +78,8 @@ public class AppointmentDAO {
         ps.setString(5, appointment.getDescription());
         ps.setString(6, appointment.getLocation());
         ps.setString(7, appointment.getType());
-        ps.setTimestamp(8, Timestamp.valueOf(appointment.getStartDateTime()));
-        ps.setTimestamp(9, Timestamp.valueOf(appointment.getEndDateTime()));
+        ps.setTimestamp(8, Timestamp.valueOf(AppointmentTimeChecker.convertLocalToUTC(appointment.getStartDateTime())));
+        ps.setTimestamp(9, Timestamp.valueOf(AppointmentTimeChecker.convertLocalToUTC(appointment.getEndDateTime())));
         ps.setTimestamp(10, Timestamp.valueOf(appointment.getLastUpdate()));
         ps.setString(11, appointment.getLastUpdatedBy());
         ps.setInt(12, appointment.getUserId());

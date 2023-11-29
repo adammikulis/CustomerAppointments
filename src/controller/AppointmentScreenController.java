@@ -319,8 +319,8 @@ public class AppointmentScreenController implements Initializable {
         date = appointmentDatePicker.getValue();
         startTime = LocalTime.parse(appointmentStartTimeTextField.getText());
         endTime = LocalTime.parse(appointmentEndTimeTextField.getText());
-        createDate = AppointmentTimeChecker.convertLocalToUTC(LocalDateTime.now());
-        lastUpdate = AppointmentTimeChecker.convertLocalToUTC(LocalDateTime.now());
+        createDate = LocalDateTime.now();
+        lastUpdate = LocalDateTime.now();
 
         startDateTime = LocalDateTime.of(date, startTime);
         endDateTime = LocalDateTime.of(date, endTime);

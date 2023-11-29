@@ -7,6 +7,7 @@ import model.Appointment;
 import java.time.LocalDateTime;
 import java.time.DayOfWeek;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /** Class for querying if appointment is within a valid timeframe
@@ -21,14 +22,22 @@ public class AppointmentTimeChecker {
      * @return true if appointment is within business hours
      */
     public static boolean businessHourChecker(LocalDateTime localStartDateTime, LocalDateTime localEndDateTime) {
-        LocalDateTime easternStartTime = convertUTCToEastern(convertLocalToUTC(localStartDateTime));
-        LocalDateTime easternEndTime = convertUTCToEastern(convertLocalToUTC(localStartDateTime));
+        LocalDateTime easternStartTime = convertLocalToEastern(localStartDateTime);
+        LocalDateTime easternEndTime = convertLocalToEastern(localEndDateTime);
         DayOfWeek startDayOfWeek = easternStartTime.getDayOfWeek();
         DayOfWeek endDayOfWeek = easternEndTime.getDayOfWeek();
 
+        boolean isStartWithinBusinessHours =
+                (easternStartTime.getHour() > 8 || (easternStartTime.getHour() == 8 && easternStartTime.getMinute() == 0)) &&
+                        (easternStartTime.getHour() < 22 || (easternStartTime.getHour() == 22 && easternStartTime.getMinute() == 0)) &&
+                        (startDayOfWeek != DayOfWeek.SATURDAY && startDayOfWeek != DayOfWeek.SUNDAY);
+
+        boolean isEndWithinBusinessHours =
+                (easternEndTime.getHour() > 8 || (easternEndTime.getHour() == 8 && easternEndTime.getMinute() == 0)) &&
+                        (easternEndTime.getHour() < 22 || (easternEndTime.getHour() == 22 && easternEndTime.getMinute() == 0)) &&
+                        (endDayOfWeek != DayOfWeek.SATURDAY && endDayOfWeek != DayOfWeek.SUNDAY);
         // True if appointment start and end are 8am-10pm (ET) Mon-Fri
-        return ((easternStartTime.getHour() >= 8 && easternStartTime.getHour() <= 22) && (startDayOfWeek != DayOfWeek.SATURDAY && startDayOfWeek != DayOfWeek.SUNDAY) &&
-                (easternEndTime.getHour() >= 8 && easternEndTime.getHour() <= 22) && (endDayOfWeek != DayOfWeek.SATURDAY && endDayOfWeek != DayOfWeek.SUNDAY));
+        return isStartWithinBusinessHours && isEndWithinBusinessHours;
     }
 
     /** Checks for overlaps with other appointments
@@ -41,8 +50,7 @@ public class AppointmentTimeChecker {
      */
     public static boolean overlapChecker(int currentAppointmentId, LocalDateTime newAppointmentStart, LocalDateTime newAppointmentEnd, boolean update) {
 
-        AppointmentDAO appointmentDAO = new AppointmentDAO();
-        List<Appointment> appointmentList = appointmentDAO.getAllAppointments();
+        List<Appointment> appointmentList = AppointmentDAO.getAllAppointments();
 
         for (Appointment appointment : appointmentList) {
             if (update && appointment.getAppointmentId() == currentAppointmentId) {
@@ -96,11 +104,8 @@ public class AppointmentTimeChecker {
 
         LocalDateTime now = LocalDateTime.now();
         Appointment upcomingAppointment = null;
-
-        AppointmentDAO appointmentDAO = new AppointmentDAO();
-
-        for (Appointment appointment : appointmentDAO.getAllAppointments()) {
-            LocalDateTime startLocal = convertUTCToLocal(appointment.getStartDateTime());
+        for (Appointment appointment : AppointmentDAO.getAllAppointments()) {
+            LocalDateTime startLocal = appointment.getStartDateTime();
             if (startLocal.isAfter(now) && startLocal.isBefore(now.plusMinutes(15))) {
                 if (upcomingAppointment == null || startLocal.isBefore(upcomingAppointment.getStartDateTime())) {
                     upcomingAppointment = appointment;
@@ -117,8 +122,11 @@ public class AppointmentTimeChecker {
      * @return UTC time
      */
     public static LocalDateTime convertLocalToUTC(LocalDateTime localDateTime) {
-        return localDateTime.atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
+        ZonedDateTime localZonedDateTime = localDateTime.atZone(ZoneId.systemDefault()); // Use ZonedDateTime to account for daylight savings
+        ZonedDateTime utcZonedDateTime = localZonedDateTime.withZoneSameInstant(ZoneId.of("UTC"));
+        return utcZonedDateTime.toLocalDateTime();
     }
+
 
     /** Converts UTC to local time
      *
@@ -126,24 +134,20 @@ public class AppointmentTimeChecker {
      * @return local time
      */
     public static LocalDateTime convertUTCToLocal(LocalDateTime UTCDateTime) {
-        return UTCDateTime.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
+        ZonedDateTime utcZonedDateTime = UTCDateTime.atZone(ZoneId.of("UTC"));
+        ZonedDateTime localZonedDateTime = utcZonedDateTime.withZoneSameInstant(ZoneId.systemDefault());
+        return localZonedDateTime.toLocalDateTime();
     }
+
 
     /** Converts local time to eastern time
      *
      * @param localDateTime local time to convert to eastern time
      * @return eastern time
      */
-    public static LocalDateTime convertUTCToEastern(LocalDateTime localDateTime) {
-        return localDateTime.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
-    }
-
-    /** Converts eastern to local time
-     *
-     * @param easternDateTime local time to convert to UTC
-     * @return local time
-     */
-    public static LocalDateTime convertEasternToUTC(LocalDateTime easternDateTime) {
-        return easternDateTime.atZone(ZoneId.of("America/New_York")).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
+    public static LocalDateTime convertLocalToEastern(LocalDateTime localDateTime) {
+        ZonedDateTime localZonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
+        ZonedDateTime easternZonedDateTime = localZonedDateTime.withZoneSameInstant(ZoneId.of("America/New_York"));
+        return easternZonedDateTime.toLocalDateTime();
     }
 }
