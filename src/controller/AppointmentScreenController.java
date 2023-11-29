@@ -129,7 +129,7 @@ public class AppointmentScreenController implements Initializable {
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         contactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("localDate"));
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
@@ -267,7 +267,7 @@ public class AppointmentScreenController implements Initializable {
                         lastUpdatedBy,
                         AppointmentTimeChecker.convertLocalToUTC(startDateTime),
                         AppointmentTimeChecker.convertLocalToUTC(endDateTime),
-                        createDate,
+                        AppointmentTimeChecker.convertLocalToUTC(createDate),
                         AppointmentTimeChecker.convertLocalToUTC(lastUpdate)
                 );
                 // Insert the new appointment into the database

@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="time conversion fix">
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="fixed contact dropdown bug and timezone conversion issues">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login_activity.txt" beforeDir="false" afterPath="$PROJECT_DIR$/login_activity.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentScreenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controller/AppointmentUpdateScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AppointmentUpdateScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/AppointmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/AppointmentDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Appointment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Appointment.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -295,14 +294,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00085" summary="refactored getCountryByDivisionId out of CustomerDAO into CountryDAO">
-      <option name="closed" value="true" />
-      <created>1700704127410</created>
-      <option name="number" value="00085" />
-      <option name="presentableId" value="LOCAL-00085" />
-      <option name="project" value="LOCAL" />
-      <updated>1700704127410</updated>
-    </task>
     <task id="LOCAL-00086" summary="refactored nearly everything relevant into CountryDAO and DivisionDAO, need to fix add/update customer">
       <option name="closed" value="true" />
       <created>1700707467647</created>
@@ -471,7 +462,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701218531591</updated>
     </task>
-    <option name="localTasksCounter" value="107" />
+    <task id="LOCAL-00107" summary="fixed contact dropdown bug and timezone conversion issues">
+      <option name="closed" value="true" />
+      <created>1701220388127</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1701220388127</updated>
+    </task>
+    <option name="localTasksCounter" value="108" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -493,7 +492,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added model classes to reflect sql db" />
     <MESSAGE value="refactored into Country and CountryDAO, does not yet update based on current customer" />
     <MESSAGE value="refactored into Division and DivisionDAO" />
     <MESSAGE value="refactored getCountryByDivisionId out of CustomerDAO into CountryDAO" />
@@ -518,7 +516,8 @@
     <MESSAGE value="fixed time updating to DB as UTC, fixed appointment alert and business hours checker to account for DST" />
     <MESSAGE value="fixed time checker" />
     <MESSAGE value="time conversion fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="time conversion fix" />
+    <MESSAGE value="fixed contact dropdown bug and timezone conversion issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed contact dropdown bug and timezone conversion issues" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -51,7 +51,7 @@ public class AppointmentUpdateScreenController extends AppointmentScreenControll
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
         contactColumn.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("localDate"));
         startTimeColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
         endTimeColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
@@ -75,11 +75,9 @@ public class AppointmentUpdateScreenController extends AppointmentScreenControll
         appointmentTitleTextField.setText(transferredAppointment.getTitle());
         appointmentDescriptionTextField.setText(transferredAppointment.getDescription());
         appointmentLocationTextField.setText(transferredAppointment.getLocation());
-        LocalDate localDate = transferredAppointment.getStartDateTime().toLocalDate();
-        LocalTime localStartTime = transferredAppointment.getStartDateTime().toLocalTime();
-        LocalTime localEndTime = transferredAppointment.getEndDateTime().toLocalTime();
-        appointmentStartTimeTextField.setText(transferredAppointment.getStartTime().toString());
-        appointmentEndTimeTextField.setText(transferredAppointment.getEndTime().toString());
+        LocalDate localDate = AppointmentTimeChecker.convertUTCToLocal(transferredAppointment.getStartDateTime()).toLocalDate();
+        appointmentStartTimeTextField.setText(AppointmentTimeChecker.convertUTCToLocal(transferredAppointment.getStartDateTime()).toLocalTime().toString());
+        appointmentEndTimeTextField.setText(AppointmentTimeChecker.convertUTCToLocal(transferredAppointment.getEndDateTime()).toLocalTime().toString());
         appointmentDatePicker.setValue(localDate);
 
         // Populate the contact combo box

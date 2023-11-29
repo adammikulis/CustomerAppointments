@@ -325,6 +325,10 @@ public class Appointment {
         return startDateTime.toLocalDate();
     }
 
+    public LocalDate getLocalDate() {
+        return AppointmentTimeChecker.convertUTCToLocal(startDateTime).toLocalDate();
+    }
+
     /** Converts startDateTime to a LocalTime
      *
      * @return startTime
