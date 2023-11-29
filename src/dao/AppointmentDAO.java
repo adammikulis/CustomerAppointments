@@ -58,8 +58,6 @@ public class AppointmentDAO {
             System.out.println("SQL Error");
             e.printStackTrace(System.out);
         }
-
-        System.out.println(allAppointments);
         return allAppointments;
     }
 

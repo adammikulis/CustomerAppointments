@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="fixed time updating to DB as UTC, fixed appointment alert and business hours checker to account for DST">
+    <list default="true" id="998e7065-7d1f-40d9-aa65-bc7563e5693a" name="Changes" comment="fixed time checker">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/login_activity.txt" beforeDir="false" afterPath="$PROJECT_DIR$/login_activity.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/helper/AppointmentTimeChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/LoginScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/LoginScreenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/AppointmentDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/AppointmentDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -293,14 +293,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686706773283</updated>
     </task>
-    <task id="LOCAL-00083" summary="refactored into Country and CountryDAO, does not yet update based on current customer">
-      <option name="closed" value="true" />
-      <created>1700700625480</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1700700625480</updated>
-    </task>
     <task id="LOCAL-00084" summary="refactored into Division and DivisionDAO">
       <option name="closed" value="true" />
       <created>1700703542791</created>
@@ -469,7 +461,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701216861862</updated>
     </task>
-    <option name="localTasksCounter" value="105" />
+    <task id="LOCAL-00105" summary="fixed time checker">
+      <option name="closed" value="true" />
+      <created>1701217175498</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1701217175498</updated>
+    </task>
+    <option name="localTasksCounter" value="106" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -491,7 +491,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="removed list classes and moved functionality into helpers and controllers" />
     <MESSAGE value="renamed client to customer and got rid of extraneous methods" />
     <MESSAGE value="added model classes to reflect sql db" />
     <MESSAGE value="refactored into Country and CountryDAO, does not yet update based on current customer" />
@@ -516,7 +515,8 @@
     <MESSAGE value="updated javadocs, project is complete" />
     <MESSAGE value="updated readme" />
     <MESSAGE value="fixed time updating to DB as UTC, fixed appointment alert and business hours checker to account for DST" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed time updating to DB as UTC, fixed appointment alert and business hours checker to account for DST" />
+    <MESSAGE value="fixed time checker" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed time checker" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

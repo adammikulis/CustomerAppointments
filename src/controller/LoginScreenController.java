@@ -85,8 +85,6 @@ public class LoginScreenController implements Initializable {
         if (checkEmptyUsernamePassword(userName, password)) {
             try {
                 LoginDAO.checkLogin(userName, password);
-                System.out.println("Current user: " + UserDAO.getCurrentUser().getUserName());
-
                 stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
                 scene = FXMLLoader.load(getClass().getResource("/view/HomeScreen.fxml"));
                 stage.setScene(new Scene(scene));
