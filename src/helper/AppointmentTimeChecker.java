@@ -106,9 +106,9 @@ public class AppointmentTimeChecker {
         LocalDateTime now = LocalDateTime.now();
         Appointment upcomingAppointment = null;
         for (Appointment appointment : AppointmentDAO.getAllAppointments()) {
-            LocalDateTime startLocal = appointment.getStartDateTime();
+            LocalDateTime startLocal = AppointmentTimeChecker.convertUTCToLocal(appointment.getStartDateTime());
             if (startLocal.isAfter(now) && startLocal.isBefore(now.plusMinutes(15))) {
-                if (upcomingAppointment == null || startLocal.isBefore(upcomingAppointment.getStartDateTime())) {
+                if (upcomingAppointment == null || startLocal.isBefore(AppointmentTimeChecker.convertUTCToLocal(upcomingAppointment.getStartDateTime()))) {
                     upcomingAppointment = appointment;
                 }
             }

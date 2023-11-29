@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDateTime;
 
+/** Class for creating a country */
 public class Country {
 
     private int countryId;

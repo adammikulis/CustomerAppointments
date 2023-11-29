@@ -1,5 +1,9 @@
 package report;
 
+
+/** Class for generating a report for total appointment hours by country
+ *
+ */
 public class AppointmentHoursByCountryReport {
     private String country;
     private long totalHours;

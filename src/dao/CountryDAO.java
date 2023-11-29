@@ -12,6 +12,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Class for querying the database for countries
+ *
+ */
 public class CountryDAO {
 
     /** Returns a list of all countries in the database
