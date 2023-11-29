@@ -36,6 +36,7 @@ public class AppointmentTimeChecker {
                 (easternEndTime.getHour() > 8 || (easternEndTime.getHour() == 8 && easternEndTime.getMinute() == 0)) &&
                         (easternEndTime.getHour() < 22 || (easternEndTime.getHour() == 22 && easternEndTime.getMinute() == 0)) &&
                         (endDayOfWeek != DayOfWeek.SATURDAY && endDayOfWeek != DayOfWeek.SUNDAY);
+
         // True if appointment start and end are 8am-10pm (ET) Mon-Fri
         return isStartWithinBusinessHours && isEndWithinBusinessHours;
     }
